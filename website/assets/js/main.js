@@ -4,22 +4,50 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Mobile Menu Toggle
+  // 1. Modern Mobile Menu Drawer & Overlay Toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
-  const navMenu = document.querySelector('.nav-menu');
+  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+  const mobileOverlay = document.getElementById('mobileMenuOverlay');
 
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      const isOpen = navMenu.classList.contains('open');
-      mobileToggle.setAttribute('aria-expanded', isOpen);
-    });
+  function toggleMobileMenu(forceClose = false) {
+    if (!mobileToggle) return;
+    
+    // Check if drawer exists (modern header) or fallback to navMenu
+    const drawer = mobileNavDrawer || document.querySelector('.nav-menu');
+    if (!drawer) return;
 
-    // Close menu when clicking a link
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navMenu.classList.remove('open'));
+    const isCurrentlyOpen = drawer.classList.contains('open');
+    if (forceClose || isCurrentlyOpen) {
+      drawer.classList.remove('open');
+      mobileToggle.classList.remove('open');
+      if (mobileOverlay) mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      drawer.classList.add('open');
+      mobileToggle.classList.add('open');
+      if (mobileOverlay) mobileOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      mobileToggle.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
     });
   }
+
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener('click', () => toggleMobileMenu(true));
+  }
+
+  // Close drawer when clicking any link inside it
+  const allNavLinks = document.querySelectorAll('.mobile-nav-link, .nav-menu a, .mobile-cta-wrap a');
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', () => toggleMobileMenu(true));
+  });
 
   // 2. Interactive Before / After Split Slider
   const sliderContainers = document.querySelectorAll('.ba-slider-container');
