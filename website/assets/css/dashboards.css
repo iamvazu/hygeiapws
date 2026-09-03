@@ -330,6 +330,51 @@
   margin: 0;
 }
 
+/* Dark Accent Banners for High Contrast */
+.dash-banner-dark,
+.dash-banner-janitorial,
+.dash-banner-pws {
+  color: #FFFFFF !important;
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 12px 32px rgba(10, 37, 51, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-banner-dark {
+  background: linear-gradient(135deg, #0A2533 0%, #163B4F 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.dash-banner-pws {
+  background: linear-gradient(135deg, #0A2533 0%, #0369A1 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+.dash-banner-janitorial {
+  background: linear-gradient(135deg, #0A2533 0%, #064E3B 100%) !important;
+  border: 1px solid rgba(52, 211, 153, 0.35) !important;
+}
+
+.dash-banner-dark .dash-greeting,
+.dash-banner-janitorial .dash-greeting,
+.dash-banner-pws .dash-greeting {
+  color: #FFFFFF !important;
+}
+
+.dash-banner-dark .dash-subtitle,
+.dash-banner-janitorial .dash-subtitle,
+.dash-banner-pws .dash-subtitle {
+  color: #E2E8F0 !important;
+}
+
 .dash-banner-actions {
   display: flex;
   gap: 12px;
