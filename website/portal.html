@@ -13,8 +13,30 @@
     <!-- Favicon -->
   <link rel="icon" type="image/webp" href="assets/img/truck.webp"/>
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
-  <link rel="stylesheet" href="assets/css/main.css?v=2.6.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=4.2.0"/>
   <link rel="stylesheet" href="assets/css/dashboards.css?v=2.6.0"/>
+  <!-- Critical Zero-FOUC Mobile Drawer Styles -->
+  <style>
+    .mobile-nav-drawer { display: none; }
+    .mobile-nav-drawer.open {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      border-bottom: 2px solid #E2E8F0;
+      box-shadow: 0 24px 60px rgba(10,37,51,0.2);
+      z-index: 1000;
+      max-height: calc(100vh - 75px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 1024px) {
+      .nav-menu { display: none !important; }
+      .mobile-toggle { display: flex !important; }
+    }
+  </style>
 </head>
 <body class="dashboard-body">
 
