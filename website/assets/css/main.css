@@ -80,9 +80,17 @@ body {
   overflow-x: hidden;
 }
 
-img, svg {
+img {
   display: block;
   max-width: 100%;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
 }
 
 a {
