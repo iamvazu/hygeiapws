@@ -3807,3 +3807,23 @@ html, body {
 .hamburger-bar {
   pointer-events: none !important;
 }
+
+
+/* Full Mobile Drawer Positioning & Zero-FOUC */
+.mobile-nav-drawer {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--border-light);
+  box-shadow: 0 24px 60px rgba(10, 37, 51, 0.2);
+  z-index: 1001;
+  max-height: calc(100vh - 75px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-nav-drawer.open {
+  display: block !important;
+}

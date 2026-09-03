@@ -143,16 +143,23 @@
   }
 ]
   </script>
-    <!-- Bulletproof Mobile Nav Controller -->
+      <!-- Bulletproof Mobile Nav Controller with Touch Debounce -->
   <script>
+    var _lastNavToggle = 0;
     function toggleMobileNav(forceClose) {
+      var now = Date.now();
+      if (forceClose === undefined && (now - _lastNavToggle < 350)) {
+        return; // Prevent phantom double-fire on touch devices
+      }
+      _lastNavToggle = now;
+
       var drawer = document.getElementById('mobileNavDrawer');
       var btn = document.getElementById('mobileMenuBtn');
       var overlay = document.getElementById('mobileMenuOverlay');
       if (!drawer) return;
 
       var isCurrentlyOpen = drawer.classList.contains('open') || (drawer.style.display && drawer.style.display !== 'none');
-      var shouldClose = (forceClose === true) || isCurrentlyOpen;
+      var shouldClose = (forceClose === true) || (forceClose !== false && isCurrentlyOpen);
 
       if (shouldClose) {
         drawer.classList.remove('open');

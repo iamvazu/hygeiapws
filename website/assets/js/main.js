@@ -4,15 +4,22 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Unified Mobile Menu Drawer Controller
+      // 1. Unified Mobile Menu Drawer Controller with Touch Debounce
+  var _lastNavToggle = 0;
   window.toggleMobileNav = function(forceClose) {
+    var now = Date.now();
+    if (forceClose === undefined && (now - _lastNavToggle < 350)) {
+      return; // Prevent phantom double-fire on touch devices
+    }
+    _lastNavToggle = now;
+
     var drawer = document.getElementById('mobileNavDrawer');
     var btn = document.getElementById('mobileMenuBtn');
     var overlay = document.getElementById('mobileMenuOverlay');
     if (!drawer) return;
 
     var isCurrentlyOpen = drawer.classList.contains('open') || (drawer.style.display && drawer.style.display !== 'none');
-    var shouldClose = (forceClose === true) || isCurrentlyOpen;
+    var shouldClose = (forceClose === true) || (forceClose !== false && isCurrentlyOpen);
 
     if (shouldClose) {
       drawer.classList.remove('open');
