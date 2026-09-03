@@ -3430,3 +3430,92 @@ html, body {
   }
 }
 
+/* ==========================================================================
+   INTERACTIVE FAQ ACCORDION COMPONENT
+   ========================================================================== */
+.faq-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(10, 37, 51, 0.04);
+}
+
+.faq-card:hover {
+  border-color: rgba(0, 144, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(10, 37, 51, 0.08);
+}
+
+.faq-card.open {
+  border-color: var(--brand-cyan);
+  box-shadow: 0 12px 32px rgba(0, 144, 255, 0.12);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--brand-navy);
+  transition: color var(--duration-fast) ease;
+}
+
+.faq-card.open .faq-trigger {
+  color: var(--brand-cyan);
+}
+
+.faq-icon {
+  width: 22px;
+  height: 22px;
+  stroke: var(--ink-muted);
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.2s ease;
+}
+
+.faq-card.open .faq-icon {
+  transform: rotate(180deg);
+  stroke: var(--brand-cyan);
+}
+
+.faq-body {
+  display: none;
+  padding: 0 28px 24px 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-secondary);
+  border-top: 1px solid rgba(10, 37, 51, 0.05);
+}
+
+.faq-card.open .faq-body {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.faq-body p {
+  margin: 14px 0 0 0;
+}
+
+
