@@ -15,59 +15,57 @@
 </head>
 <body class="dashboard-body">
 
-  <!-- Admin Top Telemetry Strip -->
+  <!-- Top Announcement / Telemetry Strip (Exact Website Component) -->
   <div class="top-strip">
-    <div class="wrap top-flex">
-      <div class="top-cert">
-        <span class="cert-gold-pill">★ Small Business &amp; DVBE Certified #2054658</span>
-        <span class="cert-sep">|</span>
-        <span>DIR Registered #JS-LR-100 132 4606</span>
-        <span class="cert-sep">|</span>
-        <span style="color:#86EFAC;font-weight:700;">● Fleet Live: 2 Rigs Active (San Jose &amp; Peninsula Routes)</span>
+    <div class="wrap top-strip-inner">
+      <div class="top-badge">
+        <span class="status-dot"></span>
+        <span style="font-weight:700;color:var(--brand-navy);">★ Small Business &amp; DVBE Certified #2054658</span>
+        <span style="color:var(--border-medium);margin:0 4px;">|</span>
+        <span>DIR #JS-LR-100 132 4606</span>
+        <span style="color:var(--border-medium);margin:0 4px;">|</span>
+        <span style="color:#15803D;font-weight:700;">● Fleet Live: 2 Rigs Active (San Jose &amp; Peninsula Routes)</span>
       </div>
-      <div class="top-contact">
-        <a href="tel:6509333823" class="top-phone">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          Dispatch: (650) 933-3823
+      <div class="top-actions">
+        <a class="top-phone" href="portal.html" style="margin-right:8px;color:var(--brand-gold);font-weight:700;">
+          👤 Client Portal
         </a>
-        <a href="mailto:andy@hygeiaservices.com" class="top-email">andy@hygeiaservices.com</a>
+        <a class="top-phone" href="tel:6509333823">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;display:inline-block;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          (650) 933-3823
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Main Navigation Header -->
-  <header class="dash-master-header">
-    <div class="dash-wrap dash-header-inner">
-      <div class="dash-brand-area">
-        <a href="index.html" class="dash-logo-link" title="Hygeia Home">
-          <img src="assets/img/logo1.svg" alt="Hygeia Power Wash Solutions Logo" class="dash-logo-img"/>
-        </a>
-        <div class="dash-badge-group">
-          <span class="dash-role-badge badge-admin">⚡ Operations Command</span>
+  <!-- Header Navigation with Official Logo2 (Exact Website Header) -->
+  <header class="site-header">
+    <div class="wrap nav-main">
+      <div class="nav-row">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <a class="nav-brand" href="index.html" title="Hygeia Power Wash Solutions">
+            <img src="assets/img/logo2.png" alt="Hygeia Power Wash Solutions Logo" class="nav-logo-img"/>
+          </a>
+          <span class="dash-role-badge badge-admin">⚡ Admin Command Center</span>
           <span class="dash-env-badge">Production v2.4</span>
         </div>
-      </div>
 
-      <!-- Quick Nav Links -->
-      <nav class="dash-nav-links">
-        <a href="#kpiSection" class="dash-nav-item active">Overview</a>
-        <a href="#routeSection" class="dash-nav-item">Route Dispatch</a>
-        <a href="#crmSection" class="dash-nav-item">Subscribers</a>
-        <a href="#quoteSection" class="dash-nav-item">Commercial RFPs</a>
-      </nav>
-
-      <!-- Admin Actions & Profile -->
-      <div class="dash-user-controls">
-        <div class="user-avatar-pill">
-          <div class="avatar-circle avatar-admin">AM</div>
-          <div class="user-meta-info">
-            <span class="user-name">Andy Montero</span>
-            <span class="user-sub-status"><span class="live-dot-green"></span> Operations Lead</span>
-          </div>
-        </div>
-
-        <a href="portal.html" class="btn btn-outline dash-header-btn">Client Portal →</a>
-        <a href="index.html" class="btn btn-gold dash-header-btn">Website ↗</a>
+        <ul class="nav-menu" style="display:flex;align-items:center;gap:20px;">
+          <li><a class="nav-link active" href="#routeSection">Route Dispatch</a></li>
+          <li><a class="nav-link" href="#crmSection">Subscribers</a></li>
+          <li><a class="nav-link" href="#quoteSection">Quote Builder</a></li>
+          <li>
+            <div class="user-avatar-pill">
+              <div class="avatar-circle avatar-admin">AM</div>
+              <div class="user-meta-info">
+                <span class="user-name">Andy Montero</span>
+                <span class="user-sub-status"><span class="live-dot-green"></span> Operations Lead</span>
+              </div>
+            </div>
+          </li>
+          <li><a class="btn btn-outline" href="portal.html" style="padding:7px 14px;font-size:13px;">Client Portal →</a></li>
+          <li><a class="btn btn-gold" href="index.html" style="padding:7px 14px;font-size:13px;">Website ↗</a></li>
+        </ul>
       </div>
     </div>
   </header>
@@ -93,12 +91,12 @@
       <!-- KPI 1: MRR -->
       <div class="kpi-card">
         <div class="kpi-icon-wrap icon-gold">
-          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <svg style="width:22px;height:22px;" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
         </div>
         <span class="kpi-label">Monthly Recurring Revenue</span>
         <div class="kpi-value" id="kpiMRR">$18,420</div>
         <div class="kpi-trend-pill trend-up">
-          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          <svg style="width:14px;height:14px;" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
           +14.2% vs last month
         </div>
       </div>
@@ -106,7 +104,7 @@
       <!-- KPI 2: Subscribers -->
       <div class="kpi-card">
         <div class="kpi-icon-wrap icon-blue">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <svg style="width:22px;height:22px;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
         <span class="kpi-label">Active Bin Subscribers</span>
         <div class="kpi-value" id="kpiSubscribers">482 <span class="kpi-sub-unit">Cans</span></div>
@@ -116,7 +114,7 @@
       <!-- KPI 3: Today's Stops -->
       <div class="kpi-card">
         <div class="kpi-icon-wrap icon-green">
-          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          <svg style="width:22px;height:22px;" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
         </div>
         <span class="kpi-label">Today's Scheduled Stops</span>
         <div class="kpi-value" id="kpiStopsToday">38 <span class="kpi-sub-unit">Stops</span></div>
@@ -126,7 +124,7 @@
       <!-- KPI 4: Commercial Pipeline -->
       <div class="kpi-card">
         <div class="kpi-icon-wrap icon-purple">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <svg style="width:22px;height:22px;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         </div>
         <span class="kpi-label">Commercial RFPs Pending</span>
         <div class="kpi-value" id="kpiRFPs">5 <span class="kpi-sub-unit">Proposals</span></div>
@@ -284,7 +282,7 @@
                 <span class="quote-price-label">Estimated Proposal Amount:</span>
                 <span class="quote-price-val" id="quoteTotalDisplay">$2,000.00</span>
               </div>
-              <p class="quote-compliance-note">✓ Includes 200° Hot Water, EPA Wastewater Vacuum Boom Reclamation, and DVBE Certified Certified Payroll</p>
+              <p class="quote-compliance-note">✓ Includes 200° Hot Water, EPA Wastewater Vacuum Boom Reclamation, and DVBE Certified Payroll</p>
               <button type="button" class="btn btn-gold" id="btnExportQuote">Export Official PDF Quote ↗</button>
             </div>
           </form>
@@ -303,7 +301,7 @@
           </div>
 
           <div class="crm-search-box">
-            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <svg class="search-icon" style="width:16px;height:16px;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input type="text" class="dash-input search-input" id="crmSearchInput" placeholder="Search by customer, street, city..."/>
           </div>
 
@@ -401,7 +399,7 @@
 
           <div class="truck-card mb-12">
             <div class="truck-card-header">
-              <div class="truck-id"><span class="live-dot-green"></span> <strong>Unit #1 (Rig Ford F-550)</strong></div>
+              <div class="truck-id"><span class="live-dot-green"></span> <strong>Unit #1 (Ford F-550 Rig)</strong></div>
               <span class="truck-badge">On Route</span>
             </div>
             <div class="truck-detail-line">Tech: <strong>Carlos Mendez</strong> · San Jose Cluster</div>
@@ -414,7 +412,7 @@
 
           <div class="truck-card">
             <div class="truck-card-header">
-              <div class="truck-id"><span class="live-dot-green"></span> <strong>Unit #2 (Rig Isuzu NPR)</strong></div>
+              <div class="truck-id"><span class="live-dot-green"></span> <strong>Unit #2 (Isuzu NPR Rig)</strong></div>
               <span class="truck-badge">On Route</span>
             </div>
             <div class="truck-detail-line">Tech: <strong>Jason Lee</strong> · Los Gatos / Saratoga</div>

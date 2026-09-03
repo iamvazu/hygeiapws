@@ -15,58 +15,61 @@
 </head>
 <body class="dashboard-body">
 
-  <!-- Top Trust Strip -->
+  <!-- Top Announcement / Trust Strip (Exact Website Component) -->
   <div class="top-strip">
-    <div class="wrap top-flex">
-      <div class="top-cert">
-        <span class="cert-gold-pill">★ Small Business &amp; DVBE Certified #2054658</span>
-        <span class="cert-sep">|</span>
-        <span>DIR Registered #JS-LR-100 132 4606</span>
-        <span class="cert-sep">|</span>
-        <span>200° Hot Water Sanitization</span>
+    <div class="wrap top-strip-inner">
+      <div class="top-badge">
+        <span class="status-dot"></span>
+        <span style="font-weight:700;color:var(--brand-navy);">★ Small Business &amp; DVBE Certified #2054658</span>
+        <span style="color:var(--border-medium);margin:0 4px;">|</span>
+        <span>DIR #JS-LR-100 132 4606</span>
+        <span style="color:var(--border-medium);margin:0 4px;">|</span>
+        <span>200° Hot Water Curbside Sanitization</span>
       </div>
-      <div class="top-contact">
-        <a href="tel:6509333823" class="top-phone">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      <div class="top-actions">
+        <a class="top-phone" href="admin.html" style="margin-right:8px;color:#0284C7;font-weight:700;">
+          ⚡ Admin Dispatch
+        </a>
+        <a class="top-phone" href="tel:6509333823">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;display:inline-block;" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           (650) 933-3823
         </a>
-        <a href="mailto:aloha@hygeiaservices.com" class="top-email">aloha@hygeiaservices.com</a>
       </div>
     </div>
   </div>
 
-  <!-- Master Navigation Header -->
-  <header class="dash-master-header">
-    <div class="dash-wrap dash-header-inner">
-      <div class="dash-brand-area">
-        <a href="index.html" class="dash-logo-link" title="Hygeia Home">
-          <img src="assets/img/logo1.svg" alt="Hygeia Power Wash Solutions Logo" class="dash-logo-img"/>
-        </a>
-        <div class="dash-badge-group">
+  <!-- Header Navigation with Official Logo2 (Exact Website Header) -->
+  <header class="site-header">
+    <div class="wrap nav-main">
+      <div class="nav-row">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <a class="nav-brand" href="index.html" title="Hygeia Power Wash Solutions">
+            <img src="assets/img/logo2.png" alt="Hygeia Power Wash Solutions Logo" class="nav-logo-img"/>
+          </a>
           <span class="dash-role-badge badge-client">👤 Customer Portal</span>
         </div>
-      </div>
 
-      <!-- User Controls & Switcher -->
-      <div class="dash-user-controls">
-        <div class="demo-account-picker">
-          <label for="userRoleSelector" class="picker-label">Simulate User:</label>
-          <select id="userRoleSelector" class="dash-select-input">
-            <option value="john_sj">John Doe (San Jose — Monthly 3 Bins)</option>
-            <option value="sarah_lg">Sarah Miller (Los Gatos — Monthly 2 Bins)</option>
-            <option value="michael_pa">Michael Chen (Palo Alto — One-Time Clean)</option>
-          </select>
-        </div>
-
-        <div class="user-avatar-pill">
-          <div class="avatar-circle" id="userInitials">JD</div>
-          <div class="user-meta-info">
-            <span class="user-name" id="userName">John Doe</span>
-            <span class="user-sub-status" id="userPlanBadge"><span class="live-dot-green"></span> Active Plan</span>
+        <!-- User Controls & Switcher -->
+        <div class="dash-user-controls" style="display:flex;align-items:center;gap:16px;">
+          <div class="demo-account-picker">
+            <label for="userRoleSelector" class="picker-label">Simulate User:</label>
+            <select id="userRoleSelector" class="dash-select-input">
+              <option value="john_sj">John Doe (San Jose — Monthly 3 Bins)</option>
+              <option value="sarah_lg">Sarah Miller (Los Gatos — Monthly 2 Bins)</option>
+              <option value="michael_pa">Michael Chen (Palo Alto — One-Time Clean)</option>
+            </select>
           </div>
-        </div>
 
-        <a href="index.html" class="btn btn-outline dash-header-btn">Back to Site ↗</a>
+          <div class="user-avatar-pill">
+            <div class="avatar-circle" id="userInitials">JD</div>
+            <div class="user-meta-info">
+              <span class="user-name" id="userName">John Doe</span>
+              <span class="user-sub-status" id="userPlanBadge"><span class="live-dot-green"></span> Active Plan</span>
+            </div>
+          </div>
+
+          <a href="index.html" class="btn btn-gold" style="padding:7px 14px;font-size:13px;">Back to Site ↗</a>
+        </div>
       </div>
     </div>
   </header>
@@ -144,7 +147,7 @@
               <h3>Wash History &amp; Photo Verification</h3>
               <p class="dash-card-desc">Every visit is documented with timestamped photos and technician logs.</p>
             </div>
-            <span class="badge-pill">100% Clean Guarantee</span>
+            <span class="bin-count-pill" style="background:#DCFCE7;color:#15803D;">100% Clean Guarantee</span>
           </div>
 
           <!-- Wash History Timeline -->
@@ -158,7 +161,7 @@
                     <strong>August 12, 2026 · 9:14 AM</strong>
                     <span class="history-sub">Tech: Rig #1 (Carlos M.) · 200° Sanitized &amp; Deodorized</span>
                   </div>
-                  <span class="status-pill status-completed">✓ Completed</span>
+                  <span class="status-pill status-active">✓ Completed</span>
                 </div>
 
                 <div class="history-photos">
@@ -183,7 +186,7 @@
                     <strong>July 15, 2026 · 10:32 AM</strong>
                     <span class="history-sub">Tech: Rig #1 (Carlos M.) · 200° Sanitized &amp; Deodorized</span>
                   </div>
-                  <span class="status-pill status-completed">✓ Completed</span>
+                  <span class="status-pill status-active">✓ Completed</span>
                 </div>
 
                 <div class="history-photos">
