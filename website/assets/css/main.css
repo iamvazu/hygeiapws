@@ -3728,3 +3728,69 @@ html, body {
     display: none !important;
   }
 }
+
+
+/* ==========================================================================
+   STANDARDS & TESTIMONIALS RESPONSIVE GRIDS
+   ========================================================================== */
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .standards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .standards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Ensure mobile nav drawer is hidden by default and only displays when active */
+.mobile-nav-drawer {
+  display: none;
+}
+
+.mobile-nav-drawer.open {
+  display: block !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--border-light);
+  box-shadow: 0 24px 60px rgba(10, 37, 51, 0.2);
+  z-index: 1000;
+  max-height: calc(100vh - 75px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
