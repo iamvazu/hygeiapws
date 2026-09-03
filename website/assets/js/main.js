@@ -90,9 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Hero Interactive Bin Subscription Quick Booking Widget
-  const bookingWidget = document.querySelector('.hero-booking-card');
-  if (bookingWidget) {
+  // 4. Hero Interactive Bin Subscription Quick Booking Widget (Only for pages with bin widget)
+  const bookingWidget = document.querySelector('.hero-bin .hero-booking-card, .hero-booking-card:has(.plan-toggle-btn)') || 
+                        (document.querySelector('.hero-booking-card') && document.querySelector('.hero-booking-card').querySelector('.plan-toggle-btn') ? document.querySelector('.hero-booking-card') : null);
+  if (bookingWidget && bookingWidget.querySelector('.plan-toggle-btn')) {
     let currentPlan = 'monthly'; // 'monthly' ($35 base for 2 bins) or 'onetime' ($65 base for 2 bins)
     let binCount = 2;
 
