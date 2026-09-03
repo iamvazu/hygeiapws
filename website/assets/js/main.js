@@ -306,4 +306,60 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // 8. Commercial Hero Facility Selector Logic
+  const commHeroWidget = document.querySelector('.hero-commercial .hero-booking-card');
+  if (commHeroWidget) {
+    const facilityChips = commHeroWidget.querySelectorAll('.chip-btn');
+    const facilityInput = commHeroWidget.querySelector('input[name="facility_type"]');
+    const submitBtn = commHeroWidget.querySelector('.booking-submit-btn');
+
+    const buttonLabels = {
+      'office': 'Request Office & Tech Park RFP →',
+      'garage': 'Request Parking Garage Site Walk →',
+      'retail': 'Request Retail Center Cleaning RFP →',
+      'dumpster': 'Request Dumpster Pad Degreasing Quote →'
+    };
+
+    facilityChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        facilityChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const fType = chip.dataset.type || 'office';
+        if (facilityInput) facilityInput.value = fType;
+        if (submitBtn && buttonLabels[fType]) {
+          submitBtn.textContent = buttonLabels[fType];
+        }
+      });
+    });
+  }
+
+  // 9. Residential Hero Surface Selector Logic
+  const resHeroWidget = document.querySelector('.hero-residential .hero-booking-card');
+  if (resHeroWidget) {
+    const resChips = resHeroWidget.querySelectorAll('.chip-btn');
+    const surfaceInput = resHeroWidget.querySelector('input[name="surfaces"]');
+    const submitBtn = resHeroWidget.querySelector('.booking-submit-btn');
+
+    resChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        chip.classList.toggle('active');
+        const activeChips = Array.from(resChips).filter(c => c.classList.contains('active'));
+        const selected = activeChips.map(c => c.dataset.surface || c.textContent.trim());
+        
+        if (surfaceInput) surfaceInput.value = selected.join(', ');
+        if (submitBtn) {
+          if (activeChips.length === 0) {
+            submitBtn.textContent = 'Request Free Home Wash Estimate →';
+          } else if (activeChips.length === 1) {
+            submitBtn.textContent = `Get Estimate for ${selected[0]} →`;
+          } else {
+            submitBtn.textContent = `Get Estimate for ${activeChips.length} Surfaces →`;
+          }
+        }
+      });
+    });
+  }
 });

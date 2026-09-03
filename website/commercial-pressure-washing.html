@@ -278,37 +278,39 @@
           <p class="hero-booking-sub">Fast tailored proposals for property managers &amp; facilities directors.</p>
 
           <form action="contact.html" method="GET">
+            <input type="hidden" name="service" value="commercial"/>
+            <input type="hidden" name="facility_type" value="office"/>
             <div class="booking-inputs">
               <div>
                 <label class="booking-field-label">Select Facility Type</label>
                 <div class="chip-grid">
-                  <span class="chip-btn active">🏢 Office / Tech Park</span>
-                  <span class="chip-btn">🅿️ Parking Garage</span>
-                  <span class="chip-btn">🛒 Retail Plaza</span>
-                  <span class="chip-btn">🗑️ Dumpster Bays</span>
+                  <button type="button" class="chip-btn active" data-type="office">🏢 Office / Campus</button>
+                  <button type="button" class="chip-btn" data-type="garage">🅿️ Parking Garage</button>
+                  <button type="button" class="chip-btn" data-type="retail">🛒 Retail Plaza</button>
+                  <button type="button" class="chip-btn" data-type="dumpster">🗑️ Dumpster Bays</button>
                 </div>
               </div>
 
               <div>
                 <label class="booking-field-label">Property Address / City</label>
-                <input type="text" class="booking-address-input" placeholder="e.g. 100 Innovation Way, San Jose" required/>
+                <input type="text" name="address" class="booking-address-input" placeholder="e.g. 100 Innovation Way, San Jose" required/>
               </div>
 
               <div>
                 <label class="booking-field-label">Contact Email or Phone</label>
-                <input type="text" class="booking-address-input" placeholder="manager@company.com or (650) 000-0000" required/>
+                <input type="text" name="contact" class="booking-address-input" placeholder="manager@company.com or (650) 000-0000" required/>
               </div>
             </div>
 
-            <button type="submit" class="booking-submit-btn">Request Free Site Walk Assessment →</button>
+            <button type="submit" class="booking-submit-btn">Request Office &amp; Tech Park RFP →</button>
           </form>
 
           <div class="booking-guarantee-strip">
-            <span>✓ DVBE / DGS Certified</span>
+            <span>✓ Small Business &amp; DVBE #2054658</span>
             <span>•</span>
             <span>✓ $5M Liability</span>
             <span>•</span>
-            <span>✓ EPA Reclaim</span>
+            <span>✓ 100% EPA Reclaim</span>
           </div>
         </div>
       </div>
@@ -406,103 +408,103 @@
              data-compliance="Protects manufacturer warranties on stucco, EIFS, Kynar 500 architectural coatings, and commercial window seals while restoring pristine corporate branding."
              data-tags="Commercial Soft Washing, Stucco Building Cleaning, Metal Panel Washing, Retail Awning Cleaning, High Reach Exterior Washing">
           <div class="comm-card-img-wrap">
-            <img src="assets/img/comm-building-facade.jpg" alt="Building Facade and Office Canopy Soft Washing" class="comm-card-img"/>
-            <span class="comm-card-tag">🏢 Soft Wash System</span>
+            <img src="assets/img/comm-building-facade.jpg" alt="Commercial Building Facade Soft Washing" class="comm-card-img"/>
+            <span class="comm-card-tag">🏢 Low-Pressure Soft Wash</span>
           </div>
           <div class="comm-card-body">
             <h3>Building Facades &amp; Awnings</h3>
-            <p>Safe low-pressure soft washing for stucco, architectural panels, glass entries, brick facades, and retail signage.</p>
+            <p>Restore architectural curb appeal without surface damage using gentle foam detergents and low-pressure soft wash.</p>
             <div class="comm-spec-strip">
-              <span class="comm-spec-pill">🛡️ Zero Surface Damage</span>
-              <span class="comm-spec-pill">🪜 4-Story Reach</span>
-              <span class="comm-spec-pill">✨ Stucco &amp; Glass</span>
+              <span class="comm-spec-pill">✨ Stucco Safe</span>
+              <span class="comm-spec-pill">🎨 Awning Care</span>
+              <span class="comm-spec-pill">🏗️ 4-Story Lift</span>
             </div>
             <span class="comm-card-btn">Explore Specs &amp; Process ↗</span>
           </div>
         </div>
 
-        <!-- Card 4: Sidewalks & Pedestrian Plazas -->
+        <!-- Card 4: Retail Sidewalks & Plazas -->
         <div class="comm-service-card"
-             data-title="Sidewalks &amp; Pedestrian Plazas"
-             data-badge="Gum &amp; Spill Extraction"
+             data-title="Retail Sidewalks, Plazas &amp; Chewing Gum"
+             data-badge="High-Traffic Public Areas"
              data-img="assets/img/comm-sidewalk-plaza.jpg"
              data-psi="3,200 PSI Rotary"
-             data-temp="190°F Hot Water"
-             data-reclaim="Zero-Puddle Extraction"
-             data-speed="Early Morning Dispatch"
-             data-desc="High-traffic retail sidewalk and corporate courtyard washing focused on chewing gum removal, coffee/soda spill extraction, food grease lifting, and deep concrete brightening before business hours."
-             data-process="High-temperature steam lances instantly melt and vaporize embedded chewing gum without pitting concrete surfaces. Balanced rotary surface scrubbers deliver consistent, stripe-free brightening across thousands of square feet of aggregate and flatwork."
-             data-compliance="Completed with high-volume water reclamation and storm drain protection in accordance with local Silicon Valley municipal stormwater runoff ordinances."
-             data-tags="Sidewalk Pressure Washing, Commercial Gum Removal, Pedestrian Plaza Cleaning, Retail Flatwork Brightening, Concrete Spill Removal">
+             data-temp="200°F Chewing Gum Melter"
+             data-reclaim="SCVURPPP Stormwater Reclaim"
+             data-speed="Early Morning / Overnight Dispatch"
+             data-desc="Complete pedestrian flatwork cleaning for shopping malls, outdoor restaurant patios, and high-foot-traffic retail corridors. Instantly dissolves hardened black chewing gum wads, soda stains, coffee spills, and heavy foot traffic soil."
+             data-process="Custom steam lance detailing melts embedded chewing gum in 3-5 seconds. Dual rotary surface cleaners deliver uniform concrete scrubbing, followed by wet-vacuum extraction to eliminate slip hazards before businesses open."
+             data-compliance="Ensures clean, safe, slip-resistant walkways reducing tenant slip-and-fall liability and meeting ADA slip resistance recommendations."
+             data-tags="Sidewalk Steam Cleaning, Chewing Gum Removal, Plaza Power Washing, Restaurant Patio Washing, Retail Center Maintenance">
           <div class="comm-card-img-wrap">
-            <img src="assets/img/comm-sidewalk-plaza.jpg" alt="Sidewalk and Pedestrian Plaza Rotary Pressure Washing" class="comm-card-img"/>
-            <span class="comm-card-tag">🚶 Gum &amp; Spill Removal</span>
+            <img src="assets/img/comm-sidewalk-plaza.jpg" alt="Retail Plaza Sidewalk Hot Water Pressure Washing" class="comm-card-img"/>
+            <span class="comm-card-tag tag-gold">✨ Chewing Gum Melter</span>
           </div>
           <div class="comm-card-body">
-            <h3>Sidewalks &amp; Pedestrian Plazas</h3>
-            <p>High-visibility gum removal, food and beverage spill extraction, and deep surface brightening before peak retail hours.</p>
+            <h3>Retail Sidewalks &amp; Plazas</h3>
+            <p>Melt hardened chewing gum, remove dark foot-traffic traffic patterns, and sanitize storefront entrances.</p>
             <div class="comm-spec-strip">
-              <span class="comm-spec-pill">🍬 Steam Gum Lance</span>
-              <span class="comm-spec-pill">☀️ Stripe-Free Clean</span>
-              <span class="comm-spec-pill">☕ Spill Degreaser</span>
+              <span class="comm-spec-pill">🍬 Gum Removal</span>
+              <span class="comm-spec-pill">☕ Coffee Stains</span>
+              <span class="comm-spec-pill">🚶 Slip-Resistant</span>
             </div>
             <span class="comm-card-btn">Explore Specs &amp; Process ↗</span>
           </div>
         </div>
 
-        <!-- Card 5: Government & Municipal Facilities -->
+        <!-- Card 5: Government & Municipal Flatwork -->
         <div class="comm-service-card"
-             data-title="Government &amp; Municipal Public Works"
-             data-badge="DVBE / DGS / DIR Certified"
+             data-title="Government, Public Works &amp; Municipal Flatwork"
+             data-badge="DVBE &amp; DIR Certified Vendor"
              data-img="assets/img/comm-gov-municipal.jpg"
              data-psi="3,500 PSI Industrial"
-             data-temp="200°F Thermal Heat"
-             data-reclaim="Certified EPA Recovery"
-             data-speed="Prevailing Wage &amp; Certified Payroll"
-             data-desc="State of California certified public works contracting for city halls, public libraries, municipal transit centers, fire stations, and county administrative campuses."
-             data-process="Execution by DIR-registered technicians adhering strictly to California prevailing wage mandates, certified payroll submissions, and environmental stormwater management protocols."
-             data-compliance="Montero Enterprises Inc. dba Hygeia holds California Small Business (Micro) &amp; DVBE Certification ID #2054658, DIR Public Works Registration #JS-LR-100 132 4606, and FI$Cal registration."
-             data-tags="DVBE Certified Power Washing, Government Facility Cleaning, DIR Registered Contractor, Municipal Sidewalk Cleaning, Prevailing Wage Pressure Washing">
+             data-temp="200°F Thermal Wash"
+             data-reclaim="100% Zero-Discharge Reclaim"
+             data-speed="Public Works RFP &amp; Prevailing Wage"
+             data-desc="Heavy-duty exterior municipal pressure washing for civic centers, transit plazas, municipal corporation yards, city sidewalks, public park structures, and emergency service bays across Santa Clara and San Mateo counties."
+             data-process="Executed with California Department of Industrial Relations (DIR) certified crews adhering to certified payroll and prevailing wage standards. Closed-loop water containment berms and multi-stage filtration protect municipal stormwater infrastructure."
+             data-compliance="Fully registered: Small Business (Micro) &amp; DVBE Certified #2054658, DIR Public Works Registration #JS-LR-100 132 4606. Meets all municipal clean-water environmental ordinances."
+             data-tags="Municipal Power Washing, Public Works Contractor, Government Facility Washing, Civic Center Cleaning, DIR Certified Pressure Washing">
           <div class="comm-card-img-wrap">
-            <img src="assets/img/comm-gov-municipal.jpg" alt="Government and Municipal Public Works Pressure Washing" class="comm-card-img"/>
-            <span class="comm-card-tag tag-gold">🏛️ DVBE / DIR Certified</span>
+            <img src="assets/img/comm-gov-municipal.jpg" alt="Municipal and Government Facility Power Washing with Water Recovery" class="comm-card-img"/>
+            <span class="comm-card-tag">🏛️ DVBE Certified #2054658</span>
           </div>
           <div class="comm-card-body">
-            <h3>Government &amp; Municipal Bids</h3>
-            <p>DVBE/DGS/DIR certified contractor experienced with public agency procurement, prevailing wage compliance, and certified payroll.</p>
+            <h3>Government &amp; Municipal Flatwork</h3>
+            <p>Public works compliant pressure washing with certified payroll (DIR #JS-LR-100 132 4606) and 100% wastewater recovery.</p>
             <div class="comm-spec-strip">
               <span class="comm-spec-pill">🎖️ DVBE #2054658</span>
-              <span class="comm-spec-pill">📜 DIR Registered</span>
-              <span class="comm-spec-pill">🏛️ CA.GOV Certified</span>
+              <span class="comm-spec-pill">🏛️ DIR Registered</span>
+              <span class="comm-spec-pill">🌊 Zero Runoff</span>
             </div>
             <span class="comm-card-btn">Explore Specs &amp; Process ↗</span>
           </div>
         </div>
 
-        <!-- Card 6: Scheduled Maintenance & Overnight Fleet -->
+        <!-- Card 6: Commercial Fleet & Equipment Decks -->
         <div class="comm-service-card"
-             data-title="Scheduled Maintenance &amp; Overnight Fleet"
-             data-badge="24/7 Silent Night Operations"
+             data-title="Commercial Fleet &amp; Equipment Washdowns"
+             data-badge="EPA Self-Contained Mobile Rigs"
              data-img="assets/img/comm-commercial-fleet.jpg"
-             data-psi="Custom Program"
-             data-temp="Dual Hot-Water Rigs"
-             data-reclaim="100% Self-Contained"
-             data-speed="Dedicated Account Manager"
-             data-desc="Tailored bi-weekly, monthly, quarterly, or bi-annual exterior maintenance programs for Silicon Valley tech campuses, medical centers, HOA communities, and commercial portfolios."
-             data-process="Our night crews deploy silent-muffler industrial rigs between 9:00 PM and 6:00 AM, ensuring zero disruption to tenants, visitors, or daytime traffic. Next-morning digital proof-of-service reports are uploaded automatically to your client portal."
-             data-compliance="Includes $5,000,000 commercial liability coverage, keycard/lockbox secure facility access, and guaranteed priority emergency dispatch."
-             data-tags="Commercial Maintenance Contracts, Overnight Pressure Washing, Tech Campus Exterior Cleaning, HOA Common Area Washing, Portfolio Service Agreements">
+             data-psi="3,000 PSI High-Volume"
+             data-temp="180°F Degreasing Water"
+             data-reclaim="Mobile Catchment Mat Reclaim"
+             data-speed="On-Site Yard Dispatch"
+             data-desc="On-site washing for commercial service vans, logistics trucks, utility trailers, and construction equipment yards. Removes heavy road grime, mud caking, salt film, and diesel soot while containing all wash water on-site."
+             data-process="Deployable heavy-duty drive-on containment mats capture 100% of wash water and suspended solids. High-volume pumps pass effluent through our on-board multi-stage sediment separation system for legal sanitary sewer disposal."
+             data-compliance="100% EPA Clean Water Act compliant. Prevents industrial stormwater discharge penalties for corporate logistics facilities and fleet operations."
+             data-tags="Commercial Fleet Washing, On-Site Truck Washing, Mobile Equipment Decontaminating, Catchment Mat Reclaim, Fleet Maintenance Wash">
           <div class="comm-card-img-wrap">
-            <img src="assets/img/comm-commercial-fleet.jpg" alt="Commercial Fleet Overnight Facility Maintenance" class="comm-card-img"/>
-            <span class="comm-card-tag">🌙 24/7 Overnight Fleet</span>
+            <img src="assets/img/comm-commercial-fleet.jpg" alt="Commercial Fleet and Mobile Equipment Power Washing" class="comm-card-img"/>
+            <span class="comm-card-tag">🚚 On-Site Mobile Fleet</span>
           </div>
           <div class="comm-card-body">
-            <h3>Flexible Schedule Contracts</h3>
-            <p>Tailored quarterly, monthly, or bi-weekly maintenance schedules with dedicated account managers and digital service reports.</p>
+            <h3>Fleet &amp; Equipment Washdowns</h3>
+            <p>Keep your commercial fleet and utility vehicles pristine with on-site containment mats and EPA-compliant recovery.</p>
             <div class="comm-spec-strip">
-              <span class="comm-spec-pill">📋 Custom Cadence</span>
-              <span class="comm-spec-pill">📸 Photo Proof Reports</span>
-              <span class="comm-spec-pill">🔐 Key &amp; Gate Access</span>
+              <span class="comm-spec-pill">🚛 On-Site Mat</span>
+              <span class="comm-spec-pill">⚡ Weekend Yard</span>
+              <span class="comm-spec-pill">🧼 Spot-Free Rinse</span>
             </div>
             <span class="comm-card-btn">Explore Specs &amp; Process ↗</span>
           </div>
@@ -511,49 +513,48 @@
     </div>
   </section>
 
-  <!-- Commercial Pop-Out Modal Container -->
-  <div class="comm-modal-overlay" role="dialog" aria-modal="true" aria-label="Commercial Service Details">
+  <!-- Section: Pop-Out Modal for Commercial Services -->
+  <div class="comm-modal-overlay" id="commServiceModal" aria-hidden="true" role="dialog">
     <div class="comm-modal-box">
-      <button class="comm-modal-close-btn" aria-label="Close modal">&times;</button>
-      
+      <button class="comm-modal-close-btn" aria-label="Close details">&times;</button>
       <div class="comm-modal-hero">
         <img src="" alt="" class="comm-modal-hero-img"/>
         <div class="comm-modal-hero-overlay">
-          <span class="comm-modal-hero-badge">Commercial Specification</span>
-          <h2>Service Name</h2>
+          <span class="comm-modal-hero-badge"></span>
+          <h2></h2>
         </div>
       </div>
 
       <div class="comm-modal-content">
         <div class="comm-modal-specs-grid">
           <div class="comm-modal-spec-card">
-            <div class="comm-modal-spec-label">Water Pressure</div>
-            <div class="comm-modal-spec-val" data-spec="psi">3,500 PSI</div>
+            <div class="comm-modal-spec-label">Operating Pressure</div>
+            <div class="comm-modal-spec-val" data-spec="psi">--</div>
           </div>
           <div class="comm-modal-spec-card">
             <div class="comm-modal-spec-label">Water Temp</div>
-            <div class="comm-modal-spec-val" data-spec="temp">200°F Hot Water</div>
+            <div class="comm-modal-spec-val" data-spec="temp">--</div>
           </div>
           <div class="comm-modal-spec-card">
-            <div class="comm-modal-spec-label">Wastewater System</div>
-            <div class="comm-modal-spec-val" data-spec="reclaim">Vacuum Reclaim</div>
+            <div class="comm-modal-spec-label">Environmental Reclaim</div>
+            <div class="comm-modal-spec-val" data-spec="reclaim">--</div>
           </div>
           <div class="comm-modal-spec-card">
-            <div class="comm-modal-spec-label">Service Window</div>
-            <div class="comm-modal-spec-val" data-spec="speed">Overnight / 24/7</div>
+            <div class="comm-modal-spec-label">Deployment Speed</div>
+            <div class="comm-modal-spec-val" data-spec="speed">--</div>
           </div>
         </div>
 
-        <h3 class="comm-modal-section-title">Service Overview &amp; Silicon Valley Scope</h3>
+        <div class="comm-modal-section-title">Service Scope &amp; Target Issues</div>
         <p class="comm-modal-text comm-modal-body-text"></p>
 
-        <h3 class="comm-modal-section-title">Technical Execution &amp; Chemistry</h3>
+        <div class="comm-modal-section-title">Industrial Equipment &amp; Execution Process</div>
         <p class="comm-modal-text comm-modal-process-text"></p>
 
-        <h3 class="comm-modal-section-title">California Environmental &amp; Regulatory Compliance</h3>
+        <div class="comm-modal-section-title">California Environmental &amp; Safety Compliance</div>
         <p class="comm-modal-text comm-modal-compliance-text"></p>
 
-        <h3 class="comm-modal-section-title" style="margin-bottom:8px;">Target Capabilities &amp; Keywords</h3>
+        <div class="comm-modal-section-title">Target SEO Specifications</div>
         <div class="comm-modal-tags"></div>
 
         <div class="comm-modal-footer">

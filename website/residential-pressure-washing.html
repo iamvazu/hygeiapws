@@ -275,32 +275,34 @@
           </div>
 
           <h2 class="hero-booking-title">Instant Home Wash Estimate</h2>
-          <p class="hero-booking-sub">Tell us what needs cleaning for a fast, free estimate.</p>
+          <p class="hero-booking-sub">Select your exterior areas for a fast, customized restoration plan.</p>
 
           <form action="contact.html" method="GET">
+            <input type="hidden" name="service" value="residential"/>
+            <input type="hidden" name="surfaces" value="Driveways &amp; Pavers"/>
             <div class="booking-inputs">
               <div>
-                <label class="booking-field-label">Select Surfaces to Clean</label>
+                <label class="booking-field-label">Select Surfaces to Clean (Tap to Toggle)</label>
                 <div class="chip-grid">
-                  <span class="chip-btn active">🚗 Driveway &amp; Pavers</span>
-                  <span class="chip-btn">🏡 Patio &amp; Pool Deck</span>
-                  <span class="chip-btn">🏠 Stucco &amp; Siding</span>
-                  <span class="chip-btn">🗑️ + Trash Bins ($35/mo)</span>
+                  <button type="button" class="chip-btn active" data-surface="Driveways &amp; Pavers">🚗 Driveways &amp; Pavers</button>
+                  <button type="button" class="chip-btn" data-surface="Patio &amp; Pool Deck">🏡 Patio &amp; Pool Deck</button>
+                  <button type="button" class="chip-btn" data-surface="Stucco Soft Wash">🏠 Stucco Soft Wash</button>
+                  <button type="button" class="chip-btn" data-surface="Trash Bins Add-on">🗑️ + Trash Bins Add-on</button>
                 </div>
               </div>
 
               <div>
                 <label class="booking-field-label">Home Address / Peninsula Zip Code</label>
-                <input type="text" class="booking-address-input" placeholder="Enter your home address or zip code..." required/>
+                <input type="text" name="address" class="booking-address-input" placeholder="Enter your home address or zip code..." required/>
               </div>
 
               <div>
-                <label class="booking-field-label">Your Name &amp; Phone</label>
-                <input type="text" class="booking-address-input" placeholder="Your name and phone number..." required/>
+                <label class="booking-field-label">Your Name &amp; Phone Number</label>
+                <input type="text" name="contact" class="booking-address-input" placeholder="e.g. Jane Doe, (650) 933-3823" required/>
               </div>
             </div>
 
-            <button type="submit" class="booking-submit-btn">Get My Free Home Estimate →</button>
+            <button type="submit" class="booking-submit-btn">Get Estimate for Driveways &amp; Pavers →</button>
           </form>
 
           <div class="booking-guarantee-strip">

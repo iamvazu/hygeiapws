@@ -526,6 +526,44 @@ a {
   margin-bottom: 16px;
 }
 
+.chip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.chip-btn {
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.chip-btn:hover {
+  border-color: var(--brand-cyan);
+  background: var(--brand-cyan-light);
+  color: var(--brand-navy);
+}
+
+.chip-btn.active {
+  background: var(--brand-navy);
+  border-color: var(--brand-navy);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(10, 37, 51, 0.2);
+}
+
 .booking-field-label {
   display: block;
   font-family: var(--font-heading);
