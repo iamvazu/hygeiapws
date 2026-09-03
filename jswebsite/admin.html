@@ -52,29 +52,34 @@
 </head>
 <body class="dashboard-body">
 
-  <!-- Header Navigation with Official Logo -->
-  <header class="site-header" style="background:#0A2533;border-bottom:1px solid rgba(255,255,255,0.12);padding:14px 0;">
+  <!-- Header Navigation with Official Logo (Original Clean White Header) -->
+  <header class="site-header">
     <div class="wrap nav-main">
-      <div class="nav-row" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="nav-row">
         <div style="display:flex;align-items:center;gap:16px;">
-          <a class="nav-brand" href="index.html" title="Hygeia Enterprise">
-            <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img" style="max-height:44px;"/>
+          <a class="nav-brand" href="index.html" title="Hygeia Janitorial Services">
+            <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img"/>
           </a>
-          <span class="dash-role-badge badge-admin" style="background:#0090FF;color:#FFFFFF;font-weight:800;font-size:12px;padding:4px 12px;border-radius:6px;">⚡ Enterprise Command Center</span>
-          <span class="dash-env-badge" style="background:rgba(16,185,129,0.2);color:#34D399;font-weight:700;font-size:11.5px;padding:3px 10px;border-radius:4px;border:1px solid rgba(16,185,129,0.3);">● Live Production Sync</span>
+          <span class="dash-role-badge badge-admin">⚡ Admin Command Center</span>
+          <span class="dash-env-badge">Production v2.7</span>
         </div>
 
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div class="user-avatar-pill" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:4px 12px;border-radius:30px;display:flex;align-items:center;gap:10px;">
-            <div class="avatar-circle avatar-admin" style="background:var(--brand-gold);color:#0A2533;font-weight:800;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;">AM</div>
-            <div class="user-meta-info">
-              <span class="user-name" style="color:#FFFFFF;font-size:13px;font-weight:700;display:block;line-height:1.2;">Andy Montero</span>
-              <span class="user-sub-status" style="color:#38BDF8;font-size:11px;"><span class="live-dot-green"></span> Operations Executive</span>
+        <ul class="nav-menu" style="display:flex;align-items:center;gap:20px;">
+          <li><a class="nav-link" href="#combined" onclick="switchEnterpriseView('combined')">Overview</a></li>
+          <li><a class="nav-link" href="#pws" onclick="switchEnterpriseView('pws')">Power Wash</a></li>
+          <li><a class="nav-link" href="#janitorial" onclick="switchEnterpriseView('janitorial')">Janitorial</a></li>
+          <li>
+            <div class="user-avatar-pill">
+              <div class="avatar-circle avatar-admin">AM</div>
+              <div class="user-meta-info">
+                <span class="user-name">Andy Montero</span>
+                <span class="user-sub-status"><span class="live-dot-green"></span> Operations Lead</span>
+              </div>
             </div>
-          </div>
-          <a class="btn btn-outline" href="portal.html" style="padding:7px 14px;font-size:12.5px;color:#FFFFFF;border-color:rgba(255,255,255,0.3);">Client Portal ↗</a>
-          <a class="btn btn-gold" href="index.html" style="padding:7px 14px;font-size:12.5px;">Live Website ↗</a>
-        </div>
+          </li>
+          <li><a class="btn btn-outline" href="portal.html" style="padding:7px 14px;font-size:13px;">Client Portal →</a></li>
+          <li><a class="btn btn-gold" href="index.html" style="padding:7px 14px;font-size:13px;">Website ↗</a></li>
+        </ul>
       </div>
     </div>
   </header>
