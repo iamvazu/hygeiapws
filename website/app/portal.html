@@ -3,23 +3,51 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-  <title>Customer Portal & Subscription Management | Hygeia Power Wash Solutions</title>
+  <title>Customer Portal &amp; Subscription Management | Hygeia Power Wash Solutions</title>
   <meta content="Manage your Hygeia trash bin cleaning subscription, update payment methods, view upcoming route schedules, and review wash verification photos." name="description"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="assets/css/dashboards.css"/>
 </head>
 <body class="dashboard-body">
 
-  <!-- Dashboard Navigation -->
-  <header class="dash-header">
+  <!-- Top Trust Strip -->
+  <div class="top-strip">
+    <div class="wrap top-flex">
+      <div class="top-cert">
+        <span class="cert-gold-pill">★ Small Business &amp; DVBE Certified #2054658</span>
+        <span class="cert-sep">|</span>
+        <span>DIR Registered #JS-LR-100 132 4606</span>
+        <span class="cert-sep">|</span>
+        <span>200° Hot Water Sanitization</span>
+      </div>
+      <div class="top-contact">
+        <a href="tel:6509333823" class="top-phone">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          (650) 933-3823
+        </a>
+        <a href="mailto:aloha@hygeiaservices.com" class="top-email">aloha@hygeiaservices.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Navigation Header -->
+  <header class="dash-master-header">
     <div class="dash-wrap dash-header-inner">
       <div class="dash-brand-area">
-        <a href="index.html" class="dash-logo-link">
-          <img src="assets/img/logo2.png" alt="Hygeia Logo" class="dash-logo-img"/>
+        <a href="index.html" class="dash-logo-link" title="Hygeia Home">
+          <img src="assets/img/logo1.svg" alt="Hygeia Power Wash Solutions Logo" class="dash-logo-img"/>
         </a>
-        <span class="dash-badge-tag">Customer Portal</span>
+        <div class="dash-badge-group">
+          <span class="dash-role-badge badge-client">👤 Customer Portal</span>
+        </div>
       </div>
 
+      <!-- User Controls & Switcher -->
       <div class="dash-user-controls">
         <div class="demo-account-picker">
           <label for="userRoleSelector" class="picker-label">Simulate User:</label>
@@ -34,26 +62,27 @@
           <div class="avatar-circle" id="userInitials">JD</div>
           <div class="user-meta-info">
             <span class="user-name" id="userName">John Doe</span>
-            <span class="user-sub-status" id="userPlanBadge">Active Subscription</span>
+            <span class="user-sub-status" id="userPlanBadge"><span class="live-dot-green"></span> Active Plan</span>
           </div>
         </div>
 
-        <a href="index.html" class="btn btn-outline dash-logout-btn">Back to Website</a>
+        <a href="index.html" class="btn btn-outline dash-header-btn">Back to Site ↗</a>
       </div>
     </div>
   </header>
 
-  <!-- Main Dashboard Container -->
+  <!-- Main Customer Dashboard Container -->
   <main class="dash-wrap dash-main">
     
     <!-- Top Welcome Banner -->
     <div class="dash-banner">
-      <div>
+      <div class="dash-banner-left">
+        <span class="dash-eyebrow">Hygeia Member Dashboard</span>
         <h1 class="dash-greeting" id="greetingText">Welcome back, John! 👋</h1>
         <p class="dash-subtitle" id="serviceAddressSub">Service Address: <strong>1420 Willow Glen Way, San Jose, CA 95125</strong></p>
       </div>
       <div class="dash-banner-actions">
-        <button class="btn btn-gold" id="btnRequestAddon">+ Request Extra Pressure Wash</button>
+        <button class="btn btn-gold" id="btnRequestAddon">+ Add Pressure Wash Service</button>
         <button class="btn btn-outline" id="btnManageStripe">Stripe Billing Portal ↗</button>
       </div>
     </div>
@@ -90,113 +119,82 @@
       <div class="dash-card">
         <div class="dash-card-header">
           <span class="dash-metric-label">Payment Method (Stripe)</span>
-          <span class="status-pill status-secure">🔒 Encrypted</span>
+          <span class="status-pill status-secure">🔒 256-Bit Encrypted</span>
         </div>
         <div class="dash-card-cardrow">
           <svg style="width:32px;height:24px;" viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#0055EE"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="22" cy="12" r="7" fill="#F79E1B" fill-opacity="0.8"/></svg>
           <span style="font-weight:700;font-size:15px;color:var(--brand-navy);" id="cardLast4">Mastercard ending in •••• 4242</span>
         </div>
-        <p class="dash-metric-sub" id="nextInvoiceDate">Next auto-charge of $45.00 on Sept 1, 2026</p>
+        <p class="dash-metric-sub" id="nextInvoiceDate">Next auto-charge of $45.00 on Oct 1, 2026</p>
         <div class="dash-card-action">
-          <button class="dash-text-btn" id="btnUpdateCard">Update Payment Method</button>
+          <button class="dash-text-btn" id="btnUpdateCard">Update Card →</button>
         </div>
       </div>
     </div>
 
-    <!-- Two Column Main Content Area -->
+    <!-- 2-Column Main Section: Wash History vs Plan Manager -->
     <div class="dash-layout-split">
       
-      <!-- Left Column: Subscription Customizer & Account Settings -->
+      <!-- Left Column: Wash History & Verification Photos -->
       <div class="dash-layout-main">
-        
-        <!-- Live Subscription Plan Customizer -->
         <div class="dash-card mb-24">
           <div class="dash-card-title-row">
-            <h3>Manage Bin Sanitizing Subscription</h3>
-            <span class="badge-blue">Instant Update</span>
-          </div>
-          <p style="font-size:14px;color:var(--ink-secondary);margin-bottom:20px;">Adjust the number of curbside bins on your monthly plan. Changes apply to your next scheduled billing cycle.</p>
-
-          <div class="plan-customizer-box">
-            <div class="customizer-counter-row">
-              <div>
-                <strong style="font-size:16px;color:var(--brand-navy);display:block;">Curbside Bins Included:</strong>
-                <span style="font-size:13px;color:var(--ink-muted);">$35/mo base for 2 bins + $10/mo per additional bin</span>
-              </div>
-              <div class="bin-counter-controls">
-                <button type="button" class="counter-btn" id="btnPortalBinMinus">−</button>
-                <span class="counter-value" id="portalBinCount">3</span>
-                <button type="button" class="counter-btn" id="btnPortalBinPlus">+</button>
-              </div>
+            <div>
+              <span class="dash-section-eyebrow">Proof of Service</span>
+              <h3>Wash History &amp; Photo Verification</h3>
+              <p class="dash-card-desc">Every visit is documented with timestamped photos and technician logs.</p>
             </div>
-
-            <!-- Frequency Selector -->
-            <div class="customizer-freq-row">
-              <label class="freq-radio-option">
-                <input type="radio" name="planFreq" value="monthly" checked id="radioMonthly"/>
-                <div class="freq-radio-card">
-                  <span class="freq-name">Monthly Subscription (Recommended)</span>
-                  <span class="freq-price" id="calcMonthlyPrice">$45 / month</span>
-                  <span class="freq-desc">Clean, sanitized bins year-round. Cancel anytime.</span>
-                </div>
-              </label>
-
-              <label class="freq-radio-option">
-                <input type="radio" name="planFreq" value="onetime" id="radioOnetime"/>
-                <div class="freq-radio-card">
-                  <span class="freq-name">One-Time Deep Clean</span>
-                  <span class="freq-price" id="calcOnetimePrice">$75 once</span>
-                  <span class="freq-desc">Single intensive 200° deep sanitization wash.</span>
-                </div>
-              </label>
-            </div>
-
-            <div class="customizer-footer">
-              <div class="customizer-total">
-                <span style="font-size:13px;color:var(--ink-muted);">New Monthly Total:</span>
-                <span class="total-price-val" id="portalTotalVal">$45.00</span>
-              </div>
-              <button class="btn btn-gold" id="btnSavePlan">Update Subscription Plan</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Service History & Photo Proof of Wash -->
-        <div class="dash-card">
-          <div class="dash-card-title-row">
-            <h3>Recent Service History &amp; Photo Proof</h3>
-            <span style="font-size:13px;color:var(--ink-muted);">Showing last 3 visits</span>
+            <span class="badge-pill">100% Clean Guarantee</span>
           </div>
 
-          <div class="service-history-list" id="serviceHistoryList">
+          <!-- Wash History Timeline -->
+          <div class="history-timeline" id="washHistoryContainer">
             <!-- Item 1 -->
             <div class="history-item">
-              <div class="history-meta">
-                <div class="history-badge-success">✓ Completed</div>
-                <div class="history-date">August 8, 2026 · 9:15 AM</div>
-                <div class="history-tech">Tech: Carlos M. (Truck #02)</div>
-                <div class="history-desc">3 Bins Sanitized at 200°F + Citrus Deodorizer Applied</div>
-              </div>
-              <div class="history-photos">
-                <div class="history-thumb-wrap">
-                  <img src="assets/img/after.jpg" alt="Wash proof" class="history-thumb"/>
-                  <span class="thumb-tag">Proof Photo</span>
+              <div class="history-dot"></div>
+              <div class="history-body">
+                <div class="history-header">
+                  <div>
+                    <strong>August 12, 2026 · 9:14 AM</strong>
+                    <span class="history-sub">Tech: Rig #1 (Carlos M.) · 200° Sanitized &amp; Deodorized</span>
+                  </div>
+                  <span class="status-pill status-completed">✓ Completed</span>
+                </div>
+
+                <div class="history-photos">
+                  <div class="history-photo-card">
+                    <img src="assets/img/before.jpg" alt="Dirty Bin Before Cleaning" class="history-img"/>
+                    <span class="photo-badge before-badge">Before Clean</span>
+                  </div>
+                  <div class="history-photo-card">
+                    <img src="assets/img/after.jpg" alt="Clean Sanitized Bin After Cleaning" class="history-img"/>
+                    <span class="photo-badge after-badge">After 200° Wash</span>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Item 2 -->
             <div class="history-item">
-              <div class="history-meta">
-                <div class="history-badge-success">✓ Completed</div>
-                <div class="history-date">July 8, 2026 · 10:04 AM</div>
-                <div class="history-tech">Tech: Carlos M. (Truck #02)</div>
-                <div class="history-desc">3 Bins Sanitized at 200°F + Citrus Deodorizer Applied</div>
-              </div>
-              <div class="history-photos">
-                <div class="history-thumb-wrap">
-                  <img src="assets/img/after.jpg" alt="Wash proof" class="history-thumb"/>
-                  <span class="thumb-tag">Proof Photo</span>
+              <div class="history-dot"></div>
+              <div class="history-body">
+                <div class="history-header">
+                  <div>
+                    <strong>July 15, 2026 · 10:32 AM</strong>
+                    <span class="history-sub">Tech: Rig #1 (Carlos M.) · 200° Sanitized &amp; Deodorized</span>
+                  </div>
+                  <span class="status-pill status-completed">✓ Completed</span>
+                </div>
+
+                <div class="history-photos">
+                  <div class="history-photo-card">
+                    <img src="assets/img/before.jpg" alt="Dirty Bin Before Cleaning" class="history-img"/>
+                    <span class="photo-badge before-badge">Before Clean</span>
+                  </div>
+                  <div class="history-photo-card">
+                    <img src="assets/img/after.jpg" alt="Clean Sanitized Bin After Cleaning" class="history-img"/>
+                    <span class="photo-badge after-badge">After 200° Wash</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -204,100 +202,104 @@
         </div>
       </div>
 
-      <!-- Right Column: Property & Gate Instructions & Quick Addons -->
-      <div class="dash-layout-side">
-        
-        <!-- Property & Gate Notes Card -->
+      <!-- Right Column: Quick Plan Customizer & Extra Services -->
+      <div class="dash-layout-sidebar">
+        <!-- Interactive Bin Customizer Widget -->
         <div class="dash-card mb-24">
-          <div class="dash-card-title-row">
-            <h4>Property &amp; Access Notes</h4>
+          <span class="dash-section-eyebrow">Subscription Controls</span>
+          <h3>Modify Your Plan</h3>
+          <p class="dash-card-desc">Add or remove trash, recycling, or compost bins at any time.</p>
+
+          <div class="bin-counter-box">
+            <div class="bin-counter-label">
+              <strong>Total Bins to Clean:</strong>
+              <span id="binCountLabel">3 Bins</span>
+            </div>
+            
+            <div class="bin-counter-controls">
+              <button class="counter-btn" id="btnDecBins" aria-label="Decrease bins">-</button>
+              <span class="counter-num" id="currentBinNum">3</span>
+              <button class="counter-btn" id="btnIncBins" aria-label="Increase bins">+</button>
+            </div>
           </div>
-          <form id="formPropertyNotes">
-            <div class="mb-14">
-              <label class="form-label">Gate Code / Access Instructions</label>
-              <input type="text" class="dash-input" id="inputGateCode" value="#4821 - Side gate unlocked on trash days"/>
-            </div>
-            <div class="mb-14">
-              <label class="form-label">Bin Placement Location</label>
-              <input type="text" class="dash-input" id="inputBinLocation" value="Curbside in front of garage driveway"/>
-            </div>
-            <div class="mb-14">
-              <label class="form-label">SMS Notification Phone</label>
-              <input type="text" class="dash-input" id="inputNotifyPhone" value="(408) 555-0192"/>
-            </div>
-            <button type="submit" class="btn btn-outline" style="width:100%;">Save Access Notes</button>
-          </form>
+
+          <div class="plan-type-toggle">
+            <label class="radio-label">
+              <input type="radio" name="planFreq" value="monthly" checked id="radioMonthly"/>
+              <span><strong>Monthly Subscription</strong> ($35 for 2 cans + $10/ea extra)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="planFreq" value="onetime" id="radioOneTime"/>
+              <span><strong>One-Time Deep Wash</strong> ($65 for 2 cans + $15/ea extra)</span>
+            </label>
+          </div>
+
+          <div class="plan-summary-row">
+            <span>Calculated New Rate:</span>
+            <strong class="new-rate-display" id="newRateDisplay">$45.00 / month</strong>
+          </div>
+
+          <button class="btn btn-gold btn-block" id="btnSavePlanChanges">Update Subscription Plan</button>
         </div>
 
         <!-- Add-on Services Quick Card -->
         <div class="dash-card">
-          <div class="dash-card-title-row">
-            <h4>Member Exclusive Add-Ons</h4>
-          </div>
-          <p style="font-size:13px;color:var(--ink-secondary);margin-bottom:14px;">Active subscribers get 15% off residential flatwork power washing.</p>
-
-          <div class="addon-mini-card">
-            <div>
-              <strong>Driveway &amp; Walkway Wash</strong>
-              <span class="addon-price">$185 (Save $35)</span>
-            </div>
-            <button class="btn btn-gold btn-sm" onclick="alert('Driveway wash request added to your next service date!')">Book</button>
-          </div>
-
-          <div class="addon-mini-card">
-            <div>
-              <strong>Patio &amp; Pool Deck Sanitizing</strong>
-              <span class="addon-price">$220 (Save $40)</span>
-            </div>
-            <button class="btn btn-gold btn-sm" onclick="alert('Patio wash request added to your next service date!')">Book</button>
-          </div>
+          <span class="dash-section-eyebrow">Residential Power Washing</span>
+          <h3>Pair With Home Washing</h3>
+          <p class="dash-card-desc">Active bin subscribers receive <strong>15% off</strong> residential power washing services.</p>
+          
+          <ul class="addon-list">
+            <li>
+              <span>🚗 Driveway &amp; Walkway Cleaning</span>
+              <a href="contact.html" class="addon-link">Get Estimate →</a>
+            </li>
+            <li>
+              <span>🏡 Patio &amp; Pool Deck Sanitizing</span>
+              <a href="contact.html" class="addon-link">Get Estimate →</a>
+            </li>
+            <li>
+              <span>🏠 Stucco &amp; House Soft Washing</span>
+              <a href="contact.html" class="addon-link">Get Estimate →</a>
+            </li>
+          </ul>
         </div>
-
       </div>
+
     </div>
+
   </main>
 
-  <!-- Stripe Checkout Modal Simulation -->
-  <div class="stripe-modal-overlay" id="stripeModal">
-    <div class="stripe-modal-card">
-      <div class="stripe-modal-header">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <svg style="width:20px;height:20px;color:#635BFF;" viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697.5 12.521.5 6.784.5 2.87 3.512 2.87 8.358c0 5.485 5.253 6.643 8.327 7.747 2.378.858 3.197 1.657 3.197 2.659 0 1.053-.945 1.684-2.508 1.684-2.172 0-5.185-.974-7.214-2.198l-.946 5.547c1.782.974 4.872 1.657 8.16 1.657 6.133 0 10.224-3.038 10.224-8.096 0-5.644-5.289-6.732-8.134-7.708z"/></svg>
-          <strong style="color:var(--brand-navy);">Stripe Secure Checkout</strong>
-        </div>
-        <button class="stripe-close-btn" id="btnCloseStripe">×</button>
+  <!-- Modern Dashboard Footer -->
+  <footer class="dash-footer">
+    <div class="dash-wrap dash-footer-flex">
+      <div>
+        <strong>Montero Enterprises Inc. dba Hygeia Power Wash Solutions</strong>
+        <span class="dash-footer-sub">DVBE &amp; Small Business Certified #2054658 · DIR #JS-LR-100 132 4606 · 1105 Benton St, Santa Clara, CA</span>
+      </div>
+      <div>
+        <a href="index.html" class="dash-footer-link">Home</a>
+        <a href="admin.html" class="dash-footer-link">Admin Portal</a>
+        <a href="contact.html" class="dash-footer-link">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Plan Update Modal Dialog -->
+  <div class="dash-modal-overlay" id="planModalOverlay">
+    <div class="dash-modal-box">
+      <button class="dash-modal-close" id="btnClosePlanModal">&times;</button>
+      <h3>Confirm Subscription Change</h3>
+      <p style="color:var(--ink-secondary);font-size:14px;margin-bottom:20px;">Your billing cycle and dispatch schedule will be updated immediately.</p>
+      
+      <div class="modal-summary-box" id="modalSummaryBox">
+        <div><strong>New Plan:</strong> <span id="mPlanName">Monthly Subscription</span></div>
+        <div><strong>Total Bins:</strong> <span id="mBinCount">3 Bins</span></div>
+        <div><strong>New Recurring Total:</strong> <span id="mTotalAmount">$45.00 / month</span></div>
       </div>
 
-      <div class="stripe-modal-body">
-        <div class="stripe-order-summary">
-          <div>
-            <div style="font-weight:700;color:var(--brand-navy);" id="stripePlanTitle">Monthly Trash Bin Sanitizing</div>
-            <div style="font-size:13px;color:var(--ink-muted);" id="stripePlanDetails">3 Bins · Auto-renews monthly</div>
-          </div>
-          <div class="stripe-price" id="stripePriceTotal">$45.00/mo</div>
-        </div>
-
-        <form id="formStripePayment" onsubmit="event.preventDefault(); simulateStripeSuccess();">
-          <div class="mb-14">
-            <label class="form-label">Cardholder Name</label>
-            <input type="text" class="dash-input" value="John Doe" required/>
-          </div>
-
-          <div class="mb-14">
-            <label class="form-label">Card Information</label>
-            <div class="stripe-card-input-box">
-              <input type="text" class="dash-input" value="4242 •••• •••• 4242" style="border:none;padding:0;background:transparent;" required/>
-              <div style="display:flex;gap:8px;">
-                <input type="text" class="dash-input" value="08/29" style="width:50px;border:none;padding:0;background:transparent;" required/>
-                <input type="text" class="dash-input" value="888" style="width:40px;border:none;padding:0;background:transparent;" required/>
-              </div>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-gold" style="width:100%;margin-top:14px;" id="btnStripeSubmit">Confirm Subscription &amp; Save Card</button>
-          
-          <p style="font-size:11.5px;color:var(--ink-muted);text-align:center;margin-top:12px;">🔒 256-bit SSL encrypted. Payment managed by Stripe Payments Company.</p>
-        </form>
+      <div style="display:flex;gap:12px;justify-content:flex-end;">
+        <button class="btn btn-outline" id="btnCancelPlanModal">Cancel</button>
+        <button class="btn btn-gold" id="btnConfirmPlanChange">Confirm &amp; Sync Stripe</button>
       </div>
     </div>
   </div>
