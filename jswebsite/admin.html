@@ -74,6 +74,29 @@
       .mobile-toggle { display: flex !important; }
     }
   </style>
+  <!-- Inline Global Mobile Nav Function -->
+  <script>
+    function toggleMobileNav(forceClose) {
+      var drawer = document.getElementById('mobileNavDrawer');
+      var btn = document.getElementById('mobileMenuBtn');
+      var overlay = document.getElementById('mobileMenuOverlay');
+      if (!drawer) return;
+      var isOpen = drawer.classList.contains('open') || drawer.style.display === 'block';
+      if (forceClose || isOpen) {
+        drawer.classList.remove('open');
+        drawer.style.display = 'none';
+        if (btn) btn.classList.remove('open');
+        if (overlay) { overlay.classList.remove('open'); overlay.style.display = 'none'; }
+        document.body.style.overflow = '';
+      } else {
+        drawer.classList.add('open');
+        drawer.style.display = 'block';
+        if (btn) btn.classList.add('open');
+        if (overlay) { overlay.classList.add('open'); overlay.style.display = 'block'; }
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  </script>
 </head>
 <body class="dashboard-body">
 

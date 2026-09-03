@@ -3794,3 +3794,16 @@ html, body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+
+/* Bulletproof Mobile Toggle & Hamburger Bar */
+.mobile-toggle {
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: none !important;
+}
+
+.hamburger-bar {
+  pointer-events: none !important;
+}

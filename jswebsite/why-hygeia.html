@@ -117,6 +117,29 @@
   }
 ]
   </script>
+  <!-- Inline Global Mobile Nav Function (Cache-Proof & 100% Reliable) -->
+  <script>
+    function toggleMobileNav(forceClose) {
+      var drawer = document.getElementById('mobileNavDrawer');
+      var btn = document.getElementById('mobileMenuBtn');
+      var overlay = document.getElementById('mobileMenuOverlay');
+      if (!drawer) return;
+      var isOpen = drawer.classList.contains('open') || drawer.style.display === 'block';
+      if (forceClose || isOpen) {
+        drawer.classList.remove('open');
+        drawer.style.display = 'none';
+        if (btn) btn.classList.remove('open');
+        if (overlay) { overlay.classList.remove('open'); overlay.style.display = 'none'; }
+        document.body.style.overflow = '';
+      } else {
+        drawer.classList.add('open');
+        drawer.style.display = 'block';
+        if (btn) btn.classList.add('open');
+        if (overlay) { overlay.classList.add('open'); overlay.style.display = 'block'; }
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  </script>
 </head>
 <body>
   <!-- Top Announcement Strip -->
@@ -157,7 +180,7 @@
         </ul>
 
         <!-- Mobile Hamburger Button -->
-        <button class="mobile-toggle" aria-label="Toggle Navigation" id="mobileMenuBtn">
+        <button class="mobile-toggle" aria-label="Toggle Navigation" id="mobileMenuBtn" onclick="toggleMobileNav()">
           <span class="hamburger-bar"></span>
           <span class="hamburger-bar"></span>
           <span class="hamburger-bar"></span>
@@ -230,7 +253,7 @@
       </div>
     </div>
   </header>
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileNav(true)"></div>
 
   <section class="hero hero-subpage hero-commercial">
     <div class="wrap">
@@ -525,6 +548,6 @@
     </div>
   </div>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=4.2.0"></script>
 </body>
 </html>
