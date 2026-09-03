@@ -21,14 +21,14 @@
   <meta property="og:title" content="Careers & Janitorial Employment | Hygeia Silicon Valley"/>
   <meta property="og:description" content="Join the Hygeia family. We are hiring commercial janitors, daytime porters, and floor care technicians across Silicon Valley. Competitive pay and stable hours."/>
   <meta property="og:url" content="https://hygeiaservices.com/apply.html"/>
-  <meta property="og:image" content="https://hygeiaservices.com/assets/img/Hygeia-Janitorial-Services.webp"/>
+  <meta property="og:image" content="https://hygeiaservices.com/assets/img/janitorial_fleet_leadership.jpg"/>
   <meta property="og:locale" content="en_US"/>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Careers & Janitorial Employment | Hygeia Silicon Valley"/>
   <meta name="twitter:description" content="Join the Hygeia family. We are hiring commercial janitors, daytime porters, and floor care technicians across Silicon Valley. Competitive pay and stable hours."/>
-  <meta name="twitter:image" content="https://hygeiaservices.com/assets/img/Hygeia-Janitorial-Services.webp"/>
+  <meta name="twitter:image" content="https://hygeiaservices.com/assets/img/janitorial_fleet_leadership.jpg"/>
 
   <!-- Mobile & PWA Theme -->
   <meta name="theme-color" content="#0A2533"/>
@@ -36,7 +36,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/main.css?v=3.0.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=3.2.0"/>
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
@@ -48,7 +48,7 @@
     "legalName": "Montero Enterprises Inc. dba Hygeia",
     "url": "https://hygeiaservices.com",
     "logo": "https://hygeiaservices.com/assets/img/logo2.png",
-    "image": "https://hygeiaservices.com/assets/img/Hygeia-Janitorial-Services.webp",
+    "image": "https://hygeiaservices.com/assets/img/janitorial_hero_crew.jpg",
     "description": "Join the Hygeia family. We are hiring commercial janitors, daytime porters, and floor care technicians across Silicon Valley. Competitive pay and stable hours.",
     "telephone": "+1-650-933-3823",
     "email": "aloha@hygeiaservices.com",
@@ -122,9 +122,9 @@
         <ul class="nav-menu">
           <li><a class="nav-link " href="services.html">Services</a></li>
           <li><a class="nav-link " href="industries.html">Industries</a></li>
-          <li><a class="nav-link " href="why-hygeia.html">Why Hygeia</a></li>
           <li><a class="nav-link " href="service-areas.html">Service Areas</a></li>
           <li><a class="nav-link " href="about.html">About</a></li>
+          <li><a class="nav-link " href="blog.html">Blog</a></li>
           <li><a class="nav-link " href="faqs.html">FAQs</a></li>
           <li><a class="btn btn-gold" href="contact.html">Free Site Walk</a></li>
         </ul>
@@ -152,44 +152,44 @@
         <h2 style="font-family:var(--font-heading);font-size:24px;font-weight:800;color:var(--brand-navy);margin-bottom:8px;">Job Application Form</h2>
         <p style="font-size:14px;color:var(--ink-secondary);margin-bottom:24px;">Please fill out your information below. Our hiring team will contact qualified candidates for an interview.</p>
 
-        <form action="#" method="POST">
+        <form action="#" method="POST" id="janitorial-apply-form">
           <div class="form-row-2col">
             <div>
               <label class="form-label">Full Legal Name *</label>
-              <input type="text" class="form-input" placeholder="e.g. Carlos Mendoza" required/>
+              <input type="text" id="app_name" class="form-input" placeholder="e.g. Carlos Mendoza" required/>
             </div>
             <div>
               <label class="form-label">Contact Phone Number *</label>
-              <input type="tel" class="form-input" placeholder="(408) 555-0123" required/>
+              <input type="tel" id="app_phone" class="form-input" placeholder="(408) 555-0123" required/>
             </div>
           </div>
 
           <div class="form-row-2col">
             <div>
               <label class="form-label">Email Address *</label>
-              <input type="email" class="form-input" placeholder="carlos@email.com" required/>
+              <input type="email" id="app_email" class="form-input" placeholder="carlos@email.com" required/>
             </div>
             <div>
               <label class="form-label">City of Residence *</label>
-              <input type="text" class="form-input" placeholder="e.g. San Jose, CA" required/>
+              <input type="text" id="app_city" class="form-input" placeholder="e.g. San Jose, CA" required/>
             </div>
           </div>
 
           <div class="form-row-2col">
             <div>
               <label class="form-label">Position Applying For *</label>
-              <select class="form-select" required>
+              <select id="app_position" class="form-select" required>
                 <option value="">Select Position...</option>
-                <option value="night-janitor">Nighttime Commercial Janitor</option>
-                <option value="day-porter">Daytime Commercial Porter</option>
-                <option value="floor-tech">Floor Care Specialist (Stripping &amp; Waxing)</option>
-                <option value="window-cleaner">Window Cleaning Technician</option>
-                <option value="supervisor">Field Quality Supervisor</option>
+                <option value="Night Janitor">Nighttime Commercial Janitor</option>
+                <option value="Day Porter">Daytime Commercial Porter</option>
+                <option value="Floor Care Tech">Floor Care Specialist (Stripping &amp; Waxing)</option>
+                <option value="Window Cleaner">Window Cleaning Technician</option>
+                <option value="Supervisor">Field Quality Supervisor</option>
               </select>
             </div>
             <div>
               <label class="form-label">Experience Level *</label>
-              <select class="form-select" required>
+              <select id="app_exp" class="form-select" required>
                 <option value="1-2-years">1–2 Years Commercial Experience</option>
                 <option value="3-5-years">3–5 Years Experience</option>
                 <option value="5-plus-years">5+ Years Experience</option>
@@ -200,7 +200,7 @@
 
           <div style="margin-bottom:24px;">
             <label class="form-label">Relevant Experience &amp; Availability</label>
-            <textarea class="form-textarea" rows="4" placeholder="Tell us about your previous cleaning experience, shift availability (Day, Evening, Night, Weekend), and reliable transportation..."></textarea>
+            <textarea id="app_notes" class="form-textarea" rows="4" placeholder="Tell us about your previous cleaning experience, shift availability (Day, Evening, Night, Weekend), and reliable transportation..."></textarea>
           </div>
 
           <button type="submit" class="quote-submit-btn">
@@ -331,6 +331,7 @@
           <a href="cookies.html">Cookie Policy</a>
           <a href="california-privacy.html">California Privacy (CCPA)</a>
           <a href="faqs.html">FAQs</a>
+          <a href="blog.html">Blog</a>
         </div>
       </div>
     </div>

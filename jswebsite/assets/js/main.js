@@ -359,8 +359,162 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             submitBtn.textContent = `Get Estimate for ${activeChips.length} Surfaces →`;
           }
-        }
-      });
+  // 10. Unified Janitorial RFP Intake & Dispatch API System
+  const janitorialQuoteForm = document.getElementById('janitorial-quote-form');
+  if (janitorialQuoteForm) {
+    janitorialQuoteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const rfpId = 'HYG-JS-' + Math.floor(1000 + Math.random() * 9000);
+      const name = document.getElementById('rfp_name')?.value || 'Valued Client';
+      const company = document.getElementById('rfp_company')?.value || 'Commercial Property';
+      const phone = document.getElementById('rfp_phone')?.value || '';
+      const email = document.getElementById('rfp_email')?.value || '';
+      const address = document.getElementById('rfp_address')?.value || '';
+      const sqft = document.getElementById('rfp_sqft')?.value || '';
+      const facility = document.getElementById('rfp_facility')?.value || '';
+      const frequency = document.getElementById('rfp_frequency')?.value || '';
+      const notes = document.getElementById('rfp_notes')?.value || '';
+
+      const addons = [];
+      if (document.getElementById('add_floor')?.checked) addons.push('Floor Care');
+      if (document.getElementById('add_window')?.checked) addons.push('Window Washing');
+      if (document.getElementById('add_carpet')?.checked) addons.push('Carpet Extraction');
+      if (document.getElementById('add_pressure')?.checked) addons.push('Power Washing');
+
+      const leadData = {
+        id: rfpId,
+        business: 'Janitorial Services',
+        badge: 'JANITORIAL RFP',
+        type: 'Commercial Janitorial Site Walk RFP',
+        name,
+        company,
+        phone,
+        email,
+        address,
+        details: `${sqft} sq ft · ${facility} · ${frequency}` + (addons.length ? ` · Add-ons: ${addons.join(', ')}` : ''),
+        notes,
+        status: 'New Inquiry',
+        date: new Date().toLocaleString(),
+        timestamp: Date.now()
+      };
+
+      // Save to Unified Operations Leads Storage
+      try {
+        const existing = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
+        existing.unshift(leadData);
+        localStorage.setItem('hygeia_unified_leads', JSON.stringify(existing));
+      } catch (err) {
+        console.warn('Storage sync error', err);
+      }
+
+      // Display High-End Interactive RFP Confirmation Card
+      const formCard = janitorialQuoteForm.closest('.contact-form-card');
+      if (formCard) {
+        formCard.innerHTML = `
+          <div style="text-align:center;padding:24px 12px;animation:fadeIn 0.5s ease;">
+            <div style="width:68px;height:68px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px auto;box-shadow:0 8px 24px rgba(5,150,105,0.15);">
+              ✓
+            </div>
+            <span style="display:inline-block;background:var(--brand-navy);color:#FDE68A;font-size:12px;font-weight:800;padding:4px 14px;border-radius:20px;margin-bottom:12px;letter-spacing:0.05em;">
+              RFP ID: ${rfpId} · TRANSMITTED TO DISPATCH
+            </span>
+            <h3 style="font-family:var(--font-heading);font-size:26px;font-weight:800;color:var(--brand-navy);margin-bottom:10px;">
+              Facility Site Walk Request Received!
+            </h3>
+            <p style="font-size:15px;color:var(--ink-secondary);line-height:1.65;max-width:540px;margin:0 auto 24px auto;">
+              Thank you <strong>${name}</strong> from <strong>${company}</strong>. Our senior operations supervisor has received your facility details for <strong>${address}</strong>.
+            </p>
+
+            <div style="background:var(--bg-subtle);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px;max-width:500px;margin:0 auto 24px auto;text-align:left;font-size:13.5px;color:var(--ink-secondary);">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Scope:</strong></span>
+                <span>${facility} (${sqft})</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Frequency:</strong></span>
+                <span>${frequency}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Direct Contact:</strong></span>
+                <span>${phone}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span><strong>Status:</strong></span>
+                <span style="color:#059669;font-weight:700;">⚡ Scheduled for 2-Hour Supervisor Call</span>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+              <a class="btn btn-gold" href="tel:6509333823">📞 Call Live Dispatch: (650) 933-3823</a>
+              <a class="btn btn-outline" href="index.html">Return to Home</a>
+            </div>
+          </div>
+        `;
+      }
+    });
+  }
+
+  // 11. Unified Careers / Job Application Intake
+  const janitorialApplyForm = document.getElementById('janitorial-apply-form');
+  if (janitorialApplyForm) {
+    janitorialApplyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const appId = 'APP-JS-' + Math.floor(1000 + Math.random() * 9000);
+      const name = document.getElementById('app_name')?.value || 'Applicant';
+      const phone = document.getElementById('app_phone')?.value || '';
+      const email = document.getElementById('app_email')?.value || '';
+      const city = document.getElementById('app_city')?.value || '';
+      const position = document.getElementById('app_position')?.value || '';
+      const exp = document.getElementById('app_exp')?.value || '';
+      const notes = document.getElementById('app_notes')?.value || '';
+
+      const applicantData = {
+        id: appId,
+        business: 'Janitorial Services',
+        badge: 'JOB APPLICATION',
+        type: `Employment Application: ${position}`,
+        name,
+        company: `Candidate (${city})`,
+        phone,
+        email,
+        address: city,
+        details: `Position: ${position} · Experience: ${exp}`,
+        notes,
+        status: 'New Applicant',
+        date: new Date().toLocaleString(),
+        timestamp: Date.now()
+      };
+
+      try {
+        const existing = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
+        existing.unshift(applicantData);
+        localStorage.setItem('hygeia_unified_leads', JSON.stringify(existing));
+      } catch (err) {
+        console.warn('Storage sync error', err);
+      }
+
+      const formCard = janitorialApplyForm.closest('.contact-form-card');
+      if (formCard) {
+        formCard.innerHTML = `
+          <div style="text-align:center;padding:24px 12px;animation:fadeIn 0.5s ease;">
+            <div style="width:68px;height:68px;border-radius:50%;background:#EFF6FF;color:#0090FF;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px auto;box-shadow:0 8px 24px rgba(0,144,255,0.15);">
+              💼
+            </div>
+            <span style="display:inline-block;background:var(--brand-navy);color:#FDE68A;font-size:12px;font-weight:800;padding:4px 14px;border-radius:20px;margin-bottom:12px;">
+              APPLICATION ID: ${appId}
+            </span>
+            <h3 style="font-family:var(--font-heading);font-size:26px;font-weight:800;color:var(--brand-navy);margin-bottom:10px;">
+              Application Submitted Successfully!
+            </h3>
+            <p style="font-size:15px;color:var(--ink-secondary);line-height:1.65;max-width:540px;margin:0 auto 24px auto;">
+              Thank you <strong>${name}</strong> for applying for the <strong>${position}</strong> role at Hygeia. Our recruiting manager will review your submission and contact you directly at <strong>${phone}</strong>.
+            </p>
+            <a class="btn btn-navy" href="index.html">Return to Home</a>
+          </div>
+        `;
+      }
     });
   }
 });

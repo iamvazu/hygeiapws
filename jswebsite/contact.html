@@ -21,14 +21,14 @@
   <meta property="og:title" content="Request Free Site Analysis & Janitorial Quote | Hygeia Silicon Valley"/>
   <meta property="og:description" content="Request a free commercial facility walkthrough, janitorial scope analysis, and proposal. Fast 24-hour turnaround from Hygeia Commercial Cleaning in Santa Clara, CA."/>
   <meta property="og:url" content="https://hygeiaservices.com/contact.html"/>
-  <meta property="og:image" content="https://hygeiaservices.com/assets/img/contact-us.webp"/>
+  <meta property="og:image" content="https://hygeiaservices.com/assets/img/janitorial_hero_crew.jpg"/>
   <meta property="og:locale" content="en_US"/>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Request Free Site Analysis & Janitorial Quote | Hygeia Silicon Valley"/>
   <meta name="twitter:description" content="Request a free commercial facility walkthrough, janitorial scope analysis, and proposal. Fast 24-hour turnaround from Hygeia Commercial Cleaning in Santa Clara, CA."/>
-  <meta name="twitter:image" content="https://hygeiaservices.com/assets/img/contact-us.webp"/>
+  <meta name="twitter:image" content="https://hygeiaservices.com/assets/img/janitorial_hero_crew.jpg"/>
 
   <!-- Mobile & PWA Theme -->
   <meta name="theme-color" content="#0A2533"/>
@@ -36,7 +36,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/main.css?v=3.0.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=3.2.0"/>
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
@@ -48,7 +48,7 @@
     "legalName": "Montero Enterprises Inc. dba Hygeia",
     "url": "https://hygeiaservices.com",
     "logo": "https://hygeiaservices.com/assets/img/logo2.png",
-    "image": "https://hygeiaservices.com/assets/img/Hygeia-Janitorial-Services.webp",
+    "image": "https://hygeiaservices.com/assets/img/janitorial_hero_crew.jpg",
     "description": "Request a free commercial facility walkthrough, janitorial scope analysis, and proposal. Fast 24-hour turnaround from Hygeia Commercial Cleaning in Santa Clara, CA.",
     "telephone": "+1-650-933-3823",
     "email": "aloha@hygeiaservices.com",
@@ -122,9 +122,9 @@
         <ul class="nav-menu">
           <li><a class="nav-link " href="services.html">Services</a></li>
           <li><a class="nav-link " href="industries.html">Industries</a></li>
-          <li><a class="nav-link " href="why-hygeia.html">Why Hygeia</a></li>
           <li><a class="nav-link " href="service-areas.html">Service Areas</a></li>
           <li><a class="nav-link " href="about.html">About</a></li>
+          <li><a class="nav-link " href="blog.html">Blog</a></li>
           <li><a class="nav-link " href="faqs.html">FAQs</a></li>
           <li><a class="btn btn-gold" href="contact.html">Free Site Walk</a></li>
         </ul>
@@ -158,33 +158,33 @@
             <div class="form-row-2col">
               <div>
                 <label class="form-label">Full Name *</label>
-                <input type="text" class="form-input" placeholder="e.g. Sarah Jenkins" required/>
+                <input type="text" id="rfp_name" class="form-input" placeholder="e.g. Sarah Jenkins" required/>
               </div>
               <div>
                 <label class="form-label">Company / Facility Name *</label>
-                <input type="text" class="form-input" placeholder="e.g. Acme Tech Campus" required/>
+                <input type="text" id="rfp_company" class="form-input" placeholder="e.g. Acme Tech Campus" required/>
               </div>
             </div>
 
             <div class="form-row-2col">
               <div>
                 <label class="form-label">Direct Work Phone *</label>
-                <input type="tel" class="form-input" placeholder="(650) 555-0199" required/>
+                <input type="tel" id="rfp_phone" class="form-input" placeholder="(650) 555-0199" required/>
               </div>
               <div>
                 <label class="form-label">Business Email *</label>
-                <input type="email" class="form-input" placeholder="sjenkins@company.com" required/>
+                <input type="email" id="rfp_email" class="form-input" placeholder="sjenkins@company.com" required/>
               </div>
             </div>
 
             <div class="form-row-2col">
               <div>
                 <label class="form-label">Facility Street Address / City *</label>
-                <input type="text" class="form-input" placeholder="e.g. 100 Innovation Way, Sunnyvale, CA" required/>
+                <input type="text" id="rfp_address" class="form-input" placeholder="e.g. 100 Innovation Way, Sunnyvale, CA" required/>
               </div>
               <div>
                 <label class="form-label">Estimated Square Footage *</label>
-                <select class="form-select" required>
+                <select id="rfp_sqft" class="form-select" required>
                   <option value="">Select Square Footage...</option>
                   <option value="under-5000">Under 5,000 sq. ft.</option>
                   <option value="5000-15000">5,000 – 15,000 sq. ft.</option>
@@ -198,7 +198,7 @@
             <div class="form-row-2col">
               <div>
                 <label class="form-label">Facility Type *</label>
-                <select class="form-select" required>
+                <select id="rfp_facility" class="form-select" required>
                   <option value="">Select Facility Type...</option>
                   <option value="office">Corporate Office / Tech Campus</option>
                   <option value="medical">Medical Suite / Clinic / Surgical</option>
@@ -211,7 +211,7 @@
               </div>
               <div>
                 <label class="form-label">Service Frequency Required *</label>
-                <select class="form-select" required>
+                <select id="rfp_frequency" class="form-select" required>
                   <option value="">Select Frequency...</option>
                   <option value="5-7-days">5–7 Days / Week (Nightly Janitorial)</option>
                   <option value="3-days">3 Days / Week</option>
@@ -226,23 +226,23 @@
               <label class="form-label">Additional Services Needed (Optional)</label>
               <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
                 <label style="display:flex;align-items:center;gap:6px;background:var(--bg-subtle);border:1px solid var(--border-light);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;">
-                  <input type="checkbox"/> Hard Floor Stripping &amp; Waxing
+                  <input type="checkbox" id="add_floor"/> Hard Floor Stripping &amp; Waxing
                 </label>
                 <label style="display:flex;align-items:center;gap:6px;background:var(--bg-subtle);border:1px solid var(--border-light);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;">
-                  <input type="checkbox"/> Window Washing
+                  <input type="checkbox" id="add_window"/> Window Washing
                 </label>
                 <label style="display:flex;align-items:center;gap:6px;background:var(--bg-subtle);border:1px solid var(--border-light);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;">
-                  <input type="checkbox"/> Carpet Steam Extraction
+                  <input type="checkbox" id="add_carpet"/> Carpet Steam Extraction
                 </label>
                 <label style="display:flex;align-items:center;gap:6px;background:var(--bg-subtle);border:1px solid var(--border-light);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;">
-                  <input type="checkbox"/> Exterior Power Washing
+                  <input type="checkbox" id="add_pressure"/> Exterior Power Washing
                 </label>
               </div>
             </div>
 
             <div style="margin-bottom:24px;">
               <label class="form-label">Scope Description / Special Instructions</label>
-              <textarea class="form-textarea" rows="4" placeholder="Tell us about special requirements, access hours, security clearance, or specific areas of concern..."></textarea>
+              <textarea id="rfp_notes" class="form-textarea" rows="4" placeholder="Tell us about special requirements, access hours, security clearance, or specific areas of concern..."></textarea>
             </div>
 
             <button type="submit" class="quote-submit-btn">
@@ -420,6 +420,7 @@
           <a href="cookies.html">Cookie Policy</a>
           <a href="california-privacy.html">California Privacy (CCPA)</a>
           <a href="faqs.html">FAQs</a>
+          <a href="blog.html">Blog</a>
         </div>
       </div>
     </div>
