@@ -4,49 +4,35 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Modern Mobile Menu Drawer & Overlay Toggle
-  const mobileToggle = document.querySelector('.mobile-toggle');
-  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
-  const mobileOverlay = document.getElementById('mobileMenuOverlay');
-
-  function toggleMobileMenu(forceClose = false) {
-    if (!mobileToggle) return;
-    
-    // Check if drawer exists (modern header) or fallback to navMenu
-    const drawer = mobileNavDrawer || document.querySelector('.nav-menu');
+  // 1. Unified Mobile Menu Drawer Controller
+  window.toggleMobileNav = function(forceClose) {
+    const drawer = document.getElementById('mobileNavDrawer');
+    const btn = document.getElementById('mobileMenuBtn');
+    const overlay = document.getElementById('mobileMenuOverlay');
     if (!drawer) return;
 
-    const isCurrentlyOpen = drawer.classList.contains('open');
-    if (forceClose || isCurrentlyOpen) {
+    const isOpen = drawer.classList.contains('open');
+
+    if (forceClose === true || (forceClose !== false && isOpen)) {
       drawer.classList.remove('open');
-      mobileToggle.classList.remove('open');
-      if (mobileOverlay) mobileOverlay.classList.remove('open');
+      drawer.style.display = 'none';
+      if (btn) btn.classList.remove('open');
+      if (overlay) { overlay.classList.remove('open'); overlay.style.display = 'none'; }
       document.body.style.overflow = '';
-      mobileToggle.setAttribute('aria-expanded', 'false');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     } else {
       drawer.classList.add('open');
-      mobileToggle.classList.add('open');
-      if (mobileOverlay) mobileOverlay.classList.add('open');
+      drawer.style.display = 'block';
+      if (btn) btn.classList.add('open');
+      if (overlay) { overlay.classList.add('open'); overlay.style.display = 'block'; }
       document.body.style.overflow = 'hidden';
-      mobileToggle.setAttribute('aria-expanded', 'true');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
     }
-  }
+  };
 
-  if (mobileToggle) {
-    mobileToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-  }
-
-  if (mobileOverlay) {
-    mobileOverlay.addEventListener('click', () => toggleMobileMenu(true));
-  }
-
-  // Close drawer when clicking any link inside it
-  const allNavLinks = document.querySelectorAll('.mobile-nav-link, .nav-menu a, .mobile-cta-wrap a');
-  allNavLinks.forEach(link => {
-    link.addEventListener('click', () => toggleMobileMenu(true));
+  // Close drawer when clicking any nav link
+  document.querySelectorAll('.mobile-nav-link, .mobile-cta-wrap a').forEach(link => {
+    link.addEventListener('click', () => window.toggleMobileNav(true));
   });
 
   // 2. Interactive Before / After Split Slider
