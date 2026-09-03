@@ -4,29 +4,40 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Unified Mobile Menu Drawer Controller
+    // 1. Unified Mobile Menu Drawer Controller
   window.toggleMobileNav = function(forceClose) {
-    const drawer = document.getElementById('mobileNavDrawer');
-    const btn = document.getElementById('mobileMenuBtn');
-    const overlay = document.getElementById('mobileMenuOverlay');
+    var drawer = document.getElementById('mobileNavDrawer');
+    var btn = document.getElementById('mobileMenuBtn');
+    var overlay = document.getElementById('mobileMenuOverlay');
     if (!drawer) return;
 
-    const isOpen = drawer.classList.contains('open');
+    var isCurrentlyOpen = drawer.classList.contains('open') || (drawer.style.display && drawer.style.display !== 'none');
+    var shouldClose = (forceClose === true) || isCurrentlyOpen;
 
-    if (forceClose === true || (forceClose !== false && isOpen)) {
+    if (shouldClose) {
       drawer.classList.remove('open');
-      drawer.style.display = 'none';
-      if (btn) btn.classList.remove('open');
-      if (overlay) { overlay.classList.remove('open'); overlay.style.display = 'none'; }
+      drawer.style.setProperty('display', 'none', 'important');
+      if (btn) {
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.style.setProperty('display', 'none', 'important');
+      }
       document.body.style.overflow = '';
-      if (btn) btn.setAttribute('aria-expanded', 'false');
     } else {
       drawer.classList.add('open');
-      drawer.style.display = 'block';
-      if (btn) btn.classList.add('open');
-      if (overlay) { overlay.classList.add('open'); overlay.style.display = 'block'; }
+      drawer.style.setProperty('display', 'block', 'important');
+      if (btn) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      if (overlay) {
+        overlay.classList.add('open');
+        overlay.style.setProperty('display', 'block', 'important');
+      }
       document.body.style.overflow = 'hidden';
-      if (btn) btn.setAttribute('aria-expanded', 'true');
     }
   };
 
