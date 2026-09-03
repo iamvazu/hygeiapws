@@ -318,7 +318,7 @@ a {
 .hero {
   position: relative;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.91) 48%, rgba(255, 255, 255, 0.78) 100%),
-              url('../img/hero-bg.jpg') center right / cover no-repeat;
+              url('../img/janitorial_hero_crew.jpg') center right / cover no-repeat;
   padding: 80px 0 95px 0;
   border-bottom: 1px solid var(--border-light);
   overflow: hidden;
@@ -326,7 +326,7 @@ a {
 
 .hero-commercial {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.91) 48%, rgba(255, 255, 255, 0.78) 100%),
-              url('../img/commercial-hero-bg.jpg') center right / cover no-repeat !important;
+              url('../img/janitorial_hero_crew.jpg') center right / cover no-repeat !important;
 }
 
 .hero-bin {
