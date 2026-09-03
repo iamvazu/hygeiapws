@@ -1523,10 +1523,12 @@ html, body {
     display: none;
   }
   .site-header {
-    padding: 14px 0;
+    padding: 12px 0;
   }
   .nav-logo-img {
-    height: 48px;
+    max-height: 44px;
+    max-width: 190px;
+    height: auto;
   }
   .nav-menu {
     display: none;
@@ -1549,21 +1551,36 @@ html, body {
     display: block;
   }
   .hero {
-    padding: 48px 0 56px 0;
+    padding: 44px 0 52px 0;
   }
   .hero h1 {
-    font-size: 32px;
+    font-size: 30px;
+    line-height: 1.25;
+  }
+  .hero p.lead {
+    font-size: 15px;
   }
   .hero-badge {
-    font-size: 11.5px;
+    font-size: 11px;
     padding: 5px 12px;
   }
   .hero-ctas {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
   }
   .hero-ctas .btn {
     width: 100%;
+    text-align: center;
+  }
+  .trust-strip {
+    padding: 14px 0;
+  }
+  .trust-flex {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
   }
   .bento-grid {
     grid-template-columns: 1fr;
@@ -1571,10 +1588,25 @@ html, body {
   }
   .city-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
   .footer-grid {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 32px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .footer-col h4 {
     margin-top: 12px;
@@ -1590,28 +1622,30 @@ html, body {
   .footer-legal-links {
     justify-content: center;
     gap: 12px;
-  }
-  .ba-slider-container {
-    height: 340px;
+    flex-wrap: wrap;
   }
   .cookie-banner {
-    left: 12px;
-    right: 12px;
-    bottom: max(12px, env(safe-area-inset-bottom));
-    padding: 18px 20px;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    padding: 16px 18px;
   }
 }
 
-/* Small Phones (<420px: iPhone SE, Galaxy S) */
+/* Small Phones (<420px: iPhone SE, Galaxy S, Foldables) */
 @media (max-width: 420px) {
   .wrap {
-    padding: 0 16px;
+    padding: 0 14px;
+  }
+  .nav-logo-img {
+    max-height: 38px;
+    max-width: 165px;
   }
   .hero h1 {
-    font-size: 28px;
+    font-size: 26px;
   }
   .hero-booking-card {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
   .booking-plan-toggle {
     flex-direction: column;
@@ -1619,13 +1653,26 @@ html, body {
   .chip-grid {
     grid-template-columns: 1fr;
   }
-  .sv-map-canvas-wrap {
-    height: 380px;
+  .bento-card {
+    padding: 24px 18px;
   }
-  .ba-tag {
-    font-size: 10.5px;
-    padding: 6px 14px;
-    bottom: 14px;
+}
+
+/* Ultra Small Screens (320px - 360px) */
+@media (max-width: 360px) {
+  .wrap {
+    padding: 0 10px;
+  }
+  .nav-logo-img {
+    max-height: 34px;
+    max-width: 145px;
+  }
+  .hero h1 {
+    font-size: 23px;
+  }
+  .btn {
+    font-size: 13.5px;
+    padding: 11px 18px;
   }
 }
 
