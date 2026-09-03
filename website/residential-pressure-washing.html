@@ -39,7 +39,7 @@
     <!-- Favicon -->
   <link rel="icon" type="image/webp" href="assets/img/truck.webp"/>
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
-  <link rel="stylesheet" href="assets/css/main.css?v=4.2.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=5.0.0"/>
 
   <!-- Structured Data JSON-LD (SEO, AEO, GEO) -->
   <script type="application/ld+json">
@@ -209,68 +209,77 @@
   }
 ]
   </script>
-  <!-- Critical Zero-FOUC Mobile Drawer Styles -->
+  
+  <!-- Critical Mobile Nav & Drawer Styles (v5.0.0) -->
   <style>
-    .mobile-nav-drawer { display: none; }
-    .mobile-nav-drawer.open {
-      display: block !important;
+    .mobile-nav-drawer {
+      display: none;
       position: absolute;
       top: 100%;
       left: 0;
       width: 100%;
       background: #FFFFFF;
       border-bottom: 2px solid #E2E8F0;
-      box-shadow: 0 24px 60px rgba(10,37,51,0.2);
-      z-index: 1000;
+      box-shadow: 0 24px 60px rgba(10, 37, 51, 0.2);
+      z-index: 1001;
       max-height: calc(100vh - 75px);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+    }
+    .mobile-nav-drawer.open {
+      display: block !important;
+    }
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 37, 51, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 999;
+    }
+    .mobile-menu-overlay.open {
+      display: block !important;
     }
     @media (max-width: 1024px) {
       .nav-menu { display: none !important; }
       .mobile-toggle { display: flex !important; }
     }
   </style>
-      <!-- Bulletproof Mobile Nav Controller with Touch Debounce -->
+        <!-- Master Mobile Nav Controller (v5.0.0) -->
   <script>
-    var _lastNavToggle = 0;
     function toggleMobileNav(forceClose) {
-      var now = Date.now();
-      if (forceClose === undefined && (now - _lastNavToggle < 350)) {
-        return; // Prevent phantom double-fire on touch devices
-      }
-      _lastNavToggle = now;
-
       var drawer = document.getElementById('mobileNavDrawer');
       var btn = document.getElementById('mobileMenuBtn');
       var overlay = document.getElementById('mobileMenuOverlay');
       if (!drawer) return;
 
-      var isCurrentlyOpen = drawer.classList.contains('open') || (drawer.style.display && drawer.style.display !== 'none');
-      var shouldClose = (forceClose === true) || (forceClose !== false && isCurrentlyOpen);
+      var isOpen = drawer.classList.contains('open');
 
-      if (shouldClose) {
+      if (forceClose === true || isOpen) {
         drawer.classList.remove('open');
-        drawer.style.setProperty('display', 'none', 'important');
+        drawer.style.display = 'none';
         if (btn) {
           btn.classList.remove('open');
           btn.setAttribute('aria-expanded', 'false');
         }
         if (overlay) {
           overlay.classList.remove('open');
-          overlay.style.setProperty('display', 'none', 'important');
+          overlay.style.display = 'none';
         }
         document.body.style.overflow = '';
       } else {
         drawer.classList.add('open');
-        drawer.style.setProperty('display', 'block', 'important');
+        drawer.style.display = 'block';
         if (btn) {
           btn.classList.add('open');
           btn.setAttribute('aria-expanded', 'true');
         }
         if (overlay) {
           overlay.classList.add('open');
-          overlay.style.setProperty('display', 'block', 'important');
+          overlay.style.display = 'block';
         }
         document.body.style.overflow = 'hidden';
       }
@@ -903,6 +912,6 @@
     </div>
   </div>
 
-  <script src="assets/js/main.js?v=4.2.0"></script>
+  <script src="assets/js/main.js?v=5.0.0"></script>
 </body>
 </html>
