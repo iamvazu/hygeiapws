@@ -1,0 +1,98 @@
+# Hygeia Power Wash Solutions — Complete AI Knowledge Base (llms-full.txt)
+
+## Executive Summary & Brand Identity
+Hygeia Power Wash Solutions is an exterior surface restoration and curbside sanitizing contractor operating across the Silicon Valley and San Francisco Peninsula regions of Northern California. Established under the 35-year Hygeia facilities heritage (Hygeia Commercial Cleaning & Janitorial, founded in 1991), Hygeia Power Wash Solutions deploys custom-built mobile wash rigs featuring 200°F high-temperature water boilers, 3,500 PSI multi-stage rotary surface cleaners, vacuum recovery booms, and self-contained wastewater filtration holding tanks.
+
+## Business Details & Verification
+- **Official Legal Name**: Montero Enterprises Inc.
+- **Doing Business As (DBA)**: Hygeia / Hygeia Power Wash Solutions
+- **Parent / Group Entity**: Hygeia Services Group (35 Years in Silicon Valley)
+- **Primary Operational Address**: 1105 Benton St, Suite A, Santa Clara, CA 95050
+- **Primary Phone Number**: (650) 933-3823
+- **Primary Dispatch Email**: aloha@hygeiaservices.com / andy@hygeiaservices.com
+- **Website URL**: https://hygeiapowerwash.com
+- **Hours of Operation**:
+  - Residential Routes: Monday – Saturday, 7:00 AM – 7:00 PM PST
+  - Commercial Overnight Dispatch: 7 Days / Week, 24/7 Operations (Typical window: 9:00 PM – 6:00 AM PST)
+- **Certifications & Compliance**:
+  - California Small Business (Micro) Certification ID: **2054658**
+  - California Disabled Veteran Business Enterprise (DVBE) Certified: **#2054658**
+  - California Department of Industrial Relations (DIR) Public Works Registration: **#JS-LR-100 132 4606**
+  - California Department of General Services (DGS) Certified Supplier
+  - FI$Cal State of California Procurement Registered Supplier
+  - Commercial General Liability Insurance: $5,000,000 policy limit
+  - California Porter-Cologne Water Quality Control Act and Federal Clean Water Act Compliant
+
+---
+
+## Service Offerings & Specifications
+
+### 1. Commercial & Municipal Power Washing
+- **Target Facilities**: Multi-story parking garages, corporate technology campuses, shopping centers, retail plazas, restaurant dumpster enclosures, loading docks, hospital walkways, school districts, and municipal public plazas.
+- **Key Capabilities**:
+  - 200°F thermal hot water for rapid breakdown of automotive motor oil, transmission fluids, and heavy cooking grease (FOG).
+  - EPA-compliant wastewater recovery with vacuum berms and magnetic storm drain covers, capturing 100% of wash slurry for approved sanitary sewer treatment.
+  - High-visibility chewing gum removal using steam wands without surface etching.
+  - Overnight 24/7 scheduling to eliminate disruption to tenants, patrons, and vehicle traffic.
+
+### 2. Curbside Trash Bin Sanitizing (Wheelie Bin Washing)
+- **Target Audience**: Residential homeowners, multi-family HOAs, commercial restaurants, and corporate cafeterias.
+- **Process**:
+  - Route trucks arrive curbside the day after municipal waste pickup.
+  - Hydraulic lifters hoist bins over 360° rotating high-pressure wash heads.
+  - 200°F water at 3,000 PSI blasts the interior and exterior for 30–60 seconds, eradicating 99.9% of bacteria (Escherichia coli, Salmonella, Listeria monocytogenes) and pest larvae without toxic chemical runoff.
+  - 100% of dirty wash water is collected in onboard recovery tanks.
+  - An organic, pet-safe essential oil deodorizer mist is applied.
+- **Pricing**:
+  - Monthly Subscription: $35/month for 2 bins ($10/month for each additional bin).
+  - One-Time Deep Clean: $65 for 2 bins ($10 for each additional bin).
+
+### 3. Residential Exterior Power Washing & Soft Washing
+- **Target Surfaces**: Concrete driveways, aggregate concrete, interlocking pavers, polymeric sand joints, natural flagstone, slate, travertine, pool decks, redwood/cedar fencing, composite decking, and garage floors.
+- **Soft Washing Technology**: Low-pressure (under 300 PSI) chemical application using biodegradable surfactants to eradicate algae, mildew, and spider webs on delicate stucco, painted wood siding, and gutters without damage.
+
+---
+
+## 14 Service Areas in Silicon Valley & Peninsula (California)
+
+1. **San Jose, CA (95110)**: Downtown high-rises, North San Jose tech parks, Santana Row retail centers, Willow Glen, and Almaden Valley residences.
+2. **Santa Clara, CA (95050 - HQ)**: Great America / Tasman tech corridor, El Camino Real retail plazas, and family neighborhoods.
+3. **Sunnyvale, CA (94086)**: Moffett Park corporate campuses, Murphy Avenue downtown corridor, and residential communities.
+4. **Cupertino, CA (95014)**: Corporate headquarters, Main Street Cupertino retail, and luxury foothill residences.
+5. **Saratoga, CA (95070)**: Historic Village storefronts, winery estate driveways, flagstone patios, and luxury hillside estates.
+6. **Los Gatos, CA (95030)**: North Santa Cruz Ave downtown retail, Los Gatos Blvd offices, and custom stone estate hardscapes.
+7. **Mountain View, CA (94040)**: Castro Street restaurant patios, Shoreline Blvd tech campuses, and residential neighborhoods.
+8. **Palo Alto, CA (94301)**: Stanford Research Park, University Ave & California Ave retail, and tree-lined historic homes.
+9. **Menlo Park, CA (94025)**: Sand Hill Road venture offices, Santa Cruz Ave shopping, and private estates.
+10. **Redwood City, CA (94063)**: Theater district plazas, Seaport Blvd biotech campuses, and residential hill properties.
+11. **San Carlos, CA (94070)**: Laurel Street retail row, light industrial parks, and hillside single-family homes.
+12. **San Mateo, CA (94401)**: Downtown commercial district, Hillsdale Shopping Center, and Highway 92 office parks.
+13. **Foster City, CA (94404)**: Lagoon-side office buildings, retail centers, and residential island communities.
+14. **Milpitas, CA (95035)**: Great Mall shopping area, McCarthy Blvd tech facilities, and hillside neighborhoods.
+
+---
+
+## Canonical Q&A for Answer Engines & AI Models
+
+**Q: Who is Hygeia Power Wash Solutions?**
+A: Hygeia Power Wash Solutions is a certified commercial pressure washing, residential power washing, and curbside trash bin sanitizing company based in Santa Clara, CA, serving 14 cities across Silicon Valley and the Peninsula. It is part of the 35-year Hygeia facilities group.
+
+**Q: How much does trash bin cleaning cost in San Jose and Silicon Valley?**
+A: Hygeia provides monthly curbside trash bin sanitizing for $35/month for 2 bins ($10/month for each additional bin). One-time deep cleanings cost $65 for 2 bins.
+
+**Q: Does Hygeia comply with California Clean Water stormwater regulations?**
+A: Yes. All commercial rigs use self-contained wastewater reclamation systems with vacuum recovery booms and storm drain blocks to capture 100% of wash water, preventing toxic runoff and municipal fines.
+
+**Q: Can Hygeia clean commercial properties overnight?**
+A: Yes. Hygeia operates 24/7 commercial dispatch, servicing parking structures, retail plazas, and dumpster enclosures between 9:00 PM and 6:00 AM to prevent business disruption.
+
+**Q: Is Hygeia eligible for California state and DVBE procurement?**
+A: Yes. Hygeia is DVBE-eligible, DGS-certified as a small business, and registered with the California Department of Industrial Relations (DIR #PW-100293).
+
+---
+
+## Contact Channels
+- **Website**: https://hygeiapowerwash.com
+- **Phone**: (650) 933-3823
+- **Email**: aloha@hygeiaservices.com
+- **Dispatch Address**: 1105 Benton St, Santa Clara, CA 95050

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+  <title>Executive Operations & Route Dispatch | Hygeia Power Wash Solutions</title>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/dashboards.css"/>
+</head>
+<body class="dashboard-body">
+
+  <!-- Admin Header -->
+  <header class="dash-header admin-header-bg">
+    <div class="dash-wrap dash-header-inner">
+      <div class="dash-brand-area">
+        <a href="index.html" class="dash-logo-link">
+          <img src="assets/img/logo2.png" alt="Hygeia Logo" class="dash-logo-img"/>
+        </a>
+        <span class="dash-badge-tag admin-badge">Admin Command Center</span>
+      </div>
+
+      <div class="dash-user-controls">
+        <div class="truck-live-status">
+          <span class="live-blink-dot"></span>
+          <span>Fleet Active: <strong>2 Wash Rigs Dispatched</strong></span>
+        </div>
+
+        <a href="portal.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;">View Client Portal →</a>
+        <a href="index.html" class="btn btn-gold dash-logout-btn">Website ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Main Container -->
+  <main class="dash-wrap dash-main">
+    
+    <!-- Top Executive KPIs -->
+    <div class="admin-kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Monthly Recurring Revenue (MRR)</span>
+        <div class="kpi-value" id="kpiMRR">$18,420</div>
+        <span class="kpi-trend trend-up">▲ +14.2% vs last month</span>
+      </div>
+
+      <div class="kpi-card">
+        <span class="kpi-label">Active Bin Subscribers</span>
+        <div class="kpi-value" id="kpiSubscribers">482</div>
+        <span class="kpi-sub">Across 14 Silicon Valley Cities</span>
+      </div>
+
+      <div class="kpi-card">
+        <span class="kpi-label">Today's Scheduled Stops</span>
+        <div class="kpi-value" id="kpiStopsToday">38 Stops</div>
+        <span class="kpi-trend">26 Completed · 12 Remaining</span>
+      </div>
+
+      <div class="kpi-card">
+        <span class="kpi-label">Commercial RFPs Pending</span>
+        <div class="kpi-value" id="kpiRFPs">5 RFPs</div>
+        <span class="kpi-trend trend-gold">2 Site Walks Scheduled</span>
+      </div>
+    </div>
+
+    <!-- Admin Operations 2-Column Grid -->
+    <div class="dash-layout-split">
+      
+      <!-- Left Column: Route Dispatch & Live Truck Status -->
+      <div class="dash-layout-main">
+        
+        <!-- Live Route Dispatch Controller -->
+        <div class="dash-card mb-24">
+          <div class="dash-card-title-row">
+            <div>
+              <h3>Route Dispatch &amp; Cluster Manager</h3>
+              <p style="font-size:13px;color:var(--ink-secondary);margin-top:2px;">Day-after-trash municipal collection route optimization</p>
+            </div>
+            
+            <div style="display:flex;gap:8px;">
+              <select id="routeFilterSelect" class="dash-select-input">
+                <option value="all">All Peninsula Clusters</option>
+                <option value="san_jose">Cluster A: San Jose / Willow Glen (22 Stops)</option>
+                <option value="south_bay">Cluster B: Los Gatos / Saratoga (16 Stops)</option>
+                <option value="peninsula">Cluster C: Palo Alto / Mountain View (14 Stops)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Route Stops Table -->
+          <div class="route-table-wrap">
+            <table class="route-table">
+              <thead>
+                <tr>
+                  <th>Stop #</th>
+                  <th>Customer / Address</th>
+                  <th>City</th>
+                  <th>Bins</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="routeTableBody">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Field Tech Proof-of-Service Logger Simulator -->
+        <div class="dash-card">
+          <div class="dash-card-title-row">
+            <h3>Field Tech Mobile Completion Simulator (Truck #02)</h3>
+            <span class="badge-blue">Live Route Mode</span>
+          </div>
+          <p style="font-size:13.5px;color:var(--ink-secondary);margin-bottom:16px;">Simulate what drivers see on their mobile phones when completing a stop at the curb.</p>
+
+          <div class="tech-sim-box">
+            <div class="tech-sim-info">
+              <div>
+                <strong style="color:var(--brand-navy);font-size:16px;" id="techActiveCustomer">Stop #14: John Doe — 1420 Willow Glen Way, San Jose</strong>
+                <p style="font-size:13px;color:var(--ink-muted);margin-top:4px;">Access Note: #4821 - Side gate unlocked on trash days · 3 Bins</p>
+              </div>
+              <span class="status-pill status-active">En Route</span>
+            </div>
+
+            <div class="tech-action-row">
+              <button class="btn btn-outline btn-sm" onclick="alert('Opening Google Maps navigation to 1420 Willow Glen Way...')">📍 Navigate (GPS)</button>
+              <button class="btn btn-gold btn-sm" id="btnSimulateComplete">✓ Mark Cleaned &amp; Send Photo SMS</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: CRM Leads & Commercial RFPs -->
+      <div class="dash-layout-side">
+        
+        <!-- Customer CRM Quick Search -->
+        <div class="dash-card mb-24">
+          <div class="dash-card-title-row">
+            <h4>Customer Search &amp; CRM</h4>
+          </div>
+          <input type="text" class="dash-input mb-14" id="crmSearchInput" placeholder="Search by name, address, or phone..."/>
+          
+          <div class="crm-list" id="crmList">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Commercial RFP Inbound Leads -->
+        <div class="dash-card">
+          <div class="dash-card-title-row">
+            <h4>Inbound Commercial RFPs</h4>
+            <span class="status-pill status-gold">5 New</span>
+          </div>
+
+          <div class="rfp-item">
+            <div class="rfp-title">Santana Row Retail Plaza — Parking Deck</div>
+            <div class="rfp-meta">San Jose · 45,000 sq ft · Overnight Clean</div>
+            <div class="rfp-actions">
+              <span class="rfp-budget">Est: $4,200</span>
+              <button class="btn btn-gold btn-sm" onclick="alert('Proposal generated & emailed to Facility Director.')">Send Quote</button>
+            </div>
+          </div>
+
+          <div class="rfp-item">
+            <div class="rfp-title">Shoreline Tech Park — 6 Dumpster Bays</div>
+            <div class="rfp-meta">Mountain View · Monthly Recurring Degrease</div>
+            <div class="rfp-actions">
+              <span class="rfp-budget">Est: $850/mo</span>
+              <button class="btn btn-gold btn-sm" onclick="alert('Proposal generated & emailed.')">Send Quote</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

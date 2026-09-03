@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hygeiapowerwash.com/sitemap.xml
+# LLM & AI Answer Engine Context File
+# Specification: https://llmstxt.org
+# LLMs.txt: https://hygeiapowerwash.com/llms.txt
+# LLMs-full.txt: https://hygeiapowerwash.com/llms-full.txt
