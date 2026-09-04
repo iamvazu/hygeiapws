@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+  <title>The 3D Hydro Experience | Hygeia Power Wash Solutions</title>
+  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization and exterior power washing technology in Silicon Valley." name="description"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  
+  <link rel="icon" type="image/webp" href="assets/img/truck.webp"/>
+  <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
+
+  <style>
+    :root {
+      --cyan-bright: #00B4D8;
+      --cyan-electric: #0090FF;
+      --cyan-glow: rgba(0, 180, 216, 0.4);
+      --slate-dark: #0B192C;
+      --slate-card: rgba(11, 25, 44, 0.75);
+      --slate-border: rgba(56, 189, 248, 0.25);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Fixed Canvas Container */
+    #canvasContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    canvas#scrollCanvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Cinematic Vignette Overlay */
+    .vignette-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(11, 25, 44, 0.1) 40%, rgba(0, 0, 0, 0.75) 100%),
+                  linear-gradient(180deg, rgba(11, 25, 44, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.85) 100%);
+    }
+
+    /* Top Navigation HUD */
+    .experience-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(11, 25, 44, 0.5);
+      border-bottom: 1px solid var(--slate-border);
+    }
+
+    .nav-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-logo-img {
+      height: 38px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(0, 144, 255, 0.4));
+    }
+
+    .nav-exp-badge {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--cyan-bright);
+      background: rgba(0, 180, 216, 0.12);
+      border: 1px solid var(--slate-border);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00F0FF;
+      box-shadow: 0 0 8px #00F0FF;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-glass {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-glass:hover {
+      background: rgba(0, 144, 255, 0.25);
+      border-color: var(--cyan-bright);
+      color: #FFFFFF;
+      box-shadow: 0 0 15px var(--cyan-glow);
+    }
+
+    .btn-cta-glow {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, var(--cyan-electric) 0%, var(--cyan-bright) 100%);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0, 144, 255, 0.4);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta-glow:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.6);
+    }
+
+    /* Telemetry HUD (Bottom-Left) */
+    .telemetry-hud {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 50;
+      background: var(--slate-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--slate-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .telemetry-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .telemetry-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #94A3B8;
+      margin-bottom: 2px;
+    }
+
+    .telemetry-val {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .telemetry-val span {
+      font-size: 11px;
+      color: var(--cyan-bright);
+      font-family: var(--font-mono);
+    }
+
+    /* Scroll Progress Track (Right Edge) */
+    .scroll-tracker {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tracker-track {
+      width: 3px;
+      height: 180px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tracker-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--cyan-electric), var(--cyan-bright));
+      box-shadow: 0 0 10px var(--cyan-bright);
+      transition: height 0.1s linear;
+    }
+
+    .tracker-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      writing-mode: vertical-rl;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Scroll Height Wrapper (Drives Frame Scrubbing) */
+    #scrollTrack {
+      position: relative;
+      height: 500vh; /* 5x viewport height for smooth 120-frame scrubbing */
+      z-index: 10;
+    }
+
+    /* Story Overlay Cards */
+    .story-card-wrap {
+      position: fixed;
+      top: 50%;
+      left: 6%;
+      transform: translateY(-50%);
+      max-width: 480px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .story-card {
+      background: rgba(11, 25, 44, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--slate-border);
+      border-radius: 20px;
+      padding: 32px 36px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 144, 255, 0.15);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: auto;
+      display: none;
+    }
+
+    .story-card.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .story-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cyan-bright);
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .story-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .story-title span {
+      background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .story-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #CBD5E1;
+      margin-bottom: 24px;
+    }
+
+    .story-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .spec-badge {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 10px;
+      border-radius: 6px;
+      color: #E2E8F0;
+    }
+
+    /* Scroll Prompt Indicator */
+    .scroll-prompt {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background: var(--cyan-bright);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: wheelRoll 1.5s infinite;
+    }
+
+    @keyframes wheelRoll {
+      0% { top: 6px; opacity: 1; }
+      100% { top: 18px; opacity: 0; }
+    }
+
+    .scroll-text {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #94A3B8;
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #0B192C;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .preloader-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(0, 180, 216, 0.15);
+      border-top-color: var(--cyan-bright);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .preloader-text {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .preloader-progress-track {
+      width: 240px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .preloader-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan-electric), var(--cyan-bright));
+      transition: width 0.1s linear;
+    }
+
+    @media (max-width: 768px) {
+      .story-card-wrap {
+        left: 5%;
+        right: 5%;
+        max-width: none;
+        top: auto;
+        bottom: 90px;
+        transform: none;
+      }
+      .telemetry-hud {
+        display: none;
+      }
+      .story-title {
+        font-size: 24px;
+      }
+      .story-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="preloader">
+    <div class="preloader-spinner"></div>
+    <div class="preloader-text" id="loaderText">STREAMING 3D FRAME BUFFER (0%)</div>
+    <div class="preloader-progress-track">
+      <div class="preloader-progress-fill" id="loaderFill"></div>
+    </div>
+  </div>
+
+  <!-- Top Navigation HUD -->
+  <header class="experience-nav">
+    <div class="nav-brand-group">
+      <a href="index.html" title="Back to Hygeia PWS Homepage">
+        <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img"/>
+      </a>
+      <span class="nav-exp-badge">
+        <span class="pulse-dot"></span>
+        3D HYDRO-ENGINE v1.0
+      </span>
+    </div>
+
+    <div class="nav-actions">
+      <a href="index.html" class="btn-glass">
+        <i class="fa-solid fa-arrow-left"></i> Standard Site
+      </a>
+      <a href="portal.html" class="btn-glass">
+        <i class="fa-solid fa-user-circle"></i> Portal
+      </a>
+      <a href="contact.html" class="btn-cta-glow">
+        <i class="fa-solid fa-bolt"></i> Instant Quote
+      </a>
+    </div>
+  </header>
+
+  <!-- Fixed 60FPS Canvas Render Viewport -->
+  <div id="canvasContainer">
+    <canvas id="scrollCanvas"></canvas>
+  </div>
+
+  <!-- Cinematic Vignette Filter -->
+  <div class="vignette-overlay"></div>
+
+  <!-- Telemetry HUD (Live Specs) -->
+  <div class="telemetry-hud" id="telemetryHud">
+    <div class="telemetry-stat">
+      <span class="telemetry-label"><i class="fa-solid fa-fire"></i> Water Temp</span>
+      <div class="telemetry-val">200.0 <span>°F</span></div>
+    </div>
+    <div class="telemetry-stat">
+      <span class="telemetry-label"><i class="fa-solid fa-gauge-high"></i> Pressure</span>
+      <div class="telemetry-val">4,000 <span>PSI</span></div>
+    </div>
+    <div class="telemetry-stat">
+      <span class="telemetry-label"><i class="fa-solid fa-water"></i> Output Flow</span>
+      <div class="telemetry-val">8.0 <span>GPM</span></div>
+    </div>
+    <div class="telemetry-stat">
+      <span class="telemetry-label"><i class="fa-solid fa-shield-virus"></i> Sanitization</span>
+      <div class="telemetry-val">99.9 <span>% Kill</span></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator Track -->
+  <div class="scroll-tracker">
+    <span class="tracker-label">SCROLL WALK</span>
+    <div class="tracker-track">
+      <div class="tracker-bar" id="trackerBar"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Scroll Mouse Prompt -->
+  <div class="scroll-prompt" id="scrollPrompt">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span class="scroll-text">SCROLL TO WALK THROUGH</span>
+  </div>
+
+  <!-- Interactive Story Cards Driven by Scroll Thresholds -->
+  <div class="story-card-wrap">
+
+    <!-- Card 1: 0% - 25% -->
+    <div class="story-card active" id="card1">
+      <div class="story-tag"><i class="fa-solid fa-truck"></i> CHAPTER 01 · ON-SITE ARRIVAL</div>
+      <h2 class="story-title">Curbside <span>Hot-Water</span> Sanitization</h2>
+      <p class="story-desc">
+        Our custom-engineered mobile rig pulls right up to your curbside on designated trash collection day across Silicon Valley &amp; the Bay Area.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">⚡ 200°F Thermal Heat</span>
+        <span class="spec-badge">🚛 San Jose &amp; Peninsula Fleet</span>
+        <span class="spec-badge">🛡️ CA DVBE #2054658</span>
+      </div>
+      <a href="contact.html" class="btn-cta-glow">Book Curbside Clean ➔</a>
+    </div>
+
+    <!-- Card 2: 25% - 50% -->
+    <div class="story-card" id="card2">
+      <div class="story-tag"><i class="fa-solid fa-water"></i> CHAPTER 02 · 4,000 PSI HYDRO-BLAST</div>
+      <h2 class="story-title">360° Rotating <span>Steam Jets</span></h2>
+      <p class="story-desc">
+        High-velocity dual rotary nozzles blast every interior square inch, liquefying encrusted grime, coagulated grease, and stubborn sludge in seconds.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">🌪️ 360° Internal Coverage</span>
+        <span class="spec-badge">⏱️ Under 60 Sec per Can</span>
+        <span class="spec-badge">🦠 Zero Odor Guarantee</span>
+      </div>
+      <a href="bin-cleaning.html" class="btn-cta-glow">View Bin Plans ($35/mo) ➔</a>
+    </div>
+
+    <!-- Card 3: 50% - 75% -->
+    <div class="story-card" id="card3">
+      <div class="story-tag"><i class="fa-solid fa-shield-halved"></i> CHAPTER 03 · HOSPITAL-GRADE PURITY</div>
+      <h2 class="story-title">CDC &amp; EPA <span>Eco-Sanitize</span></h2>
+      <p class="story-desc">
+        We neutralize Salmonella, E. Coli, and Listeria using 100% biodegradable green seal deodorizers. Clean enough for a surgical bay, safe for your family and pets.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">🌿 100% Eco-Friendly</span>
+        <span class="spec-badge">🌊 Zero Storm Drain Runoff</span>
+        <span class="spec-badge">⭐ 5-Star Rated Service</span>
+      </div>
+      <a href="portal.html" class="btn-cta-glow">Client Portal Login ➔</a>
+    </div>
+
+    <!-- Card 4: 75% - 100% -->
+    <div class="story-card" id="card4">
+      <div class="story-tag"><i class="fa-solid fa-circle-check"></i> CHAPTER 04 · RECOVERY &amp; COMPLETION</div>
+      <h2 class="story-title">Pristine Cans. <span>Zero Hassle.</span></h2>
+      <p class="story-desc">
+        All wastewater is captured into onboard recovery tanks and transported to licensed reclaim facilities. You return home to spotless, fresh-scented bins.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">📅 Auto-Synced to Trash Day</span>
+        <span class="spec-badge">📸 Before/After Photo Proof</span>
+        <span class="spec-badge">💳 Cancel Anytime</span>
+      </div>
+      <a href="contact.html" class="btn-cta-glow">Get Started Today ➔</a>
+    </div>
+
+  </div>
+
+  <!-- Virtual Scroll Track (Gives user 500vh to scrub through) -->
+  <div id="scrollTrack"></div>
+
+  <!-- Core Interactive Script -->
+  <script>
+    (function() {
+      const TOTAL_FRAMES = 120;
+      const FRAME_PATH = 'assets/frames/scene1/frame_';
+      const images = [];
+      let loadedCount = 0;
+      let currentFrameIndex = 0;
+      let targetFrameIndex = 0;
+
+      const canvas = document.getElementById('scrollCanvas');
+      const ctx = canvas.getContext('2d');
+      const preloader = document.getElementById('preloader');
+      const loaderText = document.getElementById('loaderText');
+      const loaderFill = document.getElementById('loaderFill');
+      const trackerBar = document.getElementById('trackerBar');
+      const scrollPrompt = document.getElementById('scrollPrompt');
+
+      const cards = [
+        document.getElementById('card1'),
+        document.getElementById('card2'),
+        document.getElementById('card3'),
+        document.getElementById('card4')
+      ];
+
+      // Resize canvas to full window
+      function resizeCanvas() {
+        canvas.width = window.innerWidth * window.devicePixelRatio;
+        canvas.height = window.innerHeight * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        renderFrame(currentFrameIndex);
+      }
+      window.addEventListener('resize', resizeCanvas);
+
+      // Preload all 120 frames
+      function padZero(num) {
+        return num.toString().padStart(4, '0');
+      }
+
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = `${FRAME_PATH}${padZero(i)}.webp`;
+        img.onload = () => {
+          loadedCount++;
+          const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
+          if (loaderText) loaderText.textContent = `STREAMING 3D FRAME BUFFER (${percent}%)`;
+          if (loaderFill) loaderFill.style.width = `${percent}%`;
+
+          if (loadedCount === TOTAL_FRAMES) {
+            setTimeout(() => {
+              if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+              }
+              resizeCanvas();
+              startRenderLoop();
+            }, 300);
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === TOTAL_FRAMES) {
+            if (preloader) {
+              preloader.style.opacity = '0';
+              preloader.style.visibility = 'hidden';
+            }
+            resizeCanvas();
+            startRenderLoop();
+          }
+        };
+        images.push(img);
+      }
+
+      // Render image with aspect-ratio cover scaling
+      function renderFrame(index) {
+        if (!images[index] || !images[index].complete) return;
+        const img = images[index];
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        const imgRatio = img.naturalWidth / img.naturalHeight;
+        const screenRatio = w / h;
+
+        let renderW, renderH, offsetX, offsetY;
+
+        if (screenRatio > imgRatio) {
+          renderW = w;
+          renderH = w / imgRatio;
+          offsetX = 0;
+          offsetY = (h - renderH) / 2;
+        } else {
+          renderH = h;
+          renderW = h * imgRatio;
+          offsetX = (w - renderW) / 2;
+          offsetY = 0;
+        }
+
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
+      }
+
+      // Scroll Event Listener
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollFraction = Math.min(1, Math.max(0, scrollTop / maxScroll));
+
+        targetFrameIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(scrollFraction * TOTAL_FRAMES));
+
+        // Update progress bar
+        if (trackerBar) trackerBar.style.height = `${scrollFraction * 100}%`;
+
+        // Hide scroll prompt once user scrolls
+        if (scrollPrompt) {
+          scrollPrompt.style.opacity = scrollTop > 100 ? '0' : '1';
+        }
+
+        // Active Card Thresholds
+        let activeCardIdx = 0;
+        if (scrollFraction >= 0.75) {
+          activeCardIdx = 3;
+        } else if (scrollFraction >= 0.50) {
+          activeCardIdx = 2;
+        } else if (scrollFraction >= 0.25) {
+          activeCardIdx = 1;
+        } else {
+          activeCardIdx = 0;
+        }
+
+        cards.forEach((card, idx) => {
+          if (card) {
+            if (idx === activeCardIdx) {
+              card.classList.add('active');
+            } else {
+              card.classList.remove('active');
+            }
+          }
+        });
+      });
+
+      // Smooth 60fps Lerp Render Loop
+      function startRenderLoop() {
+        function loop() {
+          // Smooth interpolation between current and target frame
+          const diff = targetFrameIndex - currentFrameIndex;
+          if (Math.abs(diff) > 0.05) {
+            currentFrameIndex += diff * 0.15; // Smooth spring dampening
+            renderFrame(Math.round(currentFrameIndex));
+          }
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      }
+    })();
+  </script>
+</body>
+</html>
