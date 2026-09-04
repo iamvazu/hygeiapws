@@ -9,9 +9,9 @@
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         return 'http://localhost:5000/api';
       }
-      return '/api';
+      return 'https://2.25.90.226.sslip.io/api';
     }
-    return '/api';
+    return 'https://2.25.90.226.sslip.io/api';
   })();
 
   const TOKEN_KEY = 'hygeia_client_token';

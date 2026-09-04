@@ -7,10 +7,9 @@ const HYGEIA_API_BASE = (function() {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       return 'http://localhost:5000/api';
     }
-    // Production API endpoint on Hostinger VPS or custom domain
-    return '/api';
+    return 'https://2.25.90.226.sslip.io/api';
   }
-  return 'http://localhost:5000/api';
+  return 'https://2.25.90.226.sslip.io/api';
 })();
 
 async function syncLeadToAPI(leadData) {

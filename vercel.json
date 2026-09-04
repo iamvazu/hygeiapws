@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://2.25.90.226/api/:path*"
+      "destination": "https://2.25.90.226.sslip.io/api/:path*"
     }
   ],
   "headers": [
