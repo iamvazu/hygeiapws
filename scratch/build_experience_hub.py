@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import os
+
+html_content = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -2948,3 +2950,9 @@
   </script>
 </body>
 </html>
+'''
+
+with open('website/experience.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("website/experience.html updated with Truck Hero in floating card, yellow CTA badge, and single large Mascot in footer!")
