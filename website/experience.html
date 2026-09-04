@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
   <title>The 3D Hydro Experience | Hygeia Power Wash Solutions</title>
-  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, commercial dumpster pad degreasing, and multi-story facade soft-washing in Silicon Valley." name="description"/>
+  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, commercial dumpster pad degreasing, multi-story facade soft-washing, and 100% EPA wastewater reclamation in Silicon Valley." name="description"/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,12 @@
       --cyan-bright: #00B4D8;
       --cyan-electric: #0090FF;
       --cyan-glow: rgba(0, 180, 216, 0.4);
+      --brand-navy: #0A2533;
+      --brand-gold: #FFB703;
       --slate-dark: #070D14;
+      --slate-card: #0D1824;
+      --slate-card-hover: #122234;
+      --slate-border: rgba(0, 180, 216, 0.2);
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -52,6 +57,7 @@
       align-items: center;
       justify-content: center;
       background: #000000;
+      transition: opacity 0.5s ease;
     }
 
     canvas#scrollCanvas {
@@ -72,6 +78,7 @@
       pointer-events: none;
       background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.6) 100%),
                   linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 12%, transparent 75%, rgba(0, 0, 0, 0.85) 100%);
+      transition: opacity 0.4s ease;
     }
 
     /* Minimalist Floating Island Header */
@@ -98,8 +105,8 @@
       border-radius: 999px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
     }
 
@@ -108,26 +115,27 @@
       align-items: center;
     }
 
-    /* Large, High-Contrast White Logo Housing */
+    /* Perfectly Rounded Pill Logo Housing */
     .logo-pill-housing {
       background: #FFFFFF;
-      padding: 6px 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 0 12px rgba(255, 255, 255, 0.4);
+      padding: 6px 20px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 240, 255, 0.25);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .logo-pill-housing:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 22px rgba(0, 180, 216, 0.5);
+      transform: scale(1.03);
+      box-shadow: 0 6px 22px rgba(0, 180, 216, 0.6);
     }
 
     .nav-logo-img {
-      height: 48px;
+      height: 44px;
       width: auto;
       object-fit: contain;
       display: block;
@@ -144,9 +152,9 @@
       font-size: 12.5px;
       font-weight: 700;
       color: #E2E8F0;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 8px 18px;
       border-radius: 999px;
       text-decoration: none;
       transition: all 0.2s ease;
@@ -156,7 +164,7 @@
     }
 
     .btn-glass:hover {
-      background: rgba(0, 144, 255, 0.2);
+      background: rgba(0, 144, 255, 0.25);
       border-color: var(--cyan-bright);
       color: #FFFFFF;
     }
@@ -168,7 +176,7 @@
       color: #FFFFFF;
       background: linear-gradient(135deg, var(--cyan-electric) 0%, var(--cyan-bright) 100%);
       border: none;
-      padding: 9px 20px;
+      padding: 9px 22px;
       border-radius: 999px;
       text-decoration: none;
       box-shadow: 0 4px 16px rgba(0, 144, 255, 0.4);
@@ -181,7 +189,54 @@
 
     .btn-cta-glow:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 22px rgba(0, 180, 216, 0.6);
+      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.7);
+    }
+
+    /* Scroll Tracker Bar */
+    .scroll-tracker {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .tracker-track {
+      width: 4px;
+      height: 160px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tracker-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, #00F0FF, #0090FF);
+      box-shadow: 0 0 10px #00F0FF;
+      border-radius: 999px;
+      transition: height 0.08s ease-out;
+    }
+
+    .tracker-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--cyan-bright);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
     }
 
     /* ========================================================================= */
@@ -198,17 +253,24 @@
       justify-content: space-between;
       align-items: flex-end;
       gap: 20px;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .story-hud-wrap.docked-hidden {
+      opacity: 0;
+      transform: translateY(24px);
+      pointer-events: none;
     }
 
     .story-caption-deck {
       max-width: 640px;
-      background: rgba(0, 0, 0, 0.68);
+      background: rgba(0, 0, 0, 0.72);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
       padding: 16px 22px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
       pointer-events: auto;
       transition: all 0.3s ease;
     }
@@ -279,19 +341,20 @@
 
     .story-badges {
       display: flex;
+      align-items: center;
+      gap: 8px;
       flex-wrap: wrap;
-      gap: 6px;
     }
 
     .spec-badge {
       font-family: var(--font-mono);
       font-size: 10.5px;
       font-weight: 700;
+      color: #A0AEC0;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 3px 8px;
-      border-radius: 5px;
-      color: #E2E8F0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 999px;
     }
 
     .story-btn-pill {
@@ -299,204 +362,928 @@
       font-size: 12px;
       font-weight: 800;
       color: #FFFFFF;
-      background: linear-gradient(135deg, var(--cyan-electric), var(--cyan-bright));
+      background: rgba(0, 144, 255, 0.35);
+      border: 1px solid var(--cyan-bright);
       padding: 6px 14px;
       border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 2px 10px rgba(0, 144, 255, 0.35);
       transition: all 0.2s ease;
       white-space: nowrap;
     }
 
     .story-btn-pill:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0, 180, 216, 0.5);
+      background: var(--cyan-bright);
+      color: #000000;
+      box-shadow: 0 0 16px rgba(0, 180, 216, 0.6);
     }
 
-    /* Telemetry HUD (Bottom-Right Deck) */
+    /* Live Telemetry Deck */
     .telemetry-hud {
-      background: rgba(0, 0, 0, 0.68);
+      background: rgba(0, 0, 0, 0.72);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 14px 20px;
       display: flex;
       gap: 16px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
       pointer-events: auto;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
     }
 
     .telemetry-stat {
       display: flex;
       flex-direction: column;
+      gap: 2px;
+      min-width: 80px;
     }
 
     .telemetry-label {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #94A3B8;
-      margin-bottom: 2px;
+      letter-spacing: 1px;
+      color: #A0AEC0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .telemetry-val {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 900;
+      color: #00F0FF;
+      letter-spacing: -0.02em;
+    }
+
+    .telemetry-val span {
+      font-size: 10px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* ========================================================================= */
+    /* MOTION LANDING: DEEP-DIVE CONTENT SUITE & ECOSYSTEM                       */
+    /* ========================================================================= */
+    .experience-content-hub {
+      position: relative;
+      z-index: 40;
+      background: var(--slate-dark);
+      border-top: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .hub-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+    }
+
+    /* Hero Transition Bar */
+    .hub-hero-banner {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 180, 216, 0.12);
+      border: 1px solid var(--cyan-bright);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #00F0FF;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+    }
+
+    .hub-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .hub-hero-title span {
+      background: linear-gradient(135deg, #00F0FF 0%, #0090FF 50%, #FFB703 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hub-hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: #CBD5E1;
+      max-width: 820px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    /* Jump Navigation Pills */
+    .hub-quick-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 60px;
+    }
+
+    .jump-pill {
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #E2E8F0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .jump-pill:hover {
+      background: rgba(0, 180, 216, 0.2);
+      border-color: var(--cyan-bright);
+      color: #00F0FF;
+      transform: translateY(-2px);
+    }
+
+    /* Section Headings */
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cyan-bright);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+
+    /* ========================================================================= */
+    /* 5-ACT ECOSYSTEM BENTO GRID                                                */
+    /* ========================================================================= */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .bento-card {
+      background: var(--slate-card);
+      border: 1px solid var(--slate-border);
+      border-radius: 20px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover {
+      background: var(--slate-card-hover);
+      border-color: var(--cyan-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 180, 216, 0.2);
+    }
+
+    .bento-card-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      transition: opacity 0.3s ease, transform 0.5s ease;
+      z-index: 1;
+    }
+
+    .bento-card:hover .bento-card-bg-img {
+      opacity: 0.28;
+      transform: scale(1.04);
+    }
+
+    .bento-card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bento-col-8 { grid-column: span 8; }
+    .bento-col-4 { grid-column: span 4; }
+    .bento-col-6 { grid-column: span 6; }
+    .bento-col-12 { grid-column: span 12; }
+
+    .bento-act-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--brand-gold);
+      background: rgba(255, 183, 3, 0.1);
+      border: 1px solid rgba(255, 183, 3, 0.3);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .bento-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .bento-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #94A3B8;
+      margin-bottom: 20px;
+    }
+
+    .bento-spec-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .bento-chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #CBD5E1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .bento-link {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 800;
+      color: #00F0FF;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease;
+    }
+
+    .bento-link:hover {
+      gap: 10px;
+    }
+
+    /* ========================================================================= */
+    /* INTERACTIVE PRICE ESTIMATOR & CONFIGURATOR                                */
+    /* ========================================================================= */
+    .calculator-section {
+      background: linear-gradient(180deg, var(--slate-card) 0%, rgba(7, 13, 20, 0.9) 100%);
+      border: 1px solid var(--slate-border);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 80px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .calc-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 16px;
+    }
+
+    .calc-tab-btn {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: #94A3B8;
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .calc-tab-btn.active {
+      background: var(--cyan-bright);
+      color: #000000;
+      box-shadow: 0 0 16px rgba(0, 180, 216, 0.5);
+    }
+
+    .calc-panel {
+      display: none;
+    }
+
+    .calc-panel.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .calc-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .calc-label {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #E2E8F0;
+    }
+
+    .calc-input, .calc-select {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .calc-input:focus, .calc-select:focus {
+      border-color: var(--cyan-bright);
+    }
+
+    .bin-counter-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .counter-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .counter-btn:hover {
+      background: var(--cyan-bright);
+      color: #000000;
+    }
+
+    .counter-val {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 900;
+      color: #00F0FF;
+    }
+
+    .calc-result-box {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .calc-result-price {
+      font-family: var(--font-mono);
+      font-size: 42px;
+      font-weight: 900;
+      color: #00F0FF;
+      margin-bottom: 4px;
+    }
+
+    .calc-result-sub {
+      font-size: 13px;
+      color: #94A3B8;
+      margin-bottom: 24px;
+    }
+
+    .calc-btn-submit {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #000000;
+      background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%);
+      border: none;
+      padding: 14px 24px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0, 180, 216, 0.5);
+    }
+
+    .calc-btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 240, 255, 0.7);
+    }
+
+    /* ========================================================================= */
+    /* BEFORE & AFTER TRANSFORMATION SLIDER                                      */
+    /* ========================================================================= */
+    .ba-section-box {
+      margin-bottom: 80px;
+    }
+
+    .ba-slider-container {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--slate-border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      user-select: none;
+    }
+
+    .ba-img-base {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ba-after-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      border-right: 2px solid #00F0FF;
+    }
+
+    .ba-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      max-width: none;
+    }
+
+    .ba-tag {
+      position: absolute;
+      top: 20px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .before-tag {
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+    }
+
+    .after-tag {
+      left: 20px;
+      background: rgba(0, 180, 216, 0.35);
+      border: 1px solid #00F0FF;
+      color: #00F0FF;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #00F0FF;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 0 20px #00F0FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: ew-resize;
+      z-index: 20;
+      color: #000000;
+    }
+
+    /* ========================================================================= */
+    /* 14 SILICON VALLEY CITIES GRID                                             */
+    /* ========================================================================= */
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+      margin-bottom: 80px;
+    }
+
+    .city-card {
+      background: var(--slate-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .city-card:hover {
+      background: var(--slate-card-hover);
+      border-color: var(--cyan-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);
+    }
+
+    .city-name {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .city-route {
+      font-size: 11.5px;
+      color: #94A3B8;
+    }
+
+    /* ========================================================================= */
+    /* STATE COMPLIANCE & DVBE CERTIFICATION VAULT                               */
+    /* ========================================================================= */
+    .compliance-vault {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 183, 3, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .cert-seal-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cert-seal-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 16px;
+      border-radius: 12px;
+    }
+
+    .cert-seal-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .cert-seal-text strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+
+    .cert-seal-text span {
+      font-size: 11px;
+      color: var(--brand-gold);
+    }
+
+    /* ========================================================================= */
+    /* AEO FAQ ACCORDION                                                         */
+    /* ========================================================================= */
+    .faq-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+
+    .faq-item {
+      background: var(--slate-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item.open {
+      border-color: var(--cyan-bright);
+    }
+
+    .faq-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 18px 22px;
+      text-align: left;
       font-family: var(--font-heading);
       font-size: 16px;
       font-weight: 800;
       color: #FFFFFF;
       display: flex;
-      align-items: baseline;
-      gap: 2px;
-    }
-
-    .telemetry-val span {
-      font-size: 10px;
-      color: var(--cyan-bright);
-      font-family: var(--font-mono);
-    }
-
-    /* Scroll Progress Track (Right Edge) */
-    .scroll-tracker {
-      position: fixed;
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      cursor: pointer;
     }
 
-    .tracker-track {
-      width: 3px;
-      height: 200px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
+    .faq-icon {
+      font-size: 14px;
+      color: var(--cyan-bright);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 22px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #94A3B8;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ========================================================================= */
+    /* ULTRA-UNIQUE FUTURISTIC HYDRO-CYBER FOOTER                                */
+    /* ========================================================================= */
+    .cyber-footer {
       position: relative;
+      background: #03070C;
+      border-top: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 70px 24px 30px;
       overflow: hidden;
     }
 
-    .tracker-bar {
+    /* Glowing Hydraulic Conduit Lines */
+    .hydraulic-conduit {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 0%;
-      background: linear-gradient(180deg, var(--cyan-electric), var(--cyan-bright));
-      box-shadow: 0 0 10px var(--cyan-bright);
-      transition: height 0.05s linear;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00F0FF, #0090FF, transparent);
+      box-shadow: 0 0 16px #00F0FF;
+      animation: conduitFlow 4s linear infinite;
     }
 
-    .tracker-label {
+    @keyframes conduitFlow {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .footer-top-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 50px;
+    }
+
+    .fleet-status-beacon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--cyan-bright);
-      writing-mode: vertical-rl;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #00F0FF;
+      background: rgba(0, 180, 216, 0.12);
+      border: 1px solid var(--cyan-bright);
+      padding: 6px 16px;
+      border-radius: 999px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+      animation: pulseGreen 1.5s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .footer-main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand-bio {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #94A3B8;
+      margin-top: 14px;
+      margin-bottom: 20px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 18px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Virtual Scroll Track (1800vh for 4 Acts) */
-    #scrollTrack {
-      position: relative;
-      height: 1800vh;
-      z-index: 10;
-    }
-
-    /* Preloader */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #070D14;
-      z-index: 99999;
+    .footer-nav-list {
+      list-style: none;
       display: flex;
       flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-link {
+      font-size: 13.5px;
+      color: #94A3B8;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      gap: 6px;
     }
 
-    .preloader-spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(0, 180, 216, 0.15);
-      border-top-color: var(--cyan-bright);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 16px;
+    .footer-nav-link:hover {
+      color: #00F0FF;
+      transform: translateX(3px);
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .footer-dispatch-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .preloader-text {
-      font-family: var(--font-mono);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #FFFFFF;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
+    .dispatch-phone {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 900;
+      color: #00F0FF;
+      text-decoration: none;
     }
 
-    .preloader-progress-track {
-      width: 220px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
+    .btn-rocket-top {
+      background: rgba(0, 180, 216, 0.15);
+      border: 1px solid var(--cyan-bright);
+      color: #00F0FF;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 16px;
       border-radius: 999px;
-      overflow: hidden;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
 
-    .preloader-progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--cyan-electric), var(--cyan-bright));
-      transition: width 0.1s linear;
+    .btn-rocket-top:hover {
+      background: var(--cyan-bright);
+      color: #000000;
+      box-shadow: 0 0 16px rgba(0, 180, 216, 0.6);
+    }
+
+    .footer-legal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: #64748B;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-links a {
+      color: #64748B;
+      text-decoration: none;
+    }
+
+    .footer-legal-links a:hover {
+      color: #CBD5E1;
     }
 
     /* ========================================================================= */
-    /* RESPONSIVE BREAKPOINTS (TABLET & MOBILE)                                  */
+    /* RESPONSIVE BREAKPOINTS                                                    */
     /* ========================================================================= */
     @media (max-width: 1024px) {
-      .nav-extra {
-        display: none !important;
-      }
-      .nav-logo-img {
-        height: 40px;
-      }
       .story-hud-wrap {
         flex-direction: column;
         align-items: stretch;
         bottom: 16px;
         left: 16px;
         right: 16px;
-        gap: 10px;
-      }
-      .story-caption-deck {
-        max-width: 100%;
-        padding: 14px 18px;
       }
       .telemetry-hud {
-        padding: 10px 14px;
-        gap: 12px;
-        justify-content: space-between;
-      }
-      .telemetry-val {
-        font-size: 14px;
-      }
-      .story-title {
-        font-size: 19px;
-      }
-      .scroll-tracker {
         display: none;
+      }
+      .bento-col-8, .bento-col-4, .bento-col-6 {
+        grid-column: span 12;
+      }
+      .calc-panel.active {
+        grid-template-columns: 1fr;
+      }
+      .footer-main-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .compliance-vault {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -509,17 +1296,14 @@
         padding: 6px 14px;
       }
       .nav-logo-img {
-        height: 34px;
+        height: 32px;
       }
       .logo-pill-housing {
-        padding: 4px 12px;
+        padding: 4px 14px;
       }
       .btn-cta-glow {
         font-size: 11.5px;
         padding: 6px 14px;
-      }
-      .telemetry-hud {
-        display: none;
       }
       .story-caption-deck {
         padding: 12px 16px;
@@ -531,6 +1315,12 @@
       .story-desc {
         font-size: 12.5px;
         margin-bottom: 8px;
+      }
+      .footer-main-grid {
+        grid-template-columns: 1fr;
+      }
+      .ba-slider-container {
+        height: 320px;
       }
     }
   </style>
@@ -546,7 +1336,7 @@
     </div>
   </div>
 
-  <!-- Top Navigation HUD (Clean, Spacious Floating Capsule) -->
+  <!-- Top Navigation HUD (Unified Organic Pill Capsule) -->
   <div class="experience-nav-wrap">
     <header class="experience-nav">
       <div class="nav-brand-group">
@@ -575,10 +1365,10 @@
   </div>
 
   <!-- Subtle Vignette Filter -->
-  <div class="vignette-overlay"></div>
+  <div class="vignette-overlay" id="vignetteOverlay"></div>
 
   <!-- Scroll Progress Indicator Track -->
-  <div class="scroll-tracker">
+  <div class="scroll-tracker" id="scrollTracker">
     <span class="tracker-label">SCROLL WALK</span>
     <div class="tracker-track">
       <div class="tracker-bar" id="trackerBar"></div>
@@ -586,14 +1376,14 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD                                   -->
+  <!-- UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD (Acts I to V)                     -->
   <!-- ========================================================================= -->
-  <div class="story-hud-wrap">
+  <div class="story-hud-wrap" id="storyHud">
     
     <!-- Story Caption Deck -->
     <div class="story-caption-deck">
 
-      <!-- Card 1: 0% - 10% (Act I Scene 1) -->
+      <!-- Card 1: Act I Scene 1 -->
       <div class="story-card active" id="card1">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CH 01 · FLEET ARRIVAL</span>
@@ -612,7 +1402,7 @@
         </div>
       </div>
 
-      <!-- Card 2: 10% - 20% (Act I Scene 1) -->
+      <!-- Card 2: Act I Scene 1 -->
       <div class="story-card" id="card2">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CH 02 · 4,000 PSI JET BLAST</span>
@@ -631,7 +1421,7 @@
         </div>
       </div>
 
-      <!-- Card 3: 20% - 30% (Act II Scene 2) -->
+      <!-- Card 3: Act II Scene 2 -->
       <div class="story-card" id="card3">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CH 03 · ROTARY RESTORATION</span>
@@ -650,7 +1440,7 @@
         </div>
       </div>
 
-      <!-- Card 4: 30% - 40% (Act II Scene 2) -->
+      <!-- Card 4: Act II Scene 2 -->
       <div class="story-card" id="card4">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CH 04 · SHOWROOM FINISH</span>
@@ -669,7 +1459,7 @@
         </div>
       </div>
 
-      <!-- Card 5: 40% - 50% (Act III Scene 3) -->
+      <!-- Card 5: Act III Scene 3 -->
       <div class="story-card" id="card5">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CH 05 · DEGREASING</span>
@@ -688,7 +1478,7 @@
         </div>
       </div>
 
-      <!-- Card 6: 50% - 60% (Act III Scene 3) -->
+      <!-- Card 6: Act III Scene 3 -->
       <div class="story-card" id="card6">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-clipboard-check"></i> ACT III · CH 06 · ENCLOSURE SANITIZED</span>
@@ -707,7 +1497,7 @@
         </div>
       </div>
 
-      <!-- Card 7: 60% - 70% (Act IV Scene 4) -->
+      <!-- Card 7: Act IV Scene 4 -->
       <div class="story-card" id="card7">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-spray-can-sparkles"></i> ACT IV · CH 07 · FACADE SOFT-WASH</span>
@@ -726,7 +1516,7 @@
         </div>
       </div>
 
-      <!-- Card 8: 70% - 80% (Act IV Scene 4) -->
+      <!-- Card 8: Act IV Scene 4 -->
       <div class="story-card" id="card8">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> ACT IV · CH 08 · PURE WATER GLAZING</span>
@@ -745,7 +1535,7 @@
         </div>
       </div>
 
-      <!-- Card 9: 80% - 90% (Act V Scene 5) -->
+      <!-- Card 9: Act V Scene 5 -->
       <div class="story-card" id="card9">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-recycle"></i> ACT V · CH 09 · 100% EPA RECLAIM</span>
@@ -764,22 +1554,22 @@
         </div>
       </div>
 
-      <!-- Card 10: 90% - 100% (Act V Scene 5 - Grand Finale) -->
+      <!-- Card 10: Act V Scene 5 - Grand Finale -->
       <div class="story-card" id="card10">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-medal"></i> ACT V · CH 10 · SUSTAINABLE FLEET</span>
           <span class="spec-badge">🏆 Certified CA DVBE #2054658</span>
         </div>
-        <h2 class="story-title">Ready For <span>Spotless Excellence?</span></h2>
+        <h2 class="story-title">Experience <span>Clean Excellence.</span></h2>
         <p class="story-desc">
-          From Silicon Valley tech campuses to residential curbsides, experience California's premier eco-compliant power washing fleet.
+          Scroll down to explore full service capabilities, interactive live estimators, and instant Silicon Valley scheduling.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
             <span class="spec-badge">⚡ 24hr Instant Quotes</span>
-            <span class="spec-badge">📞 (408) 555-HYGEIA</span>
+            <span class="spec-badge">📞 (650) 933-3823</span>
           </div>
-          <a href="contact.html" class="story-btn-pill" style="background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%); color: #000; font-weight: 800;">Get Instant Quote Now ➔</a>
+          <a href="#contentHub" class="story-btn-pill" style="background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%); color: #000; font-weight: 800;">Explore Full Services ↓</a>
         </div>
       </div>
 
@@ -807,8 +1597,489 @@
 
   </div>
 
-  <!-- Virtual Scroll Track (2200vh for 5 Acts) -->
-  <div id="scrollTrack" style="height: 2200vh;"></div>
+  <!-- Virtual Scroll Track (2000vh for 5-Act Walk) -->
+  <div id="scrollTrack" style="height: 2000vh;"></div>
+
+  <!-- ========================================================================= -->
+  <!-- MOTION LANDING: DEEP-DIVE CONTENT SUITE & ECOSYSTEM                       -->
+  <!-- ========================================================================= -->
+  <main class="experience-content-hub" id="contentHub">
+    <div class="hub-container">
+
+      <!-- Hero Transition Banner -->
+      <div class="hub-hero-banner">
+        <div class="hub-badge">
+          <i class="fa-solid fa-circle-check"></i> 5-Act 3D Simulation Completed
+        </div>
+        <h1 class="hub-hero-title">
+          Commercial &amp; Residential <span>Power Washing Mastery</span>
+        </h1>
+        <p class="hub-hero-sub">
+          Industrial 200° hot-water thermal sanitization, 100% Cal/EPA wastewater vacuum recovery, and 35+ years of trusted Bay Area facility maintenance.
+        </p>
+
+        <div class="hub-quick-nav">
+          <a href="#capabilities" class="jump-pill"><i class="fa-solid fa-layer-group"></i> 5 Core Capabilities</a>
+          <a href="#estimator" class="jump-pill"><i class="fa-solid fa-calculator"></i> Live Quote Estimator</a>
+          <a href="#transformation" class="jump-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> 200° Proof</a>
+          <a href="#cities" class="jump-pill"><i class="fa-solid fa-map-location-dot"></i> 14 Service Cities</a>
+          <a href="#compliance" class="jump-pill"><i class="fa-solid fa-award"></i> CA DVBE #2054658</a>
+          <a href="#faq" class="jump-pill"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+        </div>
+      </div>
+
+      <!-- Section 1: The 5-Act Ecosystem Bento Grid -->
+      <div class="section-header" id="capabilities">
+        <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Engineered Capabilities</span>
+        <h2 class="section-title">The Complete Power Wash Ecosystem</h2>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Card 1: Commercial Tech Campus Flatwork (Span 8) -->
+        <div class="bento-card bento-col-8">
+          <img src="assets/img/comm-parking-garage.jpg" alt="Commercial Tech Campus Flatwork" class="bento-card-bg-img"/>
+          <div class="bento-card-content">
+            <span class="bento-act-chip">ACT II · COMMERCIAL FLATWORK</span>
+            <h3 class="bento-title">Tech Campus &amp; Corporate Plaza Restoration</h3>
+            <p class="bento-desc">
+              High-speed 2,500 RPM dual-jet rotary surface cleaners cover up to 15,000 sq ft/hr with uniform hydraulic pressure. Strips stubborn tire marks, oil slicks, and chewing gum without striping or concrete etching.
+            </p>
+            <div class="bento-spec-strip">
+              <span class="bento-chip">⚡ 4,200 PSI Hydro Blast</span>
+              <span class="bento-chip">🏢 15,000 sq ft / hr</span>
+              <span class="bento-chip">✨ Zero Etch Lines</span>
+              <span class="bento-chip">🌙 24/7 Overnight Dispatch</span>
+            </div>
+            <a href="commercial-pressure-washing.html" class="bento-link">Commercial Service Details ➔</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Curbside Bin Sanitizing (Span 4) -->
+        <div class="bento-card bento-col-4">
+          <img src="assets/img/bin-hero-bg.jpg" alt="Curbside Bin Sanitizing" class="bento-card-bg-img"/>
+          <div class="bento-card-content">
+            <span class="bento-act-chip">ACT I · CURBSIDE RESIDENTIAL</span>
+            <h3 class="bento-title">Curbside Trash Bin Sanitizing</h3>
+            <p class="bento-desc">
+              Automated 200°F thermal steam cleans trash, recycling, and organic bins right after city collection, eliminating 99.9% of bacteria and odors.
+            </p>
+            <div class="bento-spec-strip">
+              <span class="bento-chip">🔥 200°F Boiler</span>
+              <span class="bento-chip">🦠 99.9% Odor Eradication</span>
+              <span class="bento-chip">💰 From $35/mo</span>
+            </div>
+            <a href="bin-cleaning.html" class="bento-link">View $35/mo Bin Plans ➔</a>
+          </div>
+        </div>
+
+        <!-- Card 3: Dumpster Pad Degreasing (Span 4) -->
+        <div class="bento-card bento-col-4">
+          <img src="assets/img/scene3_hero.jpg" alt="Dumpster Pad Degreasing" class="bento-card-bg-img"/>
+          <div class="bento-card-content">
+            <span class="bento-act-chip">ACT III · HEALTH COMPLIANCE</span>
+            <h3 class="bento-title">Dumpster Pad Thermal Remediation</h3>
+            <p class="bento-desc">
+              200° steam liquefies animal fats and industrial grease, paired with EPA List-N bio-degreasers to guarantee health inspection compliance.
+            </p>
+            <div class="bento-spec-strip">
+              <span class="bento-chip">🔥 200° Steam Boiler</span>
+              <span class="bento-chip">🏥 Health Code Pass</span>
+              <span class="bento-chip">🛡️ HOA &amp; Retail Ready</span>
+            </div>
+            <a href="commercial-pressure-washing.html" class="bento-link">Dumpster Pad Cleanups ➔</a>
+          </div>
+        </div>
+
+        <!-- Card 4: Multi-Story Facade Soft-Wash (Span 4) -->
+        <div class="bento-card bento-col-4">
+          <img src="assets/img/scene4_hero.jpg" alt="Multi-Story Facade Soft-Wash" class="bento-card-bg-img"/>
+          <div class="bento-card-content">
+            <span class="bento-act-chip">ACT IV · FACADE &amp; GLAZING</span>
+            <h3 class="bento-title">Building Facade &amp; Pure Water Glazing</h3>
+            <p class="bento-desc">
+              45-ft carbon fiber poles dispense biodegradable active foam, followed by a 0.0 PPM reverse osmosis deionized rinse for spotless glass.
+            </p>
+            <div class="bento-spec-strip">
+              <span class="bento-chip">🏢 Up to 4 Stories Reach</span>
+              <span class="bento-chip">💎 0.0 PPM Pure RO Rinse</span>
+              <span class="bento-chip">✨ Spot-Free Architectural Glass</span>
+            </div>
+            <a href="commercial-pressure-washing.html" class="bento-link">Facade Soft-Wash Specs ➔</a>
+          </div>
+        </div>
+
+        <!-- Card 5: 100% Cal/EPA Wastewater Reclaim (Span 4) -->
+        <div class="bento-card bento-col-4">
+          <img src="assets/img/scene5_hero.jpg" alt="EPA Wastewater Reclaim" class="bento-card-bg-img"/>
+          <div class="bento-card-content">
+            <span class="bento-act-chip">ACT V · SUSTAINABILITY</span>
+            <h3 class="bento-title">100% EPA Wastewater Recovery</h3>
+            <p class="bento-desc">
+              Stainless steel vacuum rings and berms suction all runoff water into on-board filtration holding tanks, protecting Bay Area stormwater drains.
+            </p>
+            <div class="bento-spec-strip">
+              <span class="bento-chip">🌊 Zero Storm Drain Runoff</span>
+              <span class="bento-chip">🌱 Cal/EPA Compliant</span>
+              <span class="bento-chip">🛡️ 100% Water Reclaim</span>
+            </div>
+            <a href="contact.html" class="bento-link">Cal/EPA Compliance RFP ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Interactive Live Quote & Price Estimator -->
+      <div class="section-header" id="estimator">
+        <span class="section-tag"><i class="fa-solid fa-calculator"></i> Transparent Pricing</span>
+        <h2 class="section-title">Live Instant Price Estimator</h2>
+      </div>
+
+      <div class="calculator-section">
+        <div class="calc-tabs">
+          <button type="button" class="calc-tab-btn active" onclick="switchCalc('bin')">
+            <i class="fa-solid fa-trash-can"></i> Curbside Bin Subscription
+          </button>
+          <button type="button" class="calc-tab-btn" onclick="switchCalc('commercial')">
+            <i class="fa-solid fa-building"></i> Commercial Pressure Washing
+          </button>
+        </div>
+
+        <!-- Panel 1: Curbside Bins -->
+        <div class="calc-panel active" id="calcPanelBin">
+          <div>
+            <div class="calc-form-group">
+              <label class="calc-label">Plan Frequency</label>
+              <select class="calc-select" id="binPlanSelect" onchange="updateBinPrice()">
+                <option value="monthly" selected>Monthly Auto-Clean ($35 Base for 2 Bins)</option>
+                <option value="onetime">One-Time Deep Clean ($65 Base for 2 Bins)</option>
+              </select>
+            </div>
+
+            <div class="calc-form-group">
+              <label class="calc-label">Number of Trash &amp; Recycling Bins</label>
+              <div class="bin-counter-box">
+                <button type="button" class="counter-btn" onclick="adjustBins(-1)">−</button>
+                <span class="counter-val" id="binCountDisplay">2</span>
+                <button type="button" class="counter-btn" onclick="adjustBins(1)">+</button>
+              </div>
+            </div>
+
+            <div class="calc-form-group">
+              <label class="calc-label">Service Zip Code (Silicon Valley / Peninsula)</label>
+              <input type="text" class="calc-input" placeholder="e.g. 95050, 95128, 94301..." id="binZipInput"/>
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div>
+              <span class="story-tag"><i class="fa-solid fa-sparkles"></i> ESTIMATED TOTAL</span>
+              <div class="calc-result-price" id="binPriceOutput">$35<span style="font-size:16px;color:#CBD5E1;font-weight:600;"> / month</span></div>
+              <p class="calc-result-sub" id="binPriceDetail">Includes 2 cans sanitized with 200° thermal steam.</p>
+            </div>
+            <a href="contact.html" class="calc-btn-submit">Proceed to Instant Booking ➔</a>
+          </div>
+        </div>
+
+        <!-- Panel 2: Commercial Surface Washing -->
+        <div class="calc-panel" id="calcPanelComm">
+          <div>
+            <div class="calc-form-group">
+              <label class="calc-label">Estimated Square Footage</label>
+              <input type="range" min="1000" max="50000" step="500" value="5000" id="sqftSlider" oninput="updateCommPrice()" style="width:100%;accent-color:#00F0FF;margin:8px 0;"/>
+              <div style="font-family:var(--font-mono);font-size:16px;color:#00F0FF;font-weight:800;" id="sqftDisplay">5,000 sq ft</div>
+            </div>
+
+            <div class="calc-form-group">
+              <label class="calc-label">Surface &amp; Property Type</label>
+              <select class="calc-select" id="commSurfaceSelect" onchange="updateCommPrice()">
+                <option value="flatwork">Commercial Concrete Flatwork &amp; Sidewalks</option>
+                <option value="garage">Parking Structure &amp; Garage Deck</option>
+                <option value="dumpster">Dumpster Enclosure Pad + Heavy Oil Remediation</option>
+                <option value="facade">Multi-Story Building Exterior Soft-Wash</option>
+              </select>
+            </div>
+
+            <div class="calc-form-group">
+              <label class="calc-label">Night Operations / Overnight Service</label>
+              <select class="calc-select" id="commNightSelect" onchange="updateCommPrice()">
+                <option value="standard">Standard Day Dispatch (7 AM – 7 PM)</option>
+                <option value="overnight">24/7 Overnight Non-Disruptive (9 PM – 6 AM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div>
+              <span class="story-tag"><i class="fa-solid fa-building"></i> ESTIMATED COMMERCIAL RANGE</span>
+              <div class="calc-result-price" id="commPriceOutput">$750 - $1,150</div>
+              <p class="calc-result-sub" id="commPriceDetail">Estimated for 5,000 sq ft with 100% Cal/EPA water recovery &amp; DVBE compliance.</p>
+            </div>
+            <a href="contact.html" class="calc-btn-submit">Request Formal RFP Proposal ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Interactive Before & After Transformation Slider -->
+      <div class="section-header" id="transformation">
+        <span class="section-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> 200° Hot Water Proof</span>
+        <h2 class="section-title">See The Transformation</h2>
+      </div>
+
+      <div class="ba-section-box">
+        <div class="ba-slider-container" id="baSliderContainer">
+          <img src="assets/img/before.jpg" alt="Commercial Concrete Before Treatment" class="ba-img-base"/>
+          <div class="ba-tag before-tag">Before Treatment</div>
+
+          <div class="ba-after-layer" id="baAfterLayer">
+            <img src="assets/img/after.jpg" alt="Commercial Concrete After Hygeia Treatment" class="ba-img-overlay" id="baImgOverlay"/>
+            <div class="ba-tag after-tag">After Hygeia 200° Wash</div>
+          </div>
+
+          <div class="ba-handle" id="baHandle">
+            <i class="fa-solid fa-arrows-left-right"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: 14 Silicon Valley Cities Route Grid -->
+      <div class="section-header" id="cities">
+        <span class="section-tag"><i class="fa-solid fa-map-location-dot"></i> Service Radius</span>
+        <h2 class="section-title">14 Silicon Valley &amp; Peninsula Cities</h2>
+      </div>
+
+      <div class="cities-grid">
+        <div class="city-card">
+          <span class="city-name">San Jose</span>
+          <span class="city-route">📍 Daily Metro Dispatch</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Santa Clara</span>
+          <span class="city-route">📍 HQ Operations Hub</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Sunnyvale</span>
+          <span class="city-route">📍 Tech Campus Route</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Cupertino</span>
+          <span class="city-route">📍 Foothill &amp; Plaza</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Palo Alto</span>
+          <span class="city-route">📍 University &amp; Research</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Mountain View</span>
+          <span class="city-route">📍 Downtown &amp; Shoreline</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Los Gatos</span>
+          <span class="city-route">📍 Commercial &amp; Estates</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Saratoga</span>
+          <span class="city-route">📍 Residential &amp; Village</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Menlo Park</span>
+          <span class="city-route">📍 Sand Hill &amp; Downtown</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Redwood City</span>
+          <span class="city-route">📍 Port &amp; Commercial</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">San Carlos</span>
+          <span class="city-route">📍 Industrial &amp; Retail</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">San Mateo</span>
+          <span class="city-route">📍 Peninsula Corridor</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Foster City</span>
+          <span class="city-route">📍 Lagoon &amp; Campus</span>
+        </div>
+        <div class="city-card">
+          <span class="city-name">Milpitas</span>
+          <span class="city-route">📍 Gateway &amp; Logistics</span>
+        </div>
+      </div>
+
+      <!-- Section 5: State of California Compliance & DVBE Enterprise Vault -->
+      <div class="section-header" id="compliance">
+        <span class="section-tag"><i class="fa-solid fa-award"></i> California Certified</span>
+        <h2 class="section-title">Public Works &amp; Enterprise Procurement Vault</h2>
+      </div>
+
+      <div class="compliance-vault">
+        <div>
+          <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> MONTERO ENTERPRISES INC. DBA HYGEIA</span>
+          <h3 style="font-family:var(--font-heading);font-size:24px;font-weight:800;color:#FFFFFF;margin:8px 0 12px;">
+            California State Certified DVBE #2054658
+          </h3>
+          <p style="font-size:14px;line-height:1.6;color:#CBD5E1;margin-bottom:16px;">
+            DIR Public Works Registered (<strong>JS-LR-100 132 4606</strong>) with $5M Commercial General Liability insurance, certified payroll capability, and 100% Cal/EPA stormwater vacuum recovery.
+          </p>
+          <a href="contact.html" class="story-btn-pill">Download Vendor Packet &amp; W-9 ➔</a>
+        </div>
+
+        <div class="cert-seal-row">
+          <div class="cert-seal-badge">
+            <img src="assets/img/cert-cagov.png" alt="CA.GOV Certified" class="cert-seal-img"/>
+            <div class="cert-seal-text">
+              <strong>CA.GOV Certified</strong>
+              <span>Small Business (Micro)</span>
+            </div>
+          </div>
+          <div class="cert-seal-badge">
+            <img src="assets/img/cert-dgs.png" alt="DGS Certified DVBE" class="cert-seal-img"/>
+            <div class="cert-seal-text">
+              <strong>DGS Certified</strong>
+              <span>DVBE #2054658</span>
+            </div>
+          </div>
+          <div class="cert-seal-badge">
+            <img src="assets/img/cert-fiscal.png" alt="DIR Public Works" class="cert-seal-img"/>
+            <div class="cert-seal-text">
+              <strong>DIR Registered</strong>
+              <span>PW #JS-LR-100 132 4606</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: AEO FAQs Accordion -->
+      <div class="section-header" id="faq">
+        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Answers &amp; Knowledge</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item open">
+          <button class="faq-btn" type="button" onclick="toggleFaq(this)">
+            <span>How does the curbside trash bin sanitization process work?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            We schedule our mobile cleaning rigs to arrive right after your municipal trash collection. Our 360-degree rotating spray heads blast the interior with 200°F thermal steam at 4,000 PSI, liquefying grime and eliminating 99.9% of germs and odors without harmful chemicals.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" type="button" onclick="toggleFaq(this)">
+            <span>How does Hygeia comply with Cal/EPA stormwater regulations?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            We deploy specialized vacuum recovery rings, magnetic drain dams, and high-volume suction pumps that capture 100% of wastewater on-site into on-board holding tanks, preventing any runoff from entering Bay Area storm drains.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" type="button" onclick="toggleFaq(this)">
+            <span>Can you perform commercial power washing overnight?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            Yes. We operate a dedicated 24/7 commercial overnight fleet between 9:00 PM and 6:00 AM, servicing corporate campuses, retail sidewalks, and parking garages with zero disruption to tenants or daily operations.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" type="button" onclick="toggleFaq(this)">
+            <span>What certifications does Hygeia hold for commercial and government contracts?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            Montero Enterprises Inc. dba Hygeia holds State of California DVBE Certification #2054658, Small Business (Micro) certification, and DIR Public Works registration #JS-LR-100 132 4606 with $5M in commercial general liability insurance.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ULTRA-UNIQUE FUTURISTIC HYDRO-CYBER FOOTER                                -->
+    <!-- ========================================================================= -->
+    <footer class="cyber-footer">
+      <div class="hydraulic-conduit"></div>
+
+      <div class="hub-container" style="padding-top:0;">
+        <div class="footer-top-strip">
+          <div class="fleet-status-beacon">
+            <span class="pulse-dot"></span>
+            <span>24/7 OVERNIGHT FLEET ACTIVE — PENINSULA &amp; SILICON VALLEY</span>
+          </div>
+          <button type="button" class="btn-rocket-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <i class="fa-solid fa-water"></i> Launch Back to 3D Experience ↑
+          </button>
+        </div>
+
+        <div class="footer-main-grid">
+          <!-- Col 1: Bio & Certifications -->
+          <div>
+            <a href="index.html" class="logo-pill-housing" style="padding:4px 16px;">
+              <img src="assets/img/logo2.png" alt="Hygeia Logo" style="height:36px;"/>
+            </a>
+            <p class="footer-brand-bio">
+              Commercial &amp; residential power washing, curbside trash bin sanitizing, and Cal/EPA vacuum recovery. Montero Enterprises Inc. dba Hygeia — 35 years serving Silicon Valley facilities.
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="spec-badge">🎖️ CA DVBE #2054658</span>
+              <span class="spec-badge">📋 DIR Registered</span>
+              <span class="spec-badge">🌊 100% Water Reclaim</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Services -->
+          <div>
+            <h4 class="footer-col-title">Services</h4>
+            <ul class="footer-nav-list">
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Commercial Pressure Wash</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Residential Soft Wash</a></li>
+              <li><a href="bin-cleaning.html" class="footer-nav-link">Curbside Bin Sanitizing</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Dumpster Pad Cleanups</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Building Facade Wash</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Quick Portals -->
+          <div>
+            <h4 class="footer-col-title">Portals &amp; Info</h4>
+            <ul class="footer-nav-list">
+              <li><a href="portal.html" class="footer-nav-link">Client Subscription Portal ↗</a></li>
+              <li><a href="admin.html" class="footer-nav-link">Admin Operations Center ↗</a></li>
+              <li><a href="service-areas.html" class="footer-nav-link">14 Service Area Routes</a></li>
+              <li><a href="blog.html" class="footer-nav-link">Knowledge Base &amp; Blog</a></li>
+              <li><a href="about.html" class="footer-nav-link">About Hygeia Heritage</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Direct Dispatch -->
+          <div>
+            <h4 class="footer-col-title">Direct Dispatch &amp; HQ</h4>
+            <div class="footer-dispatch-card">
+              <span style="font-size:11.5px;color:#A0AEC0;text-transform:uppercase;letter-spacing:1px;font-weight:700;">24/7 Phone Dispatch</span>
+              <a href="tel:6509333823" class="dispatch-phone">📞 (650) 933-3823</a>
+              <span style="font-size:12.5px;color:#CBD5E1;">✉️ aloha@hygeiaservices.com</span>
+              <span style="font-size:12px;color:#94A3B8;">📍 1105 Benton St, Santa Clara, CA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-legal-bar">
+          <span>© 2026 Montero Enterprises Inc. dba Hygeia Power Wash Solutions. All rights reserved.</span>
+          <div class="footer-legal-links">
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="cookies.html">Cookie Policy</a>
+            <a href="california-privacy.html">California Privacy (CCPA)</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
 
   <!-- Core Multi-Scene Interactive Script -->
   <script>
@@ -831,6 +2102,8 @@
       const loaderText = document.getElementById('loaderText');
       const loaderFill = document.getElementById('loaderFill');
       const trackerBar = document.getElementById('trackerBar');
+      const storyHud = document.getElementById('storyHud');
+      const scrollTracker = document.getElementById('scrollTracker');
 
       // Telemetry elements
       const telLabel1 = document.getElementById('telLabel1');
@@ -912,9 +2185,9 @@
         allImages.push(img);
       }
 
-      // Preload Scene 4 (Frames 360 to 479 - sampled from 240 frames)
+      // Preload Scene 4 (Frames 360 to 479)
       for (let i = 1; i <= SCENE4_FRAMES; i++) {
-        const frameIdx = i * 2; // Step through 240 frames
+        const frameIdx = i * 2;
         const img = new Image();
         img.src = `assets/frames/scene4/frame_${padZero(frameIdx)}.webp`;
         img.onload = checkAllLoaded;
@@ -922,9 +2195,9 @@
         allImages.push(img);
       }
 
-      // Preload Scene 5 (Frames 480 to 599 - sampled from 240 frames)
+      // Preload Scene 5 (Frames 480 to 599)
       for (let i = 1; i <= SCENE5_FRAMES; i++) {
-        const frameIdx = i * 2; // Step through 240 frames
+        const frameIdx = i * 2;
         const img = new Image();
         img.src = `assets/frames/scene5/frame_${padZero(frameIdx)}.webp`;
         img.onload = checkAllLoaded;
@@ -962,19 +2235,29 @@
       }
 
       // Scroll Event Listener
+      const scrollTrack = document.getElementById('scrollTrack');
       window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollFraction = Math.min(1, Math.max(0, scrollTop / maxScroll));
+        const trackHeight = scrollTrack.offsetHeight;
+        const scrollFraction = Math.min(1, Math.max(0, scrollTop / trackHeight));
 
         targetFrameIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(scrollFraction * TOTAL_FRAMES));
 
         // Update progress bar
         if (trackerBar) trackerBar.style.height = `${scrollFraction * 100}%`;
 
+        // Hide HUD when entering Content Hub
+        if (scrollTop >= trackHeight - 100) {
+          if (storyHud) storyHud.classList.add('docked-hidden');
+          if (scrollTracker) scrollTracker.style.opacity = '0';
+        } else {
+          if (storyHud) storyHud.classList.remove('docked-hidden');
+          if (scrollTracker) scrollTracker.style.opacity = '1';
+        }
+
         // Dynamic Telemetry across all 5 Acts
         if (scrollFraction < 0.20) {
-          // ACT I: Curbside Bin Sanitization (0% - 20%)
+          // ACT I
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-fire"></i> Water Temp';
           if (telVal1) telVal1.innerHTML = '200.0 <span>°F</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Pressure';
@@ -984,7 +2267,7 @@
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-shield-virus"></i> Sanitization';
           if (telVal4) telVal4.innerHTML = '99.9 <span>% Kill</span>';
         } else if (scrollFraction < 0.40) {
-          // ACT II: Tech Campus Flatwork Restoration (20% - 40%)
+          // ACT II
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-rotate"></i> Surface Speed';
           if (telVal1) telVal1.innerHTML = '2,500 <span>RPM</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Jet Pressure';
@@ -994,7 +2277,7 @@
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-sparkles"></i> Surface Finish';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Streak-Free</span>';
         } else if (scrollFraction < 0.60) {
-          // ACT III: Dumpster Pad Degreasing (40% - 60%)
+          // ACT III
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-fire"></i> Boiler Heat';
           if (telVal1) telVal1.innerHTML = '200.0 <span>°F Steam</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Hydro Blast';
@@ -1004,7 +2287,7 @@
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-recycle"></i> Remediation';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Sanitized</span>';
         } else if (scrollFraction < 0.80) {
-          // ACT IV: Multi-Story Building Soft-Wash & Glazing (60% - 80%)
+          // ACT IV
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-arrows-up-down"></i> Reach Height';
           if (telVal1) telVal1.innerHTML = '45.0 <span>FT</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-soap"></i> Active Foam';
@@ -1014,7 +2297,7 @@
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Glass Clarity';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Spot-Free</span>';
         } else {
-          // ACT V: 100% EPA Wastewater Vacuum Reclaim & Fleet Reveal (80% - 100%)
+          // ACT V
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-recycle"></i> Vacuum Suction';
           if (telVal1) telVal1.innerHTML = '100.0 <span>% Reclaim</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-shield-halved"></i> EPA Status';
@@ -1025,7 +2308,7 @@
           if (telVal4) telVal4.innerHTML = 'DVBE <span>#2054658</span>';
         }
 
-        // Active Card Thresholds (10 chapters, 10% each)
+        // Active Card Thresholds
         let activeCardIdx = 0;
         if (scrollFraction >= 0.90) {
           activeCardIdx = 9;
@@ -1073,6 +2356,103 @@
         requestAnimationFrame(loop);
       }
     })();
+
+    // =========================================================================
+    // INTERACTIVE CALCULATOR ENGINE
+    // =========================================================================
+    let currentBinCount = 2;
+
+    window.switchCalc = function(type) {
+      const tabBtns = document.querySelectorAll('.calc-tab-btn');
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      document.getElementById('calcPanelBin').classList.remove('active');
+      document.getElementById('calcPanelComm').classList.remove('active');
+
+      if (type === 'bin') {
+        tabBtns[0].classList.add('active');
+        document.getElementById('calcPanelBin').classList.add('active');
+      } else {
+        tabBtns[1].classList.add('active');
+        document.getElementById('calcPanelComm').classList.add('active');
+      }
+    };
+
+    window.adjustBins = function(delta) {
+      currentBinCount = Math.max(1, Math.min(10, currentBinCount + delta));
+      document.getElementById('binCountDisplay').textContent = currentBinCount;
+      updateBinPrice();
+    };
+
+    window.updateBinPrice = function() {
+      const plan = document.getElementById('binPlanSelect').value;
+      const basePrice = plan === 'monthly' ? 35 : 65;
+      const additionalBins = Math.max(0, currentBinCount - 2);
+      const totalPrice = basePrice + (additionalBins * 10);
+      const suffix = plan === 'monthly' ? ' / month' : ' one-time';
+
+      document.getElementById('binPriceOutput').innerHTML = `$${totalPrice}<span style="font-size:16px;color:#CBD5E1;font-weight:600;">${suffix}</span>`;
+      document.getElementById('binPriceDetail').textContent = `Includes ${currentBinCount} cans sanitized with 200° thermal steam & eco-deodorizer.`;
+    };
+
+    window.updateCommPrice = function() {
+      const sqft = parseInt(document.getElementById('sqftSlider').value, 10);
+      document.getElementById('sqftDisplay').textContent = `${sqft.toLocaleString()} sq ft`;
+
+      const surfaceType = document.getElementById('commSurfaceSelect').value;
+      const nightType = document.getElementById('commNightSelect').value;
+
+      let baseRateLow = 0.15;
+      let baseRateHigh = 0.23;
+
+      if (surfaceType === 'garage') { baseRateLow = 0.18; baseRateHigh = 0.28; }
+      if (surfaceType === 'dumpster') { baseRateLow = 0.22; baseRateHigh = 0.35; }
+      if (surfaceType === 'facade') { baseRateLow = 0.25; baseRateHigh = 0.40; }
+      if (nightType === 'overnight') { baseRateLow *= 1.15; baseRateHigh *= 1.15; }
+
+      const totalLow = Math.round(sqft * baseRateLow);
+      const totalHigh = Math.round(sqft * baseRateHigh);
+
+      document.getElementById('commPriceOutput').textContent = `$${totalLow.toLocaleString()} – $${totalHigh.toLocaleString()}`;
+      document.getElementById('commPriceDetail').textContent = `Estimated for ${sqft.toLocaleString()} sq ft with 100% Cal/EPA water recovery & DVBE compliance.`;
+    };
+
+    // =========================================================================
+    // BEFORE & AFTER SLIDER INTERACTION
+    // =========================================================================
+    const baContainer = document.getElementById('baSliderContainer');
+    const baAfterLayer = document.getElementById('baAfterLayer');
+    const baHandle = document.getElementById('baHandle');
+    let isDragging = false;
+
+    function handleSliderMove(clientX) {
+      const rect = baContainer.getBoundingClientRect();
+      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+      const percent = (x / rect.width) * 100;
+      baAfterLayer.style.width = `${percent}%`;
+      baHandle.style.left = `${percent}%`;
+    }
+
+    if (baContainer) {
+      baContainer.addEventListener('mousedown', () => isDragging = true);
+      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mousemove', (e) => {
+        if (isDragging) handleSliderMove(e.clientX);
+      });
+
+      baContainer.addEventListener('touchstart', () => isDragging = true);
+      window.addEventListener('touchend', () => isDragging = false);
+      window.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches[0]) handleSliderMove(e.touches[0].clientX);
+      });
+    }
+
+    // =========================================================================
+    // FAQ ACCORDION HANDLER
+    // =========================================================================
+    window.toggleFaq = function(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    };
   </script>
 </body>
 </html>
