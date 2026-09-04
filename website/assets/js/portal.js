@@ -89,6 +89,20 @@
     }
   };
 
+  async function parseResponse(res) {
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      throw new Error(`Server returned status ${res.status}: ${res.statusText || 'Unable to parse response'}`);
+    }
+    if (!res.ok) {
+      throw new Error(data.error || data.message || `Request failed (${res.status})`);
+    }
+    return data;
+  }
+
   // 1. Handle Login Submit
   if (formLogin) {
     formLogin.addEventListener('submit', async (e) => {
@@ -109,10 +123,7 @@
           body: JSON.stringify({ email, password })
         });
 
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.error || 'Authentication failed. Please check your credentials.');
-        }
+        const data = await parseResponse(res);
 
         setAuthToken(data.token);
         currentClient = data.client;
@@ -157,10 +168,7 @@
           body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.error || 'Registration failed. Please review your information.');
-        }
+        const data = await parseResponse(res);
 
         setAuthToken(data.token);
         currentClient = data.client;
@@ -200,11 +208,7 @@
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Session expired. Please sign in again.');
-      }
-
-      const data = await res.json();
+      const data = await parseResponse(res);
       currentClient = data.client;
       currentWorkOrders = data.workOrders || [];
       currentInvoices = data.invoices || [];

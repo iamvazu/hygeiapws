@@ -59,6 +59,20 @@
     localStorage.removeItem(TOKEN_KEY);
   }
 
+  async function parseResponse(res) {
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      throw new Error(`Server returned status ${res.status}: ${res.statusText || 'Unable to parse response'}`);
+    }
+    if (!res.ok) {
+      throw new Error(data.error || data.message || `Request failed (${res.status})`);
+    }
+    return data;
+  }
+
   // Switch between Login and Register Tabs
   if (tabBtnLogin && tabBtnRegister) {
     tabBtnLogin.addEventListener('click', () => {
@@ -109,10 +123,7 @@
           body: JSON.stringify({ email, password })
         });
 
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.error || 'Authentication failed. Please check your credentials.');
-        }
+        const data = await parseResponse(res);
 
         setAuthToken(data.token);
         currentClient = data.client;
@@ -155,10 +166,7 @@
           body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data.error || 'Registration failed. Please review your information.');
-        }
+        const data = await parseResponse(res);
 
         setAuthToken(data.token);
         currentClient = data.client;
@@ -198,11 +206,7 @@
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Session expired. Please sign in again.');
-      }
-
-      const data = await res.json();
+      const data = await parseResponse(res);
       currentClient = data.client;
       currentWorkOrders = data.workOrders || [];
       currentInvoices = data.invoices || [];
@@ -400,8 +404,7 @@
           body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Failed to submit work order.');
+        const data = await parseResponse(res);
 
         alert('✅ Work Order Submitted Successfully! Hygeia Janitorial Operations has received your request.');
         if (workOrderModal) workOrderModal.classList.remove('open');
@@ -447,8 +450,7 @@
           body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Failed to update profile.');
+        const data = await parseResponse(res);
 
         alert('✅ Facility information and contact details successfully saved to database.');
         await initDashboard();
