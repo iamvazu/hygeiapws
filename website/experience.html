@@ -19,9 +19,7 @@
       --cyan-bright: #00B4D8;
       --cyan-electric: #0090FF;
       --cyan-glow: rgba(0, 180, 216, 0.4);
-      --slate-dark: #0B192C;
-      --slate-card: rgba(11, 25, 44, 0.85);
-      --slate-border: rgba(56, 189, 248, 0.28);
+      --slate-dark: #070D14;
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -63,7 +61,7 @@
       display: block;
     }
 
-    /* Cinematic Vignette Overlay */
+    /* Cinematic Subtle Vignette Overlay (Leaves Center 100% Bright) */
     .vignette-overlay {
       position: fixed;
       top: 0;
@@ -72,67 +70,64 @@
       height: 100vh;
       z-index: 2;
       pointer-events: none;
-      background: radial-gradient(circle at center, rgba(11, 25, 44, 0.05) 40%, rgba(0, 0, 0, 0.75) 100%),
-                  linear-gradient(180deg, rgba(11, 25, 44, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.9) 100%);
+      background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.6) 100%),
+                  linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 12%, transparent 75%, rgba(0, 0, 0, 0.85) 100%);
     }
 
-    /* Top Navigation HUD — Floating Island Capsule */
+    /* Minimalist Floating Island Header */
     .experience-nav-wrap {
       position: fixed;
-      top: 18px;
+      top: 14px;
       left: 0;
       width: 100%;
       z-index: 100;
       display: flex;
       justify-content: center;
       pointer-events: none;
-      padding: 0 24px;
+      padding: 0 16px;
     }
 
     .experience-nav {
       width: 100%;
-      max-width: 1360px;
+      max-width: 1320px;
       pointer-events: auto;
-      padding: 10px 20px;
+      padding: 8px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-radius: 18px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      background: rgba(11, 25, 44, 0.82);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 144, 255, 0.22);
+      border-radius: 999px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
     }
 
     .nav-brand-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    /* Logo Capsule Housing for Crystal-Clear Visibility */
+    /* Clean White Logo Housing */
     .logo-pill-housing {
       background: #FFFFFF;
-      padding: 6px 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.5);
+      padding: 4px 12px;
+      border-radius: 999px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      transition: all 0.25s ease;
+      transition: transform 0.2s ease;
       text-decoration: none;
     }
 
     .logo-pill-housing:hover {
-      transform: translateY(-1px) scale(1.02);
-      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.6), 0 0 20px rgba(255, 255, 255, 0.8);
-      border-color: var(--cyan-bright);
+      transform: scale(1.03);
     }
 
     .nav-logo-img {
-      height: 32px;
+      height: 26px;
       width: auto;
       object-fit: contain;
       display: block;
@@ -140,35 +135,34 @@
 
     .nav-exp-badge {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--cyan-bright);
-      background: rgba(0, 180, 216, 0.14);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 6px 12px;
-      border-radius: 9999px;
+      background: rgba(0, 180, 216, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .scene-pill {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       color: #FFFFFF;
-      background: linear-gradient(135deg, rgba(0, 144, 255, 0.35), rgba(0, 180, 216, 0.35));
-      border: 1px solid var(--cyan-bright);
-      padding: 6px 14px;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
     }
 
     .pulse-dot {
@@ -189,69 +183,195 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-glass {
       font-family: var(--font-heading);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 8px 16px;
-      border-radius: 8px;
+      color: #E2E8F0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 999px;
       text-decoration: none;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .btn-glass:hover {
-      background: rgba(0, 144, 255, 0.25);
+      background: rgba(0, 144, 255, 0.2);
       border-color: var(--cyan-bright);
       color: #FFFFFF;
-      box-shadow: 0 0 15px var(--cyan-glow);
     }
 
     .btn-cta-glow {
       font-family: var(--font-heading);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       color: #FFFFFF;
       background: linear-gradient(135deg, var(--cyan-electric) 0%, var(--cyan-bright) 100%);
       border: none;
-      padding: 9px 18px;
-      border-radius: 8px;
+      padding: 7px 16px;
+      border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 4px 18px rgba(0, 144, 255, 0.4);
+      box-shadow: 0 3px 14px rgba(0, 144, 255, 0.4);
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
     }
 
     .btn-cta-glow:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.6);
+      box-shadow: 0 4px 18px rgba(0, 180, 216, 0.6);
     }
 
-    /* Telemetry HUD (Bottom-Left) */
-    .telemetry-hud {
+    /* ========================================================================= */
+    /* UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD (Replaces Bulky Center Card)      */
+    /* ========================================================================= */
+    .story-hud-wrap {
       position: fixed;
       bottom: 24px;
       left: 24px;
-      z-index: 50;
-      background: var(--slate-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--slate-border);
-      border-radius: 14px;
-      padding: 16px 22px;
+      right: 24px;
+      z-index: 30;
+      pointer-events: none;
       display: flex;
-      gap: 22px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .story-caption-deck {
+      max-width: 620px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 16px 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      pointer-events: auto;
+      transition: all 0.3s ease;
+    }
+
+    .story-card {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .story-card.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .story-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 10px;
+    }
+
+    .story-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--cyan-bright);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .story-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .story-title span {
+      background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .story-desc {
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #E2E8F0;
+      margin-bottom: 12px;
+    }
+
+    .story-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .story-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spec-badge {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 3px 8px;
+      border-radius: 5px;
+      color: #E2E8F0;
+    }
+
+    .story-btn-pill {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, var(--cyan-electric), var(--cyan-bright));
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0, 144, 255, 0.35);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .story-btn-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 180, 216, 0.5);
+    }
+
+    /* Telemetry HUD (Bottom-Right Deck) */
+    .telemetry-hud {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      pointer-events: auto;
     }
 
     .telemetry-stat {
@@ -261,26 +381,26 @@
 
     .telemetry-label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       color: #94A3B8;
       margin-bottom: 2px;
     }
 
     .telemetry-val {
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       color: #FFFFFF;
       display: flex;
       align-items: baseline;
-      gap: 3px;
+      gap: 2px;
     }
 
     .telemetry-val span {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--cyan-bright);
       font-family: var(--font-mono);
     }
@@ -288,19 +408,19 @@
     /* Scroll Progress Track (Right Edge) */
     .scroll-tracker {
       position: fixed;
-      right: 24px;
+      right: 18px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 50;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .tracker-track {
-      width: 4px;
-      height: 220px;
+      width: 3px;
+      height: 180px;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
       position: relative;
@@ -314,13 +434,13 @@
       width: 100%;
       height: 0%;
       background: linear-gradient(180deg, var(--cyan-electric), var(--cyan-bright));
-      box-shadow: 0 0 12px var(--cyan-bright);
+      box-shadow: 0 0 10px var(--cyan-bright);
       transition: height 0.05s linear;
     }
 
     .tracker-label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       color: var(--cyan-bright);
       writing-mode: vertical-rl;
@@ -328,144 +448,58 @@
       text-transform: uppercase;
     }
 
-    /* Virtual Scroll Track (1400vh for smooth 360-frame 3-act scrubbing) */
+    /* Virtual Scroll Track (1400vh for 360 frames) */
     #scrollTrack {
       position: relative;
       height: 1400vh;
       z-index: 10;
     }
 
-    /* Story Overlay Cards */
-    .story-card-wrap {
-      position: fixed;
-      top: 50%;
-      left: 6%;
-      transform: translateY(-50%);
-      max-width: 490px;
-      z-index: 20;
-      pointer-events: none;
-    }
-
-    .story-card {
-      background: rgba(11, 25, 44, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--slate-border);
-      border-radius: 20px;
-      padding: 32px 36px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 144, 255, 0.18);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      pointer-events: auto;
-      display: none;
-    }
-
-    .story-card.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .story-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--cyan-bright);
-      margin-bottom: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .story-title {
-      font-family: var(--font-heading);
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1.15;
-      color: #FFFFFF;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .story-title span {
-      background: linear-gradient(135deg, #00F0FF 0%, #0090FF 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .story-desc {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #CBD5E1;
-      margin-bottom: 24px;
-    }
-
-    .story-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .spec-badge {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 5px 10px;
-      border-radius: 6px;
-      color: #E2E8F0;
-    }
-
-    /* Scroll Prompt Indicator */
+    /* Scroll Mouse Prompt */
     .scroll-prompt {
       position: fixed;
-      bottom: 28px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 50;
+      z-index: 25;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
 
     .scroll-mouse {
-      width: 22px;
-      height: 36px;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
+      width: 18px;
+      height: 28px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
       position: relative;
     }
 
     .scroll-wheel {
-      width: 4px;
-      height: 8px;
+      width: 3px;
+      height: 6px;
       background: var(--cyan-bright);
       border-radius: 2px;
       position: absolute;
-      top: 6px;
+      top: 4px;
       left: 50%;
       transform: translateX(-50%);
       animation: wheelRoll 1.5s infinite;
     }
 
     @keyframes wheelRoll {
-      0% { top: 6px; opacity: 1; }
-      100% { top: 18px; opacity: 0; }
+      0% { top: 4px; opacity: 1; }
+      100% { top: 14px; opacity: 0; }
     }
 
     .scroll-text {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 9.5px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       color: #94A3B8;
     }
@@ -477,7 +511,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: #0B192C;
+      background: #070D14;
       z-index: 99999;
       display: flex;
       flex-direction: column;
@@ -487,13 +521,13 @@
     }
 
     .preloader-spinner {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border: 3px solid rgba(0, 180, 216, 0.15);
       border-top-color: var(--cyan-bright);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     @keyframes spin {
@@ -502,16 +536,16 @@
 
     .preloader-text {
       font-family: var(--font-mono);
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 700;
       color: #FFFFFF;
       letter-spacing: 1px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .preloader-progress-track {
-      width: 260px;
-      height: 4px;
+      width: 220px;
+      height: 3px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 999px;
       overflow: hidden;
@@ -524,26 +558,78 @@
       transition: width 0.1s linear;
     }
 
-    @media (max-width: 768px) {
-      .story-card-wrap {
-        left: 5%;
-        right: 5%;
-        max-width: none;
-        top: auto;
-        bottom: 85px;
-        transform: none;
+    /* ========================================================================= */
+    /* RESPONSIVE BREAKPOINTS (TABLET & MOBILE)                                  */
+    /* ========================================================================= */
+    @media (max-width: 1024px) {
+      /* Tablet adjustments */
+      .nav-extra {
+        display: none !important;
+      }
+      .nav-exp-badge {
+        display: none !important;
+      }
+      .story-hud-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        gap: 10px;
+      }
+      .story-caption-deck {
+        max-width: 100%;
+        padding: 14px 18px;
       }
       .telemetry-hud {
-        display: none;
+        padding: 10px 14px;
+        gap: 12px;
+        justify-content: space-between;
+      }
+      .telemetry-val {
+        font-size: 14px;
       }
       .story-title {
-        font-size: 24px;
+        font-size: 19px;
       }
-      .story-card {
-        padding: 24px;
+      .scroll-tracker {
+        display: none;
+      }
+      .scroll-prompt {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Mobile adjustments */
+      .experience-nav-wrap {
+        top: 10px;
+        padding: 0 10px;
+      }
+      .experience-nav {
+        padding: 6px 12px;
       }
       .scene-pill {
-        display: none;
+        font-size: 9.5px;
+        padding: 3px 8px;
+      }
+      .btn-cta-glow {
+        font-size: 11.5px;
+        padding: 6px 12px;
+      }
+      .telemetry-hud {
+        display: none; /* Hide telemetry on small mobile to maximize video visibility */
+      }
+      .story-caption-deck {
+        padding: 12px 16px;
+        border-radius: 14px;
+      }
+      .story-title {
+        font-size: 17px;
+      }
+      .story-desc {
+        font-size: 12.5px;
+        margin-bottom: 8px;
       }
     }
   </style>
@@ -559,7 +645,7 @@
     </div>
   </div>
 
-  <!-- Top Navigation HUD (Floating Island Capsule) -->
+  <!-- Top Navigation HUD (Floating Minimalist Capsule) -->
   <div class="experience-nav-wrap">
     <header class="experience-nav">
       <div class="nav-brand-group">
@@ -568,7 +654,7 @@
         </a>
         <span class="nav-exp-badge">
           <span class="pulse-dot"></span>
-          HYDRO-WORLD v3.0
+          3D ENGINE
         </span>
         <span class="scene-pill" id="sceneIndicator">
           <i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION
@@ -576,10 +662,10 @@
       </div>
 
       <div class="nav-actions">
-        <a href="index.html" class="btn-glass">
-          <i class="fa-solid fa-arrow-left"></i> Standard Site
+        <a href="index.html" class="btn-glass nav-extra">
+          <i class="fa-solid fa-arrow-left"></i> Main Site
         </a>
-        <a href="portal.html" class="btn-glass">
+        <a href="portal.html" class="btn-glass nav-extra">
           <i class="fa-solid fa-user-circle"></i> Portal
         </a>
         <a href="contact.html" class="btn-cta-glow">
@@ -594,28 +680,8 @@
     <canvas id="scrollCanvas"></canvas>
   </div>
 
-  <!-- Cinematic Vignette Filter -->
+  <!-- Subtle Vignette Filter -->
   <div class="vignette-overlay"></div>
-
-  <!-- Telemetry HUD (Live Specs Dynamically Updating by Scene) -->
-  <div class="telemetry-hud" id="telemetryHud">
-    <div class="telemetry-stat">
-      <span class="telemetry-label" id="telLabel1"><i class="fa-solid fa-fire"></i> Water Temp</span>
-      <div class="telemetry-val" id="telVal1">200.0 <span>°F</span></div>
-    </div>
-    <div class="telemetry-stat">
-      <span class="telemetry-label" id="telLabel2"><i class="fa-solid fa-gauge-high"></i> Pressure</span>
-      <div class="telemetry-val" id="telVal2">4,000 <span>PSI</span></div>
-    </div>
-    <div class="telemetry-stat">
-      <span class="telemetry-label" id="telLabel3"><i class="fa-solid fa-water"></i> Output Flow</span>
-      <div class="telemetry-val" id="telVal3">8.0 <span>GPM</span></div>
-    </div>
-    <div class="telemetry-stat">
-      <span class="telemetry-label" id="telLabel4"><i class="fa-solid fa-shield-virus"></i> Sanitization</span>
-      <div class="telemetry-val" id="telVal4">99.9 <span>% Kill</span></div>
-    </div>
-  </div>
 
   <!-- Scroll Progress Indicator Track -->
   <div class="scroll-tracker">
@@ -630,100 +696,151 @@
     <div class="scroll-mouse">
       <div class="scroll-wheel"></div>
     </div>
-    <span class="scroll-text">SCROLL TO WALK THROUGH</span>
+    <span class="scroll-text">SCROLL TO WALK</span>
   </div>
 
-  <!-- Interactive Story Cards Synchronized across all 3 Acts (6 Chapters) -->
-  <div class="story-card-wrap">
+  <!-- ========================================================================= -->
+  <!-- UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD (Clean, Non-Blocking Layout)     -->
+  <!-- ========================================================================= -->
+  <div class="story-hud-wrap">
+    
+    <!-- Story Caption Deck -->
+    <div class="story-caption-deck">
 
-    <!-- Card 1: 0% - 16% (Act I Scene 1) -->
-    <div class="story-card active" id="card1">
-      <div class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CHAPTER 01 · FLEET DISPATCH</div>
-      <h2 class="story-title">Curbside <span>Hot-Water</span> Sanitization</h2>
-      <p class="story-desc">
-        Our custom-engineered mobile rig pulls right up to your curbside on designated trash collection day across Silicon Valley &amp; the Bay Area.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">⚡ 200°F Thermal Heat</span>
-        <span class="spec-badge">🚛 San Jose &amp; Peninsula Fleet</span>
-        <span class="spec-badge">🛡️ CA DVBE #2054658</span>
+      <!-- Card 1: 0% - 16% (Act I Scene 1) -->
+      <div class="story-card active" id="card1">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CH 01 · FLEET ARRIVAL</span>
+          <span class="spec-badge">⚡ 200°F Thermal Boiler</span>
+        </div>
+        <h2 class="story-title">Curbside <span>Hot-Water</span> Sanitization</h2>
+        <p class="story-desc">
+          Our custom-engineered mobile rig pulls up on your designated trash day across Silicon Valley &amp; the Bay Area.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🚛 San Jose &amp; Peninsula</span>
+            <span class="spec-badge">🛡️ CA DVBE #2054658</span>
+          </div>
+          <a href="contact.html" class="story-btn-pill">Book Curbside Clean ➔</a>
+        </div>
       </div>
-      <a href="contact.html" class="btn-cta-glow">Book Curbside Clean ➔</a>
+
+      <!-- Card 2: 16% - 33% (Act I Scene 1) -->
+      <div class="story-card" id="card2">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CH 02 · 4,000 PSI JET BLAST</span>
+          <span class="spec-badge">⏱️ Under 60 Sec per Can</span>
+        </div>
+        <h2 class="story-title">360° Rotating <span>Steam Jets</span></h2>
+        <p class="story-desc">
+          Dual rotary nozzles blast every interior square inch, liquefying encrusted grime, sludge, and bacteria in seconds.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🌪️ 360° Internal Blast</span>
+            <span class="spec-badge">🦠 Zero Odor Guarantee</span>
+          </div>
+          <a href="bin-cleaning.html" class="story-btn-pill">View Bin Plans ($35/mo) ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 3: 33% - 50% (Act II Scene 2) -->
+      <div class="story-card" id="card3">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CH 03 · ROTARY RESTORATION</span>
+          <span class="spec-badge">🚀 2,500 RPM Rotary Bar</span>
+        </div>
+        <h2 class="story-title">Commercial <span>Flatwork Cleaner</span></h2>
+        <p class="story-desc">
+          Industrial dual-jet surface cleaners glide across tech campus walkways—stripping away tire marks, gum, and deep oil stains.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🏢 15,000+ sq ft / hr</span>
+            <span class="spec-badge">✨ Zero Striping Lines</span>
+          </div>
+          <a href="commercial-pressure-washing.html" class="story-btn-pill">Commercial Flatwork Specs ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 4: 50% - 66% (Act II Scene 2) -->
+      <div class="story-card" id="card4">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CH 04 · SHOWROOM FINISH</span>
+          <span class="spec-badge">💎 Class A Finish</span>
+        </div>
+        <h2 class="story-title">Streak-Free <span>Pristine Concrete</span></h2>
+        <p class="story-desc">
+          Uniform hydraulic pressure prevents etching while returning Silicon Valley corporate plazas to showroom-grade curb appeal.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🏢 Tech Plaza Ready</span>
+            <span class="spec-badge">📋 DIR #JS-LR-100 132 4606</span>
+          </div>
+          <a href="contact.html" class="story-btn-pill">Schedule Campus Walk ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 5: 66% - 83% (Act III Scene 3) -->
+      <div class="story-card" id="card5">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CH 05 · DEGREASING</span>
+          <span class="spec-badge">🔥 200° Hot Water Boiler</span>
+        </div>
+        <h2 class="story-title">Thermal <span>Grease Vaporization</span></h2>
+        <p class="story-desc">
+          Industrial 200° steam combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and commercial kitchen runoff.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🧪 Eco Bio-Degreasers</span>
+            <span class="spec-badge">🏥 Health Inspection Pass</span>
+          </div>
+          <a href="commercial-pressure-washing.html" class="story-btn-pill">Dumpster Pad Services ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 6: 83% - 100% (Act III Scene 3) -->
+      <div class="story-card" id="card6">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-circle-check"></i> ACT III · CH 06 · 100% EPA RECLAIM</span>
+          <span class="spec-badge">🌊 Zero Storm Drain Runoff</span>
+        </div>
+        <h2 class="story-title">Full Reclaim. <span>Zero Runoff.</span></h2>
+        <p class="story-desc">
+          Cal/EPA stormwater compliant vacuum recovery rings capture 100% of wastewater on-site, protecting Bay Area waterways.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🛡️ State Certified DVBE</span>
+            <span class="spec-badge">🤝 Free Site Walk RFP</span>
+          </div>
+          <a href="contact.html" class="story-btn-pill">Request Instant Quote ➔</a>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Card 2: 16% - 33% (Act I Scene 1) -->
-    <div class="story-card" id="card2">
-      <div class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CHAPTER 02 · 4,000 PSI JET BLAST</div>
-      <h2 class="story-title">360° Rotating <span>Steam Jets</span></h2>
-      <p class="story-desc">
-        High-velocity dual rotary nozzles blast every interior square inch, liquefying encrusted grime, coagulated grease, and stubborn sludge in seconds.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">🌪️ 360° Internal Coverage</span>
-        <span class="spec-badge">⏱️ Under 60 Sec per Can</span>
-        <span class="spec-badge">🦠 Zero Odor Guarantee</span>
+    <!-- Live Dynamic Telemetry Deck -->
+    <div class="telemetry-hud" id="telemetryHud">
+      <div class="telemetry-stat">
+        <span class="telemetry-label" id="telLabel1"><i class="fa-solid fa-fire"></i> Water Temp</span>
+        <div class="telemetry-val" id="telVal1">200.0 <span>°F</span></div>
       </div>
-      <a href="bin-cleaning.html" class="btn-cta-glow">View Bin Plans ($35/mo) ➔</a>
-    </div>
-
-    <!-- Card 3: 33% - 50% (Act II Scene 2) -->
-    <div class="story-card" id="card3">
-      <div class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CHAPTER 03 · TECH CAMPUS FLATWORK</div>
-      <h2 class="story-title">Commercial <span>Rotary Restoration</span></h2>
-      <p class="story-desc">
-        Watch industrial dual-jet surface cleaners glide across tech campus concrete walkways—instantly peeling away tire marks, gum, and deep stains.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">🚀 2,500 RPM Rotary Bar</span>
-        <span class="spec-badge">🏢 15,000+ sq ft / hr</span>
-        <span class="spec-badge">✨ Zero Striping Lines</span>
+      <div class="telemetry-stat">
+        <span class="telemetry-label" id="telLabel2"><i class="fa-solid fa-gauge-high"></i> Pressure</span>
+        <div class="telemetry-val" id="telVal2">4,000 <span>PSI</span></div>
       </div>
-      <a href="commercial-pressure-washing.html" class="btn-cta-glow">Commercial Flatwork Specs ➔</a>
-    </div>
-
-    <!-- Card 4: 50% - 66% (Act II Scene 2) -->
-    <div class="story-card" id="card4">
-      <div class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CHAPTER 04 · PRECISION CLEANING</div>
-      <h2 class="story-title">Streak-Free <span>Pristine Concrete</span></h2>
-      <p class="story-desc">
-        Uniform hydraulic pressure ensures zero etching or aggregate damage while returning commercial plazas to showroom-grade curb appeal.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">💎 Class A Finish</span>
-        <span class="spec-badge">🏢 Tech Plaza Ready</span>
-        <span class="spec-badge">📋 DIR #JS-LR-100 132 4606</span>
+      <div class="telemetry-stat">
+        <span class="telemetry-label" id="telLabel3"><i class="fa-solid fa-water"></i> Output Flow</span>
+        <div class="telemetry-val" id="telVal3">8.0 <span>GPM</span></div>
       </div>
-      <a href="contact.html" class="btn-cta-glow">Schedule Campus Walk ➔</a>
-    </div>
-
-    <!-- Card 5: 66% - 83% (Act III Scene 3) -->
-    <div class="story-card" id="card5">
-      <div class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CHAPTER 05 · DUMPSTER PAD DEGREASING</div>
-      <h2 class="story-title">Thermal <span>Grease Vaporization</span></h2>
-      <p class="story-desc">
-        Industrial 200° hot water combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and commercial kitchen runoff.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">🔥 200° Hot Water Boiler</span>
-        <span class="spec-badge">🧪 Eco Bio-Degreasers</span>
-        <span class="spec-badge">🏥 Health Inspection Pass</span>
+      <div class="telemetry-stat">
+        <span class="telemetry-label" id="telLabel4"><i class="fa-solid fa-shield-virus"></i> Sanitization</span>
+        <div class="telemetry-val" id="telVal4">99.9 <span>% Kill</span></div>
       </div>
-      <a href="commercial-pressure-washing.html" class="btn-cta-glow">Dumpster Pad Services ➔</a>
-    </div>
-
-    <!-- Card 6: 83% - 100% (Act III Scene 3) -->
-    <div class="story-card" id="card6">
-      <div class="story-tag"><i class="fa-solid fa-circle-check"></i> ACT III · CHAPTER 06 · 100% EPA RECLAIM</div>
-      <h2 class="story-title">Full Reclaim. <span>Zero Runoff.</span></h2>
-      <p class="story-desc">
-        Cal/EPA stormwater compliant vacuum recovery rings capture 100% of wastewater on-site, ensuring zero hazardous contaminants enter storm drains.
-      </p>
-      <div class="story-badges">
-        <span class="spec-badge">🌊 Cal/EPA Stormwater BMP</span>
-        <span class="spec-badge">🛡️ State Certified DVBE</span>
-        <span class="spec-badge">🤝 Free Site Walk RFP</span>
-      </div>
-      <a href="contact.html" class="btn-cta-glow">Request Instant Quote ➔</a>
     </div>
 
   </div>
@@ -787,7 +904,7 @@
       function checkAllLoaded() {
         loadedCount++;
         const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-        if (loaderText) loaderText.textContent = `BUFFERING 3D MULTI-ACT ENGINE (${percent}%)`;
+        if (loaderText) loaderText.textContent = `STREAMING 3D MULTI-ACT ENGINE (${percent}%)`;
         if (loaderFill) loaderFill.style.width = `${percent}%`;
 
         if (loadedCount >= TOTAL_FRAMES) {
