@@ -1616,8 +1616,12 @@ html_content = r'''<!DOCTYPE html>
     }
 
     @media (max-width: 768px) {
-      .top-status-badge span.long-text {
-        display: none;
+      .top-status-badge {
+        display: none !important;
+      }
+      .top-utility-inner {
+        justify-content: center;
+        gap: 20px;
       }
       .experience-nav-wrap {
         top: 40px;
@@ -2475,7 +2479,7 @@ html_content = r'''<!DOCTYPE html>
           <!-- Col 1: Bold Large Spartan Mascot Character Only -->
           <div class="footer-mascot-hero-box">
             <a href="index.html" title="Hygeia Power Wash Solutions">
-              <img src="assets/img/mascot-hero.png" alt="Hygeia Spartan Power Washer" class="footer-mascot-large"/>
+              <img src="assets/img/mascot-hero.png?v=3" alt="Hygeia Spartan Power Washer" class="footer-mascot-large"/>
             </a>
             <p class="footer-brand-bio">
               Commercial &amp; residential power washing, curbside trash bin sanitizing, and Cal/EPA vacuum recovery. Montero Enterprises Inc. dba Hygeia — 35 years serving Silicon Valley facilities.
