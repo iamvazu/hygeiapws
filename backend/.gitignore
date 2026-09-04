@@ -1,0 +1,5 @@
+node_modules/
+hygeia.db
+hygeia.db-journal
+.env
+.DS_Store
