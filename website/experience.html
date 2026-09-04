@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
   <title>The 3D Hydro Experience | Hygeia Power Wash Solutions</title>
-  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization and commercial tech campus flatwork restoration across Silicon Valley." name="description"/>
+  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, and commercial dumpster pad degreasing in Silicon Valley." name="description"/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
       --cyan-electric: #0090FF;
       --cyan-glow: rgba(0, 180, 216, 0.4);
       --slate-dark: #0B192C;
-      --slate-card: rgba(11, 25, 44, 0.82);
+      --slate-card: rgba(11, 25, 44, 0.85);
       --slate-border: rgba(56, 189, 248, 0.28);
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -89,7 +89,7 @@
       align-items: center;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      background: rgba(11, 25, 44, 0.6);
+      background: rgba(11, 25, 44, 0.65);
       border-bottom: 1px solid var(--slate-border);
     }
 
@@ -126,12 +126,15 @@
       font-size: 11px;
       font-weight: 800;
       color: #FFFFFF;
-      background: linear-gradient(135deg, rgba(0, 144, 255, 0.3), rgba(0, 180, 216, 0.3));
+      background: linear-gradient(135deg, rgba(0, 144, 255, 0.35), rgba(0, 180, 216, 0.35));
       border: 1px solid var(--cyan-bright);
       padding: 5px 12px;
       border-radius: 6px;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .pulse-dot {
@@ -263,7 +266,7 @@
 
     .tracker-track {
       width: 4px;
-      height: 200px;
+      height: 220px;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
       position: relative;
@@ -291,10 +294,10 @@
       text-transform: uppercase;
     }
 
-    /* Virtual Scroll Track (900vh for smooth 240-frame multi-act scrubbing) */
+    /* Virtual Scroll Track (1400vh for smooth 360-frame 3-act scrubbing) */
     #scrollTrack {
       position: relative;
-      height: 900vh;
+      height: 1400vh;
       z-index: 10;
     }
 
@@ -516,7 +519,7 @@
   <!-- Loading Screen -->
   <div id="preloader">
     <div class="preloader-spinner"></div>
-    <div class="preloader-text" id="loaderText">STREAMING 3D FRAME BUFFER (0%)</div>
+    <div class="preloader-text" id="loaderText">STREAMING 3D MULTI-ACT ENGINE (0%)</div>
     <div class="preloader-progress-track">
       <div class="preloader-progress-fill" id="loaderFill"></div>
     </div>
@@ -530,7 +533,7 @@
       </a>
       <span class="nav-exp-badge">
         <span class="pulse-dot"></span>
-        HYDRO-WORLD v2.0
+        HYDRO-WORLD v3.0
       </span>
       <span class="scene-pill" id="sceneIndicator">
         <i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION
@@ -594,10 +597,10 @@
     <span class="scroll-text">SCROLL TO WALK THROUGH</span>
   </div>
 
-  <!-- Interactive Story Cards Driven by Scroll Thresholds -->
+  <!-- Interactive Story Cards Synchronized across all 3 Acts (6 Chapters) -->
   <div class="story-card-wrap">
 
-    <!-- Card 1: 0% - 25% (Act I Scene 1) -->
+    <!-- Card 1: 0% - 16% (Act I Scene 1) -->
     <div class="story-card active" id="card1">
       <div class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CHAPTER 01 · FLEET DISPATCH</div>
       <h2 class="story-title">Curbside <span>Hot-Water</span> Sanitization</h2>
@@ -612,7 +615,7 @@
       <a href="contact.html" class="btn-cta-glow">Book Curbside Clean ➔</a>
     </div>
 
-    <!-- Card 2: 25% - 50% (Act I Scene 1) -->
+    <!-- Card 2: 16% - 33% (Act I Scene 1) -->
     <div class="story-card" id="card2">
       <div class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CHAPTER 02 · 4,000 PSI JET BLAST</div>
       <h2 class="story-title">360° Rotating <span>Steam Jets</span></h2>
@@ -627,12 +630,12 @@
       <a href="bin-cleaning.html" class="btn-cta-glow">View Bin Plans ($35/mo) ➔</a>
     </div>
 
-    <!-- Card 3: 50% - 75% (Act II Scene 2) -->
+    <!-- Card 3: 33% - 50% (Act II Scene 2) -->
     <div class="story-card" id="card3">
       <div class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CHAPTER 03 · TECH CAMPUS FLATWORK</div>
       <h2 class="story-title">Commercial <span>Rotary Restoration</span></h2>
       <p class="story-desc">
-        Watch industrial dual-jet surface cleaners glide across tech campus concrete walkways—instantly peeling away tire marks, gum, and deep oil stains with laser precision.
+        Watch industrial dual-jet surface cleaners glide across tech campus concrete walkways—instantly peeling away tire marks, gum, and deep stains.
       </p>
       <div class="story-badges">
         <span class="spec-badge">🚀 2,500 RPM Rotary Bar</span>
@@ -642,19 +645,49 @@
       <a href="commercial-pressure-washing.html" class="btn-cta-glow">Commercial Flatwork Specs ➔</a>
     </div>
 
-    <!-- Card 4: 75% - 100% (Act II Scene 2) -->
+    <!-- Card 4: 50% - 66% (Act II Scene 2) -->
     <div class="story-card" id="card4">
-      <div class="story-tag"><i class="fa-solid fa-circle-check"></i> ACT II · CHAPTER 04 · EPA WASTEWATER RECLAIM</div>
-      <h2 class="story-title">100% Reclaim. <span>Zero Runoff.</span></h2>
+      <div class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CHAPTER 04 · PRECISION CLEANING</div>
+      <h2 class="story-title">Streak-Free <span>Pristine Concrete</span></h2>
       <p class="story-desc">
-        Cal/EPA stormwater compliant vacuum recovery rings capture 100% of wastewater on-site. Protect our Bay Area waterways while maintaining pristine commercial curb appeal.
+        Uniform hydraulic pressure ensures zero etching or aggregate damage while returning commercial plazas to showroom-grade curb appeal.
       </p>
       <div class="story-badges">
-        <span class="spec-badge">🌊 Cal/EPA BMP Compliant</span>
-        <span class="spec-badge">📊 DVBE Certified Contractor</span>
+        <span class="spec-badge">💎 Class A Finish</span>
+        <span class="spec-badge">🏢 Tech Plaza Ready</span>
+        <span class="spec-badge">📋 DIR #JS-LR-100 132 4606</span>
+      </div>
+      <a href="contact.html" class="btn-cta-glow">Schedule Campus Walk ➔</a>
+    </div>
+
+    <!-- Card 5: 66% - 83% (Act III Scene 3) -->
+    <div class="story-card" id="card5">
+      <div class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CHAPTER 05 · DUMPSTER PAD DEGREASING</div>
+      <h2 class="story-title">Thermal <span>Grease Vaporization</span></h2>
+      <p class="story-desc">
+        Industrial 200° hot water combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and commercial kitchen runoff.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">🔥 200° Hot Water Boiler</span>
+        <span class="spec-badge">🧪 Eco Bio-Degreasers</span>
+        <span class="spec-badge">🏥 Health Inspection Pass</span>
+      </div>
+      <a href="commercial-pressure-washing.html" class="btn-cta-glow">Dumpster Pad Services ➔</a>
+    </div>
+
+    <!-- Card 6: 83% - 100% (Act III Scene 3) -->
+    <div class="story-card" id="card6">
+      <div class="story-tag"><i class="fa-solid fa-circle-check"></i> ACT III · CHAPTER 06 · 100% EPA RECLAIM</div>
+      <h2 class="story-title">Full Reclaim. <span>Zero Runoff.</span></h2>
+      <p class="story-desc">
+        Cal/EPA stormwater compliant vacuum recovery rings capture 100% of wastewater on-site, ensuring zero hazardous contaminants enter storm drains.
+      </p>
+      <div class="story-badges">
+        <span class="spec-badge">🌊 Cal/EPA Stormwater BMP</span>
+        <span class="spec-badge">🛡️ State Certified DVBE</span>
         <span class="spec-badge">🤝 Free Site Walk RFP</span>
       </div>
-      <a href="contact.html" class="btn-cta-glow">Request Free Site Walk ➔</a>
+      <a href="contact.html" class="btn-cta-glow">Request Instant Quote ➔</a>
     </div>
 
   </div>
@@ -667,7 +700,8 @@
     (function() {
       const SCENE1_FRAMES = 120;
       const SCENE2_FRAMES = 120;
-      const TOTAL_FRAMES = SCENE1_FRAMES + SCENE2_FRAMES; // 240 frames total
+      const SCENE3_FRAMES = 120;
+      const TOTAL_FRAMES = SCENE1_FRAMES + SCENE2_FRAMES + SCENE3_FRAMES; // 360 frames total
 
       const allImages = [];
       let loadedCount = 0;
@@ -697,7 +731,9 @@
         document.getElementById('card1'),
         document.getElementById('card2'),
         document.getElementById('card3'),
-        document.getElementById('card4')
+        document.getElementById('card4'),
+        document.getElementById('card5'),
+        document.getElementById('card6')
       ];
 
       function resizeCanvas() {
@@ -748,6 +784,15 @@
         allImages.push(img);
       }
 
+      // Preload Scene 3 (Frames 240 to 359)
+      for (let i = 1; i <= SCENE3_FRAMES; i++) {
+        const img = new Image();
+        img.src = `assets/frames/scene3/frame_${padZero(i)}.webp`;
+        img.onload = checkAllLoaded;
+        img.onerror = checkAllLoaded;
+        allImages.push(img);
+      }
+
       function renderFrame(index) {
         const clampedIndex = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(index)));
         const img = allImages[clampedIndex];
@@ -793,8 +838,9 @@
           scrollPrompt.style.opacity = scrollTop > 100 ? '0' : '1';
         }
 
-        // Scene Indicator & Telemetry Update based on Act I vs Act II
-        if (scrollFraction < 0.5) {
+        // Dynamic Scene Indicator & Telemetry across all 3 Acts
+        if (scrollFraction < 0.33) {
+          // ACT I: Residential Curbside Bin Sanitizing
           if (sceneIndicator) {
             sceneIndicator.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION';
             sceneIndicator.style.borderColor = 'var(--cyan-bright)';
@@ -807,7 +853,8 @@
           if (telVal3) telVal3.innerHTML = '8.0 <span>GPM</span>';
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-shield-virus"></i> Sanitization';
           if (telVal4) telVal4.innerHTML = '99.9 <span>% Kill</span>';
-        } else {
+        } else if (scrollFraction < 0.66) {
+          // ACT II: Tech Campus Flatwork Restoration
           if (sceneIndicator) {
             sceneIndicator.innerHTML = '<i class="fa-solid fa-building"></i> ACT II: TECH CAMPUS FLATWORK';
             sceneIndicator.style.borderColor = '#38BDF8';
@@ -818,17 +865,35 @@
           if (telVal2) telVal2.innerHTML = '4,200 <span>PSI</span>';
           if (telLabel3) telLabel3.innerHTML = '<i class="fa-solid fa-chart-line"></i> Coverage Rate';
           if (telVal3) telVal3.innerHTML = '15,000 <span>sq ft/hr</span>';
+          if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-sparkles"></i> Surface Finish';
+          if (telVal4) telVal4.innerHTML = '100.0 <span>% Streak-Free</span>';
+        } else {
+          // ACT III: Dumpster Pad Degreasing & EPA Reclaim
+          if (sceneIndicator) {
+            sceneIndicator.innerHTML = '<i class="fa-solid fa-fire-burner"></i> ACT III: DUMPSTER PAD DEGREASING';
+            sceneIndicator.style.borderColor = '#00F0FF';
+          }
+          if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-fire"></i> Boiler Heat';
+          if (telVal1) telVal1.innerHTML = '200.0 <span>°F Steam</span>';
+          if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Hydro Blast';
+          if (telVal2) telVal2.innerHTML = '4,500 <span>PSI</span>';
+          if (telLabel3) telLabel3.innerHTML = '<i class="fa-solid fa-flask"></i> Degreaser';
+          if (telVal3) telVal3.innerHTML = 'Bio <span>List-N</span>';
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-recycle"></i> EPA Reclaim';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Captured</span>';
         }
 
-        // Active Card Thresholds (4 quadrants)
+        // Active Card Thresholds (6 sections, ~16.6% each)
         let activeCardIdx = 0;
-        if (scrollFraction >= 0.75) {
-          activeCardIdx = 3;
+        if (scrollFraction >= 0.83) {
+          activeCardIdx = 5;
+        } else if (scrollFraction >= 0.66) {
+          activeCardIdx = 4;
         } else if (scrollFraction >= 0.50) {
+          activeCardIdx = 3;
+        } else if (scrollFraction >= 0.33) {
           activeCardIdx = 2;
-        } else if (scrollFraction >= 0.25) {
+        } else if (scrollFraction >= 0.16) {
           activeCardIdx = 1;
         } else {
           activeCardIdx = 0;
