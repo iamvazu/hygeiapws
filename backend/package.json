@@ -1,0 +1,26 @@
+{
+  "name": "hygeia-backend-api",
+  "version": "1.0.0",
+  "description": "Production REST API and Database Engine for Hygeia Enterprise Digital Ecosystem",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node db/seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  },
+  "keywords": [
+    "hygeia",
+    "commercial-cleaning",
+    "power-washing",
+    "api",
+    "hostinger"
+  ],
+  "author": "Vasu (iamvazu)",
+  "license": "ISC"
+}

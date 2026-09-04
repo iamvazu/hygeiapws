@@ -1,3 +1,37 @@
+
+// ==============================================================================
+// HYGEIA UNIFIED API CLIENT (Hostinger VPS & Local API Bridge)
+// ==============================================================================
+const HYGEIA_API_BASE = (function() {
+  if (typeof window !== 'undefined' && window.location) {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:5000/api';
+    }
+    // Production API endpoint on Hostinger VPS or custom domain
+    return '/api';
+  }
+  return 'http://localhost:5000/api';
+})();
+
+async function syncLeadToAPI(leadData) {
+  try {
+    const res = await fetch(`${HYGEIA_API_BASE}/leads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leadData)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      console.log('✅ Lead synced to Hygeia Backend DB:', data);
+      return data;
+    }
+  } catch (err) {
+    console.warn('⚠️ Backend API offline, lead stored in local storage buffer:', err.message);
+  }
+  return null;
+}
+
+
 /**
  * HYGEIA POWER WASH SOLUTIONS — MASTER SCRIPT
  * Interactive Before/After Sliders, Mobile Nav, Accordions & Interactions
