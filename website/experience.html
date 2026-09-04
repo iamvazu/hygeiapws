@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
   <title>The 3D Hydro Experience | Hygeia Power Wash Solutions</title>
-  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, and commercial dumpster pad degreasing in Silicon Valley." name="description"/>
+  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, commercial dumpster pad degreasing, and multi-story facade soft-washing in Silicon Valley." name="description"/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,7 +61,7 @@
       display: block;
     }
 
-    /* Cinematic Subtle Vignette Overlay (Leaves Center 100% Bright) */
+    /* Subtle Cinematic Vignette */
     .vignette-overlay {
       position: fixed;
       top: 0;
@@ -127,7 +127,7 @@
     }
 
     .nav-logo-img {
-      height: 48px; /* Significantly enlarged from 26px to 48px */
+      height: 48px;
       width: auto;
       object-fit: contain;
       display: block;
@@ -146,7 +146,7 @@
       color: #E2E8F0;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
       text-decoration: none;
       transition: all 0.2s ease;
@@ -163,15 +163,15 @@
 
     .btn-cta-glow {
       font-family: var(--font-heading);
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       color: #FFFFFF;
       background: linear-gradient(135deg, var(--cyan-electric) 0%, var(--cyan-bright) 100%);
       border: none;
-      padding: 7px 16px;
+      padding: 9px 20px;
       border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 3px 14px rgba(0, 144, 255, 0.4);
+      box-shadow: 0 4px 16px rgba(0, 144, 255, 0.4);
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
@@ -181,11 +181,11 @@
 
     .btn-cta-glow:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 18px rgba(0, 180, 216, 0.6);
+      box-shadow: 0 6px 22px rgba(0, 180, 216, 0.6);
     }
 
     /* ========================================================================= */
-    /* UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD (Replaces Bulky Center Card)      */
+    /* UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD                                   */
     /* ========================================================================= */
     .story-hud-wrap {
       position: fixed;
@@ -201,8 +201,8 @@
     }
 
     .story-caption-deck {
-      max-width: 620px;
-      background: rgba(0, 0, 0, 0.65);
+      max-width: 640px;
+      background: rgba(0, 0, 0, 0.68);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -315,7 +315,7 @@
 
     /* Telemetry HUD (Bottom-Right Deck) */
     .telemetry-hud {
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.68);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -373,7 +373,7 @@
 
     .tracker-track {
       width: 3px;
-      height: 180px;
+      height: 200px;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
       position: relative;
@@ -401,60 +401,11 @@
       text-transform: uppercase;
     }
 
-    /* Virtual Scroll Track (1400vh for 360 frames) */
+    /* Virtual Scroll Track (1800vh for 4 Acts) */
     #scrollTrack {
       position: relative;
-      height: 1400vh;
+      height: 1800vh;
       z-index: 10;
-    }
-
-    /* Scroll Mouse Prompt */
-    .scroll-prompt {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 25;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .scroll-mouse {
-      width: 18px;
-      height: 28px;
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      border-radius: 10px;
-      position: relative;
-    }
-
-    .scroll-wheel {
-      width: 3px;
-      height: 6px;
-      background: var(--cyan-bright);
-      border-radius: 2px;
-      position: absolute;
-      top: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: wheelRoll 1.5s infinite;
-    }
-
-    @keyframes wheelRoll {
-      0% { top: 4px; opacity: 1; }
-      100% { top: 14px; opacity: 0; }
-    }
-
-    .scroll-text {
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #94A3B8;
     }
 
     /* Preloader */
@@ -515,46 +466,6 @@
     /* RESPONSIVE BREAKPOINTS (TABLET & MOBILE)                                  */
     /* ========================================================================= */
     @media (max-width: 1024px) {
-      /* Tablet adjustments */
-      .nav-extra {
-        display: none !important;
-      }
-      .nav-exp-badge {
-        display: none !important;
-      }
-      .story-hud-wrap {
-        flex-direction: column;
-        align-items: stretch;
-        bottom: 16px;
-        left: 16px;
-        right: 16px;
-        gap: 10px;
-      }
-      .story-caption-deck {
-        max-width: 100%;
-        padding: 14px 18px;
-      }
-      .telemetry-hud {
-        padding: 10px 14px;
-        gap: 12px;
-        justify-content: space-between;
-      }
-      .telemetry-val {
-        font-size: 14px;
-      }
-      .story-title {
-        font-size: 19px;
-      }
-      .scroll-tracker {
-        display: none;
-      }
-      .scroll-prompt {
-        display: none;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      /* Tablet adjustments */
       .nav-extra {
         display: none !important;
       }
@@ -587,13 +498,9 @@
       .scroll-tracker {
         display: none;
       }
-      .scroll-prompt {
-        display: none;
-      }
     }
 
     @media (max-width: 768px) {
-      /* Mobile adjustments */
       .experience-nav-wrap {
         top: 10px;
         padding: 0 10px;
@@ -612,7 +519,7 @@
         padding: 6px 14px;
       }
       .telemetry-hud {
-        display: none; /* Hide telemetry on small mobile to maximize video visibility */
+        display: none;
       }
       .story-caption-deck {
         padding: 12px 16px;
@@ -633,7 +540,7 @@
   <!-- Loading Screen -->
   <div id="preloader">
     <div class="preloader-spinner"></div>
-    <div class="preloader-text" id="loaderText">STREAMING 3D MULTI-ACT ENGINE (0%)</div>
+    <div class="preloader-text" id="loaderText">STREAMING 3D 4-ACT ENGINE (0%)</div>
     <div class="preloader-progress-track">
       <div class="preloader-progress-fill" id="loaderFill"></div>
     </div>
@@ -678,23 +585,15 @@
     </div>
   </div>
 
-  <!-- Bottom Scroll Mouse Prompt -->
-  <div class="scroll-prompt" id="scrollPrompt">
-    <div class="scroll-mouse">
-      <div class="scroll-wheel"></div>
-    </div>
-    <span class="scroll-text">SCROLL TO WALK</span>
-  </div>
-
   <!-- ========================================================================= -->
-  <!-- UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD (Clean, Non-Blocking Layout)     -->
+  <!-- UNOBSTRUCTED CINEMATIC BOTTOM STORY HUD                                   -->
   <!-- ========================================================================= -->
   <div class="story-hud-wrap">
     
     <!-- Story Caption Deck -->
     <div class="story-caption-deck">
 
-      <!-- Card 1: 0% - 16% (Act I Scene 1) -->
+      <!-- Card 1: 0% - 12.5% (Act I Scene 1) -->
       <div class="story-card active" id="card1">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CH 01 · FLEET ARRIVAL</span>
@@ -713,7 +612,7 @@
         </div>
       </div>
 
-      <!-- Card 2: 16% - 33% (Act I Scene 1) -->
+      <!-- Card 2: 12.5% - 25% (Act I Scene 1) -->
       <div class="story-card" id="card2">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CH 02 · 4,000 PSI JET BLAST</span>
@@ -732,7 +631,7 @@
         </div>
       </div>
 
-      <!-- Card 3: 33% - 50% (Act II Scene 2) -->
+      <!-- Card 3: 25% - 37.5% (Act II Scene 2) -->
       <div class="story-card" id="card3">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CH 03 · ROTARY RESTORATION</span>
@@ -751,7 +650,7 @@
         </div>
       </div>
 
-      <!-- Card 4: 50% - 66% (Act II Scene 2) -->
+      <!-- Card 4: 37.5% - 50% (Act II Scene 2) -->
       <div class="story-card" id="card4">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CH 04 · SHOWROOM FINISH</span>
@@ -770,7 +669,7 @@
         </div>
       </div>
 
-      <!-- Card 5: 66% - 83% (Act III Scene 3) -->
+      <!-- Card 5: 50% - 62.5% (Act III Scene 3) -->
       <div class="story-card" id="card5">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CH 05 · DEGREASING</span>
@@ -778,7 +677,7 @@
         </div>
         <h2 class="story-title">Thermal <span>Grease Vaporization</span></h2>
         <p class="story-desc">
-          Industrial 200° steam combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and commercial kitchen runoff.
+          Industrial 200° steam combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and dumpster runoff.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
@@ -789,7 +688,7 @@
         </div>
       </div>
 
-      <!-- Card 6: 83% - 100% (Act III Scene 3) -->
+      <!-- Card 6: 62.5% - 75% (Act III Scene 3) -->
       <div class="story-card" id="card6">
         <div class="story-header-row">
           <span class="story-tag"><i class="fa-solid fa-circle-check"></i> ACT III · CH 06 · 100% EPA RECLAIM</span>
@@ -805,6 +704,44 @@
             <span class="spec-badge">🤝 Free Site Walk RFP</span>
           </div>
           <a href="contact.html" class="story-btn-pill">Request Instant Quote ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 7: 75% - 87.5% (Act IV Scene 4) -->
+      <div class="story-card" id="card7">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-spray-can-sparkles"></i> ACT IV · CH 07 · FACADE SOFT-WASH</span>
+          <span class="spec-badge">🌿 100% Biodegradable Foam</span>
+        </div>
+        <h2 class="story-title">Multi-Story <span>Exterior Soft-Wash</span></h2>
+        <p class="story-desc">
+          Carbon-fiber water-fed extension poles apply gentle active bio-foam, dissolving atmospheric soot, algae, and grime from metal panels.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🏢 Up to 4 Stories Reach</span>
+            <span class="spec-badge">✨ Zero Surface Etching</span>
+          </div>
+          <a href="commercial-pressure-washing.html" class="story-btn-pill">Building Wash Specs ➔</a>
+        </div>
+      </div>
+
+      <!-- Card 8: 87.5% - 100% (Act IV Scene 4) -->
+      <div class="story-card" id="card8">
+        <div class="story-header-row">
+          <span class="story-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> ACT IV · CH 08 · PURE WATER GLAZING</span>
+          <span class="spec-badge">💎 0.0 PPM Pure Deionized Water</span>
+        </div>
+        <h2 class="story-title">Streak-Free <span>Architectural Glass</span></h2>
+        <p class="story-desc">
+          Deionized 4-stage reverse osmosis filtration rinses glass sheets to crystalline clarity with zero water spots or mineral residue.
+        </p>
+        <div class="story-footer-row">
+          <div class="story-badges">
+            <span class="spec-badge">🔬 Spotless Spot-Free Rinse</span>
+            <span class="spec-badge">⚡ Instant Commercial Quote</span>
+          </div>
+          <a href="contact.html" class="story-btn-pill">Request Instant RFP ➔</a>
         </div>
       </div>
 
@@ -841,7 +778,8 @@
       const SCENE1_FRAMES = 120;
       const SCENE2_FRAMES = 120;
       const SCENE3_FRAMES = 120;
-      const TOTAL_FRAMES = SCENE1_FRAMES + SCENE2_FRAMES + SCENE3_FRAMES; // 360 frames total
+      const SCENE4_FRAMES = 120;
+      const TOTAL_FRAMES = SCENE1_FRAMES + SCENE2_FRAMES + SCENE3_FRAMES + SCENE4_FRAMES; // 480 frames total
 
       const allImages = [];
       let loadedCount = 0;
@@ -854,8 +792,6 @@
       const loaderText = document.getElementById('loaderText');
       const loaderFill = document.getElementById('loaderFill');
       const trackerBar = document.getElementById('trackerBar');
-      const scrollPrompt = document.getElementById('scrollPrompt');
-      const sceneIndicator = document.getElementById('sceneIndicator');
 
       // Telemetry elements
       const telLabel1 = document.getElementById('telLabel1');
@@ -873,7 +809,9 @@
         document.getElementById('card3'),
         document.getElementById('card4'),
         document.getElementById('card5'),
-        document.getElementById('card6')
+        document.getElementById('card6'),
+        document.getElementById('card7'),
+        document.getElementById('card8')
       ];
 
       function resizeCanvas() {
@@ -891,7 +829,7 @@
       function checkAllLoaded() {
         loadedCount++;
         const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-        if (loaderText) loaderText.textContent = `STREAMING 3D MULTI-ACT ENGINE (${percent}%)`;
+        if (loaderText) loaderText.textContent = `STREAMING 3D 4-ACT ENGINE (${percent}%)`;
         if (loaderFill) loaderFill.style.width = `${percent}%`;
 
         if (loadedCount >= TOTAL_FRAMES) {
@@ -928,6 +866,16 @@
       for (let i = 1; i <= SCENE3_FRAMES; i++) {
         const img = new Image();
         img.src = `assets/frames/scene3/frame_${padZero(i)}.webp`;
+        img.onload = checkAllLoaded;
+        img.onerror = checkAllLoaded;
+        allImages.push(img);
+      }
+
+      // Preload Scene 4 (Frames 360 to 479 - sampled from 240 frames)
+      for (let i = 1; i <= SCENE4_FRAMES; i++) {
+        const frameIdx = i * 2; // Step through 240 frames
+        const img = new Image();
+        img.src = `assets/frames/scene4/frame_${padZero(frameIdx)}.webp`;
         img.onload = checkAllLoaded;
         img.onerror = checkAllLoaded;
         allImages.push(img);
@@ -973,18 +921,9 @@
         // Update progress bar
         if (trackerBar) trackerBar.style.height = `${scrollFraction * 100}%`;
 
-        // Hide scroll prompt once user scrolls
-        if (scrollPrompt) {
-          scrollPrompt.style.opacity = scrollTop > 100 ? '0' : '1';
-        }
-
-        // Dynamic Scene Indicator & Telemetry across all 3 Acts
-        if (scrollFraction < 0.33) {
-          // ACT I: Residential Curbside Bin Sanitizing
-          if (sceneIndicator) {
-            sceneIndicator.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION';
-            sceneIndicator.style.borderColor = 'var(--cyan-bright)';
-          }
+        // Dynamic Telemetry across all 4 Acts
+        if (scrollFraction < 0.25) {
+          // ACT I: Curbside Bin Sanitization
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-fire"></i> Water Temp';
           if (telVal1) telVal1.innerHTML = '200.0 <span>°F</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Pressure';
@@ -993,12 +932,8 @@
           if (telVal3) telVal3.innerHTML = '8.0 <span>GPM</span>';
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-shield-virus"></i> Sanitization';
           if (telVal4) telVal4.innerHTML = '99.9 <span>% Kill</span>';
-        } else if (scrollFraction < 0.66) {
+        } else if (scrollFraction < 0.50) {
           // ACT II: Tech Campus Flatwork Restoration
-          if (sceneIndicator) {
-            sceneIndicator.innerHTML = '<i class="fa-solid fa-building"></i> ACT II: TECH CAMPUS FLATWORK';
-            sceneIndicator.style.borderColor = '#38BDF8';
-          }
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-rotate"></i> Surface Speed';
           if (telVal1) telVal1.innerHTML = '2,500 <span>RPM</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Jet Pressure';
@@ -1007,12 +942,8 @@
           if (telVal3) telVal3.innerHTML = '15,000 <span>sq ft/hr</span>';
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-sparkles"></i> Surface Finish';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Streak-Free</span>';
-        } else {
-          // ACT III: Dumpster Pad Degreasing & EPA Reclaim
-          if (sceneIndicator) {
-            sceneIndicator.innerHTML = '<i class="fa-solid fa-fire-burner"></i> ACT III: DUMPSTER PAD DEGREASING';
-            sceneIndicator.style.borderColor = '#00F0FF';
-          }
+        } else if (scrollFraction < 0.75) {
+          // ACT III: Dumpster Pad Degreasing
           if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-fire"></i> Boiler Heat';
           if (telVal1) telVal1.innerHTML = '200.0 <span>°F Steam</span>';
           if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-gauge-high"></i> Hydro Blast';
@@ -1021,19 +952,33 @@
           if (telVal3) telVal3.innerHTML = 'Bio <span>List-N</span>';
           if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-recycle"></i> EPA Reclaim';
           if (telVal4) telVal4.innerHTML = '100.0 <span>% Captured</span>';
+        } else {
+          // ACT IV: Multi-Story Building Soft-Wash & Glazing
+          if (telLabel1) telLabel1.innerHTML = '<i class="fa-solid fa-arrows-up-down"></i> Reach Height';
+          if (telVal1) telVal1.innerHTML = '45.0 <span>FT</span>';
+          if (telLabel2) telLabel2.innerHTML = '<i class="fa-solid fa-soap"></i> Active Foam';
+          if (telVal2) telVal2.innerHTML = 'Bio <span>Soft-Wash</span>';
+          if (telLabel3) telLabel3.innerHTML = '<i class="fa-solid fa-droplet"></i> Water Purity';
+          if (telVal3) telVal3.innerHTML = '0.0 <span>PPM TDS</span>';
+          if (telLabel4) telLabel4.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Glass Clarity';
+          if (telVal4) telVal4.innerHTML = '100.0 <span>% Spot-Free</span>';
         }
 
-        // Active Card Thresholds (6 sections, ~16.6% each)
+        // Active Card Thresholds (8 chapters, 12.5% each)
         let activeCardIdx = 0;
-        if (scrollFraction >= 0.83) {
+        if (scrollFraction >= 0.875) {
+          activeCardIdx = 7;
+        } else if (scrollFraction >= 0.75) {
+          activeCardIdx = 6;
+        } else if (scrollFraction >= 0.625) {
           activeCardIdx = 5;
-        } else if (scrollFraction >= 0.66) {
-          activeCardIdx = 4;
         } else if (scrollFraction >= 0.50) {
+          activeCardIdx = 4;
+        } else if (scrollFraction >= 0.375) {
           activeCardIdx = 3;
-        } else if (scrollFraction >= 0.33) {
+        } else if (scrollFraction >= 0.25) {
           activeCardIdx = 2;
-        } else if (scrollFraction >= 0.16) {
+        } else if (scrollFraction >= 0.125) {
           activeCardIdx = 1;
         } else {
           activeCardIdx = 0;
@@ -1055,7 +1000,7 @@
         function loop() {
           const diff = targetFrameIndex - currentFrameIndex;
           if (Math.abs(diff) > 0.05) {
-            currentFrameIndex += diff * 0.16; // Smooth spring dampening
+            currentFrameIndex += diff * 0.16;
             renderFrame(currentFrameIndex);
           }
           requestAnimationFrame(loop);
