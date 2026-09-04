@@ -44,6 +44,87 @@
       scroll-behavior: smooth;
     }
 
+    /* Top Utility Strip (Above Nav, Outside Black Box) */
+    .top-utility-strip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 34px;
+      z-index: 110;
+      background: rgba(10, 37, 51, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+    }
+
+    .top-utility-inner {
+      width: 100%;
+      max-width: 1360px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #CBD5E1;
+      letter-spacing: 0.3px;
+    }
+
+    .status-dot-green {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+    }
+
+    .top-utility-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .top-portal-btn {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--brand-gold);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s ease;
+    }
+
+    .top-portal-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .top-phone-link {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #E2E8F0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .top-phone-link:hover {
+      color: #00F0FF;
+    }
+
     /* Fixed Canvas Container */
     #canvasContainer {
       position: fixed;
@@ -84,7 +165,7 @@
     /* Minimalist Floating Island Header */
     .experience-nav-wrap {
       position: fixed;
-      top: 16px;
+      top: 46px; /* Sits cleanly below top strip */
       left: 0;
       width: 100%;
       z-index: 100;
@@ -98,14 +179,14 @@
       width: 100%;
       max-width: 1360px;
       pointer-events: auto;
-      padding: 10px 24px;
+      padding: 8px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 999px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.18);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
     }
@@ -118,7 +199,7 @@
     /* Perfectly Rounded Pill Logo Housing */
     .logo-pill-housing {
       background: #FFFFFF;
-      padding: 6px 20px;
+      padding: 5px 18px;
       border-radius: 999px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 240, 255, 0.25);
       display: inline-flex;
@@ -135,10 +216,34 @@
     }
 
     .nav-logo-img {
-      height: 44px;
+      height: 40px;
       width: auto;
       object-fit: contain;
       display: block;
+    }
+
+    /* Full Navbar Menu */
+    .nav-menu-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-item-link {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #E2E8F0;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-item-link:hover {
+      color: #00F0FF;
+      transform: translateY(-1px);
     }
 
     .nav-actions {
@@ -147,39 +252,17 @@
       gap: 12px;
     }
 
-    .btn-glass {
-      font-family: var(--font-heading);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #E2E8F0;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 8px 18px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-glass:hover {
-      background: rgba(0, 144, 255, 0.25);
-      border-color: var(--cyan-bright);
-      color: #FFFFFF;
-    }
-
     .btn-cta-glow {
       font-family: var(--font-heading);
       font-size: 13px;
       font-weight: 800;
-      color: #FFFFFF;
-      background: linear-gradient(135deg, var(--cyan-electric) 0%, var(--cyan-bright) 100%);
+      color: #000000;
+      background: linear-gradient(135deg, var(--brand-gold) 0%, #FFAA00 100%);
       border: none;
       padding: 9px 22px;
       border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(0, 144, 255, 0.4);
+      box-shadow: 0 4px 16px rgba(255, 183, 3, 0.4);
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
@@ -189,7 +272,60 @@
 
     .btn-cta-glow:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.7);
+      box-shadow: 0 6px 24px rgba(255, 183, 3, 0.7);
+    }
+
+    .mobile-hamburger-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      color: #FFFFFF;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Mobile Drawer */
+    .mobile-nav-drawer {
+      display: none;
+      position: fixed;
+      top: 90px;
+      left: 16px;
+      right: 16px;
+      background: rgba(7, 13, 20, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      border-radius: 20px;
+      padding: 24px;
+      z-index: 105;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .mobile-nav-drawer.open {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer-link {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-drawer-link:hover {
+      color: #00F0FF;
     }
 
     /* Scroll Tracker Bar */
@@ -442,33 +578,15 @@
       padding: 80px 24px 40px;
     }
 
-    /* Hero Transition Bar */
+    /* Clean Hero Transition Header */
     .hub-hero-banner {
       text-align: center;
-      margin-bottom: 70px;
-    }
-
-    .hub-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 180, 216, 0.12);
-      border: 1px solid var(--cyan-bright);
-      padding: 6px 18px;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 800;
-      color: #00F0FF;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 16px;
-      box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+      margin-bottom: 60px;
     }
 
     .hub-hero-title {
       font-family: var(--font-heading);
-      font-size: clamp(32px, 5vw, 54px);
+      font-size: clamp(34px, 5.2vw, 56px);
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.02em;
@@ -486,41 +604,8 @@
       font-size: clamp(16px, 2vw, 19px);
       color: #CBD5E1;
       max-width: 820px;
-      margin: 0 auto 32px;
+      margin: 0 auto;
       line-height: 1.6;
-    }
-
-    /* Jump Navigation Pills */
-    .hub-quick-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 60px;
-    }
-
-    .jump-pill {
-      font-family: var(--font-heading);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #E2E8F0;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 8px 16px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .jump-pill:hover {
-      background: rgba(0, 180, 216, 0.2);
-      border-color: var(--cyan-bright);
-      color: #00F0FF;
-      transform: translateY(-2px);
     }
 
     /* Section Headings */
@@ -1263,6 +1348,12 @@
     /* RESPONSIVE BREAKPOINTS                                                    */
     /* ========================================================================= */
     @media (max-width: 1024px) {
+      .nav-menu-links {
+        display: none;
+      }
+      .mobile-hamburger-btn {
+        display: flex;
+      }
       .story-hud-wrap {
         flex-direction: column;
         align-items: stretch;
@@ -1288,8 +1379,11 @@
     }
 
     @media (max-width: 768px) {
+      .top-status-badge span.long-text {
+        display: none;
+      }
       .experience-nav-wrap {
-        top: 10px;
+        top: 40px;
         padding: 0 10px;
       }
       .experience-nav {
@@ -1336,27 +1430,83 @@
     </div>
   </div>
 
-  <!-- Top Navigation HUD (Unified Organic Pill Capsule) -->
+  <!-- Top Announcement & Client Portal Strip (Outside/Above Floating Navbar) -->
+  <div class="top-utility-strip">
+    <div class="top-utility-inner">
+      <div class="top-status-badge">
+        <span class="status-dot-green"></span>
+        <span class="long-text">Now Booking Peninsula Schedule · 24/7 Commercial Dispatch</span>
+        <span style="display:none;" class="short-text">24/7 Dispatch Active</span>
+      </div>
+      <div class="top-utility-actions">
+        <a href="portal.html" class="top-portal-btn">
+          <i class="fa-solid fa-user-circle"></i> Client Portal
+        </a>
+        <a href="tel:6509333823" class="top-phone-link">
+          <i class="fa-solid fa-phone"></i> (650) 933-3823
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Navigation HUD (Floating Capsule with Full Nav Menu) -->
   <div class="experience-nav-wrap">
     <header class="experience-nav">
+      <!-- Left: Logo in White Rounded Pill Housing -->
       <div class="nav-brand-group">
-        <a href="index.html" class="logo-pill-housing" title="Back to Hygeia PWS Homepage">
+        <a href="index.html" class="logo-pill-housing" title="Hygeia Power Wash Solutions">
           <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img"/>
         </a>
       </div>
 
+      <!-- Center: Full Navbar Menu -->
+      <ul class="nav-menu-links">
+        <li><a href="commercial-pressure-washing.html" class="nav-item-link">Commercial</a></li>
+        <li><a href="residential-pressure-washing.html" class="nav-item-link">Residential</a></li>
+        <li><a href="bin-cleaning.html" class="nav-item-link">Bin Cleaning</a></li>
+        <li><a href="service-areas.html" class="nav-item-link">Service Areas</a></li>
+        <li><a href="blog.html" class="nav-item-link">Blog</a></li>
+        <li><a href="about.html" class="nav-item-link">About</a></li>
+      </ul>
+
+      <!-- Right: Action CTA & Mobile Hamburger -->
       <div class="nav-actions">
-        <a href="index.html" class="btn-glass nav-extra">
-          <i class="fa-solid fa-arrow-left"></i> Main Site
-        </a>
-        <a href="portal.html" class="btn-glass nav-extra">
-          <i class="fa-solid fa-user-circle"></i> Portal
-        </a>
         <a href="contact.html" class="btn-cta-glow">
-          <i class="fa-solid fa-bolt"></i> Instant Quote
+          <i class="fa-solid fa-bolt"></i> Get a Quote
         </a>
+        <button type="button" class="mobile-hamburger-btn" onclick="toggleDrawer()" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </header>
+  </div>
+
+  <!-- Mobile Slide Drawer -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <a href="commercial-pressure-washing.html" class="mobile-drawer-link">
+      <span>🏢 Commercial Pressure Wash</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="residential-pressure-washing.html" class="mobile-drawer-link">
+      <span>🏡 Residential Soft Wash</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="bin-cleaning.html" class="mobile-drawer-link">
+      <span>🗑️ Trash Bin Cleaning ($35/mo)</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="service-areas.html" class="mobile-drawer-link">
+      <span>📍 14 Service Area Routes</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="blog.html" class="mobile-drawer-link">
+      <span>📚 Knowledge Base &amp; Blog</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="about.html" class="mobile-drawer-link">
+      <span>🎖️ About &amp; 35-Yr Heritage</span> <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    <a href="portal.html" class="mobile-drawer-link" style="color:var(--brand-gold);">
+      <span>👤 Client Subscription Portal</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <a href="contact.html" class="btn-cta-glow" style="width:100%;text-align:center;justify-content:center;margin-top:10px;">
+      <i class="fa-solid fa-bolt"></i> Get Instant Free Quote
+    </a>
   </div>
 
   <!-- Fixed 60FPS Canvas Render Viewport -->
@@ -1608,24 +1758,12 @@
 
       <!-- Hero Transition Banner -->
       <div class="hub-hero-banner">
-        <div class="hub-badge">
-          <i class="fa-solid fa-circle-check"></i> 5-Act 3D Simulation Completed
-        </div>
         <h1 class="hub-hero-title">
           Commercial &amp; Residential <span>Power Washing Mastery</span>
         </h1>
         <p class="hub-hero-sub">
           Industrial 200° hot-water thermal sanitization, 100% Cal/EPA wastewater vacuum recovery, and 35+ years of trusted Bay Area facility maintenance.
         </p>
-
-        <div class="hub-quick-nav">
-          <a href="#capabilities" class="jump-pill"><i class="fa-solid fa-layer-group"></i> 5 Core Capabilities</a>
-          <a href="#estimator" class="jump-pill"><i class="fa-solid fa-calculator"></i> Live Quote Estimator</a>
-          <a href="#transformation" class="jump-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> 200° Proof</a>
-          <a href="#cities" class="jump-pill"><i class="fa-solid fa-map-location-dot"></i> 14 Service Cities</a>
-          <a href="#compliance" class="jump-pill"><i class="fa-solid fa-award"></i> CA DVBE #2054658</a>
-          <a href="#faq" class="jump-pill"><i class="fa-solid fa-circle-question"></i> FAQs</a>
-        </div>
       </div>
 
       <!-- Section 1: The 5-Act Ecosystem Bento Grid -->
@@ -2356,6 +2494,12 @@
         requestAnimationFrame(loop);
       }
     })();
+
+    // Mobile Drawer Toggle
+    window.toggleDrawer = function() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    };
 
     // =========================================================================
     // INTERACTIVE CALCULATOR ENGINE
