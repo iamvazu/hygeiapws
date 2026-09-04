@@ -76,45 +76,78 @@
                   linear-gradient(180deg, rgba(11, 25, 44, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.9) 100%);
     }
 
-    /* Top Navigation HUD */
-    .experience-nav {
+    /* Top Navigation HUD — Floating Island Capsule */
+    .experience-nav-wrap {
       position: fixed;
-      top: 0;
+      top: 18px;
       left: 0;
       width: 100%;
-      z-index: 50;
-      padding: 18px 32px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      padding: 0 24px;
+    }
+
+    .experience-nav {
+      width: 100%;
+      max-width: 1360px;
+      pointer-events: auto;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: rgba(11, 25, 44, 0.65);
-      border-bottom: 1px solid var(--slate-border);
+      border-radius: 18px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(11, 25, 44, 0.82);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 144, 255, 0.22);
     }
 
     .nav-brand-group {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+    }
+
+    /* Logo Capsule Housing for Crystal-Clear Visibility */
+    .logo-pill-housing {
+      background: #FFFFFF;
+      padding: 6px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .logo-pill-housing:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 6px 24px rgba(0, 180, 216, 0.6), 0 0 20px rgba(255, 255, 255, 0.8);
+      border-color: var(--cyan-bright);
     }
 
     .nav-logo-img {
-      height: 38px;
+      height: 32px;
       width: auto;
-      filter: drop-shadow(0 0 10px rgba(0, 144, 255, 0.5));
+      object-fit: contain;
+      display: block;
     }
 
     .nav-exp-badge {
       font-family: var(--font-mono);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--cyan-bright);
-      background: rgba(0, 180, 216, 0.12);
-      border: 1px solid var(--slate-border);
-      padding: 5px 12px;
+      background: rgba(0, 180, 216, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
       border-radius: 9999px;
       display: flex;
       align-items: center;
@@ -128,13 +161,14 @@
       color: #FFFFFF;
       background: linear-gradient(135deg, rgba(0, 144, 255, 0.35), rgba(0, 180, 216, 0.35));
       border: 1px solid var(--cyan-bright);
-      padding: 5px 12px;
-      border-radius: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
     }
 
     .pulse-dot {
@@ -155,7 +189,7 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-glass {
@@ -525,33 +559,35 @@
     </div>
   </div>
 
-  <!-- Top Navigation HUD -->
-  <header class="experience-nav">
-    <div class="nav-brand-group">
-      <a href="index.html" title="Back to Hygeia PWS Homepage">
-        <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img"/>
-      </a>
-      <span class="nav-exp-badge">
-        <span class="pulse-dot"></span>
-        HYDRO-WORLD v3.0
-      </span>
-      <span class="scene-pill" id="sceneIndicator">
-        <i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION
-      </span>
-    </div>
+  <!-- Top Navigation HUD (Floating Island Capsule) -->
+  <div class="experience-nav-wrap">
+    <header class="experience-nav">
+      <div class="nav-brand-group">
+        <a href="index.html" class="logo-pill-housing" title="Back to Hygeia PWS Homepage">
+          <img src="assets/img/logo2.png" alt="Hygeia Logo" class="nav-logo-img"/>
+        </a>
+        <span class="nav-exp-badge">
+          <span class="pulse-dot"></span>
+          HYDRO-WORLD v3.0
+        </span>
+        <span class="scene-pill" id="sceneIndicator">
+          <i class="fa-solid fa-location-crosshairs"></i> ACT I: CURBSIDE SANITIZATION
+        </span>
+      </div>
 
-    <div class="nav-actions">
-      <a href="index.html" class="btn-glass">
-        <i class="fa-solid fa-arrow-left"></i> Standard Site
-      </a>
-      <a href="portal.html" class="btn-glass">
-        <i class="fa-solid fa-user-circle"></i> Portal
-      </a>
-      <a href="contact.html" class="btn-cta-glow">
-        <i class="fa-solid fa-bolt"></i> Instant Quote
-      </a>
-    </div>
-  </header>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-glass">
+          <i class="fa-solid fa-arrow-left"></i> Standard Site
+        </a>
+        <a href="portal.html" class="btn-glass">
+          <i class="fa-solid fa-user-circle"></i> Portal
+        </a>
+        <a href="contact.html" class="btn-cta-glow">
+          <i class="fa-solid fa-bolt"></i> Instant Quote
+        </a>
+      </div>
+    </header>
+  </div>
 
   <!-- Fixed 60FPS Canvas Render Viewport -->
   <div id="canvasContainer">
