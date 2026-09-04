@@ -44,7 +44,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Top Utility Strip (Above Nav, Outside Black Box) */
+    /* Top Utility Strip */
     .top-utility-strip {
       position: fixed;
       top: 0;
@@ -52,7 +52,7 @@
       width: 100%;
       height: 34px;
       z-index: 110;
-      background: rgba(10, 37, 51, 0.85);
+      background: rgba(10, 37, 51, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -165,7 +165,7 @@
     /* Minimalist Floating Island Header */
     .experience-nav-wrap {
       position: fixed;
-      top: 46px; /* Sits cleanly below top strip */
+      top: 46px;
       left: 0;
       width: 100%;
       z-index: 100;
@@ -758,7 +758,7 @@
     }
 
     /* ========================================================================= */
-    /* INTERACTIVE PRICE ESTIMATOR & CONFIGURATOR                                */
+    /* ENHANCED 3-TAB INTERACTIVE PRICE ESTIMATOR                                */
     /* ========================================================================= */
     .calculator-section {
       background: linear-gradient(180deg, var(--slate-card) 0%, rgba(7, 13, 20, 0.9) 100%);
@@ -775,6 +775,7 @@
       margin-bottom: 30px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding-bottom: 16px;
+      flex-wrap: wrap;
     }
 
     .calc-tab-btn {
@@ -783,17 +784,21 @@
       font-weight: 800;
       color: #94A3B8;
       background: transparent;
-      border: none;
-      padding: 8px 18px;
+      border: 1px solid transparent;
+      padding: 10px 20px;
       border-radius: 999px;
       cursor: pointer;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .calc-tab-btn.active {
       background: var(--cyan-bright);
+      border-color: var(--cyan-bright);
       color: #000000;
-      box-shadow: 0 0 16px rgba(0, 180, 216, 0.5);
+      box-shadow: 0 0 18px rgba(0, 180, 216, 0.5);
     }
 
     .calc-panel {
@@ -802,7 +807,7 @@
 
     .calc-panel.active {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 40px;
     }
 
@@ -815,7 +820,7 @@
 
     .calc-label {
       font-family: var(--font-heading);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #E2E8F0;
     }
@@ -834,6 +839,31 @@
 
     .calc-input:focus, .calc-select:focus {
       border-color: var(--cyan-bright);
+    }
+
+    .preset-chips-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .preset-chip-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #CBD5E1;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .preset-chip-btn:hover {
+      background: rgba(0, 180, 216, 0.2);
+      border-color: var(--cyan-bright);
+      color: #00F0FF;
     }
 
     .bin-counter-box {
@@ -871,26 +901,28 @@
     }
 
     .calc-result-box {
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(0, 240, 255, 0.3);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(0, 240, 255, 0.35);
       border-radius: 18px;
       padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: inset 0 0 24px rgba(0, 180, 216, 0.1);
     }
 
     .calc-result-price {
       font-family: var(--font-mono);
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 900;
       color: #00F0FF;
       margin-bottom: 4px;
     }
 
     .calc-result-sub {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #94A3B8;
+      line-height: 1.5;
       margin-bottom: 24px;
     }
 
@@ -910,6 +942,7 @@
       text-align: center;
       transition: all 0.2s ease;
       box-shadow: 0 4px 20px rgba(0, 180, 216, 0.5);
+      display: block;
     }
 
     .calc-btn-submit:hover {
@@ -1162,13 +1195,137 @@
     }
 
     /* ========================================================================= */
-    /* ULTRA-UNIQUE FUTURISTIC HYDRO-CYBER FOOTER                                */
+    /* OVERLAPPING FLOATING 3D ACTION CARD (Screenshot 4 Style)                   */
+    /* ========================================================================= */
+    .footer-floating-card-wrap {
+      position: relative;
+      margin-bottom: -70px; /* Overlaps into footer */
+      z-index: 50;
+      padding: 0 24px;
+    }
+
+    .footer-floating-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%);
+      border-radius: 28px;
+      padding: 40px 48px;
+      box-shadow: 0 24px 70px rgba(0, 114, 255, 0.4), 0 0 30px rgba(0, 240, 255, 0.2);
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .floating-card-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+      animation: floatGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5%, 5%) scale(1.1); }
+    }
+
+    .mascot-graphic-box {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mascot-img-animated {
+      max-width: 280px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.5));
+      animation: heroMascotHover 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroMascotHover {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-10px) rotate(-1.5deg); }
+    }
+
+    .floating-card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .floating-card-title {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 3.2vw, 36px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .floating-card-sub {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #E0E7FF;
+      margin-bottom: 24px;
+    }
+
+    .floating-input-row {
+      display: flex;
+      background: #FFFFFF;
+      border-radius: 999px;
+      padding: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      gap: 8px;
+    }
+
+    .floating-email-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 10px 20px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: #0F172A;
+      outline: none;
+    }
+
+    .floating-subscribe-btn {
+      background: #0A2533;
+      color: #FFFFFF;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .floating-subscribe-btn:hover {
+      background: #FFB703;
+      color: #000000;
+      transform: scale(1.02);
+    }
+
+    /* ========================================================================= */
+    /* ULTRA-UNIQUE FUTURISTIC FOOTER WITH MOUSE SCROLL UP                       */
     /* ========================================================================= */
     .cyber-footer {
       position: relative;
       background: #03070C;
       border-top: 1px solid rgba(0, 240, 255, 0.3);
-      padding: 70px 24px 30px;
+      padding: 110px 24px 30px; /* Extra top padding for overlapping card */
       overflow: hidden;
     }
 
@@ -1230,6 +1387,63 @@
       100% { transform: scale(0.9); opacity: 0.8; }
     }
 
+    /* Mouse Icon Scroll Up Button */
+    .btn-mouse-scroll {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--cyan-bright);
+      border-radius: 999px;
+      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #00F0FF;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 16px rgba(0, 180, 216, 0.3);
+    }
+
+    .btn-mouse-scroll:hover {
+      background: var(--cyan-bright);
+      color: #000000;
+      transform: translateY(-3px);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.7);
+    }
+
+    .mouse-icon {
+      width: 16px;
+      height: 24px;
+      border: 2px solid currentColor;
+      border-radius: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mouse-wheel {
+      width: 3px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 2px;
+      position: absolute;
+      top: 4px;
+      animation: wheelMove 1.4s infinite;
+    }
+
+    @keyframes wheelMove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(6px); opacity: 0; }
+    }
+
+    .animated-arrow {
+      font-size: 14px;
+      animation: arrowBounce 1.4s infinite alternate;
+    }
+
+    @keyframes arrowBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
     .footer-main-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -1237,11 +1451,24 @@
       margin-bottom: 50px;
     }
 
+    .footer-mascot-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .footer-mascot-thumb {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0, 180, 216, 0.4));
+    }
+
     .footer-brand-bio {
       font-size: 13.5px;
       line-height: 1.6;
       color: #94A3B8;
-      margin-top: 14px;
       margin-bottom: 20px;
     }
 
@@ -1293,28 +1520,6 @@
       font-weight: 900;
       color: #00F0FF;
       text-decoration: none;
-    }
-
-    .btn-rocket-top {
-      background: rgba(0, 180, 216, 0.15);
-      border: 1px solid var(--cyan-bright);
-      color: #00F0FF;
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 800;
-      padding: 8px 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-rocket-top:hover {
-      background: var(--cyan-bright);
-      color: #000000;
-      box-shadow: 0 0 16px rgba(0, 180, 216, 0.6);
     }
 
     .footer-legal-bar {
@@ -1369,6 +1574,16 @@
       }
       .calc-panel.active {
         grid-template-columns: 1fr;
+      }
+      .footer-floating-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 32px 24px;
+      }
+      .floating-input-row {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 8px;
       }
       .footer-main-grid {
         grid-template-columns: 1fr 1fr;
@@ -1430,13 +1645,12 @@
     </div>
   </div>
 
-  <!-- Top Announcement & Client Portal Strip (Outside/Above Floating Navbar) -->
+  <!-- Top Announcement & Client Portal Strip -->
   <div class="top-utility-strip">
     <div class="top-utility-inner">
       <div class="top-status-badge">
         <span class="status-dot-green"></span>
         <span class="long-text">Now Booking Peninsula Schedule · 24/7 Commercial Dispatch</span>
-        <span style="display:none;" class="short-text">24/7 Dispatch Active</span>
       </div>
       <div class="top-utility-actions">
         <a href="portal.html" class="top-portal-btn">
@@ -1449,7 +1663,7 @@
     </div>
   </div>
 
-  <!-- Top Navigation HUD (Floating Capsule with Full Nav Menu) -->
+  <!-- Top Navigation HUD -->
   <div class="experience-nav-wrap">
     <header class="experience-nav">
       <!-- Left: Logo in White Rounded Pill Housing -->
@@ -1865,9 +2079,9 @@
         </div>
       </div>
 
-      <!-- Section 2: Interactive Live Quote & Price Estimator -->
+      <!-- Section 2: 3-Tab Interactive Live Price Estimator (Bins, Residential, Commercial) -->
       <div class="section-header" id="estimator">
-        <span class="section-tag"><i class="fa-solid fa-calculator"></i> Transparent Pricing</span>
+        <span class="section-tag"><i class="fa-solid fa-calculator"></i> Transparent Estimation</span>
         <h2 class="section-title">Live Instant Price Estimator</h2>
       </div>
 
@@ -1875,6 +2089,9 @@
         <div class="calc-tabs">
           <button type="button" class="calc-tab-btn active" onclick="switchCalc('bin')">
             <i class="fa-solid fa-trash-can"></i> Curbside Bin Subscription
+          </button>
+          <button type="button" class="calc-tab-btn" onclick="switchCalc('residential')">
+            <i class="fa-solid fa-house-chimney"></i> Residential Power &amp; Soft Washing
           </button>
           <button type="button" class="calc-tab-btn" onclick="switchCalc('commercial')">
             <i class="fa-solid fa-building"></i> Commercial Pressure Washing
@@ -1911,17 +2128,60 @@
             <div>
               <span class="story-tag"><i class="fa-solid fa-sparkles"></i> ESTIMATED TOTAL</span>
               <div class="calc-result-price" id="binPriceOutput">$35<span style="font-size:16px;color:#CBD5E1;font-weight:600;"> / month</span></div>
-              <p class="calc-result-sub" id="binPriceDetail">Includes 2 cans sanitized with 200° thermal steam.</p>
+              <p class="calc-result-sub" id="binPriceDetail">Includes 2 cans sanitized with 200° thermal steam &amp; eco-deodorizer.</p>
             </div>
             <a href="contact.html" class="calc-btn-submit">Proceed to Instant Booking ➔</a>
           </div>
         </div>
 
-        <!-- Panel 2: Commercial Surface Washing -->
+        <!-- Panel 2: Residential Pressure Washing -->
+        <div class="calc-panel" id="calcPanelRes">
+          <div>
+            <div class="calc-form-group">
+              <label class="calc-label">Residential Service Type</label>
+              <select class="calc-select" id="resServiceSelect" onchange="updateResPrice()">
+                <option value="driveway">Driveway &amp; Concrete Walkways ($0.22/sq ft)</option>
+                <option value="patio">Stone Paver Patio &amp; Pool Deck ($0.28/sq ft)</option>
+                <option value="house">House Exterior Stucco &amp; Siding Soft Wash ($0.24/sq ft)</option>
+                <option value="fence">Cedar Wood Fence &amp; Deck Restoration ($0.30/sq ft)</option>
+              </select>
+            </div>
+
+            <div class="calc-form-group">
+              <label class="calc-label">Approximate Area / Size</label>
+              <input type="range" min="300" max="4000" step="50" value="600" id="resSqftSlider" oninput="updateResPrice()" style="width:100%;accent-color:#00F0FF;margin:8px 0;"/>
+              <div style="font-family:var(--font-mono);font-size:16px;color:#00F0FF;font-weight:800;" id="resSqftDisplay">600 sq ft</div>
+              <div class="preset-chips-row">
+                <button type="button" class="preset-chip-btn" onclick="setResPreset(450)">2-Car Driveway (450 sq ft)</button>
+                <button type="button" class="preset-chip-btn" onclick="setResPreset(750)">3-Car Driveway (750 sq ft)</button>
+                <button type="button" class="preset-chip-btn" onclick="setResPreset(600)">Paver Patio (600 sq ft)</button>
+                <button type="button" class="preset-chip-btn" onclick="setResPreset(2400)">House Exterior (2,400 sq ft)</button>
+              </div>
+            </div>
+
+            <div class="calc-form-group" style="margin-top:12px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#CBD5E1;cursor:pointer;">
+                <input type="checkbox" id="resSealantCheck" onchange="updateResPrice()" style="accent-color:#00F0FF;width:16px;height:16px;"/>
+                <span>Add Hydrophobic Surface Sealant &amp; Stain Shield (+20%)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div>
+              <span class="story-tag"><i class="fa-solid fa-house-chimney"></i> RESIDENTIAL ESTIMATE</span>
+              <div class="calc-result-price" id="resPriceOutput">$130 – $180</div>
+              <p class="calc-result-sub" id="resPriceDetail">Estimated for 600 sq ft with eco-friendly plant-safe detergents &amp; zero surface damage guarantee.</p>
+            </div>
+            <a href="contact.html" class="calc-btn-submit">Book Residential Cleaning ➔</a>
+          </div>
+        </div>
+
+        <!-- Panel 3: Commercial Surface Washing -->
         <div class="calc-panel" id="calcPanelComm">
           <div>
             <div class="calc-form-group">
-              <label class="calc-label">Estimated Square Footage</label>
+              <label class="calc-label">Estimated Commercial Square Footage</label>
               <input type="range" min="1000" max="50000" step="500" value="5000" id="sqftSlider" oninput="updateCommPrice()" style="width:100%;accent-color:#00F0FF;margin:8px 0;"/>
               <div style="font-family:var(--font-mono);font-size:16px;color:#00F0FF;font-weight:800;" id="sqftDisplay">5,000 sq ft</div>
             </div>
@@ -1947,7 +2207,7 @@
 
           <div class="calc-result-box">
             <div>
-              <span class="story-tag"><i class="fa-solid fa-building"></i> ESTIMATED COMMERCIAL RANGE</span>
+              <span class="story-tag"><i class="fa-solid fa-building"></i> COMMERCIAL RANGE</span>
               <div class="calc-result-price" id="commPriceOutput">$750 - $1,150</div>
               <p class="calc-result-sub" id="commPriceDetail">Estimated for 5,000 sq ft with 100% Cal/EPA water recovery &amp; DVBE compliance.</p>
             </div>
@@ -2137,7 +2397,36 @@
     </div>
 
     <!-- ========================================================================= -->
-    <!-- ULTRA-UNIQUE FUTURISTIC HYDRO-CYBER FOOTER                                -->
+    <!-- OVERLAPPING FLOATING 3D ACTION CARD (Screenshot 4 Style with Mascot)       -->
+    <!-- ========================================================================= -->
+    <div class="footer-floating-card-wrap">
+      <div class="footer-floating-card">
+        <div class="floating-card-glow"></div>
+
+        <!-- Left: Animated Mascot Hero -->
+        <div class="mascot-graphic-box">
+          <img src="assets/img/mascot-hero.png" alt="Hygeia Spartan Power Washer Mascot" class="mascot-img-animated"/>
+        </div>
+
+        <!-- Right: Subscription & Instant Estimation Form -->
+        <div class="floating-card-content">
+          <h3 class="floating-card-title">Ready for Spotless Curb Appeal?</h3>
+          <p class="floating-card-sub">
+            Get instant priority scheduling across Silicon Valley &amp; the Peninsula. Receive free digital estimates and seasonal service notifications.
+          </p>
+          <form action="contact.html" method="GET" class="floating-input-row">
+            <input type="email" placeholder="Enter your email or address..." class="floating-email-input" required/>
+            <button type="submit" class="floating-subscribe-btn">Get Free Estimate ➔</button>
+          </form>
+          <div style="font-size:11.5px;color:#C7D2FE;margin-top:10px;display:flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-shield-halved"></i> 100% Privacy Protected · Zero Spam Guarantee · 24/7 Direct Dispatch
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ULTRA-UNIQUE FUTURISTIC FOOTER WITH MOUSE SCROLL UP                       -->
     <!-- ========================================================================= -->
     <footer class="cyber-footer">
       <div class="hydraulic-conduit"></div>
@@ -2148,17 +2437,27 @@
             <span class="pulse-dot"></span>
             <span>24/7 OVERNIGHT FLEET ACTIVE — PENINSULA &amp; SILICON VALLEY</span>
           </div>
-          <button type="button" class="btn-rocket-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-            <i class="fa-solid fa-water"></i> Launch Back to 3D Experience ↑
+
+          <!-- Mouse Icon Scroll Up Button (Replaces Launch Text) -->
+          <button type="button" class="btn-mouse-scroll" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Scroll Back to Top">
+            <div class="mouse-icon">
+              <span class="mouse-wheel"></span>
+            </div>
+            <i class="fa-solid fa-arrow-up animated-arrow"></i>
+            <span style="font-family:var(--font-heading);font-size:12px;font-weight:800;letter-spacing:0.5px;">TOP</span>
           </button>
         </div>
 
         <div class="footer-main-grid">
-          <!-- Col 1: Bio & Certifications -->
+          <!-- Col 1: Mascot Logo & Certifications -->
           <div>
-            <a href="index.html" class="logo-pill-housing" style="padding:4px 16px;">
-              <img src="assets/img/logo2.png" alt="Hygeia Logo" style="height:36px;"/>
-            </a>
+            <div class="footer-mascot-row">
+              <img src="assets/img/mascot-hero.png" alt="Hygeia Mascot Emblem" class="footer-mascot-thumb"/>
+              <div>
+                <img src="assets/img/logo2.png" alt="Hygeia Power Wash Solutions" style="height:32px;display:block;margin-bottom:4px;"/>
+                <span style="font-size:11px;font-weight:700;color:var(--brand-gold);text-transform:uppercase;letter-spacing:1px;">Silicon Valley Fleet</span>
+              </div>
+            </div>
             <p class="footer-brand-bio">
               Commercial &amp; residential power washing, curbside trash bin sanitizing, and Cal/EPA vacuum recovery. Montero Enterprises Inc. dba Hygeia — 35 years serving Silicon Valley facilities.
             </p>
@@ -2502,7 +2801,7 @@
     };
 
     // =========================================================================
-    // INTERACTIVE CALCULATOR ENGINE
+    // 3-TAB INTERACTIVE CALCULATOR ENGINE
     // =========================================================================
     let currentBinCount = 2;
 
@@ -2510,14 +2809,20 @@
       const tabBtns = document.querySelectorAll('.calc-tab-btn');
       tabBtns.forEach(btn => btn.classList.remove('active'));
       document.getElementById('calcPanelBin').classList.remove('active');
+      document.getElementById('calcPanelRes').classList.remove('active');
       document.getElementById('calcPanelComm').classList.remove('active');
 
       if (type === 'bin') {
         tabBtns[0].classList.add('active');
         document.getElementById('calcPanelBin').classList.add('active');
-      } else {
+      } else if (type === 'residential') {
         tabBtns[1].classList.add('active');
+        document.getElementById('calcPanelRes').classList.add('active');
+        updateResPrice();
+      } else {
+        tabBtns[2].classList.add('active');
         document.getElementById('calcPanelComm').classList.add('active');
+        updateCommPrice();
       }
     };
 
@@ -2536,6 +2841,33 @@
 
       document.getElementById('binPriceOutput').innerHTML = `$${totalPrice}<span style="font-size:16px;color:#CBD5E1;font-weight:600;">${suffix}</span>`;
       document.getElementById('binPriceDetail').textContent = `Includes ${currentBinCount} cans sanitized with 200° thermal steam & eco-deodorizer.`;
+    };
+
+    window.setResPreset = function(sqft) {
+      document.getElementById('resSqftSlider').value = sqft;
+      updateResPrice();
+    };
+
+    window.updateResPrice = function() {
+      const sqft = parseInt(document.getElementById('resSqftSlider').value, 10);
+      document.getElementById('resSqftDisplay').textContent = `${sqft.toLocaleString()} sq ft`;
+
+      const serviceType = document.getElementById('resServiceSelect').value;
+      const hasSealant = document.getElementById('resSealantCheck').checked;
+
+      let rateLow = 0.20;
+      let rateHigh = 0.28;
+
+      if (serviceType === 'patio') { rateLow = 0.25; rateHigh = 0.35; }
+      if (serviceType === 'house') { rateLow = 0.22; rateHigh = 0.30; }
+      if (serviceType === 'fence') { rateLow = 0.28; rateHigh = 0.38; }
+      if (hasSealant) { rateLow *= 1.20; rateHigh *= 1.20; }
+
+      let totalLow = Math.max(120, Math.round(sqft * rateLow));
+      let totalHigh = Math.max(160, Math.round(sqft * rateHigh));
+
+      document.getElementById('resPriceOutput').textContent = `$${totalLow.toLocaleString()} – $${totalHigh.toLocaleString()}`;
+      document.getElementById('resPriceDetail').textContent = `Estimated for ${sqft.toLocaleString()} sq ft with eco-friendly plant-safe detergents & zero surface damage guarantee.`;
     };
 
     window.updateCommPrice = function() {
