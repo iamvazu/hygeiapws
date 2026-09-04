@@ -41,6 +41,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Mount Modular API Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/leads', require('./routes/leads'));
 app.use('/api/portal', require('./routes/portal'));
 app.use('/api/admin', require('./routes/admin'));

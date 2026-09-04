@@ -1,19 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const { db } = require('../db/database');
+const { requireAuth } = require('../utils/auth');
 
 /**
- * GET /api/portal/me
- * Returns client profile, active contracts, invoices, and requested work orders
+ * GET /api/portal/dashboard
+ * Authenticated Client Dashboard
+ * Returns complete profile, invoices, work orders, and dispatch stats
  */
-router.get('/me', async (req, res) => {
+router.get('/dashboard', requireAuth, async (req, res) => {
   try {
-    const email = req.query.email || 'client@hygeiapws.com';
-    const client = await db.getAsync(`SELECT * FROM clients WHERE email = ?`, [email]);
+    const clientId = req.user.id;
+    const client = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [clientId]);
 
     if (!client) {
       return res.status(404).json({ error: 'Client account not found.' });
     }
+
+    const { password_hash, salt, ...safeClient } = client;
 
     const invoices = await db.allAsync(
       `SELECT * FROM invoices WHERE client_id = ? ORDER BY id DESC`,
@@ -26,7 +30,65 @@ router.get('/me', async (req, res) => {
     );
 
     res.json({
-      client,
+      client: safeClient,
+      invoices,
+      workOrders,
+      stats: {
+        totalInvoices: invoices.length,
+        openWorkOrders: workOrders.filter(w => w.status !== 'completed').length,
+        monthlyRate: safeClient.monthly_rate,
+        nextService: safeClient.next_service_date
+      }
+    });
+  } catch (err) {
+    console.error('Error fetching portal dashboard:', err);
+    res.status(500).json({ error: 'Failed to fetch portal dashboard.' });
+  }
+});
+
+/**
+ * GET /api/portal/me
+ * Legacy support for email query or authenticated token
+ */
+router.get('/me', async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    let clientId = null;
+    let clientEmail = req.query.email;
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const { verifyToken } = require('../utils/auth');
+      const payload = verifyToken(authHeader.split(' ')[1]);
+      if (payload) clientId = payload.id;
+    }
+
+    let client = null;
+    if (clientId) {
+      client = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [clientId]);
+    } else if (clientEmail) {
+      client = await db.getAsync(`SELECT * FROM clients WHERE LOWER(email) = LOWER(?)`, [clientEmail.trim()]);
+    } else {
+      client = await db.getAsync(`SELECT * FROM clients ORDER BY id ASC LIMIT 1`);
+    }
+
+    if (!client) {
+      return res.status(404).json({ error: 'Client account not found.' });
+    }
+
+    const { password_hash, salt, ...safeClient } = client;
+
+    const invoices = await db.allAsync(
+      `SELECT * FROM invoices WHERE client_id = ? ORDER BY id DESC`,
+      [client.id]
+    );
+
+    const workOrders = await db.allAsync(
+      `SELECT * FROM work_orders WHERE client_id = ? ORDER BY id DESC`,
+      [client.id]
+    );
+
+    res.json({
+      client: safeClient,
       invoices,
       workOrders
     });
@@ -39,13 +101,17 @@ router.get('/me', async (req, res) => {
 /**
  * POST /api/portal/request-service
  * Submits an extra service / emergency dispatch request
- * Triggers dispatch alert to Andy Montero (SMS + Email) and creates a live Work Order
  */
-router.post('/request-service', async (req, res) => {
+router.post('/request-service', requireAuth, async (req, res) => {
   try {
+    const clientId = req.user.id;
+    const client = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [clientId]);
+
+    if (!client) {
+      return res.status(404).json({ error: 'Client record not found.' });
+    }
+
     const {
-      client_id = 1,
-      client_name = 'Miller Tech Residences',
       service_name,
       scope_description,
       requested_date,
@@ -54,35 +120,66 @@ router.post('/request-service', async (req, res) => {
     } = req.body;
 
     if (!service_name) {
-      return res.status(400).json({ error: 'Service name is required.' });
+      return res.status(400).json({ error: 'Service name or scope type is required.' });
     }
 
     const result = await db.runAsync(
       `INSERT INTO work_orders (client_id, client_name, service_name, scope_description, requested_date, urgency, price, status)
        VALUES (?, ?, ?, ?, ?, ?, ?, 'pending_approval')`,
-      [client_id, client_name, service_name, scope_description, requested_date, urgency, price]
+      [client.id, client.company_name || client.name, service_name, scope_description || '', requested_date || 'Next Available', urgency, price]
     );
 
-    // Simulated Dispatch Notification to Andy's phone & email
     const notificationPayload = {
       recipientPhone: '(650) 933-3823',
       recipientEmail: 'aloha@hygeiaservices.com',
-      subject: `🚨 [HYGEIA EXTRA SERVICE REQUEST] ${client_name} - ${service_name}`,
-      message: `New add-on service order #${result.id} requested by ${client_name} for ${requested_date || 'immediate scheduling'}. Urgency: ${urgency.toUpperCase()}. Price: $${price}. Approve in Admin Dashboard: https://hygeiapwsweb.vercel.app/admin.html`
+      subject: `🚨 [HYGEIA EXTRA SERVICE REQUEST] ${client.company_name || client.name} - ${service_name}`,
+      message: `Work order #${result.id} submitted by ${client.name} (${client.company_name || 'Client'}) for ${requested_date || 'immediate scheduling'}. Urgency: ${urgency.toUpperCase()}. Price: $${price}.`
     };
 
-    console.log(`📲 [SMS DISPATCH TRIGGERED TO ANDY] -> (650) 933-3823: "${notificationPayload.message}"`);
-    console.log(`📧 [EMAIL DISPATCH DISPATCHED] -> aloha@hygeiaservices.com`);
+    console.log(`📲 [SMS DISPATCH TRIGGERED] -> (650) 933-3823: "${notificationPayload.message}"`);
 
     res.status(201).json({
       success: true,
-      message: 'Add-on service request submitted successfully! Dispatch alert sent to Andy Montero.',
+      message: 'Work order request submitted successfully! Operations dispatch has been notified.',
       workOrderId: result.id,
       notification: notificationPayload
     });
   } catch (err) {
     console.error('Error submitting add-on request:', err);
-    res.status(500).json({ error: 'Failed to submit service request.' });
+    res.status(500).json({ error: 'Failed to submit service request.', details: err.message });
+  }
+});
+
+/**
+ * PUT /api/portal/profile
+ * Update client profile, phone, or facility address
+ */
+router.put('/profile', requireAuth, async (req, res) => {
+  try {
+    const clientId = req.user.id;
+    const { name, company_name, phone, facility_address, city } = req.body;
+
+    await db.runAsync(`
+      UPDATE clients
+      SET name = COALESCE(?, name),
+          company_name = COALESCE(?, company_name),
+          phone = COALESCE(?, phone),
+          facility_address = COALESCE(?, facility_address),
+          city = COALESCE(?, city)
+      WHERE id = ?
+    `, [name, company_name, phone, facility_address, city, clientId]);
+
+    const updated = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [clientId]);
+    const { password_hash, salt, ...safeClient } = updated;
+
+    res.json({
+      success: true,
+      message: 'Facility profile updated successfully.',
+      client: safeClient
+    });
+  } catch (err) {
+    console.error('Error updating profile:', err);
+    res.status(500).json({ error: 'Failed to update profile.' });
   }
 });
 

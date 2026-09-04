@@ -6,6 +6,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
+const { hashPassword } = require('../utils/auth');
 
 const dbPath = process.env.DB_PATH || path.join(__dirname, 'hygeia.db');
 const db = new sqlite3.Database(dbPath, (err) => {
@@ -67,26 +68,46 @@ async function initDatabase() {
     )
   `);
 
-  // 2. Clients Table
+  // 2. Clients / Users Table
   await db.runAsync(`
     CREATE TABLE IF NOT EXISTS clients (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      business_unit TEXT NOT NULL,
+      business_unit TEXT NOT NULL DEFAULT 'janitorial', -- 'janitorial' | 'pws' | 'enterprise'
       customer_id TEXT UNIQUE NOT NULL, -- e.g. 'HYG-C-1049'
       name TEXT NOT NULL,
       company_name TEXT,
       email TEXT UNIQUE NOT NULL,
       phone TEXT,
+      password_hash TEXT,
+      salt TEXT,
+      role TEXT DEFAULT 'client', -- 'client' | 'admin'
       facility_address TEXT,
       city TEXT,
-      active_plan TEXT NOT NULL,
-      monthly_rate REAL NOT NULL,
-      next_service_date TEXT,
+      active_plan TEXT NOT NULL DEFAULT 'Standard Facility Care Plan',
+      monthly_rate REAL NOT NULL DEFAULT 0,
+      next_service_date TEXT DEFAULT 'Pending Schedule',
       payment_method TEXT DEFAULT 'Visa ending in 4242',
       status TEXT DEFAULT 'active', -- 'active', 'paused', 'delinquent'
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  // Auto-migrate clients columns if table existed without auth columns
+  try {
+    const tableInfo = await db.allAsync(`PRAGMA table_info(clients)`);
+    const colNames = tableInfo.map(c => c.name);
+    if (!colNames.includes('password_hash')) {
+      await db.runAsync(`ALTER TABLE clients ADD COLUMN password_hash TEXT`);
+    }
+    if (!colNames.includes('salt')) {
+      await db.runAsync(`ALTER TABLE clients ADD COLUMN salt TEXT`);
+    }
+    if (!colNames.includes('role')) {
+      await db.runAsync(`ALTER TABLE clients ADD COLUMN role TEXT DEFAULT 'client'`);
+    }
+  } catch (e) {
+    console.log('Column check notice:', e.message);
+  }
 
   // 3. Work Orders / Extra Services Table
   await db.runAsync(`
@@ -146,46 +167,54 @@ async function initDatabase() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
+      salt TEXT NOT NULL,
       role TEXT DEFAULT 'superadmin',
       last_login DATETIME
     )
   `);
 
+  // Auto-migrate admin_users columns if table existed without salt
+  try {
+    const adminTableInfo = await db.allAsync(`PRAGMA table_info(admin_users)`);
+    const adminColNames = adminTableInfo.map(c => c.name);
+    if (!adminColNames.includes('salt')) {
+      await db.runAsync(`ALTER TABLE admin_users ADD COLUMN salt TEXT`);
+    }
+  } catch (e) {
+    console.log('Admin column check notice:', e.message);
+  }
+
   // Seed default demo data if tables are empty
-  const leadCount = await db.getAsync(`SELECT COUNT(*) as count FROM leads`);
-  if (leadCount.count === 0) {
+  const clientCount = await db.getAsync(`SELECT COUNT(*) as count FROM clients`);
+  const defaultPw = hashPassword('Hygeia2026!');
+  const adminPw = hashPassword('HygeiaAdmin2026!');
+
+  // Ensure Admin user exists
+  const adminExists = await db.getAsync(`SELECT id FROM admin_users WHERE username = 'admin@hygeia.com'`);
+  if (!adminExists) {
+    await db.runAsync(
+      `INSERT INTO admin_users (username, password_hash, salt, role) VALUES (?, ?, ?, ?)`,
+      ['admin@hygeia.com', adminPw.hash, adminPw.salt, 'superadmin']
+    );
+    console.log('✅ Default superadmin created: admin@hygeia.com / HygeiaAdmin2026!');
+  }
+
+  // Ensure Seed Clients have password hashes
+  if (clientCount.count === 0) {
     console.log('🌱 Seeding initial database records for Montero Enterprises...');
     
-    // Seed Leads
+    // Seed Clients with secure password hash
     await db.runAsync(`
-      INSERT INTO leads (business_unit, customer_name, email, phone, company_name, service_type, frequency, square_footage, city, estimated_value, status) VALUES
-      ('janitorial', 'Marcus Vance', 'mvance@siliconcloud.io', '(408) 555-0192', 'Silicon Cloud HQ', 'Commercial Janitorial & Day Porter', '5 Days/Week', '45,000 sq ft', 'Santa Clara', 6800.00, 'quoted'),
-      ('janitorial', 'Elena Rostova', 'erostova@medbay.com', '(650) 555-0811', 'BioMed Surgical Center', 'Terminal Medical Sanitization', '7 Days/Week', '18,500 sq ft', 'Palo Alto', 4200.00, 'dispatched'),
-      ('pws', 'David Chen', 'dchen@santanarow.com', '(408) 555-9321', 'Santana Retail Plaza', 'Dumpster Pad & Sidewalk Washing', 'Bi-Weekly', '12,000 sq ft', 'San Jose', 1850.00, 'new'),
-      ('pws', 'Sarah Jenkins', 'sjenkins@gmail.com', '(650) 555-4432', NULL, 'Residential Trash Bin Sanitization ($35/mo)', 'Monthly Subscription', '2 Bins', 'Sunnyvale', 35.00, 'completed')
-    `);
-
-    // Seed Clients
-    await db.runAsync(`
-      INSERT INTO clients (business_unit, customer_id, name, company_name, email, phone, facility_address, city, active_plan, monthly_rate, next_service_date) VALUES
-      ('pws', 'HYG-PWS-1049', 'Johnathan Miller', 'Miller Tech Residences', 'client@hygeiapws.com', '(650) 933-3823', '4820 Innovation Way, Suite 100', 'Santa Clara', 'Commercial Bin & Walkway Pro ($249/mo)', 249.00, 'Tomorrow, 7:30 AM'),
-      ('janitorial', 'HYG-JS-2088', 'Sarah Lin', 'Apex Biotech Laboratories', 'slin@apexbiotech.com', '(650) 555-3211', '1200 BioWay Blvd', 'Palo Alto', 'Medical & Cleanroom Master Tier', 5800.00, 'Tonight, 9:00 PM')
-    `);
+      INSERT INTO clients (business_unit, customer_id, name, company_name, email, phone, password_hash, salt, role, facility_address, city, active_plan, monthly_rate, next_service_date) VALUES
+      ('pws', 'HYG-PWS-1049', 'Johnathan Miller', 'Miller Tech Residences', 'client@hygeiapws.com', '(650) 933-3823', ?, ?, 'client', '4820 Innovation Way, Suite 100', 'Santa Clara', 'Commercial Bin & Walkway Pro ($249/mo)', 249.00, 'Tomorrow, 7:30 AM'),
+      ('janitorial', 'HYG-JS-2088', 'Dr. Amanda Thorne', 'Valley Surgical Center', 'client@valleyhealth.org', '(408) 555-8822', ?, ?, 'client', '1200 BioWay Blvd', 'San Jose', 'Medical Terminal Sanitization & Day Porter ($4,200/mo)', 4200.00, 'Tonight, 9:00 PM')
+    `, [defaultPw.hash, defaultPw.salt, defaultPw.hash, defaultPw.salt]);
 
     // Seed Work Orders
     await db.runAsync(`
       INSERT INTO work_orders (client_id, client_name, service_name, scope_description, requested_date, urgency, price, status, crew_assigned) VALUES
       (1, 'Miller Tech Residences', 'Post-Event High-Pressure Grease Remediation', 'Dumpster pad degreasing and loading dock hot-water wash', '2026-09-08', 'standard', 380.00, 'approved', 'Truck Unit Rig-01 (Carlos M.)'),
-      (2, 'Apex Biotech Laboratories', 'Emergency ISO-7 Cleanroom Decontamination', 'Spill remediation and cleanroom wall wiping', '2026-09-05', 'emergency', 1200.00, 'dispatched', 'Team Alpha (Hector S.)')
-    `);
-
-    // Seed Route Stops (PWS Truck Routes)
-    await db.runAsync(`
-      INSERT INTO route_stops (truck_unit, driver_name, stop_order, client_name, address, city, bins_count, service_window, status) VALUES
-      ('Rig-01', 'Carlos Mendez', 1, 'Miller Tech Residences', '4820 Innovation Way', 'Santa Clara', 6, '07:30 - 08:15 AM', 'completed'),
-      ('Rig-01', 'Carlos Mendez', 2, 'Sunnyvale Plaza Lofts', '1240 Mathilda Ave', 'Sunnyvale', 4, '08:45 - 09:30 AM', 'en_route'),
-      ('Rig-01', 'Carlos Mendez', 3, 'Palo Alto Bio Center', '350 El Camino Real', 'Palo Alto', 8, '10:00 - 11:00 AM', 'pending'),
-      ('Rig-01', 'Carlos Mendez', 4, 'Mountain View Town Ctr', '850 Castro St', 'Mountain View', 5, '11:30 - 12:15 PM', 'pending')
+      (2, 'Valley Surgical Center', 'Emergency ISO-7 Cleanroom Decontamination', 'Spill remediation and cleanroom wall wiping', '2026-09-05', 'emergency', 1200.00, 'dispatched', 'Team Alpha (Hector S.)')
     `);
 
     // Seed Invoices
@@ -193,11 +222,26 @@ async function initDatabase() {
       INSERT INTO invoices (invoice_number, client_id, client_name, amount, issue_date, due_date, status) VALUES
       ('INV-2026-089', 1, 'Miller Tech Residences', 249.00, 'Sep 01, 2026', 'Sep 15, 2026', 'paid'),
       ('INV-2026-088', 1, 'Miller Tech Residences', 249.00, 'Aug 01, 2026', 'Aug 15, 2026', 'paid'),
-      ('INV-2026-087', 1, 'Miller Tech Residences', 380.00, 'Jul 15, 2026', 'Jul 30, 2026', 'paid'),
-      ('INV-2026-090', 2, 'Apex Biotech Laboratories', 5800.00, 'Sep 01, 2026', 'Sep 15, 2026', 'paid')
+      ('INV-2026-090', 2, 'Valley Surgical Center', 4200.00, 'Sep 01, 2026', 'Sep 15, 2026', 'paid')
     `);
 
-    console.log('✅ Initial seed data populated successfully!');
+    console.log('✅ Initial client seed accounts populated!');
+  } else {
+    // Ensure Seed Clients have password hashes
+    const unhashedClients = await db.allAsync(`SELECT id FROM clients WHERE password_hash IS NULL`);
+    for (const c of unhashedClients) {
+      await db.runAsync(`UPDATE clients SET password_hash = ?, salt = ? WHERE id = ?`, [defaultPw.hash, defaultPw.salt, c.id]);
+    }
+
+    // Ensure Janitorial demo client exists
+    const janDemo = await db.getAsync(`SELECT id FROM clients WHERE email = 'client@valleyhealth.org'`);
+    if (!janDemo) {
+      await db.runAsync(`
+        INSERT INTO clients (business_unit, customer_id, name, company_name, email, phone, password_hash, salt, role, facility_address, city, active_plan, monthly_rate, next_service_date) VALUES
+        ('janitorial', 'HYG-JS-3011', 'Dr. Amanda Thorne', 'Valley Surgical Center', 'client@valleyhealth.org', '(408) 555-8822', ?, ?, 'client', '1200 BioWay Blvd', 'San Jose', 'Medical Terminal Sanitization & Day Porter ($4,200/mo)', 4200.00, 'Tonight, 9:00 PM')
+      `, [defaultPw.hash, defaultPw.salt]);
+      console.log('✅ Default janitorial client created: client@valleyhealth.org / Hygeia2026!');
+    }
   }
 }
 

@@ -1,379 +1,308 @@
-// Hygeia Enterprise Multi-View Admin Operations & Dispatch Command Center Engine (v2.7.0)
+/**
+ * HYGEIA ENTERPRISE — UNIFIED ADMIN COMMAND CENTER ENGINE (v3.0.0)
+ * Real-time Multi-View Dashboard for Montero Enterprises Inc.
+ * Synchronizes PWS & Janitorial Business Units, Leads, Work Orders & Truck Route Dispatches.
+ */
+
 (function() {
-  const seedLeads = [
-    {
-      id: "HYG-JS-9042",
-      business: "Janitorial Services",
-      badge: "JANITORIAL RFP",
-      type: "Commercial Janitorial Site Walk RFP",
-      name: "Marcus Vance",
-      company: "Silicon Valley Tech Campus",
-      phone: "(650) 555-0182",
-      email: "mvance@techcampus.io",
-      address: "100 Innovation Way, Sunnyvale, CA",
-      details: "35,000 – 75,000 sq ft · Tech Office · 5–7 Days / Week · Add-ons: Floor Care, Window Washing",
-      notes: "Requires after-hours security badge orientation and electronic supervisor logs.",
-      status: "Walk Scheduled",
-      date: "3/2/2026, 9:15 AM",
-      timestamp: Date.now() - 3600000
-    },
-    {
-      id: "HYG-PW-8821",
-      business: "Power Washing",
-      badge: "BIN SUBSCRIPTION",
-      type: "Residential Bin Sanitation Plan",
-      name: "Sarah Miller",
-      company: "Residential",
-      phone: "(408) 555-0914",
-      email: "smiller@gmail.com",
-      address: "185 Loma Alta Ave, Los Gatos, CA",
-      details: "2 Trash Bins · Monthly Recurring ($35/mo)",
-      notes: "Gate code #4421. Clean green and black bins.",
-      status: "Contract Active",
-      date: "3/1/2026, 2:30 PM",
-      timestamp: Date.now() - 86400000
-    },
-    {
-      id: "HYG-JS-7734",
-      business: "Janitorial Services",
-      badge: "DAY PORTER RFP",
-      type: "Daytime Porter Staffing RFP",
-      name: "Elena Rostova",
-      company: "Peninsula Healthcare Center",
-      phone: "(650) 555-9821",
-      email: "erostova@healthpeninsula.com",
-      address: "420 University Ave, Palo Alto, CA",
-      details: "15,000 – 35,000 sq ft · Medical Clinic · Full-Time Day Porter + Night Clean",
-      notes: "Hospital grade EPA List N sanitizers required across all patient suites.",
-      status: "Proposal Sent",
-      date: "2/28/2026, 11:00 AM",
-      timestamp: Date.now() - 172800000
-    },
-    {
-      id: "HYG-PW-6612",
-      business: "Power Washing",
-      business_name: "Power Washing",
-      badge: "COMMERCIAL POWER WASH",
-      type: "Commercial Parking Garage Power Wash",
-      name: "David Vance",
-      company: "The Alameda Office Park",
-      phone: "(408) 555-2231",
-      email: "dvance@alamedapark.com",
-      address: "882 The Alameda, San Jose, CA",
-      details: "45,000 sq ft 3-Deck Garage · Hot Water Degrease + EPA Wastewater Reclaim",
-      notes: "Perform on weekend overnight shift to avoid tenant vehicles.",
-      status: "Proposal Sent",
-      date: "2/27/2026, 4:15 PM",
-      timestamp: Date.now() - 259200000
-    },
-    {
-      id: "APP-JS-3321",
-      business: "Janitorial Services",
-      badge: "CAREERS",
-      type: "Employment Application: Floor Care Tech",
-      name: "Carlos Mendoza",
-      company: "Candidate (San Jose)",
-      phone: "(408) 555-4412",
-      email: "carlos.m@email.com",
-      address: "San Jose, CA",
-      details: "Position: Floor Care Specialist · 3–5 Years Experience",
-      notes: "Experienced in VCT stripping, 2000 RPM high-speed burnishing, and terrazzo polishing.",
-      status: "Interview Set",
-      date: "3/2/2026, 8:00 AM",
-      timestamp: Date.now() - 7200000
+  const API_BASE = (function() {
+    if (typeof window !== 'undefined' && window.location) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:5000/api';
+      }
+      return '/api';
     }
-  ];
+    return '/api';
+  })();
 
-  function getUnifiedLeads() {
-    try {
-      const stored = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
-      return [...stored, ...seedLeads];
-    } catch (e) {
-      return seedLeads;
-    }
+  const ADMIN_TOKEN_KEY = 'hygeia_admin_token';
+
+  let currentView = 'unified'; // 'unified' | 'pws' | 'janitorial'
+  let leadsData = [];
+  let metricsData = null;
+
+  function getAdminToken() {
+    return localStorage.getItem(ADMIN_TOKEN_KEY);
   }
 
-  const routeStops = [
-    { id: 1, name: "John Doe", address: "1420 Willow Glen Way", city: "San Jose", bins: 3, plan: "Monthly ($45)", status: "Completed", cluster: "san_jose" },
-    { id: 2, name: "Sarah Miller", address: "185 Loma Alta Ave", city: "Los Gatos", bins: 2, plan: "Monthly ($35)", status: "En Route", cluster: "south_bay" },
-    { id: 3, name: "Michael Chen", address: "420 University Ave", city: "Palo Alto", bins: 2, plan: "One-Time ($65)", status: "Pending", cluster: "peninsula" },
-    { id: 4, name: "David Vance", address: "882 The Alameda", city: "San Jose", bins: 4, plan: "Monthly ($55)", status: "Completed", cluster: "san_jose" },
-    { id: 5, name: "Elena Rostova", address: "20440 Saratoga Rd", city: "Saratoga", bins: 2, plan: "Monthly ($35)", status: "En Route", cluster: "south_bay" },
-    { id: 6, name: "Marcus Brody", address: "10300 N De Anza Blvd", city: "Cupertino", bins: 3, plan: "Monthly ($45)", status: "Pending", cluster: "south_bay" },
-    { id: 7, name: "Robert Kim", address: "780 Castro St", city: "Mountain View", bins: 2, plan: "Monthly ($35)", status: "Completed", cluster: "peninsula" },
-    { id: 8, name: "Karen Appleton", address: "1104 Benton St", city: "Santa Clara", bins: 3, plan: "Monthly ($45)", status: "Pending", cluster: "san_jose" }
-  ];
-
-  // Global View Switcher
-  window.switchEnterpriseView = function(viewName) {
-    // 1. Update Tabs
-    const tabs = document.querySelectorAll('.biz-filter-tab');
-    tabs.forEach(t => {
-      if (t.dataset.view === viewName) {
-        t.classList.add('active', 'btn-navy');
-        t.classList.remove('btn-outline');
-      } else {
-        t.classList.remove('active', 'btn-navy');
-        t.classList.add('btn-outline');
-      }
-    });
-
-    // 2. Update View Containers
-    const containers = document.querySelectorAll('.enterprise-view-container');
-    containers.forEach(c => {
-      c.classList.remove('active');
-    });
-
-    const target = document.getElementById(`view-${viewName}`);
-    if (target) {
-      target.classList.add('active');
-    }
-
-    // 3. Update hash
-    window.location.hash = viewName;
-  };
-
-  function renderLeadsPipeline(searchTerm = "") {
-    const combinedContainer = document.getElementById('unifiedLeadsContainerCombined');
-    const janitorialContainer = document.getElementById('unifiedLeadsContainerJanitorial');
-    
-    const allLeads = getUnifiedLeads();
-    const query = searchTerm.toLowerCase().trim();
-
-    const renderCard = (lead) => {
-      const card = document.createElement('div');
-      card.className = "dash-card mb-16";
-      const isJanitorial = lead.business === "Janitorial Services";
-      card.style.borderLeft = isJanitorial ? "4px solid #10B981" : "4px solid #0090FF";
-      
-      const badgeStyle = isJanitorial ? "background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;" : "background:#EFF6FF;color:#0090FF;border:1px solid #BFDBFE;";
-
-      card.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span style="${badgeStyle}font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:12px;">${lead.badge}</span>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);">${lead.name}</strong>
-            <span style="font-size:13px;color:var(--ink-secondary);">· ${lead.company}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="font-size:12px;color:var(--ink-muted);">${lead.date}</span>
-            <span class="status-pill status-gold">${lead.status}</span>
-          </div>
-        </div>
-
-        <div style="font-size:13.5px;color:var(--brand-navy);margin-bottom:6px;">
-          📍 <strong>${lead.address}</strong>
-        </div>
-
-        <div style="font-size:13px;color:var(--ink-secondary);line-height:1.5;background:var(--bg-subtle);padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:12px;">
-          <div><strong>Details:</strong> ${lead.details}</div>
-          ${lead.notes ? `<div style="margin-top:4px;"><strong>Notes:</strong> <em>"${lead.notes}"</em></div>` : ''}
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:13px;">
-          <div style="display:flex;gap:16px;color:var(--ink-secondary);">
-            <span>📞 <a href="tel:${lead.phone}" style="color:var(--brand-navy);font-weight:700;">${lead.phone}</a></span>
-            <span>✉️ <a href="mailto:${lead.email}" style="color:var(--brand-cyan);">${lead.email}</a></span>
-          </div>
-          <div style="display:flex;gap:8px;">
-            <button class="btn btn-xs btn-outline" onclick="advanceLeadStatus('${lead.id}')">Advance Stage →</button>
-            <button class="btn btn-xs btn-gold" onclick="alert('⚡ Live Dispatch Notification sent to field operations lead for ${lead.id} (${lead.name})')">⚡ Alert Lead</button>
-          </div>
-        </div>
-      `;
-      return card;
-    };
-
-    // Render Combined Container
-    if (combinedContainer) {
-      combinedContainer.innerHTML = "";
-      const filtered = allLeads.filter(l => {
-        if (!query) return true;
-        return (l.name || "").toLowerCase().includes(query) ||
-               (l.company || "").toLowerCase().includes(query) ||
-               (l.address || "").toLowerCase().includes(query) ||
-               (l.business || "").toLowerCase().includes(query);
-      });
-
-      if (filtered.length === 0) {
-        combinedContainer.innerHTML = '<div style="padding:24px;text-align:center;color:var(--ink-muted);">No matching inquiries found.</div>';
-      } else {
-        filtered.forEach(lead => combinedContainer.appendChild(renderCard(lead)));
-      }
-    }
-
-    // Render Janitorial-only Container
-    if (janitorialContainer) {
-      janitorialContainer.innerHTML = "";
-      const janitorialLeads = allLeads.filter(l => l.business === "Janitorial Services");
-      if (janitorialLeads.length === 0) {
-        janitorialContainer.innerHTML = '<div style="padding:24px;text-align:center;color:var(--ink-muted);">No commercial janitorial inquiries.</div>';
-      } else {
-        janitorialLeads.forEach(lead => janitorialContainer.appendChild(renderCard(lead)));
-      }
-    }
+  function setAdminToken(token) {
+    localStorage.setItem(ADMIN_TOKEN_KEY, token);
   }
 
-  window.advanceLeadStatus = function(leadId) {
-    const stored = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
-    const lead = stored.find(l => l.id === leadId) || seedLeads.find(l => l.id === leadId);
-    
-    if (lead) {
-      const stages = ["New Inquiry", "Walk Scheduled", "Proposal Sent", "Contract Active", "Completed"];
-      const currentIdx = stages.indexOf(lead.status);
-      const nextStatus = stages[(currentIdx + 1) % stages.length];
-      lead.status = nextStatus;
-      
-      // Save to localStorage
-      const existingIdx = stored.findIndex(l => l.id === leadId);
-      if (existingIdx >= 0) {
-        stored[existingIdx] = lead;
-      } else {
-        stored.push(lead);
-      }
-      localStorage.setItem('hygeia_unified_leads', JSON.stringify(stored));
-      renderLeadsPipeline(document.getElementById('leadSearchInput')?.value || "");
-    }
-  };
-
-  function renderRouteTable(filter = "all") {
-    const tbody = document.getElementById('routeTableBody');
-    if (!tbody) return;
-    tbody.innerHTML = "";
-
-    const filtered = filter === "all" ? routeStops : routeStops.filter(s => s.cluster === filter);
-
-    filtered.forEach((stop) => {
-      const tr = document.createElement('tr');
-      const statusClass = stop.status === "Completed" ? "status-chip chip-completed" : (stop.status === "En Route" ? "status-chip chip-enroute" : "status-chip chip-pending");
-      
-      tr.innerHTML = `
-        <td><span class="stop-badge">#${stop.id}</span></td>
-        <td><strong>${stop.name}</strong><br><span style="font-size:12px;color:var(--ink-muted);">${stop.address}</span></td>
-        <td><span class="city-pill">${stop.city}</span></td>
-        <td><span class="bin-count-pill">${stop.bins} Bins</span></td>
-        <td><span class="plan-type-pill">${stop.plan}</span></td>
-        <td><span class="${statusClass}"><span class="chip-dot"></span> ${stop.status}</span></td>
-        <td style="text-align:right;">
-          <button class="btn btn-xs btn-outline" onclick="toggleStopStatus(${stop.id})">Toggle Status</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
+  function clearAdminToken() {
+    localStorage.removeItem(ADMIN_TOKEN_KEY);
   }
 
-  window.toggleStopStatus = function(id) {
-    const stop = routeStops.find(s => s.id === id);
-    if (stop) {
-      if (stop.status === "Pending") stop.status = "En Route";
-      else if (stop.status === "En Route") stop.status = "Completed";
-      else stop.status = "Pending";
-      renderRouteTable(document.getElementById('routeFilterSelect')?.value || "all");
+  // --- Auth Modal / Protection ---
+  const adminAuthModal = document.getElementById('adminAuthModal');
+  const formAdminLogin = document.getElementById('formAdminLogin');
+  const adminAuthError = document.getElementById('adminAuthError');
+  const btnAdminLogout = document.getElementById('btnAdminLogout');
+
+  function checkAdminAuth() {
+    const token = getAdminToken();
+    if (!token) {
+      if (adminAuthModal) adminAuthModal.classList.add('open');
+      return false;
+    }
+    if (adminAuthModal) adminAuthModal.classList.remove('open');
+    return true;
+  }
+
+  window.fillAdminDemo = function() {
+    const u = document.getElementById('adminUsername');
+    const p = document.getElementById('adminPassword');
+    if (u && p) {
+      u.value = 'admin@hygeia.com';
+      p.value = 'HygeiaAdmin2026!';
     }
   };
 
-  window.calculateQuote = function() {
-    const client = document.getElementById('qClient')?.value || "Commercial Client";
-    const type = document.getElementById('qType')?.value || "garage";
-    const size = parseInt(document.getElementById('qSize')?.value || "25000", 10);
-    const freq = document.getElementById('qFrequency')?.value || "one_time";
+  if (formAdminLogin) {
+    formAdminLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const submitBtn = formAdminLogin.querySelector('button[type="submit"]');
 
-    let rate = 0.08;
-    if (type === "dumpster") rate = 250 / (size > 0 ? size : 1);
-    else if (type === "sidewalk") rate = 0.15;
-    else if (type === "facade") rate = 0.18;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+      if (adminAuthError) adminAuthError.style.display = 'none';
 
-    let total = type === "dumpster" ? 250 * size : size * rate;
+      try {
+        const res = await fetch(`${API_BASE}/auth/admin-login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
 
-    if (freq === "quarterly") total *= 0.85;
-    if (freq === "monthly") total *= 0.75;
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Invalid administrator credentials.');
 
-    const resBox = document.getElementById('quoteResultBox');
-    const title = document.getElementById('quoteTitle');
-    const details = document.getElementById('quoteDetails');
-    const price = document.getElementById('quotePrice');
-
-    if (resBox && title && details && price) {
-      title.innerText = `Proposal Estimate for ${client}`;
-      details.innerText = `${size.toLocaleString()} sq ft · ${type.toUpperCase()} · ${freq.replace('_', ' ').toUpperCase()} · Hot Water & EPA Reclaim Included`;
-      price.innerText = `$${Math.round(total).toLocaleString()}`;
-      resBox.style.display = "block";
-    }
-  };
-
-  window.openNewRFPModal = function() {
-    const name = prompt("Enter Client Contact Name:", "Facility Director");
-    if (!name) return;
-    const company = prompt("Enter Company / Facility Name:", "Silicon Valley Corp");
-    const biz = confirm("Is this for Janitorial Services? (Cancel for Power Washing)") ? "Janitorial Services" : "Power Washing";
-    const details = prompt("Enter Service Scope / Details:", "5x/week Nightly Clean · 45,000 sq ft");
-
-    const newLead = {
-      id: "HYG-" + (biz === "Janitorial Services" ? "JS" : "PW") + "-" + Math.floor(1000 + Math.random() * 9000),
-      business: biz,
-      badge: biz === "Janitorial Services" ? "JANITORIAL RFP" : "COMMERCIAL PWS",
-      type: "Commercial Proposal Intake",
-      name: name,
-      company: company || "Commercial Property",
-      phone: "(650) 933-3823",
-      email: "inquiries@hygeiaenterprise.com",
-      address: "Silicon Valley, CA",
-      details: details || "Custom commercial cleaning scope",
-      notes: "Direct lead logged via Admin Command Center.",
-      status: "New Inquiry",
-      date: new Date().toLocaleDateString() + ", " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      timestamp: Date.now()
-    };
-
-    const stored = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
-    stored.unshift(newLead);
-    localStorage.setItem('hygeia_unified_leads', JSON.stringify(stored));
-    renderLeadsPipeline();
-    alert(`Lead ${newLead.id} created and synced across both enterprises!`);
-  };
-
-  window.exportEnterpriseReport = function() {
-    alert("Master Enterprise KPI Report (PWS + Janitorial) exported successfully!");
-  };
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // Route Filter Select
-    const filterSelect = document.getElementById('routeFilterSelect');
-    if (filterSelect) {
-      filterSelect.addEventListener('change', (e) => {
-        renderRouteTable(e.target.value);
-      });
-    }
-
-    // Lead Search Input
-    const searchInput = document.getElementById('leadSearchInput');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        renderLeadsPipeline(e.target.value);
-      });
-    }
-
-    // Business Filter Tabs
-    const bizTabs = document.querySelectorAll('.biz-filter-tab');
-    bizTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        const view = tab.dataset.view;
-        if (view) {
-          switchEnterpriseView(view);
+        setAdminToken(data.token);
+        if (adminAuthModal) adminAuthModal.classList.remove('open');
+        await fetchLiveMetrics();
+        await fetchLiveLeads();
+      } catch (err) {
+        if (adminAuthError) {
+          adminAuthError.textContent = err.message;
+          adminAuthError.style.display = 'block';
         }
-      });
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-lock-open"></i> Authenticate & Enter Command Center';
+      }
     });
+  }
 
-    // Check URL hash for initial view
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'pws' || hash === 'janitorial' || hash === 'combined') {
-      switchEnterpriseView(hash);
-    } else {
-      switchEnterpriseView('combined');
+  if (btnAdminLogout) {
+    btnAdminLogout.addEventListener('click', () => {
+      clearAdminToken();
+      if (adminAuthModal) adminAuthModal.classList.add('open');
+    });
+  }
+
+  // --- View Switcher Tabs ---
+  const viewTabs = document.querySelectorAll('.dash-nav-btn');
+  viewTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      viewTabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentView = btn.dataset.view;
+      renderActiveView();
+      renderLeads();
+    });
+  });
+
+  // --- Fetch API Data ---
+  async function fetchLiveMetrics() {
+    try {
+      const res = await fetch(`${API_BASE}/admin/metrics`);
+      if (res.ok) {
+        metricsData = await res.json();
+        renderActiveView();
+      }
+    } catch (err) {
+      console.warn('Metrics sync error, using cached data:', err);
+    }
+  }
+
+  async function fetchLiveLeads() {
+    try {
+      const res = await fetch(`${API_BASE}/leads`);
+      if (res.ok) {
+        const data = await res.json();
+        leadsData = data.leads || [];
+        renderLeads();
+      }
+    } catch (err) {
+      console.warn('Leads sync error:', err);
+    }
+  }
+
+  function renderActiveView() {
+    const kpiGrid = document.getElementById('kpiCardsGrid');
+    if (!kpiGrid) return;
+
+    if (!metricsData) return;
+
+    if (currentView === 'unified') {
+      const u = metricsData.unified || {};
+      kpiGrid.innerHTML = `
+        <div class="kpi-card">
+          <div class="kpi-label">Unified Recurring Revenue</div>
+          <div class="kpi-value" style="color:var(--brand-gold);">$${(u.totalRevenue || 58000).toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+          <div class="kpi-trend trend-up">▲ 18.4% vs last quarter</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Commercial Contracts</div>
+          <div class="kpi-value">${u.activeContractsCount || 86} Active</div>
+          <div class="kpi-sub">PWS & Janitorial Clients</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Open Lead Pipeline</div>
+          <div class="kpi-value" style="color:#38BDF8;">${u.openLeadsCount || leadsData.length} New</div>
+          <div class="kpi-sub">Ready for site walk / quote dispatch</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Truck & Crew Route Efficiency</div>
+          <div class="kpi-value" style="color:#22C55E;">${u.routeEfficiency || '98%'}</div>
+          <div class="kpi-sub">24/7 Peninsula & South Bay Dispatch</div>
+        </div>
+      `;
+    } else if (currentView === 'pws') {
+      const p = metricsData.pws || {};
+      kpiGrid.innerHTML = `
+        <div class="kpi-card">
+          <div class="kpi-label">PWS Recurring Revenue</div>
+          <div class="kpi-value" style="color:#38BDF8;">$${(p.monthlyRecurringRevenue || 5219).toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+          <div class="kpi-trend trend-up">▲ 142 Active Curbside Subscriptions</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Fleet & Rig Units</div>
+          <div class="kpi-value">Rig-01 & Rig-02</div>
+          <div class="kpi-sub">200° Hot Water Custom Reclaim Rigs</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Today's Route Stops</div>
+          <div class="kpi-value">${p.stopsCompleted || 1} / ${p.stopsTotal || 4} Completed</div>
+          <div class="kpi-sub">Carlos Mendez (Rig-01) En Route</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Stormwater Reclaimed (EPA)</div>
+          <div class="kpi-value" style="color:#22C55E;">360 Gal</div>
+          <div class="kpi-sub">100% Closed-Loop California Compliant</div>
+        </div>
+      `;
+    } else if (currentView === 'janitorial') {
+      const j = metricsData.janitorial || {};
+      kpiGrid.innerHTML = `
+        <div class="kpi-card">
+          <div class="kpi-label">Janitorial Contract Value</div>
+          <div class="kpi-value" style="color:var(--brand-gold);">$${(j.monthlyContractValue || 44200).toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+          <div class="kpi-trend trend-up">▲ 18 Managed Silicon Valley Facilities</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Cleaned Square Footage</div>
+          <div class="kpi-value">${j.squareFootageMaintained || '485,000 sq ft'}</div>
+          <div class="kpi-sub">Tech, Biotech, Medical & Class A</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Day Porter Hours This Week</div>
+          <div class="kpi-value" style="color:#38BDF8;">160 Hours</div>
+          <div class="kpi-sub">On-site facility maintenance</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Quality Audit Score</div>
+          <div class="kpi-value" style="color:#22C55E;">99.4%</div>
+          <div class="kpi-sub">Supervised Quality Control Inspections</div>
+        </div>
+      `;
+    }
+  }
+
+  function renderLeads() {
+    const tbody = document.getElementById('leadsTableBody');
+    if (!tbody) return;
+
+    let filtered = leadsData;
+    if (currentView === 'pws') {
+      filtered = leadsData.filter(l => l.business_unit === 'pws');
+    } else if (currentView === 'janitorial') {
+      filtered = leadsData.filter(l => l.business_unit === 'janitorial');
     }
 
-    renderRouteTable();
-    renderLeadsPipeline();
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:#94A3B8;">No incoming leads found for this filter.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(l => {
+      const unitBadge = l.business_unit === 'pws' 
+        ? '<span class="dash-badge badge-blue">PWS</span>' 
+        : '<span class="dash-badge badge-gold">JANITORIAL</span>';
+
+      let statusBadge = '<span class="dash-badge badge-amber">New</span>';
+      if (l.status === 'quoted') statusBadge = '<span class="dash-badge badge-blue">Quoted</span>';
+      if (l.status === 'dispatched') statusBadge = '<span class="dash-badge badge-gold">Dispatched</span>';
+      if (l.status === 'completed') statusBadge = '<span class="dash-badge badge-green">Completed</span>';
+
+      return `
+        <tr>
+          <td><strong style="color:#F1F5F9;font-family:monospace;">#L-${l.id}</strong></td>
+          <td>${unitBadge}</td>
+          <td>
+            <div style="font-weight:700;color:#F8FAFC;">${l.customer_name}</div>
+            <div style="font-size:12px;color:#94A3B8;">${l.company_name || 'Individual / Residential'}</div>
+          </td>
+          <td>
+            <div style="font-weight:600;color:#E2E8F0;">${l.service_type}</div>
+            <div style="font-size:12px;color:#64748B;">${l.square_footage || l.frequency || l.city || 'Bay Area'}</div>
+          </td>
+          <td>
+            <a href="tel:${l.phone}" style="color:#38BDF8;text-decoration:none;font-size:12px;display:block;">${l.phone || 'No Phone'}</a>
+            <a href="mailto:${l.email}" style="color:#94A3B8;text-decoration:none;font-size:11px;">${l.email}</a>
+          </td>
+          <td>
+            <select class="lead-status-select" onchange="window.updateLeadStatus(${l.id}, this.value)" style="background:#0A2533;color:#F8FAFC;border:1px solid #334155;border-radius:4px;padding:4px 8px;font-size:12px;">
+              <option value="new" ${l.status === 'new' ? 'selected' : ''}>New Inquiry</option>
+              <option value="quoted" ${l.status === 'quoted' ? 'selected' : ''}>Quoted / Site Walk</option>
+              <option value="dispatched" ${l.status === 'dispatched' ? 'selected' : ''}>Dispatched</option>
+              <option value="completed" ${l.status === 'completed' ? 'selected' : ''}>Completed / Client</option>
+            </select>
+          </td>
+          <td>
+            <button onclick="alert('Lead Details:\\n\\nName: ${l.customer_name}\\nCompany: ${l.company_name || 'N/A'}\\nEmail: ${l.email}\\nPhone: ${l.phone}\\nService: ${l.service_type}\\nCity: ${l.city || 'Bay Area'}\\nNotes: ${l.notes || 'None'}')" style="background:#1E293B;border:1px solid #475569;color:#F8FAFC;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;">
+              View Notes
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  window.updateLeadStatus = async function(leadId, newStatus) {
+    try {
+      const res = await fetch(`${API_BASE}/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.ok) {
+        const lead = leadsData.find(l => l.id === leadId);
+        if (lead) lead.status = newStatus;
+        await fetchLiveMetrics();
+      }
+    } catch (err) {
+      alert('Failed to update lead status: ' + err.message);
+    }
+  };
+
+  // Initial Load
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (checkAdminAuth()) {
+      await fetchLiveMetrics();
+      await fetchLiveLeads();
+    }
   });
 })();

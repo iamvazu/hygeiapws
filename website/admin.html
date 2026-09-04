@@ -159,6 +159,7 @@
           </li>
           <li><a class="btn btn-outline" href="portal.html" style="padding:7px 14px;font-size:13px;">Client Portal →</a></li>
           <li><a class="btn btn-gold" href="index.html" style="padding:7px 14px;font-size:13px;">Website ↗</a></li>
+          <li><button id="btnAdminLogout" class="btn btn-sm" style="background:#EF4444;color:#FFFFFF;border:none;padding:7px 12px;font-size:13px;border-radius:6px;cursor:pointer;font-weight:700;">Sign Out</button></li>
         </ul>
       </div>
     </div>
@@ -602,6 +603,45 @@
 
   </main>
 
-  <script src="assets/js/admin.js?v=2.7.0"></script>
+  <!-- Admin Authentication Gate Modal -->
+  <div id="adminAuthModal" class="modal-backdrop" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,37,51,0.92);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#FFFFFF;border-radius:16px;max-width:460px;width:90%;padding:32px;box-shadow:0 25px 60px rgba(0,0,0,0.4);border:1px solid #E2E8F0;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="width:60px;height:60px;border-radius:50%;background:#0A2533;color:#D4AF37;display:inline-flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 style="font-family:'Outfit',sans-serif;margin:0 0 6px;color:#0A2533;font-size:22px;">Admin Authentication</h2>
+        <p style="margin:0;font-size:13px;color:#64748B;">Hygeia Enterprise Operations &amp; Dispatch Hub</p>
+      </div>
+
+      <div id="adminAuthError" style="display:none;background:#FEF2F2;border:1px solid #F87171;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:16px;"></div>
+
+      <form id="formAdminLogin">
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:13px;font-weight:700;color:#334155;margin-bottom:6px;">Admin Username / Email</label>
+          <input type="text" id="adminUsername" required style="width:100%;padding:12px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;"/>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:13px;font-weight:700;color:#334155;margin-bottom:6px;">Security Password</label>
+          <input type="password" id="adminPassword" required style="width:100%;padding:12px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;"/>
+        </div>
+        <button type="submit" style="width:100%;padding:14px;background:#0A2533;color:#D4AF37;border:none;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer;transition:all 0.2s;">
+          <i class="fa-solid fa-lock-open"></i> Authenticate &amp; Enter Command Center
+        </button>
+      </form>
+
+      <div style="background:#F8FAFC;border:1px dashed #CBD5E1;border-radius:8px;padding:12px;font-size:12px;color:#475569;margin-top:16px;text-align:center;">
+        <strong>Authorized Admin:</strong> admin@hygeia.com / HygeiaAdmin2026!
+        <br/>
+        <a href="javascript:void(0)" onclick="fillAdminDemo()" style="color:#0284C7;font-weight:700;text-decoration:underline;">Click to autofill admin credentials</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .modal-backdrop.open { display: flex !important; }
+  </style>
+
+  <script src="assets/js/admin.js?v=3.0.0"></script>
 </body>
 </html>
