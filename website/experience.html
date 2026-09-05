@@ -1064,6 +1064,123 @@
       cursor: ew-resize;
       z-index: 20;
       color: #000000;
+      pointer-events: none;
+    }
+
+    .ba-nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .ba-tab-btn {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 800;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ba-tab-btn:hover {
+      background: rgba(255, 183, 3, 0.15);
+      border-color: #FFB703;
+      color: #FFB703;
+    }
+
+    .ba-tab-btn.active {
+      background: linear-gradient(135deg, #FFB703 0%, #FB8500 100%);
+      border-color: #FFB703;
+      color: #000000;
+      box-shadow: 0 0 20px rgba(255, 183, 3, 0.45);
+    }
+
+    .ba-controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      padding: 0 6px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ba-caption-badge {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #E2E8F0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ba-caption-badge span.spec {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #FFB703;
+      background: rgba(255, 183, 3, 0.12);
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .ba-slide-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ba-arrow-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+
+    .ba-arrow-btn:hover {
+      background: #FFB703;
+      border-color: #FFB703;
+      color: #000000;
+      box-shadow: 0 0 16px rgba(255, 183, 3, 0.6);
+    }
+
+    .ba-dots-box {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .ba-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .ba-dot.active {
+      width: 24px;
+      background: #FFB703;
+      box-shadow: 0 0 10px rgba(255, 183, 3, 0.6);
     }
 
     /* ========================================================================= */
@@ -2357,24 +2474,65 @@
         </div>
       </div>
 
-      <!-- Section 3: Interactive Before & After Transformation Slider -->
+            <!-- Section 3: Interactive Before & After Multi-Service Slideshow -->
       <div class="section-header" id="transformation">
-        <span class="section-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> 200° Hot Water Proof</span>
+        <span class="section-tag"><i class="fa-solid fa-wand-magic-sparkles" style="color:#FFB703;"></i> 200° Hot Water Proof</span>
         <h2 class="section-title">See The Transformation</h2>
       </div>
 
       <div class="ba-section-box">
+        <!-- Service Filter Tabs -->
+        <div class="ba-nav-tabs">
+          <button type="button" class="ba-tab-btn active" onclick="setBASlide(0)">
+            <i class="fa-solid fa-building"></i> Concrete Flatwork
+          </button>
+          <button type="button" class="ba-tab-btn" onclick="setBASlide(1)">
+            <i class="fa-solid fa-trash-can"></i> Green Bin Sanitizing
+          </button>
+          <button type="button" class="ba-tab-btn" onclick="setBASlide(2)">
+            <i class="fa-solid fa-house"></i> Paver Patio &amp; Pool Deck
+          </button>
+          <button type="button" class="ba-tab-btn" onclick="setBASlide(3)">
+            <i class="fa-solid fa-dumpster"></i> Dumpster Pad Remediation
+          </button>
+        </div>
+
+        <!-- Slider Viewport -->
         <div class="ba-slider-container" id="baSliderContainer">
-          <img src="assets/img/before.jpg" alt="Commercial Concrete Before Treatment" class="ba-img-base"/>
+          <img src="assets/img/before.jpg" alt="Before Hygeia Treatment" class="ba-img-base" id="baImgBase"/>
           <div class="ba-tag before-tag">Before Treatment</div>
 
           <div class="ba-after-layer" id="baAfterLayer">
-            <img src="assets/img/after.jpg" alt="Commercial Concrete After Hygeia Treatment" class="ba-img-overlay" id="baImgOverlay"/>
+            <img src="assets/img/after.jpg" alt="After Hygeia Treatment" class="ba-img-overlay" id="baImgOverlay"/>
             <div class="ba-tag after-tag">After Hygeia 200° Wash</div>
           </div>
 
           <div class="ba-handle" id="baHandle">
             <i class="fa-solid fa-arrows-left-right"></i>
+          </div>
+        </div>
+
+        <!-- Controls & Meta Caption Bar -->
+        <div class="ba-controls-bar">
+          <div class="ba-caption-badge" id="baCaptionBadge">
+            <i class="fa-solid fa-circle-check" style="color:#00F0FF;"></i>
+            <span id="baServiceTitle">Commercial Tech Plaza &amp; Concrete Sidewalks</span>
+            <span class="spec" id="baServiceSpec">4,200 PSI Hot-Water Surface Rotary</span>
+          </div>
+
+          <div class="ba-slide-btns">
+            <button type="button" class="ba-arrow-btn" onclick="changeBASlide(-1)" aria-label="Previous Transformation">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="ba-dots-box">
+              <span class="ba-dot active" onclick="setBASlide(0)"></span>
+              <span class="ba-dot" onclick="setBASlide(1)"></span>
+              <span class="ba-dot" onclick="setBASlide(2)"></span>
+              <span class="ba-dot" onclick="setBASlide(3)"></span>
+            </div>
+            <button type="button" class="ba-arrow-btn" onclick="changeBASlide(1)" aria-label="Next Transformation">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -3140,8 +3298,82 @@
     };
 
     // =========================================================================
-    // BEFORE & AFTER TRANSFORMATION SLIDER (DESKTOP, MOBILE & TABLET TOUCH)
+    // BEFORE & AFTER MULTI-SERVICE SLIDESHOW ENGINE (2-MIN ROTATION + TOUCH)
     // =========================================================================
+    const baSlides = [
+      {
+        before: 'assets/img/before.jpg',
+        after: 'assets/img/after.jpg',
+        title: 'Commercial Tech Plaza & Concrete Sidewalks',
+        spec: '4,200 PSI 200°F Rotary Surface Wash'
+      },
+      {
+        before: 'assets/img/ba_bin_before.jpg',
+        after: 'assets/img/ba_bin_after.jpg',
+        title: 'Curbside Organics & Trash Green Bin Sanitizing',
+        spec: '200°F Thermal Steam + Eco Deodorizer'
+      },
+      {
+        before: 'assets/img/ba_patio_before.jpg',
+        after: 'assets/img/ba_patio_after.jpg',
+        title: 'Stone Paver Patio & Pool Deck Restoration',
+        spec: 'Algae Stripping + Hydrophobic Stain Seal'
+      },
+      {
+        before: 'assets/img/ba_dumpster_before.jpg',
+        after: 'assets/img/ba_dumpster_after.jpg',
+        title: 'Commercial Dumpster Enclosure Pad Degreasing',
+        spec: '100% Cal/EPA Wastewater Vacuum Reclaim'
+      }
+    ];
+
+    let currentBASlideIdx = 0;
+    let baAutoTimer = null;
+
+    window.setBASlide = function(index) {
+      currentBASlideIdx = (index + baSlides.length) % baSlides.length;
+      const slide = baSlides[currentBASlideIdx];
+
+      const imgBase = document.getElementById('baImgBase');
+      const imgOverlay = document.getElementById('baImgOverlay');
+      const titleEl = document.getElementById('baServiceTitle');
+      const specEl = document.getElementById('baServiceSpec');
+
+      if (imgBase) imgBase.src = slide.before;
+      if (imgOverlay) imgOverlay.src = slide.after;
+      if (titleEl) titleEl.textContent = slide.title;
+      if (specEl) specEl.textContent = slide.spec;
+
+      // Update Tabs
+      const tabs = document.querySelectorAll('.ba-tab-btn');
+      tabs.forEach((tab, i) => {
+        if (i === currentBASlideIdx) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      // Update Dots
+      const dots = document.querySelectorAll('.ba-dot');
+      dots.forEach((dot, i) => {
+        if (i === currentBASlideIdx) dot.classList.add('active');
+        else dot.classList.remove('active');
+      });
+
+      resetBAAutoTimer();
+    };
+
+    window.changeBASlide = function(delta) {
+      window.setBASlide(currentBASlideIdx + delta);
+    };
+
+    function resetBAAutoTimer() {
+      if (baAutoTimer) clearInterval(baAutoTimer);
+      // Auto-swap slideshow every 2 minutes (120,000 ms)
+      baAutoTimer = setInterval(() => {
+        window.setBASlide(currentBASlideIdx + 1);
+      }, 120000);
+    }
+
+    // Initialize BA Touch / Drag Slider
     (function initBeforeAfterSlider() {
       const container = document.getElementById('baSliderContainer');
       const handle = document.getElementById('baHandle');
@@ -3171,6 +3403,7 @@
         isDragging = true;
         const clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
         setSliderPosition(clientX);
+        resetBAAutoTimer();
       }
 
       function onPointerMove(e) {
@@ -3194,10 +3427,13 @@
       window.addEventListener('mouseup', onPointerUp);
 
       // Touch Listeners (Mobile & Tablet)
-      container.addEventListener('touchstart', onPointerDown, { passive: false });
+      container.addEventListener('touchstart', onPointerDown, { passive: true });
       window.addEventListener('touchmove', onPointerMove, { passive: false });
       window.addEventListener('touchend', onPointerUp);
       window.addEventListener('touchcancel', onPointerUp);
+
+      // Start 2-min auto-rotation
+      resetBAAutoTimer();
     })();
 
   </script>
