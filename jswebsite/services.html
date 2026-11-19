@@ -40,11 +40,249 @@
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
 
     <!-- Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="assets/css/main.css?v=5.0.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=5.2.0"/>
 
-  
-  <!-- Critical Mobile Nav & Drawer Styles (v5.0.0) -->
+  <!-- Critical Styles (Directly embedded for instant rendering & cache immunity) -->
   <style>
+    /* Hero Background Clarity Enhancement */
+    .hero.hero-commercial,
+    .hero-commercial {
+      position: relative !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.52) 45%, rgba(255, 255, 255, 0.12) 100%),
+                  url('assets/img/janitorial_hero_crew.jpg') center right / cover no-repeat !important;
+    }
+    .cta-band {
+      background: linear-gradient(135deg, rgba(10, 37, 51, 0.76) 0%, rgba(14, 52, 71, 0.68) 100%), 
+                  url('assets/img/bin-cta-bg.jpg') center center / cover no-repeat !important;
+    }
+
+    /* Specialized Services Catalog Grid & Animated Cards */
+    .service-spec-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 32px !important;
+      margin-top: 40px !important;
+    }
+
+    .service-spec-card {
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      border-radius: 20px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      box-shadow: 0 4px 20px rgba(10, 37, 51, 0.06) !important;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.3s ease !important;
+      position: relative !important;
+    }
+
+    .service-spec-card:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 24px 48px rgba(10, 37, 51, 0.14), 0 0 0 1px rgba(0, 144, 255, 0.35) !important;
+      border-color: rgba(0, 144, 255, 0.5) !important;
+    }
+
+    .service-card-media {
+      position: relative !important;
+      width: 100% !important;
+      height: 250px !important;
+      overflow: hidden !important;
+      background: #0A2533 !important;
+    }
+
+    .service-card-img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      display: block !important;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease !important;
+    }
+
+    .service-spec-card:hover .service-card-img {
+      transform: scale(1.08) !important;
+      filter: brightness(1.03) !important;
+    }
+
+    .service-card-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      background: linear-gradient(180deg, rgba(10, 37, 51, 0.1) 0%, rgba(10, 37, 51, 0.05) 40%, rgba(10, 37, 51, 0.75) 100%) !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+    }
+
+    .service-spec-card:hover .service-card-overlay {
+      background: linear-gradient(180deg, rgba(10, 37, 51, 0.05) 0%, rgba(10, 37, 51, 0.02) 40%, rgba(10, 37, 51, 0.60) 100%) !important;
+    }
+
+    .service-card-badge {
+      position: absolute !important;
+      top: 16px !important;
+      left: 16px !important;
+      background: rgba(10, 37, 51, 0.88) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      color: #38BDF8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.4) !important;
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.8px !important;
+      padding: 6px 14px !important;
+      border-radius: 999px !important;
+      z-index: 2 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    .service-card-pill {
+      position: absolute !important;
+      bottom: 16px !important;
+      right: 16px !important;
+      background: rgba(255, 255, 255, 0.96) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      color: #0A2533 !important;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      padding: 6px 14px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+      z-index: 2 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      transition: transform 0.3s ease, background 0.3s ease !important;
+    }
+
+    .service-spec-card:hover .service-card-pill {
+      transform: translateY(-2px) !important;
+      background: #FFFFFF !important;
+    }
+
+    .service-card-body {
+      padding: 28px 28px 16px 28px !important;
+      flex-grow: 1 !important;
+    }
+
+    .service-card-title {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+      font-size: 22px !important;
+      font-weight: 800 !important;
+      color: #0A2533 !important;
+      margin: 0 0 10px 0 !important;
+      line-height: 1.25 !important;
+      letter-spacing: -0.01em !important;
+      transition: color 0.25s ease !important;
+    }
+
+    .service-spec-card:hover .service-card-title {
+      color: #0284C7 !important;
+    }
+
+    .service-card-desc {
+      font-size: 14.5px !important;
+      color: #475569 !important;
+      line-height: 1.6 !important;
+      margin-bottom: 20px !important;
+    }
+
+    .service-card-list {
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+      font-size: 13.5px !important;
+      color: #334155 !important;
+    }
+
+    .service-card-list li {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 10px !important;
+      line-height: 1.45 !important;
+    }
+
+    .service-card-check {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 20px !important;
+      height: 20px !important;
+      border-radius: 50% !important;
+      background: rgba(14, 165, 233, 0.15) !important;
+      color: #0284C7 !important;
+      font-weight: 900 !important;
+      font-size: 11px !important;
+      flex-shrink: 0 !important;
+      margin-top: 1px !important;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease !important;
+    }
+
+    .service-spec-card:hover .service-card-check {
+      background: #0284C7 !important;
+      color: #FFFFFF !important;
+      transform: scale(1.08) !important;
+    }
+
+    .service-card-footer {
+      padding: 16px 28px 24px 28px !important;
+      border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
+      background: #FAFAFC !important;
+    }
+
+    .service-card-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      background: #FFFFFF !important;
+      color: #0A2533 !important;
+      border: 1px solid #CBD5E1 !important;
+      padding: 12px 20px !important;
+      border-radius: 12px !important;
+      font-weight: 700 !important;
+      font-size: 14px !important;
+      text-decoration: none !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .service-spec-card:hover .service-card-btn {
+      background: linear-gradient(135deg, #0A2533 0%, #0F3B52 100%) !important;
+      color: #FFFFFF !important;
+      border-color: #0A2533 !important;
+      box-shadow: 0 6px 18px rgba(10, 37, 51, 0.22) !important;
+    }
+
+    .service-card-btn .btn-arrow-icon {
+      width: 18px !important;
+      height: 18px !important;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      fill: currentColor !important;
+    }
+
+    .service-spec-card:hover .service-card-btn .btn-arrow-icon {
+      transform: translateX(5px) !important;
+      fill: #38BDF8 !important;
+    }
+
+    @media (max-width: 900px) {
+      .service-spec-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      .service-card-media {
+        height: 210px !important;
+      }
+    }
+
+    /* Mobile Nav Drawer Styles */
     .mobile-nav-drawer {
       display: none;
       position: absolute;
@@ -294,7 +532,7 @@
   </header>
   <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileNav(true)"></div>
 
-  <section class="hero hero-subpage hero-commercial">
+  <section class="hero hero-subpage hero-commercial" style="position:relative;background:linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%), url('assets/img/janitorial_hero_crew.jpg') center right / cover no-repeat !important;">
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-content">
@@ -388,203 +626,203 @@
         <p>Click below to explore specific protocols, equipment standards, and frequencies.</p>
       </div>
 
-      <div class="service-spec-grid">
+      <div class="service-spec-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 480px), 1fr));gap:32px;margin-top:40px;">
         <!-- 1. Commercial Janitorial Services -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_hero_crew.jpg" alt="Hygeia Commercial Janitorial Services Crew" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">Core Service · 24/7 Operations</span>
-            <span class="service-card-pill">🏢 Corporate &amp; Tech Campuses</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_hero_crew.jpg" alt="Hygeia Commercial Janitorial Services Crew" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">Core Service · 24/7 Operations</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">🏢 Corporate &amp; Tech Campuses</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Commercial Janitorial Services</h3>
-            <p class="service-card-desc">Tailored commercial cleaning programs for corporate offices, medical suites, tech campuses, and commercial facilities. We maintain spotless, hygienic, and productive workplaces with hospital-grade protocols.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Customizable schedules: Nightly, Multi-Day, or Weekly frequencies</span></li>
-              <li><span class="service-card-check">✓</span> <span>High-touch point sanitization &amp; EPA hospital-grade disinfectants</span></li>
-              <li><span class="service-card-check">✓</span> <span>Restroom deep cleaning, descaling, and consumable restocking</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Commercial Janitorial Services</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Tailored commercial cleaning programs for corporate offices, medical suites, tech campuses, and commercial facilities. We maintain spotless, hygienic, and productive workplaces with hospital-grade protocols.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Customizable schedules: Nightly, Multi-Day, or Weekly frequencies</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>High-touch point sanitization &amp; EPA hospital-grade disinfectants</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Restroom deep cleaning, descaling, and consumable restocking</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/janitorial-services.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/janitorial-services.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Commercial Janitorial Services Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 2. Day Porter Services -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_day_porter.jpg" alt="Hygeia Dedicated Day Porter Staffing" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">On-Site Staffing · Uniformed</span>
-            <span class="service-card-pill">👔 Continuous Daytime Presence</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_day_porter.jpg" alt="Hygeia Dedicated Day Porter Staffing" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">On-Site Staffing · Uniformed</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">👔 Continuous Daytime Presence</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Day Porter Services</h3>
-            <p class="service-card-desc">Dedicated on-site daytime porters to manage high-traffic lobbies, refresh restrooms throughout the day, sanitize shared kitchens, and handle immediate facility spills seamlessly.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Continuous lobby, entry glass, and common area upkeep</span></li>
-              <li><span class="service-card-check">✓</span> <span>Ongoing restroom inspections, sanitizing, and restocking</span></li>
-              <li><span class="service-card-check">✓</span> <span>Breakroom and executive kitchen maintenance between meetings</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Day Porter Services</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Dedicated on-site daytime porters to manage high-traffic lobbies, refresh restrooms throughout the day, sanitize shared kitchens, and handle immediate facility spills seamlessly.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Continuous lobby, entry glass, and common area upkeep</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Ongoing restroom inspections, sanitizing, and restocking</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Breakroom and executive kitchen maintenance between meetings</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/day-porter-services.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/day-porter-services.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Day Porter Services Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 3. Commercial Floor Care -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_floor_care.jpg" alt="Commercial Hard Floor Stripping, Waxing & Burnishing" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">High-Gloss Finish · Slip-Resistant</span>
-            <span class="service-card-pill">✨ VCT · Terrazzo · Concrete</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_floor_care.jpg" alt="Commercial Hard Floor Stripping, Waxing & Burnishing" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">High-Gloss Finish · Slip-Resistant</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">✨ VCT · Terrazzo · Concrete</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Commercial Floor Care</h3>
-            <p class="service-card-desc">Expert restorative maintenance for VCT tile, hardwood, polished concrete, terrazzo, and vinyl. We strip old wax, apply high-solid polymer finishes, and burnish for brilliant mirror shine.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Complete stripping and multi-coat polymer waxing for VCT tile</span></li>
-              <li><span class="service-card-check">✓</span> <span>High-speed burnishing and buffing for mirror-like gloss</span></li>
-              <li><span class="service-card-check">✓</span> <span>Concrete scrubbing, densifying, and protective sealing</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Commercial Floor Care</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Expert restorative maintenance for VCT tile, hardwood, polished concrete, terrazzo, and vinyl. We strip old wax, apply high-solid polymer finishes, and burnish for brilliant mirror shine.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Complete stripping and multi-coat polymer waxing for VCT tile</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>High-speed burnishing and buffing for mirror-like gloss</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Concrete scrubbing, densifying, and protective sealing</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/floor-care.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/floor-care.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Commercial Floor Care Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 4. Commercial Window Washing -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_window_clean.jpg" alt="Commercial Window Washing with Pure DI Water" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">Pure Water Tech · Multi-Story</span>
-            <span class="service-card-pill">💧 Streak-Free DI Filtration</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_window_clean.jpg" alt="Commercial Window Washing with Pure DI Water" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">Pure Water Tech · Multi-Story</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">💧 Streak-Free DI Filtration</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Commercial Window Washing</h3>
-            <p class="service-card-desc">Crystal clear, streak-free window cleaning for office buildings, storefronts, and tech campuses. Utilizing deionized water-fed pole systems and eco-safe solutions.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Interior and exterior multi-story window cleaning</span></li>
-              <li><span class="service-card-check">✓</span> <span>Water-fed pole pure deionized filtration systems</span></li>
-              <li><span class="service-card-check">✓</span> <span>Sills, frames, tracks, and screen detailing</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Commercial Window Washing</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Crystal clear, streak-free window cleaning for office buildings, storefronts, and tech campuses. Utilizing deionized water-fed pole systems and eco-safe solutions.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Interior and exterior multi-story window cleaning</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Water-fed pole pure deionized filtration systems</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Sills, frames, tracks, and screen detailing</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/window-washing.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/window-washing.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Commercial Window Washing Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 5. Commercial Carpet Cleaning -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_carpet_steam.jpg" alt="Commercial Carpet Hot Steam Extraction" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">Fast-Drying · Hypoallergenic</span>
-            <span class="service-card-pill">♨️ High-Heat Steam Extraction</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_carpet_steam.jpg" alt="Commercial Carpet Hot Steam Extraction" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">Fast-Drying · Hypoallergenic</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">♨️ High-Heat Steam Extraction</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Commercial Carpet Cleaning</h3>
-            <p class="service-card-desc">High-performance commercial carpet extraction eliminating deep soil, heavy traffic patterns, allergens, and stubborn stains to protect your commercial floor investment.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Truck-mounted and portable high-heat steam extraction</span></li>
-              <li><span class="service-card-check">✓</span> <span>Encapsulation low-moisture cleaning for fast drying times</span></li>
-              <li><span class="service-card-check">✓</span> <span>Targeted spot and stain removal (coffee, ink, food grease)</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Commercial Carpet Cleaning</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">High-performance commercial carpet extraction eliminating deep soil, heavy traffic patterns, allergens, and stubborn stains to protect your commercial floor investment.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Truck-mounted and portable high-heat steam extraction</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Encapsulation low-moisture cleaning for fast drying times</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Targeted spot and stain removal (coffee, ink, food grease)</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/carpet-cleaning.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/carpet-cleaning.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Commercial Carpet Cleaning Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 6. Commercial Pressure Washing -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/comm-sidewalk-plaza.jpg" alt="Commercial Hot-Water Pressure Washing and Wastewater Recovery" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">200° Hot Water · EPA Reclaim</span>
-            <span class="service-card-pill">⚡ 3,500 PSI Thermal Power</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/comm-sidewalk-plaza.jpg" alt="Commercial Hot-Water Pressure Washing and Wastewater Recovery" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">200° Hot Water · EPA Reclaim</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">⚡ 3,500 PSI Thermal Power</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Commercial Pressure Washing</h3>
-            <p class="service-card-desc">High-powered exterior washing for building facades, entry sidewalks, dumpster enclosures, and parking structures with 100% environmental wastewater recovery.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Hot water thermal washing at up to 200°F and 3,500 PSI</span></li>
-              <li><span class="service-card-check">✓</span> <span>Full EPA wastewater recovery preventing storm drain runoff</span></li>
-              <li><span class="service-card-check">✓</span> <span>Gum, oil spot, and tire mark extraction from concrete</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Commercial Pressure Washing</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">High-powered exterior washing for building facades, entry sidewalks, dumpster enclosures, and parking structures with 100% environmental wastewater recovery.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Hot water thermal washing at up to 200°F and 3,500 PSI</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Full EPA wastewater recovery preventing storm drain runoff</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Gum, oil spot, and tire mark extraction from concrete</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/pressure-washing.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/pressure-washing.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Commercial Pressure Washing Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 7. Post-Construction Cleanup -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_post_construction.jpg" alt="Commercial Post-Construction Rough and Final Turnover Cleaning" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">Move-In Ready · OSHA Compliant</span>
-            <span class="service-card-pill">🏗️ 3-Phase Turnkey Clean</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_post_construction.jpg" alt="Commercial Post-Construction Rough and Final Turnover Cleaning" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">Move-In Ready · OSHA Compliant</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">🏗️ 3-Phase Turnkey Clean</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Post-Construction Cleanup</h3>
-            <p class="service-card-desc">Detailed multi-phase post-construction cleanup for tenant improvements, corporate buildouts, new facilities, and retail remodels across the Bay Area.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>Phase 1 Rough Clean: Debris clearing, dust sweep, sticker removal</span></li>
-              <li><span class="service-card-check">✓</span> <span>Phase 2 Final Clean: Deep scrubbing, window detailing, polish</span></li>
-              <li><span class="service-card-check">✓</span> <span>Phase 3 Touch-Up Clean: Inspection prep and move-in ready handover</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Post-Construction Cleanup</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Detailed multi-phase post-construction cleanup for tenant improvements, corporate buildouts, new facilities, and retail remodels across the Bay Area.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Phase 1 Rough Clean: Debris clearing, dust sweep, sticker removal</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Phase 2 Final Clean: Deep scrubbing, window detailing, polish</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Phase 3 Touch-Up Clean: Inspection prep and move-in ready handover</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/construction-cleanup.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/construction-cleanup.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Post-Construction Cleanup Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
 
         <!-- 8. Emergency Cleaning Services -->
-        <article class="service-spec-card">
-          <div class="service-card-media">
-            <img src="assets/img/janitorial_medical_care.jpg" alt="Commercial Emergency Sanitization & Biohazard Cleanup" class="service-card-img" loading="lazy" />
-            <div class="service-card-overlay"></div>
-            <span class="service-card-badge">24/7 Immediate Dispatch</span>
-            <span class="service-card-pill">🚨 Rapid Incident Response</span>
+        <article class="service-spec-card" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(10,37,51,0.06);position:relative;">
+          <div class="service-card-media" style="position:relative;width:100%;height:250px;overflow:hidden;background:#0A2533;">
+            <img src="assets/img/janitorial_medical_care.jpg" alt="Commercial Emergency Sanitization & Biohazard Cleanup" class="service-card-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
+            <div class="service-card-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,37,51,0.1) 0%, rgba(10,37,51,0.05) 40%, rgba(10,37,51,0.75) 100%);pointer-events:none;"></div>
+            <span class="service-card-badge" style="position:absolute;top:16px;left:16px;background:rgba(10,37,51,0.88);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:6px 14px;border-radius:999px;z-index:2;">24/7 Immediate Dispatch</span>
+            <span class="service-card-pill" style="position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.96);color:#0A2533;font-size:12px;font-weight:800;padding:6px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:2;">🚨 Rapid Incident Response</span>
           </div>
-          <div class="service-card-body">
-            <h3 class="service-card-title">Emergency Cleaning Services</h3>
-            <p class="service-card-desc">Immediate emergency response for plumbing overflows, chemical/bio spills, biohazard cleanup, storm intrusion, and unexpected commercial contamination.</p>
-            <ul class="service-card-list">
-              <li><span class="service-card-check">✓</span> <span>24/7/365 live emergency dispatch hotline</span></li>
-              <li><span class="service-card-check">✓</span> <span>Water extraction, structural dehumidification, and moisture testing</span></li>
-              <li><span class="service-card-check">✓</span> <span>Biohazard, bloodborne pathogen, and infectious disease protocol</span></li>
+          <div class="service-card-body" style="padding:28px 28px 16px 28px;flex-grow:1;">
+            <h3 class="service-card-title" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:22px;font-weight:800;color:#0A2533;margin:0 0 10px 0;line-height:1.25;">Emergency Cleaning Services</h3>
+            <p class="service-card-desc" style="font-size:14.5px;color:#475569;line-height:1.6;margin-bottom:20px;">Immediate emergency response for plumbing overflows, chemical/bio spills, biohazard cleanup, storm intrusion, and unexpected commercial contamination.</p>
+            <ul class="service-card-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:#334155;">
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>24/7/365 live emergency dispatch hotline</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Water extraction, structural dehumidification, and moisture testing</span></li>
+              <li style="display:flex;align-items:flex-start;gap:10px;line-height:1.45;"><span class="service-card-check" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.15);color:#0284C7;font-weight:900;font-size:11px;flex-shrink:0;">✓</span> <span>Biohazard, bloodborne pathogen, and infectious disease protocol</span></li>
             </ul>
           </div>
-          <div class="service-card-footer">
-            <a class="service-card-btn" href="services/emergency-cleaning.html">
+          <div class="service-card-footer" style="padding:16px 28px 24px 28px;border-top:1px solid rgba(226,232,240,0.8);background:#FAFAFC;">
+            <a class="service-card-btn" href="services/emergency-cleaning.html" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#FFFFFF;color:#0A2533;border:1px solid #CBD5E1;padding:12px 20px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;">
               <span>View Emergency Cleaning Services Details</span>
-              <svg class="btn-arrow-icon" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <svg class="btn-arrow-icon" style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
         </article>
@@ -592,7 +830,7 @@
     </div>
   </section>
 
-  <section class="cta-band">
+  <section class="cta-band" style="background:linear-gradient(135deg, rgba(10, 37, 51, 0.74) 0%, rgba(14, 52, 71, 0.65) 100%), url('assets/img/bin-cta-bg.jpg') center center / cover no-repeat !important;">
     <div class="wrap">
       <h2>Need a Customized Facility Proposal?</h2>
       <p>We build multi-service contracts tailored to your building's traffic patterns and budget.</p>
