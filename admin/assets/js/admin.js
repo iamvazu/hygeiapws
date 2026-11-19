@@ -97,6 +97,8 @@
       window.history.replaceState(null, null, '#' + viewName);
     } catch (e) {}
 
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
     // Re-render data for current view
     renderUnifiedLeadsTable();
     renderPwsLeadsTable();

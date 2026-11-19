@@ -17,7 +17,7 @@
   <link rel="icon" type="image/webp" href="assets/img/truck.webp"/>
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
   <link rel="stylesheet" href="assets/css/main.css?v=5.0.0"/>
-  <link rel="stylesheet" href="assets/css/dashboards.css?v=3.2.0"/>
+  <link rel="stylesheet" href="assets/css/dashboards.css?v=3.3.0"/>
   
   <style>
     :root {
@@ -29,22 +29,39 @@
       --admin-green: #059669;
     }
     
-    /* Executive Header Polish */
+    /* Executive Master Header (Pixel-Perfect Alignment) */
     .admin-master-header {
       background: #FFFFFF;
       border-bottom: 1.5px solid #E2E8F0;
-      box-shadow: 0 2px 10px rgba(10, 37, 51, 0.04);
+      box-shadow: 0 2px 12px rgba(10, 37, 51, 0.05);
       position: sticky;
       top: 0;
       z-index: 1000;
+      width: 100%;
     }
     .admin-header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
-      padding: 0 28px;
-      gap: 20px;
+      min-height: 68px;
+      padding: 0 24px;
+      gap: 16px;
+      max-width: 1440px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    
+    .admin-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .admin-header-logo-img {
+      height: 42px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
     
     /* View Switcher Segmented Control */
@@ -52,42 +69,85 @@
       display: inline-flex;
       background: #F1F5F9;
       padding: 4px;
-      border-radius: 12px;
-      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      border: 1.5px solid #E2E8F0;
       gap: 4px;
+      flex-shrink: 0;
     }
     .view-segment-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      border: none;
+      gap: 7px;
+      padding: 8px 16px;
+      border: none !important;
+      outline: none !important;
       background: transparent;
       color: #475569;
       font-family: var(--font-heading, 'Outfit', sans-serif);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
-      border-radius: 8px;
+      border-radius: 7px;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.18s ease;
       white-space: nowrap;
+      user-select: none;
+    }
+    .view-segment-btn:focus, .view-segment-btn:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
     }
     .view-segment-btn:hover {
       color: #0A2533;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.7);
     }
     .view-segment-btn.active {
-      background: #0A2533;
-      color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(10, 37, 51, 0.25);
+      background: #0A2533 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(10, 37, 51, 0.2) !important;
     }
     .view-segment-btn.active.btn-pws {
-      background: #0090FF;
-      box-shadow: 0 4px 12px rgba(0, 144, 255, 0.3);
+      background: #0090FF !important;
+      box-shadow: 0 2px 10px rgba(0, 144, 255, 0.3) !important;
     }
     .view-segment-btn.active.btn-janitorial {
-      background: #059669;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+      background: #059669 !important;
+      box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3) !important;
+    }
+
+    .admin-header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .btn-header-link {
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .btn-header-signout {
+      background: #EF4444;
+      color: #FFFFFF;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s ease;
+    }
+    .btn-header-signout:hover {
+      background: #DC2626;
     }
 
     /* Container Transitions */
@@ -302,47 +362,53 @@
   <!-- ========================================================================= -->
   <header class="admin-master-header">
     <div class="admin-header-row">
-      <!-- Left: Master Corporate Identity -->
-      <div style="display:flex;align-items:center;gap:16px;">
-        <a href="index.html#combined" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-          <img src="assets/img/logo2.png" alt="Hygeia Master Logo" style="height:36px;width:auto;"/>
-          <div>
-            <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:17px;color:#0A2533;letter-spacing:0.02em;line-height:1.1;">HYGEIA ENTERPRISE</div>
-            <div style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Master Command Center</div>
-          </div>
+      <!-- Left: Clean Master Emblem & Status Badge -->
+      <div class="admin-header-left">
+        <a href="#combined" onclick="switchEnterpriseView('combined')" style="display:inline-block;text-decoration:none;" title="Hygeia Master Command Center">
+          <img src="assets/img/logo2.png" alt="Hygeia Logo" class="admin-header-logo-img"/>
         </a>
-        <span class="dash-role-badge badge-admin" style="font-size:11px;padding:3px 8px;">⚡ Live DB Sync</span>
+        <span class="dash-role-badge badge-admin" style="font-size:11px;padding:3px 10px;white-space:nowrap;letter-spacing:0.02em;">
+          ⚡ Command Center
+        </span>
       </div>
 
       <!-- Center: Consolidated View Switcher Segmented Control -->
       <div class="view-segmented-control">
-        <button class="view-segment-btn active" id="btnNavCombined" onclick="switchEnterpriseView('combined')">
+        <button type="button" class="view-segment-btn active" id="btnNavCombined" onclick="switchEnterpriseView('combined')">
           <i class="fa-solid fa-globe"></i> Unified Overview
         </button>
-        <button class="view-segment-btn btn-pws" id="btnNavPWS" onclick="switchEnterpriseView('pws')">
+        <button type="button" class="view-segment-btn btn-pws" id="btnNavPWS" onclick="switchEnterpriseView('pws')">
           <i class="fa-solid fa-truck"></i> Power Wash Solutions
         </button>
-        <button class="view-segment-btn btn-janitorial" id="btnNavJanitorial" onclick="switchEnterpriseView('janitorial')">
+        <button type="button" class="view-segment-btn btn-janitorial" id="btnNavJanitorial" onclick="switchEnterpriseView('janitorial')">
           <i class="fa-solid fa-building"></i> Commercial Janitorial
         </button>
       </div>
 
       <!-- Right: Operations Profile & Quick Division Portals -->
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div class="admin-header-right">
         <!-- Andy Montero Operations Pill -->
-        <div class="user-avatar-pill" style="padding:4px 10px 4px 6px;">
-          <div class="avatar-circle avatar-admin" style="width:32px;height:32px;font-size:12px;">AM</div>
+        <div class="user-avatar-pill" style="padding:4px 10px 4px 6px;margin:0;">
+          <div class="avatar-circle avatar-admin" style="width:30px;height:30px;font-size:11.5px;">AM</div>
           <div class="user-meta-info">
-            <span class="user-name" style="font-size:13px;line-height:1.2;">Andy Montero</span>
-            <span class="user-sub-status" style="font-size:11px;"><span class="live-dot-green"></span> Operations Lead</span>
+            <span class="user-name" style="font-size:12.5px;line-height:1.2;">Andy Montero</span>
+            <span class="user-sub-status" style="font-size:10.5px;"><span class="live-dot-green"></span> Operations Lead</span>
           </div>
         </div>
 
         <!-- Quick Access Outlines -->
-        <a class="btn btn-outline" href="https://portal.2.25.90.226.sslip.io/" target="_blank" style="padding:6px 10px;font-size:12px;border-radius:6px;" title="Open Client Portal"><i class="fa-solid fa-users"></i> Portal ↗</a>
-        <a class="btn btn-outline" href="https://pws.2.25.90.226.sslip.io/" target="_blank" style="padding:6px 10px;font-size:12px;color:#0090FF;border-color:#BFDBFE;border-radius:6px;" title="Open PWS Marketing Site"><i class="fa-solid fa-truck"></i> PWS ↗</a>
-        <a class="btn btn-outline" href="https://janitorial.2.25.90.226.sslip.io/" target="_blank" style="padding:6px 10px;font-size:12px;color:#059669;border-color:#A7F3D0;border-radius:6px;" title="Open Janitorial Site"><i class="fa-solid fa-building"></i> Janitorial ↗</a>
-        <button id="btnAdminLogout" class="btn btn-sm" style="background:#EF4444;color:#FFFFFF;border:none;padding:6px 12px;font-size:12px;border-radius:6px;cursor:pointer;font-weight:700;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+        <a class="btn btn-outline btn-header-link" href="https://portal.2.25.90.226.sslip.io/" target="_blank" title="Client Portal">
+          <i class="fa-solid fa-users"></i> Portal ↗
+        </a>
+        <a class="btn btn-outline btn-header-link" href="https://pws.2.25.90.226.sslip.io/" target="_blank" style="color:#0090FF;border-color:#BFDBFE;" title="PWS Marketing Site">
+          <i class="fa-solid fa-truck"></i> PWS ↗
+        </a>
+        <a class="btn btn-outline btn-header-link" href="https://janitorial.2.25.90.226.sslip.io/" target="_blank" style="color:#059669;border-color:#A7F3D0;" title="Commercial Janitorial Site">
+          <i class="fa-solid fa-building"></i> Janitorial ↗
+        </a>
+        <button id="btnAdminLogout" type="button" class="btn-header-signout" title="Sign Out">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
       </div>
     </div>
   </header>
@@ -1079,6 +1145,6 @@
     <span id="adminToastMsg">Notification</span>
   </div>
 
-  <script src="assets/js/admin.js?v=4.0.0"></script>
+  <script src="assets/js/admin.js?v=4.1.0"></script>
 </body>
 </html>
