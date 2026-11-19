@@ -40,11 +40,23 @@
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
 
     <!-- Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="assets/css/main.css?v=5.0.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=5.2.0"/>
 
-  
-  <!-- Critical Mobile Nav & Drawer Styles (v5.0.0) -->
+  <!-- Critical Styles (Directly embedded for instant rendering & cache immunity) -->
   <style>
+    /* Hero Background Clarity Enhancement with New Golden-Hour Twilight Architecture */
+    .hero.hero-commercial,
+    .hero-commercial {
+      position: relative !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
+                  url('assets/img/service_areas_hero.jpg') center right / cover no-repeat !important;
+    }
+    .cta-band {
+      background: linear-gradient(135deg, rgba(10, 37, 51, 0.76) 0%, rgba(14, 52, 71, 0.68) 100%), 
+                  url('assets/img/bin-cta-bg.jpg') center center / cover no-repeat !important;
+    }
+
+    /* Mobile Nav Drawer Styles */
     .mobile-nav-drawer {
       display: none;
       position: absolute;
@@ -294,7 +306,7 @@
   </header>
   <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileNav(true)"></div>
 
-  <section class="hero hero-subpage hero-commercial">
+  <section class="hero hero-subpage hero-commercial" style="position:relative;background:linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%), url('assets/img/service_areas_hero.jpg') center right / cover no-repeat !important;">
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-content">
@@ -537,7 +549,7 @@
     </div>
   </section>
 
-  <section class="cta-band">
+  <section class="cta-band" style="background:linear-gradient(135deg, rgba(10, 37, 51, 0.74) 0%, rgba(14, 52, 71, 0.65) 100%), url('assets/img/bin-cta-bg.jpg') center center / cover no-repeat !important;">
     <div class="wrap">
       <h2>Don't See Your City Listed?</h2>
       <p>We service facilities throughout Santa Clara, San Mateo, and Alameda Counties. Call dispatch to confirm service availability.</p>
