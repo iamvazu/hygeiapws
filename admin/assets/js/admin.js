@@ -633,6 +633,84 @@
     }
   };
 
+  // Provision New Client Modal
+  window.openNewClientModal = function(defaultUnit = 'janitorial') {
+    const modal = document.getElementById('newClientModal');
+    const form = document.getElementById('formNewClient');
+    if (form) form.reset();
+
+    const radios = document.getElementsByName('client_business_unit');
+    radios.forEach(r => {
+      if (r.value === defaultUnit) r.checked = true;
+    });
+
+    updateClientModalDefaults(defaultUnit);
+    if (modal) modal.classList.add('open');
+  };
+
+  window.updateClientModalDefaults = function(unit) {
+    const planInput = document.getElementById('nc_plan');
+    const rateInput = document.getElementById('nc_rate');
+    const dateInput = document.getElementById('nc_service_date');
+    if (!planInput || !rateInput || !dateInput) return;
+
+    if (unit === 'pws') {
+      planInput.value = 'Commercial Bin & Walkway Pro ($249/mo)';
+      rateInput.value = 249;
+      dateInput.value = 'Tomorrow, 7:30 AM (Rig-01)';
+    } else {
+      planInput.value = 'Medical Terminal Sanitization & Day Porter ($4,200/mo)';
+      rateInput.value = 4200;
+      dateInput.value = 'Tonight, 9:00 PM (Team Alpha)';
+    }
+  };
+
+  window.handleCreateClientSubmit = async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnSubmitNewClient');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Provisioning Client...';
+
+    const radios = document.getElementsByName('client_business_unit');
+    let unit = 'janitorial';
+    radios.forEach(r => { if (r.checked) unit = r.value; });
+
+    const payload = {
+      business_unit: unit,
+      name: document.getElementById('nc_name').value.trim(),
+      company_name: document.getElementById('nc_company').value.trim(),
+      email: document.getElementById('nc_email').value.trim(),
+      password: document.getElementById('nc_password').value.trim() || 'Hygeia2026!',
+      phone: document.getElementById('nc_phone').value.trim(),
+      facility_address: document.getElementById('nc_address').value.trim(),
+      city: document.getElementById('nc_city').value.trim() || 'Silicon Valley',
+      active_plan: document.getElementById('nc_plan').value.trim(),
+      monthly_rate: parseFloat(document.getElementById('nc_rate').value) || 0,
+      next_service_date: document.getElementById('nc_service_date').value.trim()
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/clients`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to provision client account.');
+
+      const portalUrl = unit === 'pws' ? 'https://pws.2.25.90.226.sslip.io/portal.html' : 'https://janitorial.2.25.90.226.sslip.io/portal.html';
+      showToast(`🎉 Account ${data.customer_id} created for ${payload.name}! Client can log in at ${portalUrl}`);
+      closeModal('newClientModal');
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error provisioning client: ' + err.message, true);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  };
+
   // Close Modals
   window.closeModal = function(modalId) {
     const modal = document.getElementById(modalId);

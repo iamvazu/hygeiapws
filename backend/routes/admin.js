@@ -141,4 +141,98 @@ router.post('/invoices', async (req, res) => {
   }
 });
 
+/**
+ * GET /api/admin/clients
+ * Returns all active client accounts with their subscriptions and rates
+ */
+router.get('/clients', async (req, res) => {
+  try {
+    const { business_unit } = req.query;
+    let sql = `SELECT id, business_unit, customer_id, name, company_name, email, phone, facility_address, city, active_plan, monthly_rate, next_service_date, payment_method, status, created_at FROM clients WHERE 1=1`;
+    const params = [];
+    if (business_unit && business_unit !== 'all') {
+      sql += ` AND business_unit = ?`;
+      params.push(business_unit);
+    }
+    sql += ` ORDER BY id DESC`;
+    const clients = await db.allAsync(sql, params);
+    res.json({ clients });
+  } catch (err) {
+    console.error('Error fetching admin clients:', err);
+    res.status(500).json({ error: 'Failed to fetch clients.' });
+  }
+});
+
+/**
+ * POST /api/admin/clients
+ * Directly provision a new client portal account from Admin Command Center
+ */
+router.post('/clients', async (req, res) => {
+  try {
+    const {
+      business_unit = 'janitorial',
+      name,
+      company_name,
+      email,
+      phone,
+      password = 'Hygeia2026!',
+      facility_address,
+      city = 'Silicon Valley',
+      active_plan = 'Custom Commercial Maintenance Agreement',
+      monthly_rate = 0,
+      next_service_date = 'Pending Schedule'
+    } = req.body;
+
+    if (!name || !email) {
+      return res.status(400).json({ error: 'Client name and email address are required.' });
+    }
+
+    // Check if client exists
+    const existing = await db.getAsync(`SELECT id FROM clients WHERE LOWER(email) = LOWER(?)`, [email.trim()]);
+    if (existing) {
+      return res.status(409).json({ error: `An account for ${email} already exists in the system.` });
+    }
+
+    const { hashPassword } = require('../utils/auth');
+    const { hash, salt } = hashPassword(password);
+
+    const prefix = business_unit === 'pws' ? 'HYG-PWS' : 'HYG-JS';
+    const customer_id = `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const result = await db.runAsync(`
+      INSERT INTO clients (
+        business_unit, customer_id, name, company_name, email, phone,
+        password_hash, salt, role, facility_address, city, active_plan,
+        monthly_rate, next_service_date, payment_method, status
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'client', ?, ?, ?, ?, ?, 'Direct Invoice', 'active')
+    `, [
+      business_unit,
+      customer_id,
+      name.trim(),
+      company_name ? company_name.trim() : null,
+      email.trim().toLowerCase(),
+      phone || null,
+      hash,
+      salt,
+      facility_address || null,
+      city,
+      active_plan,
+      parseFloat(monthly_rate) || 0,
+      next_service_date
+    ]);
+
+    console.log(`👤 [CLIENT PROVISIONED] #${customer_id} (${name} - ${company_name || 'Individual'}) [${business_unit.toUpperCase()}]`);
+
+    res.status(201).json({
+      success: true,
+      message: `Client account created successfully for ${name}. Account ID: ${customer_id}`,
+      clientId: result.id,
+      customer_id
+    });
+  } catch (err) {
+    console.error('Error creating client account:', err);
+    res.status(500).json({ error: 'Failed to create client account.', details: err.message });
+  }
+});
+
 module.exports = router;

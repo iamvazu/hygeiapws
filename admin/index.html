@@ -446,6 +446,7 @@
         </div>
         <div class="dash-banner-actions">
           <button class="btn btn-gold" onclick="openNewLeadModal()">+ Log New Lead / RFP</button>
+          <button class="btn btn-primary" onclick="openNewClientModal()" style="background:#0090FF;color:#fff;border:none;display:inline-flex;align-items:center;gap:6px;font-weight:700;"><i class="fa-solid fa-user-plus"></i> + Provision Client Account</button>
           <button class="btn btn-outline" onclick="exportMasterLeadsCSV()">📊 Export Master Leads CSV</button>
         </div>
       </div>
@@ -612,8 +613,9 @@
           <p class="dash-subtitle">14 Municipal Trash Day Clusters · Automated Route Optimization &amp; Bin Subscriptions</p>
         </div>
         <div class="dash-banner-actions">
-          <button class="btn btn-gold" onclick="alert('Route optimization algorithm recalculated 38 stops for Rig-01 and Rig-02 with 18% fuel efficiency savings.')">⚡ Optimize Today's Routes</button>
-          <button class="btn btn-outline" onclick="alert('Driver mobile dispatch console launched on Unit Rig-01.')">📲 Launch Driver Mobile App</button>
+          <button class="btn btn-gold" onclick="openNewClientModal('pws')"><i class="fa-solid fa-user-plus"></i> + Add PWS Client Account</button>
+          <button class="btn btn-outline" onclick="alert('Route optimization algorithm recalculated 38 stops for Rig-01 and Rig-02 with 18% fuel efficiency savings.')">⚡ Optimize Today's Routes</button>
+          <button class="btn btn-outline" onclick="alert('Driver mobile dispatch console launched on Unit Rig-01.')">📲 Driver App</button>
         </div>
       </div>
 
@@ -825,7 +827,8 @@
         </div>
         <div class="dash-banner-actions">
           <button class="btn btn-gold" onclick="openNewLeadModal('janitorial')">+ Schedule Facility Walk</button>
-          <button class="btn btn-outline" style="color:#FFFFFF;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);" onclick="alert('Night supervisor check-in broadcast initiated across 12 facilities.')">📲 Broadcast Shift Check-In</button>
+          <button class="btn btn-outline" style="color:#FFFFFF;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.15);" onclick="openNewClientModal('janitorial')"><i class="fa-solid fa-user-plus"></i> + Add Janitorial Client Account</button>
+          <button class="btn btn-outline" style="color:#FFFFFF;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);" onclick="alert('Night supervisor check-in broadcast initiated across 12 facilities.')">📲 Broadcast Check-In</button>
         </div>
       </div>
 
@@ -1096,6 +1099,97 @@
           <button type="button" class="btn btn-outline" onclick="closeModal('newLeadModal')">Cancel</button>
           <button type="submit" id="btnSubmitNewLead" class="btn btn-gold">
             <i class="fa-solid fa-save"></i> Save Lead to Database
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: PROVISION CLIENT ACCOUNT DIRECTLY FROM ADMIN                       -->
+  <!-- ========================================================================= -->
+  <div id="newClientModal" class="admin-modal-overlay">
+    <div class="admin-modal-card" style="max-width: 620px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+        <div>
+          <h2 style="margin:0;font-family:'Outfit',sans-serif;font-size:22px;color:#0A2533;">+ Provision Client Portal Account</h2>
+          <p style="margin:4px 0 0;font-size:12.5px;color:#64748B;">Creates an active account with immediate portal login access.</p>
+        </div>
+        <button onclick="closeModal('newClientModal')" style="background:none;border:none;font-size:22px;cursor:pointer;color:#64748B;">&times;</button>
+      </div>
+
+      <form id="formNewClient" onsubmit="handleCreateClientSubmit(event)">
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:13px;font-weight:700;color:#334155;margin-bottom:6px;">Select Enterprise Division <span style="color:#EF4444;">*</span></label>
+          <div style="display:flex;gap:12px;">
+            <label style="flex:1;border:1.5px solid #CBD5E1;border-radius:8px;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;">
+              <input type="radio" name="client_business_unit" value="pws" onchange="updateClientModalDefaults('pws')"/> 🚛 Power Wash Solutions
+            </label>
+            <label style="flex:1;border:1.5px solid #CBD5E1;border-radius:8px;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;">
+              <input type="radio" name="client_business_unit" value="janitorial" checked onchange="updateClientModalDefaults('janitorial')"/> 🏢 Commercial Janitorial
+            </label>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Primary Contact / Name *</label>
+            <input type="text" id="nc_name" required placeholder="e.g. Dr. Amanda Thorne" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Company / Facility Name</label>
+            <input type="text" id="nc_company" placeholder="e.g. Valley Surgical Center" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Client Login Email *</label>
+            <input type="email" id="nc_email" required placeholder="client@company.com" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Portal Initial Password</label>
+            <input type="text" id="nc_password" value="Hygeia2026!" placeholder="Hygeia2026!" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Facility Address</label>
+            <input type="text" id="nc_address" placeholder="e.g. 1200 BioWay Blvd" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">City</label>
+            <input type="text" id="nc_city" placeholder="e.g. San Jose, Santa Clara" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Active Plan / Scope Description</label>
+            <input type="text" id="nc_plan" value="Medical Terminal Sanitization & Day Porter ($4,200/mo)" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Monthly Rate ($)</label>
+            <input type="number" id="nc_rate" value="4200" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Next Scheduled Service / Visit</label>
+            <input type="text" id="nc_service_date" value="Tonight, 9:00 PM" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Phone Number</label>
+            <input type="tel" id="nc_phone" placeholder="(408) 555-8822" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('newClientModal')">Cancel</button>
+          <button type="submit" id="btnSubmitNewClient" class="btn btn-gold" style="background:#0090FF;color:#fff;border:none;">
+            <i class="fa-solid fa-user-check"></i> Provision Account
           </button>
         </div>
       </form>
