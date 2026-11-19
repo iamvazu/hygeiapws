@@ -39,7 +39,7 @@
     <!-- Favicon -->
   <link rel="icon" type="image/webp" href="assets/img/truck.webp"/>
   <link rel="apple-touch-icon" href="assets/img/truck.webp"/>
-  <link rel="stylesheet" href="assets/css/main.css?v=5.0.0"/>
+  <link rel="stylesheet" href="assets/css/main.css?v=5.6.0"/>
 
   <!-- Structured Data JSON-LD (SEO, AEO, GEO) -->
   <script type="application/ld+json">
@@ -286,6 +286,435 @@
     }
     window.toggleMobileNav = toggleMobileNav;
   </script>
+
+  <!-- Enhanced Hero Visibility & Unified Cyber Footer Standard (v5.6.0) -->
+  <style>
+    .hero.hero-commercial, .hero-commercial {
+      position: relative !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%), url('assets/img/commercial-hero-bg.jpg') center right / cover no-repeat !important;
+    }
+.cyber-footer {
+      position: relative;
+      background: #03070C;
+      border-top: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 110px 24px 30px;
+      overflow: hidden;
+    }
+
+    /* Glowing Hydraulic Conduit Lines */
+    .hydraulic-conduit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00F0FF, #0090FF, transparent);
+      box-shadow: 0 0 16px #00F0FF;
+      animation: conduitFlow 4s linear infinite;
+    }
+
+    @keyframes conduitFlow {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .footer-top-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 50px;
+    }
+
+    /* CTA Yellow 24/7 Overnight Fleet Active Badge */
+    .fleet-status-beacon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: #FFB703;
+      background: rgba(255, 183, 3, 0.12);
+      border: 1px solid rgba(255, 183, 3, 0.45);
+      padding: 7px 18px;
+      border-radius: 999px;
+      box-shadow: 0 0 16px rgba(255, 183, 3, 0.25);
+    }
+
+    .pulse-dot-gold {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFB703;
+      box-shadow: 0 0 10px #FFB703;
+      animation: pulseGold 1.5s infinite;
+    }
+
+    @keyframes pulseGold {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    /* Mouse Icon Scroll Up Button */
+    .btn-mouse-scroll {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--cyan-bright);
+      border-radius: 999px;
+      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #00F0FF;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 16px rgba(0, 180, 216, 0.3);
+    }
+
+    .btn-mouse-scroll:hover {
+      background: var(--cyan-bright);
+      color: #000000;
+      transform: translateY(-3px);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.7);
+    }
+
+    .mouse-icon {
+      width: 16px;
+      height: 24px;
+      border: 2px solid currentColor;
+      border-radius: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mouse-wheel {
+      width: 3px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 2px;
+      position: absolute;
+      top: 4px;
+      animation: wheelMove 1.4s infinite;
+    }
+
+    @keyframes wheelMove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(6px); opacity: 0; }
+    }
+
+    .animated-arrow {
+      font-size: 14px;
+      animation: arrowBounce 1.4s infinite alternate;
+    }
+
+    @keyframes arrowBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .footer-main-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.1fr 1.3fr;
+      gap: 36px;
+      margin-bottom: 50px;
+    }
+
+    /* Hero Big Spartan Mascot in Footer */
+    .footer-mascot-hero-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .footer-mascot-large {
+      max-width: 220px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 28px rgba(0, 180, 216, 0.35));
+      transition: transform 0.3s ease;
+    }
+
+    .footer-mascot-large:hover {
+      transform: scale(1.03);
+    }
+
+    .footer-brand-bio {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #94A3B8;
+      margin-bottom: 16px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-link {
+      font-size: 13.5px;
+      color: #94A3B8;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-nav-link:hover {
+      color: #00F0FF;
+      transform: translateX(3px);
+    }
+
+    .footer-dispatch-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dispatch-phone {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 900;
+      color: #00F0FF;
+      text-decoration: none;
+    }
+
+    .footer-legal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: #64748B;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-links a {
+      color: #64748B;
+      text-decoration: none;
+    }
+
+    .footer-legal-links a:hover {
+      color: #CBD5E1;
+    }
+
+    /* ========================================================================= */
+    /* RESPONSIVE BREAKPOINTS                                                    */
+    /* ========================================================================= */
+    @media (max-width: 1024px) {
+      .nav-menu-links {
+        display: none;
+      }
+      .mobile-hamburger-btn {
+        display: flex;
+      }
+      .story-hud-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+      }
+      .telemetry-hud {
+        display: none;
+      }
+      .bento-col-8, .bento-col-4, .bento-col-6 {
+        grid-column: span 12;
+      }
+      .calc-panel.active {
+        grid-template-columns: 1fr;
+      }
+      .footer-floating-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 32px 24px;
+      }
+      .floating-input-row {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 8px;
+      }
+      .footer-main-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .compliance-vault {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-status-badge {
+        display: none !important;
+      }
+      .top-utility-inner {
+        justify-content: center;
+        gap: 20px;
+      }
+      .experience-nav-wrap {
+        top: 36px;
+        padding: 0 8px;
+      }
+      .experience-nav {
+        padding: 5px 12px;
+      }
+      .nav-logo-img {
+        height: 28px;
+      }
+      .logo-pill-housing {
+        padding: 3px 10px;
+      }
+      .btn-cta-glow {
+        font-size: 11px;
+        padding: 5px 12px;
+      }
+      .story-hud {
+        bottom: 16px;
+      }
+      .story-caption-deck {
+        padding: 10px 14px;
+        border-radius: 12px;
+        max-width: 95%;
+        margin: 0 auto;
+        background: rgba(4, 9, 15, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 240, 255, 0.22);
+      }
+      .story-tag {
+        font-size: 8.5px;
+        letter-spacing: 0.6px;
+        margin-bottom: 2px;
+      }
+      .story-title {
+        font-size: 14.5px;
+        line-height: 1.2;
+        margin-bottom: 3px;
+      }
+      .story-desc {
+        font-size: 11px;
+        line-height: 1.35;
+        margin-bottom: 6px;
+      }
+      .spec-badge {
+        font-size: 9px;
+        padding: 2px 7px;
+      }
+      .story-btn-pill {
+        font-size: 10px;
+        padding: 4px 10px;
+      }
+      .footer-top-strip {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+      }
+      .fleet-status-beacon {
+        font-size: 11px;
+        padding: 6px 14px;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 360px;
+      }
+      .footer-main-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 36px;
+      }
+      .footer-mascot-hero-box {
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .footer-mascot-large {
+        margin: 0 auto 12px auto;
+        display: block;
+        max-width: 200px;
+      }
+      .footer-brand-bio {
+        text-align: center;
+        max-width: 440px;
+        margin: 0 auto 14px auto;
+      }
+      .footer-cert-chips-box {
+        justify-content: center;
+        margin: 0 auto;
+      }
+      .footer-nav-list {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-dispatch-card {
+        margin: 0 auto;
+        max-width: 360px;
+        text-align: center;
+      }
+      .footer-dispatch-card .dispatch-item {
+        justify-content: center;
+      }
+      .footer-bottom-row {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        justify-content: center;
+      }
+      .footer-legal-links {
+        justify-content: center;
+      }
+      .ba-slider-container {
+        height: 300px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .story-title {
+        font-size: 13.5px;
+      }
+      .story-desc {
+        font-size: 10.5px;
+        line-height: 1.3;
+      }
+      .story-caption-deck {
+        padding: 8px 12px;
+      }
+    }
+  
+  </style>
+
 </head>
 <body>
   <!-- Top Announcement Strip -->
@@ -774,128 +1203,159 @@
   </section>
 
   <!-- Modern Footer with Official State of California Certifications -->
-  <footer class="site-footer">
-    <!-- State of California Certifications Trust Band -->
-    <div class="footer-cert-band">
-      <div class="wrap footer-cert-inner">
-        <div class="footer-cert-title-area">
-          <span class="cert-band-eyebrow">
-            <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path></svg>
-            State of California Certified Supplier
-          </span>
-          <h3 class="cert-band-heading">Montero Enterprises Inc. dba Hygeia</h3>
-          <p class="cert-band-sub">Small Business &amp; DVBE Certification ID: <strong>2054658</strong> · DIR Public Works Reg: <strong>JS-LR-100 132 4606</strong></p>
+  <footer class="cyber-footer">
+      <div class="hydraulic-conduit"></div>
+
+      <div class="hub-container" style="padding-top:0;">
+        <div class="footer-top-strip">
+          <!-- CTA Yellow 24/7 Overnight Fleet Active Badge -->
+          <div class="fleet-status-beacon">
+            <span class="pulse-dot-gold"></span>
+            <span>24/7 OVERNIGHT FLEET ACTIVE — PENINSULA &amp; SILICON VALLEY</span>
+          </div>
+
+          <!-- Mouse Icon Scroll Up Button -->
+          <button type="button" class="btn-mouse-scroll" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Scroll Back to Top">
+            <div class="mouse-icon">
+              <span class="mouse-wheel"></span>
+            </div>
+            <i class="fa-solid fa-arrow-up animated-arrow"></i>
+            <span style="font-family:var(--font-heading);font-size:12px;font-weight:800;letter-spacing:0.5px;">TOP</span>
+          </button>
         </div>
 
-        <div class="footer-cert-logos">
-          <div class="footer-cert-card" title="State of California Certified Small Business">
-            <img src="assets/img/cert-cagov.png" alt="State of California CA.GOV" class="footer-cert-img"/>
-            <div class="footer-cert-text">
-              <strong>CA.GOV Certified</strong>
-              <span>Small Business (Micro)</span>
+        <div class="footer-main-grid">
+          <!-- Col 1: Bold Large Spartan Mascot Character Only -->
+          <div class="footer-mascot-hero-box">
+            <a href="index.html" title="Hygeia Power Wash Solutions">
+              <img src="assets/img/mascot-hero.png?v=3" alt="Hygeia Spartan Power Washer" class="footer-mascot-large"/>
+            </a>
+            <p class="footer-brand-bio">
+              Commercial &amp; residential power washing, curbside trash bin sanitizing, and Cal/EPA vacuum recovery. Montero Enterprises Inc. dba Hygeia — 35 years serving Silicon Valley facilities.
+            </p>
+            <div class="footer-cert-chips-box" style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="spec-badge">🎖️ CA DVBE #2054658</span>
+              <span class="spec-badge">📋 DIR Registered</span>
+              <span class="spec-badge">🌊 100% Water Reclaim</span>
             </div>
           </div>
 
-          <div class="footer-cert-card" title="Department of General Services Certified DVBE">
-            <img src="assets/img/cert-dgs.png" alt="California Department of General Services DGS" class="footer-cert-img"/>
-            <div class="footer-cert-text">
-              <strong>DGS Certified</strong>
-              <span>DVBE #2054658</span>
-            </div>
-          </div>
-
-          <div class="footer-cert-card" title="FI$Cal State Procurement Registered">
-            <img src="assets/img/cert-fiscal.png" alt="FI$Cal State of California" class="footer-cert-img"/>
-            <div class="footer-cert-text">
-              <strong>FI$Cal Registered</strong>
-              <span>DIR: JS-LR-100 132 4606</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Footer Columns -->
-    <div class="wrap footer-main-area">
-      <div class="footer-grid">
-        <!-- Col 1: Brand & Emblem -->
-        <div class="footer-brand">
-          <a href="index.html" style="display:block;margin-bottom:12px;">
-            <img src="assets/img/logo1.svg" alt="Hygeia Power Wash Solutions Emblem" class="footer-logo-img"/>
-          </a>
-          <p class="footer-desc">Commercial &amp; residential pressure washing and curbside bin sanitizing. Montero Enterprises Inc. dba Hygeia — 35 years serving Silicon Valley facilities.</p>
-          <div class="cert-badges">
-            <span class="cert-badge cert-badge-gold">🎖️ DVBE Certified</span>
-            <span class="cert-badge">Small Business (Micro)</span>
-            <span class="cert-badge">DIR #JS-LR-100 132 4606</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Services & Portals -->
-        <div class="footer-col">
-          <h4>Services &amp; Portals</h4>
-          <ul class="footer-links">
-            <li><a href="commercial-pressure-washing.html">Commercial Pressure Washing</a></li>
-            <li><a href="residential-pressure-washing.html">Residential Pressure Washing</a></li>
-            <li><a href="bin-cleaning.html">Trash Bin Cleaning</a></li>
-            <li><a href="portal.html">Client Subscription Portal ↗</a></li>
-            <li><a href="admin.html">Admin Operations Center ↗</a></li>
-            <li><a href="blog.html">Knowledge Base &amp; Blog</a></li>
-            <li><a href="about.html">About Hygeia</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: 14 Service Areas in 2 Columns -->
-        <div class="footer-col">
-          <h4>Service Areas</h4>
-          <div class="footer-sa-columns">
-            <ul class="footer-links">
-              <li><a href="service-areas/san-jose.html">San Jose</a></li>
-              <li><a href="service-areas/los-gatos.html">Los Gatos</a></li>
-              <li><a href="service-areas/saratoga.html">Saratoga</a></li>
-              <li><a href="service-areas/cupertino.html">Cupertino</a></li>
-              <li><a href="service-areas/santa-clara.html">Santa Clara</a></li>
-              <li><a href="service-areas/sunnyvale.html">Sunnyvale</a></li>
-              <li><a href="service-areas/milpitas.html">Milpitas</a></li>
-            </ul>
-            <ul class="footer-links">
-              <li><a href="service-areas/mountain-view.html">Mountain View</a></li>
-              <li><a href="service-areas/palo-alto.html">Palo Alto</a></li>
-              <li><a href="service-areas/menlo-park.html">Menlo Park</a></li>
-              <li><a href="service-areas/redwood-city.html">Redwood City</a></li>
-              <li><a href="service-areas/san-carlos.html">San Carlos</a></li>
-              <li><a href="service-areas/san-mateo.html">San Mateo</a></li>
-              <li><a href="service-areas/foster-city.html">Foster City</a></li>
+          <!-- Col 2: Residential Services -->
+          <div>
+            <h4 class="footer-col-title">Residential Services</h4>
+            <ul class="footer-nav-list">
+              <li><a href="bin-cleaning.html" class="footer-nav-link">Curbside Trash Can Cleaning</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Driveway &amp; Sidewalk Wash</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">House Exterior Soft Wash</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Patio, Deck &amp; Pavers</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Gutter &amp; Roof Soft Wash</a></li>
             </ul>
           </div>
+
+          <!-- Col 3: Commercial Services -->
+          <div>
+            <h4 class="footer-col-title">Commercial Services</h4>
+            <ul class="footer-nav-list">
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Parking Lots &amp; Concrete</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Dumpster Pad Degreasing</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Building Facade Soft Wash</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Commercial Window Cleaning</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Cal/EPA Water Recovery</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Quick Portals & Sister Division -->
+          <div>
+            <h4 class="footer-col-title">Portals &amp; Info</h4>
+            <ul class="footer-nav-list">
+              <li><a href="https://janitorial.2.25.90.226.sslip.io/" target="_blank" class="footer-nav-link" style="color:var(--brand-gold);font-weight:700;">🏢 Commercial Janitorial Services ↗</a></li>
+              <li><a href="portal.html" class="footer-nav-link">Client Subscription Portal ↗</a></li>
+              <li><a href="admin.html" class="footer-nav-link">Admin Operations Center ↗</a></li>
+              <li><a href="service-areas.html" class="footer-nav-link">14 Service Area Routes</a></li>
+              <li><a href="blog.html" class="footer-nav-link">Knowledge Base &amp; Blog</a></li>
+              <li><a href="about.html" class="footer-nav-link">About Hygeia Heritage</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 5: Direct Dispatch & HQ -->
+          <div>
+            <h4 class="footer-col-title">Direct Dispatch &amp; HQ</h4>
+            <div class="footer-dispatch-card">
+              <span style="font-size:11.5px;color:#A0AEC0;text-transform:uppercase;letter-spacing:1px;font-family:var(--font-mono);font-weight:800;">Fleet Operations Base</span>
+              <div style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:#FFFFFF;margin:6px 0 12px 0;">1105 Benton St, Suite A<br><span style="font-size:14px;color:#94A3B8;">Santa Clara, CA 95050</span></div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <a href="tel:6509333823" style="color:#00F0FF;font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-phone"></i> (650) 933-3823
+                </a>
+                <a href="mailto:dispatch@hygeiapowerwash.com" style="color:#CBD5E1;font-size:13px;text-decoration:none;">
+                  dispatch@hygeiapowerwash.com
+                </a>
+              </div>
+              <p style="margin:14px 0 0 0;font-size:12px;color:#10B981;font-weight:700;line-height:1.4;">⚡ 24/7 Silicon Valley Power Wash Fleet Active</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Col 4: Contact & Direct Dispatch -->
-        <div class="footer-col">
-          <h4>Direct Dispatch &amp; HQ</h4>
-          <ul class="footer-links">
-            <li><a href="tel:6509333823" style="font-weight:800;color:var(--brand-navy);font-size:15px;">📞 (650) 933-3823</a></li>
-            <li><a href="mailto:aloha@hygeiaservices.com">✉️ aloha@hygeiaservices.com</a></li>
-            <li><span>📍 1105 Benton St, Suite A<br/>Santa Clara, CA 95050</span></li>
-            <li><span style="font-size:12px;color:var(--brand-gold);font-weight:700;">⚡ 24/7 Commercial Overnight Dispatch</span></li>
-            <li><a href="faq.html">Frequently Asked Questions</a></li>
-            <li><a href="https://hygeiaservices.com" target="_blank" rel="noopener" style="font-weight:700;color:var(--brand-cyan);">hygeiaservices.com ↗ Janitorial</a></li>
-          </ul>
-        </div>
-      </div>
+        <!-- BAY AREA SERVICE AREAS & CITIES DIRECTORY GRID -->
+        <div class="service-areas-directory">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+            <h4 style="font-family:var(--font-heading);font-size:16px;font-weight:800;color:#FFFFFF;margin:0;display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-map-location-dot" style="color:#00F0FF;"></i> Bay Area Power Wash Service Areas &amp; Dedicated City Routes
+            </h4>
+            <a href="service-areas.html" style="color:#00F0FF;font-size:13px;font-weight:700;text-decoration:none;">View All 14 Service Areas ➔</a>
+          </div>
 
-      <div class="footer-bottom">
-        <span>© 2026 Montero Enterprises Inc. dba Hygeia Power Wash Solutions. All rights reserved.</span>
-        <div class="footer-legal-links">
-          <a href="terms.html">Terms of Service</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="cookies.html">Cookie Policy</a>
-          <a href="california-privacy.html">California Privacy (CCPA)</a>
-          <a href="faq.html">FAQ</a>
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-city"></i> South Bay &amp; Silicon Valley Core</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#santa-clara">📍 Santa Clara (HQ)</a>
+              <a class="city-pill-link" href="service-areas.html#san-jose">📍 San Jose</a>
+              <a class="city-pill-link" href="service-areas.html#sunnyvale">📍 Sunnyvale</a>
+              <a class="city-pill-link" href="service-areas.html#mountain-view">📍 Mountain View</a>
+              <a class="city-pill-link" href="service-areas.html#cupertino">📍 Cupertino</a>
+              <a class="city-pill-link" href="service-areas.html#milpitas">📍 Milpitas</a>
+              <a class="city-pill-link" href="service-areas.html#campbell">📍 Campbell</a>
+              <a class="city-pill-link" href="service-areas.html#los-gatos">📍 Los Gatos</a>
+            </div>
+          </div>
+
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-building"></i> San Francisco Peninsula</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#palo-alto">📍 Palo Alto</a>
+              <a class="city-pill-link" href="service-areas.html#menlo-park">📍 Menlo Park</a>
+              <a class="city-pill-link" href="service-areas.html#los-altos">📍 Los Altos</a>
+              <a class="city-pill-link" href="service-areas.html#redwood-city">📍 Redwood City</a>
+              <a class="city-pill-link" href="service-areas.html#san-carlos">📍 San Carlos</a>
+              <a class="city-pill-link" href="service-areas.html#san-mateo">📍 San Mateo</a>
+              <a class="city-pill-link" href="service-areas.html#burlingame">📍 Burlingame</a>
+            </div>
+          </div>
+
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-bridge-water"></i> East Bay Routes</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#fremont">📍 Fremont</a>
+              <a class="city-pill-link" href="service-areas.html#newark">📍 Newark</a>
+              <a class="city-pill-link" href="service-areas.html#hayward">📍 Hayward</a>
+              <a class="city-pill-link" href="service-areas.html#union-city">📍 Union City</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-legal-bar" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;margin-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12.5px;color:#64748B;">
+          <span>© 2026 Montero Enterprises Inc. dba Hygeia Power Wash Solutions. All rights reserved.</span>
+          <div class="footer-legal-links" style="display:flex;gap:18px;flex-wrap:wrap;">
+            <a href="terms.html" style="color:#64748B;text-decoration:none;">Terms of Service</a>
+            <a href="privacy.html" style="color:#64748B;text-decoration:none;">Privacy Policy</a>
+            <a href="cookies.html" style="color:#64748B;text-decoration:none;">Cookie Policy</a>
+            <a href="california-privacy.html" style="color:#64748B;text-decoration:none;">California Privacy (CCPA)</a>
+            <a href="faq.html" style="color:#64748B;text-decoration:none;">FAQ</a>
+            <a href="https://janitorial.2.25.90.226.sslip.io/" target="_blank" style="color:var(--brand-gold);font-weight:700;text-decoration:none;">Commercial Janitorial Services ↗</a>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
   <!-- Cookie Consent Banner -->
   <div class="cookie-banner">
