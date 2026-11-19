@@ -7,9 +7,10 @@ const HYGEIA_API_BASE = (function() {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       return 'http://localhost:5000/api';
     }
-    return 'https://2.25.90.226.sslip.io/api';
+    // Relative /api is natively reverse-proxied by Nginx on all subdomains
+    return window.location.origin + '/api';
   }
-  return 'https://2.25.90.226.sslip.io/api';
+  return '/api';
 })();
 
 async function syncLeadToAPI(leadData) {
@@ -461,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timestamp: Date.now()
       };
 
-      // Save to Unified Operations Leads Storage
+      // Save to Unified Operations Leads Storage & Transmit to SQLite DB
       try {
         const existing = JSON.parse(localStorage.getItem('hygeia_unified_leads') || '[]');
         existing.unshift(leadData);
@@ -469,6 +470,22 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.warn('Storage sync error', err);
       }
+
+      // Transmit to Backend API Engine (Post to /api/leads)
+      syncLeadToAPI({
+        business_unit: 'janitorial',
+        customer_name: name,
+        company_name: company,
+        email: email,
+        phone: phone,
+        service_type: 'Commercial Janitorial Site Walk (' + facility + ')',
+        frequency: frequency,
+        square_footage: sqft,
+        address: address,
+        city: (address && address.includes(',')) ? address.split(',')[1].trim() : 'Silicon Valley',
+        estimated_value: 4500,
+        notes: notes + (addons.length ? ' | Add-ons: ' + addons.join(', ') : '')
+      });
 
       // Display High-End Interactive RFP Confirmation Card
       const formCard = janitorialQuoteForm.closest('.contact-form-card');

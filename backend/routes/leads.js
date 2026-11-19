@@ -105,4 +105,24 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
+/**
+ * DELETE /api/leads/:id
+ * Admin endpoint to delete / remove lead record
+ */
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const lead = await db.getAsync(`SELECT * FROM leads WHERE id = ?`, [id]);
+    if (!lead) {
+      return res.status(404).json({ error: 'Lead not found.' });
+    }
+    await db.runAsync(`DELETE FROM leads WHERE id = ?`, [id]);
+    console.log(`🗑️ [LEAD DELETED] #${id}`);
+    res.json({ success: true, message: `Lead #${id} deleted successfully.` });
+  } catch (err) {
+    console.error('Error deleting lead:', err);
+    res.status(500).json({ error: 'Failed to delete lead.' });
+  }
+});
+
 module.exports = router;

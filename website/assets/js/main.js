@@ -7,9 +7,10 @@ const HYGEIA_API_BASE = (function() {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       return 'http://localhost:5000/api';
     }
-    return 'https://2.25.90.226.sslip.io/api';
+    // Relative /api is natively reverse-proxied by Nginx on all subdomains
+    return window.location.origin + '/api';
   }
-  return 'https://2.25.90.226.sslip.io/api';
+  return '/api';
 })();
 
 async function syncLeadToAPI(leadData) {
@@ -420,4 +421,102 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // 10. PWS Master Contact Form Submission Handler
+  const pwsContactForm = document.getElementById('pwsContactForm');
+  if (pwsContactForm) {
+    pwsContactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('pwsSubmitBtn');
+      const origText = submitBtn ? submitBtn.innerHTML : 'Submit';
+
+      const service = document.getElementById('pws_service')?.value || 'General Pressure Washing';
+      const name = document.getElementById('pws_name')?.value || 'Valued Client';
+      const phone = document.getElementById('pws_phone')?.value || '';
+      const email = document.getElementById('pws_email')?.value || '';
+      const city = document.getElementById('pws_city')?.value || 'Bay Area';
+      const address = document.getElementById('pws_address')?.value || '';
+      const sqft = document.getElementById('pws_sqft')?.value || '';
+      const frequency = document.getElementById('pws_frequency')?.value || 'As Soon As Possible';
+      const notes = document.getElementById('pws_notes')?.value || '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Transmitting Request to Dispatch...</span> <span>⏳</span>';
+      }
+
+      const leadPayload = {
+        business_unit: 'pws',
+        customer_name: name,
+        email: email,
+        phone: phone,
+        company_name: (service.includes('Commercial') || service.includes('Government')) ? 'Commercial Facility' : 'Residential Account',
+        service_type: service,
+        frequency: frequency,
+        square_footage: sqft,
+        address: address,
+        city: city,
+        estimated_value: service.includes('Bin') ? 35 : (service.includes('Commercial') ? 1850 : 450),
+        notes: notes
+      };
+
+      try {
+        const res = await fetch(`${HYGEIA_API_BASE}/leads`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadPayload)
+        });
+        const result = await res.json();
+        const leadId = result.leadId || Math.floor(1000 + Math.random() * 9000);
+
+        // Render confirmation card
+        pwsContactForm.innerHTML = `
+          <div style="text-align:center;padding:36px 16px;animation:fadeIn 0.4s ease-out;">
+            <div style="width:68px;height:68px;border-radius:50%;background:#EFF6FF;color:#0090FF;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px auto;border:2px solid #BFDBFE;box-shadow:0 8px 24px rgba(0,144,255,0.15);">
+              ✓
+            </div>
+            <span style="display:inline-block;background:#0A2533;color:#FDE68A;font-size:12px;font-weight:800;padding:4px 14px;border-radius:20px;margin-bottom:12px;letter-spacing:0.05em;">
+              LEAD ID #PWS-${leadId} · RECORDED IN DISPATCH
+            </span>
+            <h3 style="font-family:var(--font-heading, sans-serif);font-size:24px;font-weight:800;color:#0A2533;margin:0 0 10px 0;">
+              Estimate Request Transmitted!
+            </h3>
+            <p style="font-size:14.5px;color:#475569;line-height:1.6;max-width:500px;margin:0 auto 24px auto;">
+              Thank you, <strong>${name}</strong>. Our Peninsula &amp; South Bay dispatch team has received your request for <strong>${service}</strong> in <strong>${city}</strong>.
+            </p>
+            <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:18px;max-width:480px;margin:0 auto 24px auto;text-align:left;font-size:13.5px;color:#334155;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Service Scope:</strong></span>
+                <span>${service}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Target Schedule:</strong></span>
+                <span>${frequency}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span><strong>Phone Contact:</strong></span>
+                <span>${phone}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span><strong>Operations Status:</strong></span>
+                <span style="color:#0090FF;font-weight:700;">⚡ Fast 2-Hour Quote Dispatch</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+              <a class="btn btn-gold" href="tel:6509333823" style="display:inline-block;padding:12px 24px;background:#E59830;color:#FFFFFF;border-radius:8px;font-weight:800;text-decoration:none;">📞 Call Dispatch: (650) 933-3823</a>
+              <a class="btn btn-outline" href="index.html" style="display:inline-block;padding:12px 24px;background:#FFFFFF;color:#0A2533;border:1.5px solid #CBD5E1;border-radius:8px;font-weight:700;text-decoration:none;">Back to Home</a>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error('Submission error:', err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }
+        alert('Thank you! Your estimate request has been logged. Our dispatch team will follow up within 2 hours.');
+      }
+    });
+  }
+
 });

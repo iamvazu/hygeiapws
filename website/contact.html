@@ -1019,19 +1019,19 @@
             <p>Fill out the details below and our operations team will review aerial surface maps and deliver a firm estimate.</p>
           </div>
 
-          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your quote request has been received. Our Peninsula operations team will review your property details and contact you within 2 business hours.');">
+          <form id="pwsContactForm" method="POST">
             
             <!-- Service Selection Pills -->
             <div class="form-group">
               <label class="form-label">Select Service Needed <span class="req">*</span></label>
-              <select class="form-select" id="serviceSelect" required>
+              <select class="form-select" id="pws_service" name="service" required>
                 <option value="" disabled selected>Choose service type...</option>
-                <option value="commercial">🏢 Commercial Facility / Parking Garage / Dumpster Pad</option>
-                <option value="residential">🏡 Residential Driveway, Patio, Stucco or Deck</option>
-                <option value="bin-cleaning">🗑️ Curbside Trash Bin Sanitizing Subscription ($35/mo)</option>
-                <option value="graffiti">🎨 Graffiti Removal &amp; Surface Abatement</option>
-                <option value="solar">☀️ Solar Panel Cleaning &amp; Roof Soft Wash</option>
-                <option value="public">🏛️ Government / Municipal / Public Works Bid</option>
+                <option value="Commercial Facility / Parking Garage / Dumpster Pad">🏢 Commercial Facility / Parking Garage / Dumpster Pad</option>
+                <option value="Residential Driveway, Patio, Stucco or Deck">🏡 Residential Driveway, Patio, Stucco or Deck</option>
+                <option value="Curbside Trash Bin Sanitizing Subscription ($35/mo)">🗑️ Curbside Trash Bin Sanitizing Subscription ($35/mo)</option>
+                <option value="Graffiti Removal & Surface Abatement">🎨 Graffiti Removal &amp; Surface Abatement</option>
+                <option value="Solar Panel Cleaning & Roof Soft Wash">☀️ Solar Panel Cleaning &amp; Roof Soft Wash</option>
+                <option value="Government / Municipal / Public Works Bid">🏛️ Government / Municipal / Public Works Bid</option>
               </select>
             </div>
 
@@ -1039,11 +1039,11 @@
             <div class="form-row-2col">
               <div class="form-group mb-0">
                 <label class="form-label">First &amp; Last Name <span class="req">*</span></label>
-                <input type="text" class="form-input" placeholder="e.g. Andy Montero" required/>
+                <input type="text" class="form-input" id="pws_name" name="name" placeholder="e.g. Andy Montero" required/>
               </div>
               <div class="form-group mb-0">
                 <label class="form-label">Phone Number <span class="req">*</span></label>
-                <input type="tel" class="form-input" placeholder="(650) 933-3823" required/>
+                <input type="tel" class="form-input" id="pws_phone" name="phone" placeholder="(650) 933-3823" required/>
               </div>
             </div>
 
@@ -1051,34 +1051,34 @@
             <div class="form-row-2col">
               <div class="form-group mb-0">
                 <label class="form-label">Email Address <span class="req">*</span></label>
-                <input type="email" class="form-input" placeholder="name@company.com" required/>
+                <input type="email" class="form-input" id="pws_email" name="email" placeholder="name@company.com" required/>
               </div>
               <div class="form-group mb-0">
                 <label class="form-label">Service City / Zip Code <span class="req">*</span></label>
-                <input type="text" class="form-input" placeholder="e.g. Santa Clara, 95050" required/>
+                <input type="text" class="form-input" id="pws_city" name="city" placeholder="e.g. Santa Clara, 95050" required/>
               </div>
             </div>
 
             <!-- Full Address -->
             <div class="form-group">
               <label class="form-label">Property Street Address <span class="req">*</span></label>
-              <input type="text" class="form-input" placeholder="e.g. 1105 Benton St, Suite A" required/>
+              <input type="text" class="form-input" id="pws_address" name="address" placeholder="e.g. 1105 Benton St, Suite A" required/>
             </div>
 
             <!-- Approximate Size / Bin Count -->
             <div class="form-row-2col">
               <div class="form-group mb-0">
                 <label class="form-label">Approx. Square Footage or Bin Count</label>
-                <input type="text" class="form-input" placeholder="e.g. 25,000 sq ft or 3 Bins"/>
+                <input type="text" class="form-input" id="pws_sqft" name="sqft" placeholder="e.g. 25,000 sq ft or 3 Bins"/>
               </div>
               <div class="form-group mb-0">
                 <label class="form-label">Preferred Schedule</label>
-                <select class="form-select">
-                  <option value="asap">⚡ As Soon As Possible</option>
-                  <option value="this-week">🗓️ Within This Week</option>
-                  <option value="overnight">🌙 Overnight (Commercial 9PM-6AM)</option>
-                  <option value="weekend">📅 Weekend Service</option>
-                  <option value="recurring">🔄 Recurring Maintenance Schedule</option>
+                <select class="form-select" id="pws_frequency" name="frequency">
+                  <option value="As Soon As Possible">⚡ As Soon As Possible</option>
+                  <option value="Within This Week">🗓️ Within This Week</option>
+                  <option value="Overnight (9PM-6AM)">🌙 Overnight (Commercial 9PM-6AM)</option>
+                  <option value="Weekend Service">📅 Weekend Service</option>
+                  <option value="Recurring Maintenance Schedule">🔄 Recurring Maintenance Schedule</option>
                 </select>
               </div>
             </div>
@@ -1086,13 +1086,13 @@
             <!-- Project Details Textarea -->
             <div class="form-group">
               <label class="form-label">Project Details &amp; Surface Description</label>
-              <textarea class="form-textarea" placeholder="Tell us about the surfaces (oil stains, grease traps, gum, stucco height, delicate landscaping, gate access codes)..."></textarea>
+              <textarea class="form-textarea" id="pws_notes" name="notes" placeholder="Tell us about the surfaces (oil stains, grease traps, gum, stucco height, delicate landscaping, gate access codes)..."></textarea>
             </div>
 
             <!-- File Upload Dropzone -->
             <div class="form-group">
               <label class="form-label">Attach Photos or Scope Documents (Optional)</label>
-              <div class="file-dropzone-box" onclick="alert('Photo upload dialog ready. You can also email photos directly to aloha@hygeiaservices.com.');">
+              <div class="file-dropzone-box" onclick="alert('Photo upload ready. You can also email photos directly to aloha@hygeiaservices.com.');">
                 <svg class="file-dropzone-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 <div class="file-dropzone-title">Click to attach photos or RFP documents</div>
                 <div class="file-dropzone-sub">PNG, JPG, PDF up to 25MB · Accelerates estimate accuracy</div>
@@ -1100,7 +1100,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="quote-submit-btn">
+            <button type="submit" id="pwsSubmitBtn" class="quote-submit-btn">
               <span>Submit Estimate Request &amp; Photos</span>
               <span>→</span>
             </button>
