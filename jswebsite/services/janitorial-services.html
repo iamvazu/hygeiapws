@@ -116,6 +116,12 @@
     .mobile-menu-overlay.open {
       display: block !important;
     }
+    @media (max-width: 900px) {
+      .calc-inner-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+    }
     @media (max-width: 1024px) {
       .nav-menu { display: none !important; }
       .mobile-toggle { display: flex !important; }
@@ -593,7 +599,135 @@
 </table>
 </div>
 </div>
-<!-- FAQ Section -->
+
+  <!-- Interactive Commercial Facility Rate Estimator -->
+  <section class="calculator-container-wrap" style="margin: 50px 0 60px 0;">
+    <div style="background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.12) 0%, transparent 60%), linear-gradient(135deg, #0B132B 0%, #0F172A 100%); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 20px; padding: 44px 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #F59E0B, #D97706, transparent);"></div>
+      
+      <div style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
+        <span style="color: #F59E0B; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-mono); background: rgba(245, 158, 11, 0.12); padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(245, 158, 11, 0.25); display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px;">
+          <span>⚡ Transparent Operational Scope</span>
+        </span>
+        <h2 style="font-family: var(--font-heading); font-size: clamp(26px, 3.5vw, 36px); font-weight: 900; color: #FFFFFF; margin: 0 0 10px 0; line-height: 1.25;">
+          Interactive Commercial <span style="background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rate Estimator</span>
+        </h2>
+        <p style="font-size: 15px; color: #94A3B8; margin: 0; line-height: 1.6;">
+          Configure your facility square footage, industry sector, and schedule to calculate an instant baseline monthly janitorial investment.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center;" class="calc-inner-grid">
+        <!-- Controls Column -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <!-- Slider -->
+          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #FFFFFF;">Building / Facility Size (Sq. Ft.)</span>
+              <span id="janitorSqftDisplay" style="font-family: var(--font-mono); font-size: 17px; font-weight: 800; color: #FCD34D; background: rgba(245, 158, 11, 0.12); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.3);">25,000 sq ft</span>
+            </div>
+            <input type="range" id="janitorSqftSlider" min="3000" max="150000" step="1000" value="25000" oninput="calculateJanitorialRate()" style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.15); border-radius: 999px; outline: none; -webkit-appearance: none; accent-color: #F59E0B; cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #64748B; font-family: var(--font-mono); margin-top: 8px;">
+              <span>3,000 sq ft</span>
+              <span>75,000 sq ft</span>
+              <span>150,000+ sq ft</span>
+            </div>
+          </div>
+
+          <!-- Facility Vertical Dropdown -->
+          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 22px;">
+            <label for="janitorFacilityType" style="display: block; font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;">Facility Vertical / Compliance Standard</label>
+            <div style="position: relative;">
+              <select id="janitorFacilityType" onchange="calculateJanitorialRate()" style="width: 100%; height: 48px; background: #0B132B; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 0 16px; color: #FFFFFF; font-family: var(--font-body); font-size: 14px; outline: none; cursor: pointer;">
+                <option value="1.0">Corporate Tech Office / Commercial High-Rise</option>
+                <option value="1.35">Medical Outpatient Clinic / Surgical Facility (CDC Tier 1)</option>
+                <option value="1.20">Life Sciences / Cleanroom Particulate Maintenance</option>
+                <option value="0.95">School / Educational Campus (Green Seal Safe)</option>
+                <option value="1.25">Commercial Kitchen &amp; Restaurant (Nightly Degrease)</option>
+                <option value="1.05">Industrial &amp; Logistics R&amp;D Warehouse</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cleaning Service Frequency Dropdown -->
+          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px 22px;">
+            <label for="janitorServiceFreq" style="display: block; font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 10px;">Cleaning Service Frequency</label>
+            <div style="position: relative;">
+              <select id="janitorServiceFreq" onchange="calculateJanitorialRate()" style="width: 100%; height: 48px; background: #0B132B; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 0 16px; color: #FFFFFF; font-family: var(--font-body); font-size: 14px; outline: none; cursor: pointer;">
+                <option value="1.0">5 Days / Week (Standard Nightly Janitorial)</option>
+                <option value="1.3">7 Days / Week (Full Enterprise Coverage)</option>
+                <option value="0.65">3 Days / Week (Hybrid / Flexible Schedule)</option>
+                <option value="1.85">Nightly Janitorial + Dedicated Day Porter Staffing</option>
+                <option value="0.45">1-2 Days / Week (Small Office / Targeted Upkeep)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Box Column -->
+        <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 19, 43, 0.98) 100%); border: 1px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 36px 30px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.12); position: relative;">
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: #FCD34D; letter-spacing: 1px; text-transform: uppercase; background: rgba(245, 158, 11, 0.12); padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(245, 158, 11, 0.3); margin-bottom: 14px;">
+            ⚡ Estimated Silicon Valley Monthly Retainer
+          </span>
+          <div id="janitorPriceDisplay" style="font-family: var(--font-heading); font-size: 46px; font-weight: 900; color: #FFFFFF; margin-bottom: 6px; letter-spacing: -0.02em;">
+            $2,850 <span style="font-size: 16px; color: #94A3B8; font-weight: 600; font-family: var(--font-body);">/ month</span>
+          </div>
+          <p id="janitorCalcSubtext" style="font-size: 13.5px; color: #CBD5E1; line-height: 1.6; margin: 0 0 24px 0; max-width: 320px;">
+            Includes dedicated crew, EPA List N virucides, CRI Gold HEPA vacuuming, touchpoint disinfection, and QR audit logging.
+          </p>
+          <div style="width: 100%;">
+            <a href="../contact.html" class="btn-pws-crosslink" style="width: 100%; justify-content: center; padding: 16px; font-size: 15px; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
+              <span>Lock In 24-Hr Site Walk &amp; Proposal</span>
+              <span style="font-size: 18px;">→</span>
+            </a>
+          </div>
+          <div style="margin-top: 16px; font-size: 11.5px; color: #94A3B8; font-family: var(--font-mono); display: flex; align-items: center; gap: 6px;">
+            <span style="color: #10B981;">✓</span>
+            <span>State of CA DVBE #2054658 · No-Obligation Facility Walk</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Calculator Controller Script -->
+  <script>
+    function calculateJanitorialRate() {
+      const slider = document.getElementById('janitorSqftSlider');
+      const sqftDisplay = document.getElementById('janitorSqftDisplay');
+      const facilitySelect = document.getElementById('janitorFacilityType');
+      const freqSelect = document.getElementById('janitorServiceFreq');
+      const priceDisplay = document.getElementById('janitorPriceDisplay');
+      const subtext = document.getElementById('janitorCalcSubtext');
+
+      if (!slider || !sqftDisplay || !facilitySelect || !freqSelect || !priceDisplay) return;
+
+      const sqft = parseInt(slider.value, 10);
+      const facMult = parseFloat(facilitySelect.value);
+      const freqMult = parseFloat(freqSelect.value);
+
+      sqftDisplay.textContent = `${sqft.toLocaleString()} sq ft`;
+
+      // Commercial Silicon Valley baseline model:
+      // ~$0.088/sqft baseline modulated by frequency multiplier and compliance complexity
+      const baseMonthly = Math.max(850, Math.round(sqft * 0.088 * facMult * freqMult));
+      priceDisplay.innerHTML = `$${baseMonthly.toLocaleString()} <span style="font-size:16px;color:#94A3B8;font-weight:600;font-family:var(--font-body);">/ month</span>`;
+
+      if (freqMult >= 1.8) {
+        subtext.textContent = 'Includes dedicated daytime porter staffing + nightly comprehensive terminal janitorial crews, EPA List N chemicals, and supervisor QA.';
+      } else if (facMult >= 1.3) {
+        subtext.textContent = 'Includes clinical healthcare terminal cleaning protocols, CDC compliance disinfection logs, and biohazard surface barriers.';
+      } else if (sqft >= 60000) {
+        subtext.textContent = 'Includes multi-person campus team, industrial auto-scrubbers, CRI Gold HEPA filtration, and daily supervisor walkthroughs.';
+      } else {
+        subtext.textContent = 'Includes dedicated crew, EPA List N virucides, CRI Gold HEPA vacuuming, touchpoint disinfection, and QR audit logging.';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', calculateJanitorialRate);
+    window.calculateJanitorialRate = calculateJanitorialRate;
+  </script>
+
+  <!-- FAQ Section -->
 <div style="background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-xl);padding:40px;margin-bottom:52px;">
 <div style="text-align:center;max-width:680px;margin:0 auto 32px auto;">
 <span class="eyebrow-tag">Frequently Asked Questions</span>
