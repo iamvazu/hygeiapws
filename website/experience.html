@@ -139,7 +139,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000000;
+      background: #000000 url('assets/img/scene1_hero.jpg') center center / cover no-repeat;
       transition: opacity 0.5s ease;
     }
 
@@ -3017,6 +3017,13 @@
         new Image(),
         new Image()
       ];
+      actPosters.forEach((p) => {
+        p.onload = () => {
+          if (!lastRenderedImg) {
+            renderFrame(currentFrameIndex);
+          }
+        };
+      });
       actPosters[0].src = 'assets/img/scene1_hero.jpg';
       actPosters[1].src = 'assets/img/scene2_hero.jpg';
       actPosters[2].src = 'assets/img/scene3_hero.jpg';
@@ -3088,7 +3095,13 @@
           const idx = i - 1;
           const img = new Image();
           img.src = `assets/frames/scene1/frame_${padZero(i)}.webp`;
-          img.onload = () => { allImages[idx] = img; checkProgress(); };
+          img.onload = () => {
+            allImages[idx] = img;
+            checkProgress();
+            if (!lastRenderedImg || idx === 0) {
+              renderFrame(currentFrameIndex);
+            }
+          };
           img.onerror = () => { checkProgress(); };
         }
 
@@ -3305,7 +3318,7 @@
       function startRenderLoop() {
         function loop() {
           const diff = targetFrameIndex - currentFrameIndex;
-          if (Math.abs(diff) > 0.05) {
+          if (Math.abs(diff) > 0.05 || !lastRenderedImg) {
             currentFrameIndex += diff * 0.22;
             renderFrame(currentFrameIndex);
           }
