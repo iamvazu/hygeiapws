@@ -50,21 +50,17 @@ app.use('/api/stripe', require('./routes/stripe'));
 // Serve static frontend files if hosted together on Hostinger VPS
 const websitePath = path.join(__dirname, '..', 'website');
 const jswebsitePath = path.join(__dirname, '..', 'jswebsite');
+const adminPath = path.join(__dirname, '..', 'admin');
+const portalPath = path.join(__dirname, '..', 'portal');
 
+app.use('/admin', express.static(adminPath));
+app.use('/portal', express.static(portalPath));
 app.use('/pws', express.static(websitePath));
 app.use('/janitorial', express.static(jswebsitePath));
 
 // Static asset fallbacks for nested /app/ paths and shared assets
 app.use('/app/assets', express.static(path.join(websitePath, 'assets')));
 app.use('/assets', express.static(path.join(websitePath, 'assets')));
-
-// Direct admin and portal routes
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(jswebsitePath, 'admin.html'));
-});
-app.get('/portal', (req, res) => {
-  res.sendFile(path.join(jswebsitePath, 'portal.html'));
-});
 
 // Root redirect to PWS frontend
 app.get('/', (req, res) => {
