@@ -431,8 +431,9 @@
         <h3>B. Functional &amp; Preference Cookies</h3>
         <p>These cookies allow our website to remember choices you make while interacting with our site (such as your preferred enterprise division view in admin consoles, or square footage selections in interactive calculators). Their purpose is to provide an optimized, personalized user experience.</p>
 
-        <h3>C. Performance &amp; Diagnostic Telemetry</h3>
-        <p>These cookies collect aggregated, non-personally identifiable diagnostic information regarding site stability, asset loading speeds, and network responsiveness. They assist our technical team in verifying that California regional servers are responding rapidly and that digital dispatch forms are functioning correctly.</p>
+        <h3>C. Performance &amp; Web Analytics Telemetry (Google Analytics)</h3>
+        <p>These cookies collect aggregated, pseudonymous information regarding website traffic volume, visitor navigation pathways, session durations, and user interactions with our service calculators. We use <strong>Google Analytics (GA4)</strong> and <strong>Google Search Console</strong> to understand which pages (such as commercial cleaning services, day porter options, and facility sector pages) are most useful to commercial property managers, measure page loading speeds, and detect server-side errors.</p>
+        <p>Google Analytics operates with IP masking/anonymization enabled to protect individual visitor identities. We do not use Google Analytics to identify specific visitors or merge analytics data with personally identifiable customer information.</p>
 
         <h2 id="sec-cookie-table">4. Detailed Cookie Inventory</h2>
         <div style="overflow-x:auto;margin:24px 0;">
@@ -462,20 +463,41 @@
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">24 Hours</td>
               </tr>
               <tr style="background:#FFFFFF;">
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">_ga</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">HTTP Cookie</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Analytics</span></td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">Google Analytics primary identifier used to distinguish unique visitors and calculate visitor sessions.</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">2 Years</td>
+              </tr>
+              <tr style="background:#F8FAFC;">
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">_ga_* (Container ID)</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">HTTP Cookie</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Analytics</span></td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">Google Analytics 4 session tracker used to maintain session status and page visit flow.</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">2 Years</td>
+              </tr>
+              <tr style="background:#FFFFFF;">
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">_gid</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">HTTP Cookie</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Analytics</span></td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">Google Analytics 24-hour identifier used to group pageviews across a single day's visit.</td>
+                <td style="padding:10px 14px;border:1px solid #E2E8F0;">24 Hours</td>
+              </tr>
+              <tr style="background:#F8FAFC;">
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">hyg_calc_sqft</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">Local Storage</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#F0FDF4;color:#166534;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Functional</span></td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">Preserves selected square footage in the Janitorial Price Estimator.</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">30 Days</td>
               </tr>
-              <tr style="background:#F8FAFC;">
+              <tr style="background:#FFFFFF;">
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">hyg_calc_frequency</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">Local Storage</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#F0FDF4;color:#166534;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Functional</span></td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">Preserves selected cleaning frequency (e.g. 5 nights/week, Day Porter).</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">30 Days</td>
               </tr>
-              <tr style="background:#FFFFFF;">
+              <tr style="background:#F8FAFC;">
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;font-family:monospace;font-weight:700;color:#0A2533;">cookie_consent</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;">Cookie</td>
                 <td style="padding:10px 14px;border:1px solid #E2E8F0;"><span style="background:#F0FDF4;color:#166534;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;">Functional</span></td>
@@ -505,6 +527,7 @@
           <li><strong>Mozilla Firefox:</strong> Settings &gt; Privacy &amp; Security &gt; Enhanced Tracking Protection.</li>
           <li><strong>Microsoft Edge:</strong> Settings &gt; Cookies and site permissions &gt; Manage and delete cookies.</li>
         </ul>
+        <p><strong>Opting Out of Google Analytics:</strong> In addition to browser-level cookie controls, you may specifically opt out of having your page visits, dwell time, and interaction pathways recorded by Google Analytics by installing the official <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener" style="color:#0090FF;font-weight:700;">Google Analytics Opt-out Browser Add-on</a>.</p>
         <div class="legal-highlight-box" style="background:#FEF3C7;border-left-color:#F59E0B;color:#92400E;">
           <strong>Important Operational Note:</strong> If you elect to block or disable all cookies in your browser, the public marketing pages of our website will continue to display normally. However, you will be unable to log into the <strong>Hygeia Client Portal</strong> or access live work orders, as encrypted session tokens are necessary for authorized identity verification.
         </div>
