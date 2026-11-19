@@ -319,7 +319,7 @@ a {
    ========================================================================== */
 .hero {
   position: relative;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.65) 45%, rgba(255, 255, 255, 0.22) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/janitorial_hero_crew.jpg') center right / cover no-repeat;
   padding: 80px 0 95px 0;
   border-bottom: 1px solid var(--border-light);
@@ -327,47 +327,47 @@ a {
 }
 
 .hero-commercial {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/janitorial_hero_crew.jpg') center right / cover no-repeat !important;
 }
 
 .hero-tech-campus {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/tech-campus.jpg') center right / cover no-repeat !important;
 }
 
 .hero-healthcare {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/healthcare-medical.jpg') center right / cover no-repeat !important;
 }
 
 .hero-property-mgmt {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/property-management.jpg') center right / cover no-repeat !important;
 }
 
 .hero-schools {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/schools-daycares.jpg') center right / cover no-repeat !important;
 }
 
 .hero-restaurants {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/restaurants-dining.jpg') center right / cover no-repeat !important;
 }
 
 .hero-retail {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/sectors/retail-showrooms.jpg') center right / cover no-repeat !important;
 }
 
 .hero-bin {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/bin-hero-bg.jpg') center right / cover no-repeat !important;
 }
 
 .hero-residential {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.20) 100%),
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
               url('../img/residential-hero-bg.jpg') center right / cover no-repeat !important;
 }
 
@@ -2100,20 +2100,36 @@ html, body {
 }
 
 /* ==========================================================================
-   FOOTER (MODERN, CLEAN WITH OFFICIAL CALIFORNIA STATE CERTIFICATIONS)
+   FOOTER (EXECUTIVE CYBER-NAVY THEME - CALIFORNIA STATE CERTIFIED)
    ========================================================================== */
 .site-footer {
-  background: #FFFFFF;
-  color: var(--ink-secondary);
+  background: radial-gradient(circle at 50% 0%, #0F2537 0%, #081622 55%, #040D14 100%) !important;
+  color: #94A3B8 !important;
   padding: 0;
-  border-top: 1px solid var(--border-light);
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, #00F0FF 0%, #F59E0B 50%, #0284C7 100%) 1 !important;
   font-size: 14.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.45) 0%, rgba(0, 240, 255, 0) 70%);
+  pointer-events: none;
 }
 
 /* Pre-Footer State of California Certification Trust Band */
 .footer-cert-band {
-  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
-  border-bottom: 1px solid var(--border-light);
+  background: rgba(8, 26, 40, 0.78) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 38px 0;
 }
 
@@ -2136,7 +2152,7 @@ html, body {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
-  color: #0284C7;
+  color: #38BDF8 !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 4px;
@@ -2146,19 +2162,19 @@ html, body {
   font-family: var(--font-heading);
   font-size: 20px;
   font-weight: 800;
-  color: var(--brand-navy);
+  color: #FFFFFF !important;
   margin: 0 0 6px 0;
 }
 
 .cert-band-sub {
   font-size: 13px;
-  color: var(--ink-secondary);
+  color: #94A3B8 !important;
   line-height: 1.5;
   margin: 0;
 }
 
 .cert-band-sub strong {
-  color: var(--brand-navy);
+  color: #38BDF8 !important;
 }
 
 .footer-cert-logos {
@@ -2169,21 +2185,24 @@ html, body {
 }
 
 .footer-cert-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 144, 255, 0.2);
+  background: rgba(15, 37, 55, 0.65) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
   border-radius: 12px;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 4px 12px rgba(10, 37, 51, 0.04);
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
 }
 
 .footer-cert-card:hover {
   transform: translateY(-2px);
-  border-color: var(--brand-cyan);
-  box-shadow: 0 8px 20px rgba(0, 144, 255, 0.12);
+  border-color: #38BDF8 !important;
+  background: rgba(20, 48, 72, 0.85) !important;
+  box-shadow: 0 12px 28px rgba(0, 240, 255, 0.2) !important;
 }
 
 .footer-cert-img {
@@ -2191,6 +2210,9 @@ html, body {
   width: auto;
   object-fit: contain;
   display: block;
+  background: #FFFFFF;
+  padding: 3px 6px;
+  border-radius: 6px;
 }
 
 .footer-cert-text {
@@ -2202,13 +2224,13 @@ html, body {
   font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 800;
-  color: var(--brand-navy);
+  color: #F8FAFC !important;
 }
 
 .footer-cert-text span {
   font-size: 11px;
   font-weight: 600;
-  color: #0284C7;
+  color: #38BDF8 !important;
 }
 
 /* Main Footer Content */
@@ -2221,7 +2243,7 @@ html, body {
   grid-template-columns: 1.4fr 1fr 1.1fr 1.1fr;
   gap: 44px;
   padding-bottom: 48px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .footer-brand {
@@ -2238,7 +2260,7 @@ html, body {
   margin: 0 auto 14px auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 4px 16px rgba(0, 144, 255, 0.18));
+  filter: drop-shadow(0 4px 16px rgba(0, 240, 255, 0.25));
   transition: transform var(--transition-fast);
 }
 
@@ -2249,7 +2271,7 @@ html, body {
 .footer-desc {
   font-size: 13.5px;
   line-height: 1.6;
-  color: var(--ink-secondary);
+  color: #94A3B8 !important;
   margin: 0 auto 16px auto;
   max-width: 320px;
   text-align: center;
@@ -2263,31 +2285,43 @@ html, body {
 }
 
 .cert-badge {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
+  background: rgba(15, 37, 55, 0.75) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
   padding: 5px 12px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  color: var(--brand-navy);
+  color: #E2E8F0 !important;
   letter-spacing: 0.04em;
 }
 
 .cert-badge-gold {
-  background: #FEF3C7;
-  border-color: #FDE68A;
-  color: #B45309;
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: rgba(245, 158, 11, 0.45) !important;
+  color: #FBBF24 !important;
 }
 
 .footer-col h4 {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 800;
-  color: var(--brand-navy);
+  color: #FFFFFF !important;
   margin-bottom: 18px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col h4::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: linear-gradient(180deg, #00F0FF 0%, #0284C7 100%);
+  border-radius: 2px;
 }
 
 .footer-links {
@@ -2300,15 +2334,16 @@ html, body {
 }
 
 .footer-links a {
-  color: var(--ink-secondary);
+  color: #CBD5E1 !important;
   font-size: 14px;
   transition: color var(--transition-fast), transform var(--transition-fast);
   display: inline-block;
 }
 
 .footer-links a:hover {
-  color: var(--brand-cyan);
-  transform: translateX(3px);
+  color: #00F0FF !important;
+  transform: translateX(4px);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
 }
 
 .footer-sa-columns {
@@ -2325,7 +2360,7 @@ html, body {
   gap: 16px;
   padding: 24px 0 32px 0;
   font-size: 13px;
-  color: var(--ink-muted);
+  color: #64748B !important;
 }
 
 .footer-legal-links {
@@ -2336,12 +2371,66 @@ html, body {
 }
 
 .footer-legal-links a {
-  color: var(--ink-muted);
+  color: #94A3B8 !important;
   transition: color var(--transition-fast);
 }
 
 .footer-legal-links a:hover {
-  color: var(--brand-cyan);
+  color: #00F0FF !important;
+}
+
+/* Service area pills in dark footer */
+.footer-sa-pill-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+.footer-sa-pill-strip h5 {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  color: #FFFFFF !important;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-sa-pill-strip h5::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 12px;
+  background: #F59E0B;
+  border-radius: 2px;
+}
+
+.footer-sa-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.footer-sa-pills-list a {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #94A3B8 !important;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer-sa-pills-list a:hover {
+  background: rgba(0, 240, 255, 0.14) !important;
+  border-color: #00F0FF !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 240, 255, 0.25);
 }
 
 @media (max-width: 1024px) {

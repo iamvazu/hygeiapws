@@ -40,9 +40,63 @@
   <link rel="apple-touch-icon" href="../assets/img/truck.webp"/>
 
     <!-- Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="../assets/css/main.css?v=5.0.0"/>
+  <link rel="stylesheet" href="../assets/css/main.css?v=5.3.0"/>
 
   
+  <!-- Critical Defensive Styles (v5.3.0) - Hero Background Visibility & Executive Cyber-Navy Footer -->
+  <style>
+    .hero.hero-commercial {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%),
+                  url('../assets/img/janitorial_carpet_steam.jpg') center right / cover no-repeat !important;
+    }
+    .site-footer {
+      background: radial-gradient(circle at 50% 0%, #0F2537 0%, #081622 55%, #040D14 100%) !important;
+      color: #94A3B8 !important;
+      border-top: 3px solid transparent;
+      border-image: linear-gradient(90deg, #00F0FF 0%, #F59E0B 50%, #0284C7 100%) 1 !important;
+    }
+    .footer-cert-band {
+      background: rgba(8, 26, 40, 0.78) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .footer-cert-card {
+      background: rgba(15, 37, 55, 0.65) !important;
+      border: 1px solid rgba(56, 189, 248, 0.25) !important;
+    }
+    .footer-col h4 {
+      color: #FFFFFF !important;
+    }
+    .footer-links a {
+      color: #CBD5E1 !important;
+    }
+    .footer-links a:hover {
+      color: #00F0FF !important;
+    }
+    .scope-pillar-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      box-shadow: 0 4px 16px rgba(10, 37, 51, 0.04);
+      transition: all 0.25s ease;
+    }
+    .scope-pillar-card:hover {
+      transform: translateY(-3px);
+      border-color: #00F0FF;
+      box-shadow: 0 12px 28px rgba(0, 144, 255, 0.12);
+    }
+    .spec-badge {
+      display: inline-block;
+      background: #F1F5F9;
+      color: #0F172A;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+  </style>
   <!-- Critical Mobile Nav & Drawer Styles (v5.0.0) -->
   <style>
     .mobile-nav-drawer {
@@ -294,7 +348,7 @@
   </header>
   <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileNav(true)"></div>
 
-  <section class="hero hero-subpage hero-commercial">
+  <section class="hero hero-subpage hero-commercial" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.50) 45%, rgba(255, 255, 255, 0.10) 100%), url('../assets/img/janitorial_carpet_steam.jpg') center right / cover no-repeat !important;">
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-content">
@@ -388,45 +442,68 @@
         <p>Deep Thermal Hot Water Extraction & Upholstery Care</p>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:20px;margin-bottom:48px;" class="city-grid">
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
+      <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px;margin-bottom:48px;" class="city-grid">
+        <div class="scope-pillar-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;">♨️</div>
+            <div>
+              <span style="font-size:11px;font-weight:800;color:#0284C7;text-transform:uppercase;letter-spacing:0.08em;font-family:var(--font-mono);">Pillar 01 · Thermal Extraction</span>
+              <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--brand-navy);margin:0;">212°F Truck-Mount Hot Water Extraction</h3>
+            </div>
+          </div>
+          <p style="font-size:14px;color:var(--ink-secondary);line-height:1.6;margin-bottom:14px;">
+            High-powered truck-mounted extraction generating 212°F steam and 500+ PSI water injection to dissolve grease, beverage spills, and deeply trapped soil from commercial carpet tiles, immediately vacuumed away with dual 3-stage blowers.
+          </p>
           <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Truck-mounted and portable high-heat steam extraction</strong>
+            <span class="spec-badge">212°F Thermal Steam</span><span class="spec-badge">500 PSI Injection</span><span class="spec-badge">Dual Blower Vacuum</span><span class="spec-badge">Deep Soil Removal</span>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
+        <div class="scope-pillar-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;">⏱️</div>
+            <div>
+              <span style="font-size:11px;font-weight:800;color:#0284C7;text-transform:uppercase;letter-spacing:0.08em;font-family:var(--font-mono);">Pillar 02 · Fast-Dry Tech</span>
+              <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--brand-navy);margin:0;">Low-Moisture Encapsulation Cleaning</h3>
+            </div>
+          </div>
+          <p style="font-size:14px;color:var(--ink-secondary);line-height:1.6;margin-bottom:14px;">
+            For active tech campuses requiring rapid turnarounds, our polymer encapsulation technology crystalizes dirt particles for dry vacuum extraction within 45 to 60 minutes, preventing wick-back and eliminating downtime.
+          </p>
           <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Encapsulation low-moisture cleaning for fast drying times</strong>
+            <span class="spec-badge">60-Min Dry Times</span><span class="spec-badge">Polymer Crystal Suspension</span><span class="spec-badge">No Wick-Back</span><span class="spec-badge">Ideal for Tech Campuses</span>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
+        <div class="scope-pillar-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;">🎯</div>
+            <div>
+              <span style="font-size:11px;font-weight:800;color:#0284C7;text-transform:uppercase;letter-spacing:0.08em;font-family:var(--font-mono);">Pillar 03 · Spot Treatment</span>
+              <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--brand-navy);margin:0;">Targeted Traffic Lane & Spill Remediation</h3>
+            </div>
+          </div>
+          <p style="font-size:14px;color:var(--ink-secondary);line-height:1.6;margin-bottom:14px;">
+            Pre-treating high-traffic corridors, elevator vestibules, coffee stations, and food service spill zones with specialized enzymatic digesters and solvent pre-sprays that dissolve stubborn coffee, ink, soda, and grease spots.
+          </p>
           <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Targeted spot and stain removal (coffee, ink, food grease)</strong>
+            <span class="spec-badge">Enzymatic Pre-Spray</span><span class="spec-badge">Traffic Lane Agitation</span><span class="spec-badge">Coffee & Ink Eradication</span><span class="spec-badge">Odor Elimination</span>
           </div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
-          <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Fabric and leather executive chair and sofa upholstery cleaning</strong>
+        <div class="scope-pillar-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;">🛡️</div>
+            <div>
+              <span style="font-size:11px;font-weight:800;color:#0284C7;text-transform:uppercase;letter-spacing:0.08em;font-family:var(--font-mono);">Pillar 04 · Fiber Defense</span>
+              <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:var(--brand-navy);margin:0;">Fluorochemical Anti-Resoiling Shield</h3>
+            </div>
           </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
+          <p style="font-size:14px;color:var(--ink-secondary);line-height:1.6;margin-bottom:14px;">
+            Post-cleaning application of commercial-grade fluorochemical carpet protection that bonds to carpet fibers, creating an invisible protective barrier repelling liquid spills, dry abrasion, and oil-based contamination.
+          </p>
           <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Odor neutralization and hypoallergenic green detergents</strong>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;background:#FFFFFF;border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-subtle);">
-          <div style="width:28px;height:28px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;">✓</div>
-          <div>
-            <strong style="font-family:var(--font-heading);font-size:16px;color:var(--brand-navy);display:block;margin-bottom:4px;">Scheduled lifecycle maintenance to protect carpet warranties</strong>
+            <span class="spec-badge">CRI Approved Protectant</span><span class="spec-badge">Liquid Repellency</span><span class="spec-badge">Wear Layer Preservation</span><span class="spec-badge">Extended Carpet Lifespan</span>
           </div>
         </div>
       </div>
-
       <div style="text-align:center;margin-top:40px;">
         <span class="eyebrow-tag">Explore Additional Services</span>
         <div style="display:flex;gap:12px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
@@ -575,10 +652,27 @@
       </div>
 
       <!-- Service Areas Directory Strip -->
-      <div style="border-top:1px solid var(--border-light);padding-top:24px;margin-top:24px;">
-        <h5 style="font-family:var(--font-heading);font-size:13px;font-weight:800;color:var(--brand-navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;">Bay Area Service Areas</h5>
-        <div style="display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;">
-          <a href="../service-areas/santa-clara.html" style="color:var(--ink-secondary);">Santa Clara</a> <a href="../service-areas/san-jose.html" style="color:var(--ink-secondary);">San Jose</a> <a href="../service-areas/sunnyvale.html" style="color:var(--ink-secondary);">Sunnyvale</a> <a href="../service-areas/mountain-view.html" style="color:var(--ink-secondary);">Mountain View</a> <a href="../service-areas/palo-alto.html" style="color:var(--ink-secondary);">Palo Alto</a> <a href="../service-areas/menlo-park.html" style="color:var(--ink-secondary);">Menlo Park</a> <a href="../service-areas/redwood-city.html" style="color:var(--ink-secondary);">Redwood City</a> <a href="../service-areas/san-carlos.html" style="color:var(--ink-secondary);">San Carlos</a> <a href="../service-areas/san-mateo.html" style="color:var(--ink-secondary);">San Mateo</a> <a href="../service-areas/san-bruno.html" style="color:var(--ink-secondary);">San Bruno</a> <a href="../service-areas/los-altos.html" style="color:var(--ink-secondary);">Los Altos</a> <a href="../service-areas/cupertino.html" style="color:var(--ink-secondary);">Cupertino</a> <a href="../service-areas/milpitas.html" style="color:var(--ink-secondary);">Milpitas</a> <a href="../service-areas/fremont.html" style="color:var(--ink-secondary);">Fremont</a> <a href="../service-areas/newark.html" style="color:var(--ink-secondary);">Newark</a> <a href="../service-areas/hayward.html" style="color:var(--ink-secondary);">Hayward</a> <a href="../service-areas/dublin.html" style="color:var(--ink-secondary);">Dublin</a> <a href="../service-areas/morgan-hill.html" style="color:var(--ink-secondary);">Morgan Hill</a>
+      <div class="footer-sa-pill-strip">
+        <h5>Bay Area Service Areas</h5>
+        <div class="footer-sa-pills-list">
+          <a href="../service-areas/santa-clara.html">Santa Clara</a>
+          <a href="../service-areas/san-jose.html">San Jose</a>
+          <a href="../service-areas/sunnyvale.html">Sunnyvale</a>
+          <a href="../service-areas/mountain-view.html">Mountain View</a>
+          <a href="../service-areas/palo-alto.html">Palo Alto</a>
+          <a href="../service-areas/menlo-park.html">Menlo Park</a>
+          <a href="../service-areas/redwood-city.html">Redwood City</a>
+          <a href="../service-areas/san-carlos.html">San Carlos</a>
+          <a href="../service-areas/san-mateo.html">San Mateo</a>
+          <a href="../service-areas/san-bruno.html">San Bruno</a>
+          <a href="../service-areas/los-altos.html">Los Altos</a>
+          <a href="../service-areas/cupertino.html">Cupertino</a>
+          <a href="../service-areas/milpitas.html">Milpitas</a>
+          <a href="../service-areas/fremont.html">Fremont</a>
+          <a href="../service-areas/newark.html">Newark</a>
+          <a href="../service-areas/hayward.html">Hayward</a>
+          <a href="../service-areas/dublin.html">Dublin</a>
+          <a href="../service-areas/morgan-hill.html">Morgan Hill</a>
         </div>
       </div>
 
