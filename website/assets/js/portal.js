@@ -6,12 +6,12 @@
 (function() {
   const API_BASE = (function() {
     if (typeof window !== 'undefined' && window.location) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return 'http://localhost:5000/api';
+      if (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return window.location.origin + '/api';
       }
-      return 'https://2.25.90.226.sslip.io/api';
+      return window.location.origin + '/api';
     }
-    return 'https://2.25.90.226.sslip.io/api';
+    return '/api';
   })();
 
   const TOKEN_KEY = 'hygeia_client_token';

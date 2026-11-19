@@ -54,6 +54,18 @@ const jswebsitePath = path.join(__dirname, '..', 'jswebsite');
 app.use('/pws', express.static(websitePath));
 app.use('/janitorial', express.static(jswebsitePath));
 
+// Static asset fallbacks for nested /app/ paths and shared assets
+app.use('/app/assets', express.static(path.join(websitePath, 'assets')));
+app.use('/assets', express.static(path.join(websitePath, 'assets')));
+
+// Direct admin and portal routes
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(jswebsitePath, 'admin.html'));
+});
+app.get('/portal', (req, res) => {
+  res.sendFile(path.join(jswebsitePath, 'portal.html'));
+});
+
 // Root redirect to PWS frontend
 app.get('/', (req, res) => {
   res.redirect('/pws/');
