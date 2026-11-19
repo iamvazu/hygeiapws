@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-  <title>The 3D Hydro Experience | Hygeia Power Wash Solutions</title>
-  <meta content="Interactive 3D scroll-walk experience demonstrating Hygeia's 200° hot-water high-pressure curbside bin sanitization, tech campus flatwork restoration, commercial dumpster pad degreasing, multi-story facade soft-washing, and 100% EPA wastewater reclamation in Silicon Valley." name="description"/>
+  <title>Hygeia Power Wash Solutions | 3D Silicon Valley Pressure Washing & Bin Cleaning</title>
+  <meta content="Silicon Valley's premier commercial pressure washing, residential power washing, and curbside trash bin cleaning. Experience our interactive 3D 200° hot-water wash rig, 100% EPA wastewater recovery, and instant pricing calculator. Serving San Jose, Santa Clara, Sunnyvale, Palo Alto, and Peninsula." name="description"/>
+  <meta name="keywords" content="pressure washing San Jose, power washing Silicon Valley, commercial pressure washing Bay Area, trash bin cleaning San Jose, concrete cleaning Santa Clara, EPA wastewater recovery, 200 degree hot water pressure washing, curbside bin sanitizing"/>
+  <link rel="canonical" href="https://hygeiapowerwash.com/"/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -513,51 +515,120 @@
       box-shadow: 0 0 16px rgba(0, 180, 216, 0.6);
     }
 
-    /* Live Telemetry Deck */
+    /* Live Telemetry Deck - Hidden for Clean Unobstructed View */
     .telemetry-hud {
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 18px;
-      padding: 14px 20px;
-      display: flex;
-      gap: 16px;
-      pointer-events: auto;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      display: none !important;
     }
 
-    .telemetry-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 80px;
-    }
-
-    .telemetry-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #A0AEC0;
+    /* Ecosystem Cross-Link Banner (Sister Division) */
+    .ecosystem-banner {
+      background: linear-gradient(135deg, rgba(13, 24, 36, 0.96) 0%, rgba(20, 26, 31, 0.98) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 24px;
+      padding: 36px 40px;
+      margin: 80px 0 40px 0;
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: space-between;
+      gap: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      flex-wrap: wrap;
     }
 
-    .telemetry-val {
-      font-family: var(--font-mono);
-      font-size: 16px;
+    .btn-janitorial-crosslink {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      color: #070D14 !important;
+      font-family: var(--font-heading);
+      font-size: 15px;
       font-weight: 900;
-      color: #00F0FF;
-      letter-spacing: -0.02em;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(255, 215, 0, 0.4);
+      transition: all 0.25s ease;
+      white-space: nowrap;
     }
 
-    .telemetry-val span {
-      font-size: 10px;
-      color: #FFFFFF;
-      font-weight: 600;
+    .btn-janitorial-crosslink:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(255, 215, 0, 0.6);
+      background: #FFFFFF;
+      color: #0A2533 !important;
+    }
+
+    /* State Certifications Band */
+    .footer-cert-band {
+      background: rgba(6, 23, 32, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 20px;
+      padding: 26px 32px;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-cert-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Service Areas Directory */
+    .service-areas-directory {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 36px;
+      margin-top: 40px;
+    }
+
+    .service-area-cat {
+      margin-bottom: 22px;
+    }
+
+    .service-area-cat-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 800;
+      color: #00F0FF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .city-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+    }
+
+    .city-pill-link {
+      color: #CBD5E1;
+      font-size: 13px;
+      padding: 7px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .city-pill-link:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: #00F0FF;
+      color: #00F0FF;
+      transform: translateY(-2px);
     }
 
     /* ========================================================================= */
@@ -1598,8 +1669,8 @@
 
     .footer-main-grid {
       display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1.5fr;
-      gap: 40px;
+      grid-template-columns: 1.5fr 1fr 1fr 1.1fr 1.3fr;
+      gap: 36px;
       margin-bottom: 50px;
     }
 
@@ -2005,34 +2076,34 @@
     <!-- Story Caption Deck -->
     <div class="story-caption-deck">
 
-      <!-- Card 1: Act I Scene 1 -->
+      <!-- Card 1: Curbside Trash Can Cleaning & Sanitizing -->
       <div class="story-card active" id="card1">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-truck"></i> ACT I · CH 01 · FLEET ARRIVAL</span>
-          <span class="spec-badge">⚡ 200°F Thermal Boiler</span>
+          <span class="story-tag"><i class="fa-solid fa-trash-can"></i> RESIDENTIAL TRASH CAN CLEANING</span>
+          <span class="spec-badge">🌿 100% Eco-Sanitized</span>
         </div>
-        <h2 class="story-title">Curbside <span>Hot-Water</span> Sanitization</h2>
+        <h2 class="story-title">Curbside Trash Can <span>Cleaning &amp; Sanitizing</span></h2>
         <p class="story-desc">
-          Our custom-engineered mobile rig pulls up on your designated trash day across Silicon Valley &amp; the Bay Area.
+          We clean, sanitize, and deodorize your residential trash, recycling, and compost cans right at your curb on your regular pickup day.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
             <span class="spec-badge">🚛 San Jose &amp; Peninsula</span>
             <span class="spec-badge">🛡️ CA DVBE #2054658</span>
           </div>
-          <a href="contact.html" class="story-btn-pill">Book Curbside Clean ➔</a>
+          <a href="bin-cleaning.html" class="story-btn-pill">Book Trash Can Clean ➔</a>
         </div>
       </div>
 
-      <!-- Card 2: Act I Scene 1 -->
+      <!-- Card 2: 99.9% Bacteria & Odor Removal -->
       <div class="story-card" id="card2">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-water"></i> ACT I · CH 02 · 4,000 PSI JET BLAST</span>
-          <span class="spec-badge">⏱️ Under 60 Sec per Can</span>
+          <span class="story-tag"><i class="fa-solid fa-sparkles"></i> 99.9% ODOR &amp; BACTERIA REMOVAL</span>
+          <span class="spec-badge">⚡ 200° Hot Water Steam</span>
         </div>
-        <h2 class="story-title">360° Rotating <span>Steam Jets</span></h2>
+        <h2 class="story-title">Smell-Free, Germ-Free <span>Clean Cans</span></h2>
         <p class="story-desc">
-          Dual rotary nozzles blast every interior square inch, liquefying encrusted grime, sludge, and bacteria in seconds.
+          Our 200° hot water high-pressure rotary spray blasts away bacteria, sticky grime, and pungent odors in under 60 seconds.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
@@ -2043,148 +2114,148 @@
         </div>
       </div>
 
-      <!-- Card 3: Act II Scene 2 -->
+      <!-- Card 3: Driveway & Sidewalk Concrete Pressure Washing -->
       <div class="story-card" id="card3">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-building"></i> ACT II · CH 03 · ROTARY RESTORATION</span>
-          <span class="spec-badge">🚀 2,500 RPM Rotary Bar</span>
+          <span class="story-tag"><i class="fa-solid fa-building"></i> COMMERCIAL CONCRETE PRESSURE WASHING</span>
+          <span class="spec-badge">🏢 Tech Campuses &amp; Plazas</span>
         </div>
-        <h2 class="story-title">Commercial <span>Flatwork Cleaner</span></h2>
+        <h2 class="story-title">Driveway, Sidewalk &amp; <span>Concrete Cleaning</span></h2>
         <p class="story-desc">
-          Industrial dual-jet surface cleaners glide across tech campus walkways—stripping away tire marks, gum, and deep oil stains.
+          Industrial surface cleaners restore commercial walkways, parking plazas, and sidewalks—removing stubborn oil spots, tire marks, and chewing gum.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
             <span class="spec-badge">🏢 15,000+ sq ft / hr</span>
-            <span class="spec-badge">✨ Zero Striping Lines</span>
+            <span class="spec-badge">✨ Streak-Free Surface</span>
           </div>
-          <a href="commercial-pressure-washing.html" class="story-btn-pill">Commercial Flatwork Specs ➔</a>
+          <a href="commercial-pressure-washing.html" class="story-btn-pill">Commercial Concrete Specs ➔</a>
         </div>
       </div>
 
-      <!-- Card 4: Act II Scene 2 -->
+      <!-- Card 4: Corporate Curb Appeal & Clean Walkways -->
       <div class="story-card" id="card4">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> ACT II · CH 04 · SHOWROOM FINISH</span>
-          <span class="spec-badge">💎 Class A Finish</span>
+          <span class="story-tag"><i class="fa-solid fa-shield-halved"></i> CORPORATE CURB APPEAL</span>
+          <span class="spec-badge">💎 Showroom Quality</span>
         </div>
-        <h2 class="story-title">Streak-Free <span>Pristine Concrete</span></h2>
+        <h2 class="story-title">Spotless Walkways &amp; <span>Corporate Entryways</span></h2>
         <p class="story-desc">
-          Uniform hydraulic pressure prevents etching while returning Silicon Valley corporate plazas to showroom-grade curb appeal.
+          Keep corporate headquarters, business parks, and retail centers clean, safe, and slip-free for employees, customers, and visitors.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
-            <span class="spec-badge">🏢 Tech Plaza Ready</span>
-            <span class="spec-badge">📋 DIR #JS-LR-100 132 4606</span>
+            <span class="spec-badge">🏢 Silicon Valley Plazas</span>
+            <span class="spec-badge">📋 DIR Public Works Certified</span>
           </div>
           <a href="contact.html" class="story-btn-pill">Schedule Campus Walk ➔</a>
         </div>
       </div>
 
-      <!-- Card 5: Act III Scene 3 -->
+      <!-- Card 5: Dumpster Pad Cleaning & Degreasing -->
       <div class="story-card" id="card5">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-fire-burner"></i> ACT III · CH 05 · DEGREASING</span>
-          <span class="spec-badge">🔥 200° Hot Water Boiler</span>
+          <span class="story-tag"><i class="fa-solid fa-dumpster"></i> RESTAURANT &amp; RETAIL DUMPSTER PADS</span>
+          <span class="spec-badge">🔥 200° Hot-Water Degreasing</span>
         </div>
-        <h2 class="story-title">Thermal <span>Grease Vaporization</span></h2>
+        <h2 class="story-title">Commercial Dumpster Pad <span>Cleaning &amp; Degreasing</span></h2>
         <p class="story-desc">
-          Industrial 200° steam combined with EPA-approved bio-degreasers emulsifies thick black grease, oil slicks, and dumpster runoff.
+          We melt away thick cooking grease, dark oil spills, and foul odors around trash enclosures to keep your business clean and health-code ready.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
-            <span class="spec-badge">🧪 Eco Bio-Degreasers</span>
-            <span class="spec-badge">🏥 Health Inspection Pass</span>
+            <span class="spec-badge">🧪 EPA-Safe Degreasers</span>
+            <span class="spec-badge">🏥 Pass Health Inspections</span>
           </div>
           <a href="commercial-pressure-washing.html" class="story-btn-pill">Dumpster Pad Services ➔</a>
         </div>
       </div>
 
-      <!-- Card 6: Act III Scene 3 -->
+      <!-- Card 6: Sanitary Trash Enclosures & Odor Control -->
       <div class="story-card" id="card6">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-clipboard-check"></i> ACT III · CH 06 · ENCLOSURE SANITIZED</span>
-          <span class="spec-badge">🛡️ Odor &amp; Pest Remediation</span>
+          <span class="story-tag"><i class="fa-solid fa-clipboard-check"></i> ODOR &amp; PEST REMEDIATION</span>
+          <span class="spec-badge">🛡️ Clean &amp; Sanitary</span>
         </div>
-        <h2 class="story-title">Certified <span>Health Compliance</span></h2>
+        <h2 class="story-title">Sanitary Trash Enclosures &amp; <span>Odor Control</span></h2>
         <p class="story-desc">
-          Complete microbial sanitization eliminates nesting bacteria, insect attraction, and pungent grease runoff for retail &amp; restaurants.
+          Routine scheduled washings prevent greasy runoff, fly and rodent infestations, and costly municipal stormwater violation fines.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
-            <span class="spec-badge">🛡️ Retail &amp; HOA Ready</span>
-            <span class="spec-badge">⚡ Next-Day Service</span>
+            <span class="spec-badge">🛡️ Retail &amp; Restaurants</span>
+            <span class="spec-badge">⚡ 24/7 Rapid Dispatch</span>
           </div>
           <a href="contact.html" class="story-btn-pill">Request Pad Cleanup ➔</a>
         </div>
       </div>
 
-      <!-- Card 7: Act IV Scene 4 -->
+      <!-- Card 7: Commercial Building Exterior & Soft Washing -->
       <div class="story-card" id="card7">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-spray-can-sparkles"></i> ACT IV · CH 07 · FACADE SOFT-WASH</span>
-          <span class="spec-badge">🌿 100% Biodegradable Foam</span>
+          <span class="story-tag"><i class="fa-solid fa-building-circle-check"></i> EXTERIOR BUILDING CLEANING</span>
+          <span class="spec-badge">🏢 Up to 4 Stories Reach</span>
         </div>
-        <h2 class="story-title">Multi-Story <span>Exterior Soft-Wash</span></h2>
+        <h2 class="story-title">Commercial Building Exterior <span>&amp; Soft Washing</span></h2>
         <p class="story-desc">
-          Carbon-fiber water-fed extension poles apply gentle active bio-foam, dissolving atmospheric soot, algae, and grime from metal panels.
+          Gentle low-pressure soft washing safely removes dirt, mold, mildew, soot, and cobwebs from siding, stucco, stone, and architectural metal panels.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
-            <span class="spec-badge">🏢 Up to 4 Stories Reach</span>
-            <span class="spec-badge">✨ Zero Surface Etching</span>
+            <span class="spec-badge">🌿 Safe for All Facades</span>
+            <span class="spec-badge">✨ Zero Surface Damage</span>
           </div>
           <a href="commercial-pressure-washing.html" class="story-btn-pill">Building Wash Specs ➔</a>
         </div>
       </div>
 
-      <!-- Card 8: Act IV Scene 4 -->
+      <!-- Card 8: Exterior Window & Glass Cleaning -->
       <div class="story-card" id="card8">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> ACT IV · CH 08 · PURE WATER GLAZING</span>
-          <span class="spec-badge">💎 0.0 PPM Pure Deionized Water</span>
+          <span class="story-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> SPOT-FREE COMMERCIAL WINDOWS</span>
+          <span class="spec-badge">💎 100% Deionized Water</span>
         </div>
-        <h2 class="story-title">Streak-Free <span>Architectural Glass</span></h2>
+        <h2 class="story-title">Exterior Window &amp; <span>Glass Cleaning</span></h2>
         <p class="story-desc">
-          Deionized 4-stage reverse osmosis filtration rinses glass sheets to crystalline clarity with zero water spots or mineral residue.
+          Pure deionized water filtration leaves commercial windows, glass curtain walls, and entryways gleaming and 100% spot-free.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
             <span class="spec-badge">🔬 Spotless Spot-Free Rinse</span>
-            <span class="spec-badge">⚡ Instant Commercial Quote</span>
+            <span class="spec-badge">⚡ Free Instant Estimates</span>
           </div>
-          <a href="contact.html" class="story-btn-pill">Request Building RFP ➔</a>
+          <a href="contact.html" class="story-btn-pill">Request Window Wash RFP ➔</a>
         </div>
       </div>
 
-      <!-- Card 9: Act V Scene 5 -->
+      <!-- Card 9: Eco-Friendly Pressure Washing with Full Water Recovery -->
       <div class="story-card" id="card9">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-recycle"></i> ACT V · CH 09 · 100% EPA RECLAIM</span>
+          <span class="story-tag"><i class="fa-solid fa-recycle"></i> CAL/EPA CLEAN WATER COMPLIANCE</span>
           <span class="spec-badge">🌊 Zero Storm Drain Runoff</span>
         </div>
-        <h2 class="story-title">Full Reclaim. <span>Zero Runoff.</span></h2>
+        <h2 class="story-title">Eco-Friendly Pressure Washing <span>with Water Reclaim</span></h2>
         <p class="story-desc">
-          Cal/EPA compliant stainless steel vacuum recovery rings suction 100% of wash water into on-board filtration holding tanks in real time.
+          Our mobile vacuum reclaim systems capture 100% of wash water on-site so no dirty wastewater or chemicals enter storm drains or the Bay.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
-            <span class="spec-badge">🛡️ Bay Area Clean Water</span>
             <span class="spec-badge">🌱 100% EPA Compliant</span>
+            <span class="spec-badge">🛡️ Bay Area Clean Water</span>
           </div>
-          <a href="commercial-pressure-washing.html" class="story-btn-pill">EPA Reclaim Specs ➔</a>
+          <a href="commercial-pressure-washing.html" class="story-btn-pill">Water Reclaim Specs ➔</a>
         </div>
       </div>
 
-      <!-- Card 10: Act V Scene 5 - Grand Finale -->
+      <!-- Card 10: Professional Power Washing You Can Count On -->
       <div class="story-card" id="card10">
         <div class="story-header-row">
-          <span class="story-tag"><i class="fa-solid fa-medal"></i> ACT V · CH 10 · SUSTAINABLE FLEET</span>
-          <span class="spec-badge">🏆 Certified CA DVBE #2054658</span>
+          <span class="story-tag"><i class="fa-solid fa-medal"></i> TRUSTED SILICON VALLEY SERVICE</span>
+          <span class="spec-badge">🏆 35+ Years in Business</span>
         </div>
-        <h2 class="story-title">Experience <span>Clean Excellence.</span></h2>
+        <h2 class="story-title">Professional Power Washing <span>You Can Count On</span></h2>
         <p class="story-desc">
-          Scroll down to explore full service capabilities, interactive live estimators, and instant Silicon Valley scheduling.
+          Fast quotes, flexible night and weekend dispatch, and guaranteed quality. Scroll down to see pricing calculators, city routes, and services.
         </p>
         <div class="story-footer-row">
           <div class="story-badges">
@@ -2196,27 +2267,6 @@
       </div>
 
     </div>
-
-    <!-- Live Dynamic Telemetry Deck -->
-    <div class="telemetry-hud" id="telemetryHud">
-      <div class="telemetry-stat">
-        <span class="telemetry-label" id="telLabel1"><i class="fa-solid fa-fire"></i> Water Temp</span>
-        <div class="telemetry-val" id="telVal1">200.0 <span>°F</span></div>
-      </div>
-      <div class="telemetry-stat">
-        <span class="telemetry-label" id="telLabel2"><i class="fa-solid fa-gauge-high"></i> Pressure</span>
-        <div class="telemetry-val" id="telVal2">4,000 <span>PSI</span></div>
-      </div>
-      <div class="telemetry-stat">
-        <span class="telemetry-label" id="telLabel3"><i class="fa-solid fa-water"></i> Output Flow</span>
-        <div class="telemetry-val" id="telVal3">8.0 <span>GPM</span></div>
-      </div>
-      <div class="telemetry-stat">
-        <span class="telemetry-label" id="telLabel4"><i class="fa-solid fa-shield-virus"></i> Sanitization</span>
-        <div class="telemetry-val" id="telVal4">99.9 <span>% Kill</span></div>
-      </div>
-    </div>
-
   </div>
 
   <!-- Virtual Scroll Track (2000vh for 5-Act Walk) -->
@@ -2693,6 +2743,57 @@
         </div>
       </div>
 
+      <!-- ========================================================================= -->
+      <!-- MONTERO ENTERPRISES ECOSYSTEM: HYGEIA COMMERCIAL JANITORIAL SERVICES     -->
+      <!-- ========================================================================= -->
+      <div class="ecosystem-banner">
+        <div style="display:flex; align-items:center; gap:24px; max-width:780px;">
+          <img src="assets/img/janitorial-footer-logo.jpg" alt="Hygeia Commercial Janitorial Services" style="width:130px; height:auto; border-radius:12px; box-shadow:0 10px 24px rgba(0, 0, 0, 0.5); flex-shrink:0; background:#FFF; padding:4px;" />
+          <div>
+            <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(212, 175, 55, 0.15); border:1px solid rgba(212, 175, 55, 0.35); padding:4px 14px; border-radius:999px; margin-bottom:10px;">
+              <span style="color:var(--brand-gold, #D4AF37); font-size:11px; font-family:var(--font-mono); font-weight:800; text-transform:uppercase; letter-spacing:1px;">Sister Division · Interior Cleaning</span>
+            </div>
+            <h3 style="font-family:var(--font-heading); font-size:24px; font-weight:900; color:#FFFFFF; margin-bottom:8px; line-height:1.2;">
+              Looking for Interior Cleaning? Visit <span style="background:linear-gradient(135deg, #FFD700, #FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Hygeia Commercial Janitorial</span>
+            </h3>
+            <p style="font-size:14px; color:#94A3B8; line-height:1.55; margin:0;">
+              Nightly office janitorial, tech campuses, medical clinic terminal cleaning, VCT floor waxing, carpet extraction, and day porter services across Silicon Valley. State of California DVBE #2054658.
+            </p>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+          <a href="/janitorial/" class="btn-janitorial-crosslink">
+            Explore Janitorial Site ➔
+          </a>
+          <span style="font-size:12px; color:#64748B;">Direct route to /janitorial/ · 24/7 Dispatch · (650) 933-3823</span>
+        </div>
+      </div>
+
+      <!-- State of California Certifications Trust Band -->
+      <div class="footer-cert-band">
+        <div style="max-width: 520px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: #00F0FF; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-shield-halved"></i> State of California Certified Supplier
+          </span>
+          <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: #FFFFFF; margin: 6px 0 3px 0;">Montero Enterprises Inc. dba Hygeia</h3>
+          <p style="font-size: 12.5px; color: #94A3B8; margin: 0;">Small Business &amp; DVBE Certification ID: <strong style="color:#FFF;">2054658</strong> · DIR Public Works Reg: <strong style="color:#FFF;">JS-LR-100 132 4606</strong></p>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <div class="footer-cert-card" title="State of California Certified Small Business">
+            <img src="assets/img/cert-cagov.png" alt="CA.GOV" style="height: 32px; width: auto;" />
+            <div style="font-size: 11px; color: #FFF; line-height: 1.3;"><strong>CA.GOV Certified</strong><br/><span style="color:#94A3B8;">Small Business (Micro)</span></div>
+          </div>
+          <div class="footer-cert-card" title="Department of General Services Certified DVBE">
+            <img src="assets/img/cert-dgs.png" alt="DGS" style="height: 32px; width: auto;" />
+            <div style="font-size: 11px; color: #FFF; line-height: 1.3;"><strong>DGS Certified</strong><br/><span style="color:#00F0FF;">DVBE #2054658</span></div>
+          </div>
+          <div class="footer-cert-card" title="FI$Cal State Procurement Registered">
+            <img src="assets/img/cert-fiscal.png" alt="FI$Cal" style="height: 32px; width: auto;" />
+            <div style="font-size: 11px; color: #FFF; line-height: 1.3;"><strong>FI$Cal Registered</strong><br/><span style="color:#94A3B8;">DIR: JS-LR-100 132 4606</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ========================================================================= -->
@@ -2764,22 +2865,35 @@
             </div>
           </div>
 
-          <!-- Col 2: Services -->
+          <!-- Col 2: Residential Services -->
           <div>
-            <h4 class="footer-col-title">Services</h4>
+            <h4 class="footer-col-title">Residential Services</h4>
             <ul class="footer-nav-list">
-              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Commercial Pressure Wash</a></li>
-              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Residential Soft Wash</a></li>
-              <li><a href="bin-cleaning.html" class="footer-nav-link">Curbside Bin Sanitizing</a></li>
-              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Dumpster Pad Cleanups</a></li>
-              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Building Facade Wash</a></li>
+              <li><a href="bin-cleaning.html" class="footer-nav-link">Curbside Trash Can Cleaning</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Driveway &amp; Sidewalk Wash</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">House Exterior Soft Wash</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Patio, Deck &amp; Pavers</a></li>
+              <li><a href="residential-pressure-washing.html" class="footer-nav-link">Gutter &amp; Roof Soft Wash</a></li>
             </ul>
           </div>
 
-          <!-- Col 3: Quick Portals -->
+          <!-- Col 3: Commercial Services -->
+          <div>
+            <h4 class="footer-col-title">Commercial Services</h4>
+            <ul class="footer-nav-list">
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Parking Lots &amp; Concrete</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Dumpster Pad Degreasing</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Building Facade Soft Wash</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Commercial Window Cleaning</a></li>
+              <li><a href="commercial-pressure-washing.html" class="footer-nav-link">Cal/EPA Water Recovery</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Quick Portals & Sister Division -->
           <div>
             <h4 class="footer-col-title">Portals &amp; Info</h4>
             <ul class="footer-nav-list">
+              <li><a href="/janitorial/" class="footer-nav-link" style="color:var(--brand-gold);font-weight:700;">🏢 Commercial Janitorial Services ↗</a></li>
               <li><a href="portal.html" class="footer-nav-link">Client Subscription Portal ↗</a></li>
               <li><a href="admin.html" class="footer-nav-link">Admin Operations Center ↗</a></li>
               <li><a href="service-areas.html" class="footer-nav-link">14 Service Area Routes</a></li>
@@ -2788,7 +2902,7 @@
             </ul>
           </div>
 
-          <!-- Col 4: Direct Dispatch -->
+          <!-- Col 5: Direct Dispatch & HQ -->
           <div>
             <h4 class="footer-col-title">Direct Dispatch &amp; HQ</h4>
             <div class="footer-dispatch-card">
@@ -2796,18 +2910,72 @@
               <a href="tel:6509333823" class="dispatch-phone">📞 (650) 933-3823</a>
               <span style="font-size:12.5px;color:#CBD5E1;">✉️ aloha@hygeiaservices.com</span>
               <span style="font-size:12px;color:#94A3B8;">📍 1105 Benton St, Santa Clara, CA</span>
+              <p style="margin-top:10px;font-size:11.5px;color:#00F0FF;font-weight:700;line-height:1.4;">⚡ 24/7 Silicon Valley Power Wash Fleet Active</p>
             </div>
           </div>
         </div>
 
-        <div class="footer-legal-bar">
+        <!-- ========================================================================= -->
+        <!-- BAY AREA SERVICE AREAS & CITIES DIRECTORY GRID                            -->
+        <!-- ========================================================================= -->
+        <div class="service-areas-directory">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+            <h4 style="font-family:var(--font-heading);font-size:16px;font-weight:800;color:#FFFFFF;margin:0;display:flex;align-items:center;gap:8px;">
+              <i class="fa-solid fa-map-location-dot" style="color:#00F0FF;"></i> Bay Area Power Wash Service Areas &amp; Dedicated City Routes
+            </h4>
+            <a href="service-areas.html" style="color:#00F0FF;font-size:13px;font-weight:700;text-decoration:none;">View All 14 Service Areas ➔</a>
+          </div>
+
+          <!-- South Bay Silicon Valley -->
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-city"></i> South Bay &amp; Silicon Valley Core</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#santa-clara">📍 Santa Clara (HQ)</a>
+              <a class="city-pill-link" href="service-areas.html#san-jose">📍 San Jose</a>
+              <a class="city-pill-link" href="service-areas.html#sunnyvale">📍 Sunnyvale</a>
+              <a class="city-pill-link" href="service-areas.html#mountain-view">📍 Mountain View</a>
+              <a class="city-pill-link" href="service-areas.html#cupertino">📍 Cupertino</a>
+              <a class="city-pill-link" href="service-areas.html#milpitas">📍 Milpitas</a>
+              <a class="city-pill-link" href="service-areas.html#campbell">📍 Campbell</a>
+              <a class="city-pill-link" href="service-areas.html#los-gatos">📍 Los Gatos</a>
+            </div>
+          </div>
+
+          <!-- Peninsula -->
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-building"></i> San Francisco Peninsula</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#palo-alto">📍 Palo Alto</a>
+              <a class="city-pill-link" href="service-areas.html#menlo-park">📍 Menlo Park</a>
+              <a class="city-pill-link" href="service-areas.html#los-altos">📍 Los Altos</a>
+              <a class="city-pill-link" href="service-areas.html#redwood-city">📍 Redwood City</a>
+              <a class="city-pill-link" href="service-areas.html#san-carlos">📍 San Carlos</a>
+              <a class="city-pill-link" href="service-areas.html#san-mateo">📍 San Mateo</a>
+              <a class="city-pill-link" href="service-areas.html#burlingame">📍 Burlingame</a>
+            </div>
+          </div>
+
+          <!-- East Bay -->
+          <div class="service-area-cat">
+            <div class="service-area-cat-title"><i class="fa-solid fa-bridge-water"></i> East Bay Routes</div>
+            <div class="city-pills-wrap">
+              <a class="city-pill-link" href="service-areas.html#fremont">📍 Fremont</a>
+              <a class="city-pill-link" href="service-areas.html#newark">📍 Newark</a>
+              <a class="city-pill-link" href="service-areas.html#hayward">📍 Hayward</a>
+              <a class="city-pill-link" href="service-areas.html#union-city">📍 Union City</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-legal-bar" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;margin-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12.5px;color:#64748B;">
           <span>© 2026 Montero Enterprises Inc. dba Hygeia Power Wash Solutions. All rights reserved.</span>
-          <div class="footer-legal-links">
-            <a href="terms.html">Terms of Service</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="cookies.html">Cookie Policy</a>
-            <a href="california-privacy.html">California Privacy (CCPA)</a>
-            <a href="faq.html">FAQ</a>
+          <div class="footer-legal-links" style="display:flex;gap:18px;flex-wrap:wrap;">
+            <a href="terms.html" style="color:#64748B;text-decoration:none;">Terms of Service</a>
+            <a href="privacy.html" style="color:#64748B;text-decoration:none;">Privacy Policy</a>
+            <a href="cookies.html" style="color:#64748B;text-decoration:none;">Cookie Policy</a>
+            <a href="california-privacy.html" style="color:#64748B;text-decoration:none;">California Privacy (CCPA)</a>
+            <a href="faq.html" style="color:#64748B;text-decoration:none;">FAQ</a>
+            <a href="/janitorial/" style="color:var(--brand-gold);font-weight:700;text-decoration:none;">Commercial Janitorial Services ↗</a>
           </div>
         </div>
       </div>

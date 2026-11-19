@@ -54,6 +54,11 @@ const jswebsitePath = path.join(__dirname, '..', 'jswebsite');
 app.use('/pws', express.static(websitePath));
 app.use('/janitorial', express.static(jswebsitePath));
 
+// Root redirect to PWS frontend
+app.get('/', (req, res) => {
+  res.redirect('/pws/');
+});
+
 // Error Handler
 app.use((err, req, res, next) => {
   console.error('Unhandled server error:', err);
