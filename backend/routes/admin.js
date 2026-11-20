@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { db } = require('../db/database');
+const { hashPassword } = require('../utils/auth');
 
 /**
  * GET /api/admin/metrics
@@ -9,9 +10,25 @@ const { db } = require('../db/database');
 router.get('/metrics', async (req, res) => {
   try {
     const leads = await db.allAsync(`SELECT * FROM leads ORDER BY id DESC`);
-    const clients = await db.allAsync(`SELECT * FROM clients ORDER BY id DESC`);
+    const clients = await db.allAsync(`SELECT id, business_unit, customer_id, name, company_name, email, phone, facility_address, city, active_plan, monthly_rate, next_service_date, payment_method, status, created_at FROM clients ORDER BY id DESC`);
     const routeStops = await db.allAsync(`SELECT * FROM route_stops ORDER BY stop_order ASC`);
-    const workOrders = await db.allAsync(`SELECT * FROM work_orders ORDER BY id DESC`);
+    
+    // Join work orders with client contact and business unit details
+    const workOrders = await db.allAsync(`
+      SELECT 
+        w.*, 
+        c.name as client_contact_name, 
+        c.company_name as client_company_name, 
+        c.email as client_email, 
+        c.phone as client_phone, 
+        c.facility_address, 
+        c.city as client_city, 
+        c.business_unit 
+      FROM work_orders w 
+      LEFT JOIN clients c ON w.client_id = c.id 
+      ORDER BY w.id DESC
+    `);
+    
     const invoices = await db.allAsync(`SELECT * FROM invoices ORDER BY id DESC`);
 
     // PWS Metrics
@@ -57,6 +74,7 @@ router.get('/metrics', async (req, res) => {
         leadPipeline: janLeads
       },
       leads,
+      clients,
       workOrders,
       invoices
     });
@@ -67,24 +85,167 @@ router.get('/metrics', async (req, res) => {
 });
 
 /**
+ * GET /api/admin/work-orders
+ * Returns all work orders with joined client information
+ */
+router.get('/work-orders', async (req, res) => {
+  try {
+    const { business_unit, status } = req.query;
+    let sql = `
+      SELECT 
+        w.*, 
+        c.name as client_contact_name, 
+        c.company_name as client_company_name, 
+        c.email as client_email, 
+        c.phone as client_phone, 
+        c.facility_address, 
+        c.city as client_city, 
+        c.business_unit 
+      FROM work_orders w 
+      LEFT JOIN clients c ON w.client_id = c.id 
+      WHERE 1=1
+    `;
+    const params = [];
+
+    if (business_unit && business_unit !== 'all') {
+      sql += ` AND c.business_unit = ?`;
+      params.push(business_unit);
+    }
+    if (status && status !== 'all') {
+      sql += ` AND w.status = ?`;
+      params.push(status);
+    }
+
+    sql += ` ORDER BY w.id DESC`;
+    const workOrders = await db.allAsync(sql, params);
+    res.json({ workOrders });
+  } catch (err) {
+    console.error('Error fetching work orders:', err);
+    res.status(500).json({ error: 'Failed to fetch work orders.' });
+  }
+});
+
+/**
+ * GET /api/admin/work-orders/:id
+ * Returns single work order with client details
+ */
+router.get('/work-orders/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await db.getAsync(`
+      SELECT 
+        w.*, 
+        c.customer_id,
+        c.name as client_contact_name, 
+        c.company_name as client_company_name, 
+        c.email as client_email, 
+        c.phone as client_phone, 
+        c.facility_address, 
+        c.city as client_city, 
+        c.business_unit 
+      FROM work_orders w 
+      LEFT JOIN clients c ON w.client_id = c.id 
+      WHERE w.id = ?
+    `, [id]);
+
+    if (!order) {
+      return res.status(404).json({ error: 'Work order not found.' });
+    }
+
+    res.json({ workOrder: order });
+  } catch (err) {
+    console.error('Error fetching work order:', err);
+    res.status(500).json({ error: 'Failed to fetch work order.' });
+  }
+});
+
+/**
+ * PATCH /api/admin/work-orders/:id
+ * Full CRUD update for work order: status, crew, price, date, scope
+ */
+router.patch('/work-orders/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, crew_assigned, price, requested_date, service_name, scope_description } = req.body;
+
+    const existing = await db.getAsync(`SELECT * FROM work_orders WHERE id = ?`, [id]);
+    if (!existing) {
+      return res.status(404).json({ error: 'Work order not found.' });
+    }
+
+    const updatedStatus = status !== undefined ? status : existing.status;
+    const updatedCrew = crew_assigned !== undefined ? crew_assigned : existing.crew_assigned;
+    const updatedPrice = price !== undefined ? parseFloat(price) : existing.price;
+    const updatedDate = requested_date !== undefined ? requested_date : existing.requested_date;
+    const updatedService = service_name !== undefined ? service_name : existing.service_name;
+    const updatedScope = scope_description !== undefined ? scope_description : existing.scope_description;
+
+    await db.runAsync(`
+      UPDATE work_orders 
+      SET status = ?, crew_assigned = ?, price = ?, requested_date = ?, service_name = ?, scope_description = ?
+      WHERE id = ?
+    `, [updatedStatus, updatedCrew, updatedPrice, updatedDate, updatedService, updatedScope, id]);
+
+    console.log(`✅ [WORK ORDER UPDATED] #${id} -> status: ${updatedStatus}, crew: ${updatedCrew}, price: $${updatedPrice}`);
+    res.json({ 
+      success: true, 
+      message: `Work order #${id} successfully updated.`,
+      workOrder: {
+        id: parseInt(id),
+        status: updatedStatus,
+        crew_assigned: updatedCrew,
+        price: updatedPrice,
+        requested_date: updatedDate,
+        service_name: updatedService,
+        scope_description: updatedScope
+      }
+    });
+  } catch (err) {
+    console.error('Error updating work order:', err);
+    res.status(500).json({ error: 'Failed to update work order.' });
+  }
+});
+
+/**
  * PATCH /api/admin/work-orders/:id/status
- * Approves, dispatches, or marks work order completed
+ * Legacy shortcut for backward compatibility
  */
 router.patch('/work-orders/:id/status', async (req, res) => {
   try {
     const { id } = req.params;
-    const { status, crew_assigned } = req.body;
+    const { status, crew_assigned, price } = req.body;
 
     await db.runAsync(
-      `UPDATE work_orders SET status = ?, crew_assigned = COALESCE(?, crew_assigned) WHERE id = ?`,
-      [status, crew_assigned, id]
+      `UPDATE work_orders SET status = ?, crew_assigned = COALESCE(?, crew_assigned), price = COALESCE(?, price) WHERE id = ?`,
+      [status, crew_assigned, price, id]
     );
 
-    console.log(`✅ [WORK ORDER UPDATED] #${id} -> status: ${status}, crew: ${crew_assigned || 'unchanged'}`);
+    console.log(`✅ [WORK ORDER STATUS UPDATED] #${id} -> status: ${status}, crew: ${crew_assigned || 'unchanged'}`);
     res.json({ success: true, message: `Work order #${id} updated.` });
   } catch (err) {
     console.error('Error updating work order:', err);
     res.status(500).json({ error: 'Failed to update work order.' });
+  }
+});
+
+/**
+ * DELETE /api/admin/work-orders/:id
+ * Delete a work order
+ */
+router.delete('/work-orders/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const existing = await db.getAsync(`SELECT id FROM work_orders WHERE id = ?`, [id]);
+    if (!existing) {
+      return res.status(404).json({ error: 'Work order not found.' });
+    }
+
+    await db.runAsync(`DELETE FROM work_orders WHERE id = ?`, [id]);
+    console.log(`🗑️ [WORK ORDER DELETED] #${id}`);
+    res.json({ success: true, message: `Work order #${id} has been permanently deleted.` });
+  } catch (err) {
+    console.error('Error deleting work order:', err);
+    res.status(500).json({ error: 'Failed to delete work order.' });
   }
 });
 
@@ -164,6 +325,156 @@ router.get('/clients', async (req, res) => {
 });
 
 /**
+ * GET /api/admin/clients/:id
+ * Fetches single client details, along with their work orders history and invoices
+ */
+router.get('/clients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await db.getAsync(`
+      SELECT id, business_unit, customer_id, name, company_name, email, phone, 
+             facility_address, city, active_plan, monthly_rate, next_service_date, 
+             payment_method, status, created_at 
+      FROM clients 
+      WHERE id = ?
+    `, [id]);
+
+    if (!client) {
+      return res.status(404).json({ error: 'Client account not found.' });
+    }
+
+    const workOrders = await db.allAsync(`
+      SELECT * FROM work_orders WHERE client_id = ? ORDER BY id DESC
+    `, [id]);
+
+    const invoices = await db.allAsync(`
+      SELECT * FROM invoices WHERE client_id = ? ORDER BY id DESC
+    `, [id]);
+
+    res.json({ 
+      client, 
+      workOrders, 
+      invoices 
+    });
+  } catch (err) {
+    console.error('Error fetching client details:', err);
+    res.status(500).json({ error: 'Failed to fetch client details.' });
+  }
+});
+
+/**
+ * PATCH /api/admin/clients/:id
+ * Full CRUD update for client account details
+ */
+router.patch('/clients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [id]);
+    if (!client) {
+      return res.status(404).json({ error: 'Client not found.' });
+    }
+
+    const {
+      name,
+      company_name,
+      email,
+      phone,
+      facility_address,
+      city,
+      business_unit,
+      active_plan,
+      monthly_rate,
+      next_service_date,
+      status,
+      password
+    } = req.body;
+
+    const updatedName = name !== undefined ? name.trim() : client.name;
+    const updatedCompany = company_name !== undefined ? company_name.trim() : client.company_name;
+    const updatedEmail = email !== undefined ? email.trim().toLowerCase() : client.email;
+    const updatedPhone = phone !== undefined ? phone.trim() : client.phone;
+    const updatedAddress = facility_address !== undefined ? facility_address.trim() : client.facility_address;
+    const updatedCity = city !== undefined ? city.trim() : client.city;
+    const updatedUnit = business_unit !== undefined ? business_unit : client.business_unit;
+    const updatedPlan = active_plan !== undefined ? active_plan.trim() : client.active_plan;
+    const updatedRate = monthly_rate !== undefined ? parseFloat(monthly_rate) : client.monthly_rate;
+    const updatedNextDate = next_service_date !== undefined ? next_service_date.trim() : client.next_service_date;
+    const updatedStatus = status !== undefined ? status : client.status;
+
+    let hash = client.password_hash;
+    let salt = client.salt;
+    if (password && password.trim().length >= 6) {
+      const hashed = hashPassword(password.trim());
+      hash = hashed.hash;
+      salt = hashed.salt;
+    }
+
+    await db.runAsync(`
+      UPDATE clients 
+      SET name = ?, company_name = ?, email = ?, phone = ?, facility_address = ?, 
+          city = ?, business_unit = ?, active_plan = ?, monthly_rate = ?, 
+          next_service_date = ?, status = ?, password_hash = ?, salt = ?
+      WHERE id = ?
+    `, [
+      updatedName, updatedCompany, updatedEmail, updatedPhone, updatedAddress,
+      updatedCity, updatedUnit, updatedPlan, updatedRate,
+      updatedNextDate, updatedStatus, hash, salt,
+      id
+    ]);
+
+    console.log(`👤 [CLIENT UPDATED] #${client.customer_id} (${updatedName}) -> status: ${updatedStatus}, plan: ${updatedPlan}`);
+
+    res.json({
+      success: true,
+      message: `Client ${updatedName} (#${client.customer_id}) updated successfully.`,
+      client: {
+        id: parseInt(id),
+        customer_id: client.customer_id,
+        name: updatedName,
+        company_name: updatedCompany,
+        email: updatedEmail,
+        phone: updatedPhone,
+        facility_address: updatedAddress,
+        city: updatedCity,
+        business_unit: updatedUnit,
+        active_plan: updatedPlan,
+        monthly_rate: updatedRate,
+        next_service_date: updatedNextDate,
+        status: updatedStatus
+      }
+    });
+  } catch (err) {
+    console.error('Error updating client account:', err);
+    res.status(500).json({ error: 'Failed to update client account.', details: err.message });
+  }
+});
+
+/**
+ * DELETE /api/admin/clients/:id
+ * Permanently delete or deactivate client account
+ */
+router.delete('/clients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await db.getAsync(`SELECT * FROM clients WHERE id = ?`, [id]);
+    if (!client) {
+      return res.status(404).json({ error: 'Client not found.' });
+    }
+
+    await db.runAsync(`DELETE FROM clients WHERE id = ?`, [id]);
+    console.log(`🗑️ [CLIENT DELETED] #${client.customer_id} (${client.name})`);
+
+    res.json({
+      success: true,
+      message: `Client account #${client.customer_id} (${client.name}) has been deleted.`
+    });
+  } catch (err) {
+    console.error('Error deleting client account:', err);
+    res.status(500).json({ error: 'Failed to delete client account.' });
+  }
+});
+
+/**
  * POST /api/admin/clients
  * Directly provision a new client portal account from Admin Command Center
  */
@@ -193,7 +504,6 @@ router.post('/clients', async (req, res) => {
       return res.status(409).json({ error: `An account for ${email} already exists in the system.` });
     }
 
-    const { hashPassword } = require('../utils/auth');
     const { hash, salt } = hashPassword(password);
 
     const prefix = business_unit === 'pws' ? 'HYG-PWS' : 'HYG-JS';

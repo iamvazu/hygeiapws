@@ -20,13 +20,26 @@
 
   const ADMIN_TOKEN_KEY = 'hygeia_admin_token';
   let leadsData = [];
+  let workOrdersData = [];
+  let clientsData = [];
   let metricsData = null;
   let activeModalLeadId = null;
+  let activeModalClientId = null;
+  let activeModalWorkOrderId = null;
 
-  // Filter States for Unified View
+  // Filter States for Unified Leads
   let filterUnit = 'all';     // 'all' | 'pws' | 'janitorial'
   let filterStatus = 'all';   // 'all' | 'new' | 'quoted' | 'dispatched' | 'completed'
   let searchQuery = '';
+
+  // Filter States for Work Orders
+  let filterWoUnit = 'all';
+  let filterWoStatus = 'all';
+  let searchWoQuery = '';
+
+  // Filter States for Clients
+  let filterClientUnit = 'all';
+  let searchClientQuery = '';
 
   // Auth Helpers
   function getAdminToken() {
@@ -103,6 +116,8 @@
     renderUnifiedLeadsTable();
     renderPwsLeadsTable();
     renderJanitorialLeadsTable();
+    renderAllWorkOrdersTables();
+    renderAllClientsTables();
   };
 
   // Auth Protection & Login
@@ -182,7 +197,11 @@
       const res = await fetch(`${API_BASE}/admin/metrics`);
       if (res.ok) {
         metricsData = await res.json();
+        workOrdersData = metricsData.workOrders || [];
+        clientsData = metricsData.clients || [];
         updateKPICards();
+        renderAllWorkOrdersTables();
+        renderAllClientsTables();
       }
     } catch (err) {
       console.warn('Metrics sync notice:', err);
@@ -715,6 +734,694 @@
   window.closeModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.classList.remove('open');
+  };
+
+  // =========================================================================
+  // WORK ORDERS MANAGEMENT ENGINE
+  // =========================================================================
+
+  window.setWorkOrderFilterUnit = function(unit, btn) {
+    filterWoUnit = unit;
+    if (btn) {
+      const parent = btn.parentElement;
+      if (parent) parent.querySelectorAll('.filter-chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderUnifiedWorkOrdersTable();
+  };
+
+  window.setWorkOrderFilterStatus = function(status, btn) {
+    filterWoStatus = status;
+    if (btn) {
+      const parent = btn.parentElement;
+      if (parent) parent.querySelectorAll('.filter-chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderUnifiedWorkOrdersTable();
+  };
+
+  window.handleWorkOrdersSearch = function(query) {
+    searchWoQuery = (query || '').toLowerCase().trim();
+    renderUnifiedWorkOrdersTable();
+  };
+
+  function renderAllWorkOrdersTables() {
+    updateWorkOrderCounters();
+    renderUnifiedWorkOrdersTable();
+    renderPwsWorkOrdersTable();
+    renderJanitorialWorkOrdersTable();
+  }
+
+  function updateWorkOrderCounters() {
+    const countAll = workOrdersData.length;
+    const countJan = workOrdersData.filter(w => (w.business_unit || 'janitorial') === 'janitorial').length;
+    const countPws = workOrdersData.filter(w => w.business_unit === 'pws').length;
+    const pendingOrders = workOrdersData.filter(w => w.status === 'pending_approval');
+    const pendingCount = pendingOrders.length;
+    const janPending = pendingOrders.filter(w => (w.business_unit || 'janitorial') === 'janitorial').length;
+
+    const elAll = document.getElementById('countAllWorkOrders');
+    if (elAll) elAll.textContent = countAll;
+    const elJan = document.getElementById('countJanWorkOrders');
+    if (elJan) elJan.textContent = countJan;
+    const elPws = document.getElementById('countPwsWorkOrders');
+    if (elPws) elPws.textContent = countPws;
+
+    const badgePending = document.getElementById('badgePendingWorkOrdersCount');
+    if (badgePending) {
+      if (pendingCount > 0) {
+        badgePending.textContent = `🚨 ${pendingCount} Pending Review`;
+        badgePending.style.display = 'inline-flex';
+      } else {
+        badgePending.style.display = 'none';
+      }
+    }
+
+    const badgeJanPending = document.getElementById('badgeJanPendingOrders');
+    if (badgeJanPending) {
+      if (janPending > 0) {
+        badgeJanPending.textContent = `🚨 ${janPending} Pending Review`;
+        badgeJanPending.style.display = 'inline-flex';
+      } else {
+        badgeJanPending.style.display = 'none';
+      }
+    }
+  }
+
+  function generateWorkOrderRow(order, showDivision = true) {
+    const isPWS = order.business_unit === 'pws';
+    const divBadge = isPWS
+      ? '<span class="badge-pws" style="font-size:11px;"><i class="fa-solid fa-truck"></i> PWS</span>'
+      : '<span class="badge-janitorial" style="font-size:11px;"><i class="fa-solid fa-building"></i> JANITORIAL</span>';
+
+    const urgencyClass = `urgency-badge-${order.urgency || 'standard'}`;
+    const urgencyIcon = order.urgency === 'rush' || order.urgency === 'emergency' ? '<i class="fa-solid fa-bolt"></i> ' : '';
+
+    const priceFormatted = order.price && parseFloat(order.price) > 0
+      ? `$${parseFloat(order.price).toLocaleString('en-US', { minimumFractionDigits: 2 })}`
+      : '<span style="color:#64748B;font-style:italic;">Pending Quote</span>';
+
+    const clientDisplay = order.client_company_name 
+      ? `<strong>${escapeHtml(order.client_company_name)}</strong><br><span style="font-size:12px;color:#64748B;">${escapeHtml(order.client_contact_name || order.client_name)}</span>`
+      : `<strong>${escapeHtml(order.client_name || 'Client')}</strong>`;
+
+    return `
+      <tr class="clickable-row" onclick="openWorkOrderDetailModal(${order.id})">
+        <td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#0A2533;">#WO-${order.id}</td>
+        ${showDivision ? `<td>${divBadge}</td>` : ''}
+        <td>${clientDisplay}</td>
+        <td>
+          <div style="font-weight:700;color:#0A2533;">${escapeHtml(order.service_name)}</div>
+          <div style="font-size:12.5px;color:#475569;margin-top:2px;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            ${escapeHtml(order.scope_description || 'No description provided')}
+          </div>
+        </td>
+        <td style="font-size:12.5px;color:#334155;">${escapeHtml(order.requested_date || 'ASAP')}</td>
+        <td><span class="${urgencyClass}">${urgencyIcon}${escapeHtml((order.urgency || 'standard').toUpperCase())}</span></td>
+        <td style="font-family:'Outfit',sans-serif;font-weight:700;color:#0A2533;">${priceFormatted}</td>
+        <td style="font-size:12.5px;color:#475569;" onclick="event.stopPropagation()">
+          <span style="font-weight:600;color:#0A2533;">${escapeHtml(order.crew_assigned || 'Unassigned')}</span>
+        </td>
+        <td onclick="event.stopPropagation()">
+          <select class="wo-status-dropdown wo-status-${order.status}" onchange="handleWorkOrderStatusChange(${order.id}, this.value, this)">
+            <option value="pending_approval" ${order.status === 'pending_approval' ? 'selected' : ''}>⏳ Pending Review</option>
+            <option value="approved" ${order.status === 'approved' ? 'selected' : ''}>✅ Approved</option>
+            <option value="dispatched" ${order.status === 'dispatched' ? 'selected' : ''}>🚚 Dispatched</option>
+            <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>🏆 Completed</option>
+            <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+          </select>
+        </td>
+        <td style="text-align:right;" onclick="event.stopPropagation()">
+          <div style="display:inline-flex;gap:4px;">
+            <button class="btn-table-action" onclick="openWorkOrderDetailModal(${order.id})" title="Dispatch & Update Order">
+              <i class="fa-solid fa-pen-to-square"></i> Dispatch
+            </button>
+            <button class="btn-table-action btn-table-delete" onclick="handleDeleteWorkOrderDirect(${order.id})" title="Delete Order">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }
+
+  function renderUnifiedWorkOrdersTable() {
+    const tbody = document.getElementById('unifiedWorkOrdersTableBody');
+    if (!tbody) return;
+
+    let filtered = workOrdersData.slice();
+
+    if (filterWoUnit !== 'all') {
+      filtered = filtered.filter(w => (w.business_unit || 'janitorial') === filterWoUnit);
+    }
+    if (filterWoStatus !== 'all') {
+      filtered = filtered.filter(w => w.status === filterWoStatus);
+    }
+    if (searchWoQuery) {
+      filtered = filtered.filter(w => 
+        (w.service_name || '').toLowerCase().includes(searchWoQuery) ||
+        (w.scope_description || '').toLowerCase().includes(searchWoQuery) ||
+        (w.client_name || '').toLowerCase().includes(searchWoQuery) ||
+        (w.client_company_name || '').toLowerCase().includes(searchWoQuery) ||
+        `#wo-${w.id}`.toLowerCase().includes(searchWoQuery)
+      );
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="10" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-clipboard-check" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No client work orders match your current filters.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(order => generateWorkOrderRow(order, true)).join('');
+  }
+
+  function renderPwsWorkOrdersTable() {
+    const tbody = document.getElementById('pwsWorkOrdersTableBody');
+    if (!tbody) return;
+
+    const filtered = workOrdersData.filter(w => w.business_unit === 'pws');
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-truck-droplet" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No extra service work orders in the Power Wash dispatch queue.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(order => generateWorkOrderRow(order, false)).join('');
+  }
+
+  function renderJanitorialWorkOrdersTable() {
+    const tbody = document.getElementById('janitorialWorkOrdersTableBody');
+    if (!tbody) return;
+
+    const filtered = workOrdersData.filter(w => (w.business_unit || 'janitorial') === 'janitorial');
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-building-circle-check" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No active special service requests in the Janitorial dispatch queue.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(order => generateWorkOrderRow(order, false)).join('');
+  }
+
+  // =========================================================================
+  // REGISTERED CLIENT ACCOUNTS DIRECTORY ENGINE
+  // =========================================================================
+
+  window.setClientFilterUnit = function(unit, btn) {
+    filterClientUnit = unit;
+    if (btn) {
+      const parent = btn.parentElement;
+      if (parent) parent.querySelectorAll('.filter-chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderUnifiedClientsTable();
+  };
+
+  window.handleClientSearch = function(query) {
+    searchClientQuery = (query || '').toLowerCase().trim();
+    renderUnifiedClientsTable();
+  };
+
+  function renderAllClientsTables() {
+    updateClientCounters();
+    renderUnifiedClientsTable();
+    renderPwsClientsTable();
+    renderJanitorialClientsTable();
+  }
+
+  function updateClientCounters() {
+    const countAll = clientsData.length;
+    const countJan = clientsData.filter(c => (c.business_unit || 'janitorial') === 'janitorial').length;
+    const countPws = clientsData.filter(c => c.business_unit === 'pws').length;
+
+    const elAll = document.getElementById('countAllClients');
+    if (elAll) elAll.textContent = countAll;
+    const elJan = document.getElementById('countJanClients');
+    if (elJan) elJan.textContent = countJan;
+    const elPws = document.getElementById('countPwsClients');
+    if (elPws) elPws.textContent = countPws;
+
+    const badgeClients = document.getElementById('badgeClientsCount');
+    if (badgeClients) {
+      badgeClients.textContent = `${countAll} Active Client Accounts`;
+    }
+  }
+
+  function generateClientRow(c, showDivision = true) {
+    const isPWS = c.business_unit === 'pws';
+    const divBadge = isPWS
+      ? '<span class="badge-pws" style="font-size:11px;"><i class="fa-solid fa-truck"></i> PWS</span>'
+      : '<span class="badge-janitorial" style="font-size:11px;"><i class="fa-solid fa-building"></i> JANITORIAL</span>';
+
+    const statusBadge = `<span class="client-status-badge client-status-${c.status || 'active'}"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;"></span> ${(c.status || 'active').toUpperCase()}</span>`;
+
+    const clientDisplay = c.company_name 
+      ? `<strong>${escapeHtml(c.company_name)}</strong><br><span style="font-size:12px;color:#64748B;">${escapeHtml(c.name)}</span>`
+      : `<strong>${escapeHtml(c.name)}</strong>`;
+
+    const contactDisplay = `
+      <div style="font-size:12.5px;color:#0A2533;font-weight:600;"><a href="mailto:${escapeHtml(c.email)}" style="color:#0090FF;" onclick="event.stopPropagation()">${escapeHtml(c.email)}</a></div>
+      <div style="font-size:12px;color:#64748B;">${escapeHtml(c.phone || 'No phone')}</div>
+    `;
+
+    const locationDisplay = `
+      <div style="font-size:12.5px;color:#334155;">${escapeHtml(c.facility_address || 'Silicon Valley Facility')}</div>
+      <div style="font-size:11.5px;color:#64748B;">${escapeHtml(c.city || 'CA')}</div>
+    `;
+
+    const planDisplay = `
+      <div style="font-size:12.5px;color:#0A2533;font-weight:700;">${escapeHtml(c.active_plan)}</div>
+      <div style="font-size:12px;color:#059669;font-weight:700;">$${parseFloat(c.monthly_rate || 0).toLocaleString('en-US')}/mo</div>
+    `;
+
+    return `
+      <tr class="clickable-row" onclick="openClientDetailModal(${c.id})">
+        <td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#0A2533;">${escapeHtml(c.customer_id)}</td>
+        ${showDivision ? `<td>${divBadge}</td>` : ''}
+        <td>${clientDisplay}</td>
+        <td>${contactDisplay}</td>
+        <td>${locationDisplay}</td>
+        <td>${planDisplay}</td>
+        <td style="font-size:12.5px;color:#475569;">${escapeHtml(c.next_service_date || 'Pending Schedule')}</td>
+        <td>${statusBadge}</td>
+        <td style="text-align:right;" onclick="event.stopPropagation()">
+          <div style="display:inline-flex;gap:4px;">
+            <button class="btn-table-action" onclick="openClientDetailModal(${c.id})" title="View and Edit Client Profile">
+              <i class="fa-solid fa-user-pen"></i> View / Edit
+            </button>
+            <button class="btn-table-action btn-table-delete" onclick="handleDeleteClientDirect(${c.id})" title="Delete Client Account">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }
+
+  function renderUnifiedClientsTable() {
+    const tbody = document.getElementById('unifiedClientsTableBody');
+    if (!tbody) return;
+
+    let filtered = clientsData.slice();
+
+    if (filterClientUnit !== 'all') {
+      filtered = filtered.filter(c => (c.business_unit || 'janitorial') === filterClientUnit);
+    }
+    if (searchClientQuery) {
+      filtered = filtered.filter(c => 
+        (c.name || '').toLowerCase().includes(searchClientQuery) ||
+        (c.company_name || '').toLowerCase().includes(searchClientQuery) ||
+        (c.email || '').toLowerCase().includes(searchClientQuery) ||
+        (c.customer_id || '').toLowerCase().includes(searchClientQuery) ||
+        (c.facility_address || '').toLowerCase().includes(searchClientQuery) ||
+        (c.city || '').toLowerCase().includes(searchClientQuery)
+      );
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-users" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No client accounts match your search filters.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(c => generateClientRow(c, true)).join('');
+  }
+
+  function renderPwsClientsTable() {
+    const tbody = document.getElementById('pwsClientsTableBody');
+    if (!tbody) return;
+
+    const filtered = clientsData.filter(c => c.business_unit === 'pws');
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-users" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No Power Wash subscribers found.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(c => generateClientRow(c, false)).join('');
+  }
+
+  function renderJanitorialClientsTable() {
+    const tbody = document.getElementById('janitorialClientsTableBody');
+    if (!tbody) return;
+
+    const filtered = clientsData.filter(c => (c.business_unit || 'janitorial') === 'janitorial');
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align:center;padding:36px;color:#64748B;">
+            <i class="fa-solid fa-users" style="font-size:28px;margin-bottom:8px;color:#CBD5E1;display:block;"></i>
+            No Janitorial facility client accounts found.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(c => generateClientRow(c, false)).join('');
+  }
+
+  // =========================================================================
+  // CLIENT DETAIL MODAL & CRUD HANDLERS
+  // =========================================================================
+
+  window.openClientDetailModal = async function(clientId) {
+    activeModalClientId = clientId;
+    const modal = document.getElementById('clientDetailModal');
+    if (!modal) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/clients/${clientId}`);
+      if (!res.ok) throw new Error('Failed to load client details.');
+      const data = await res.json();
+      const client = data.client;
+      const orders = data.workOrders || [];
+
+      document.getElementById('cdmClientId').value = client.id;
+      document.getElementById('cdmTitleName').textContent = client.name;
+      document.getElementById('cdmCustomerBadge').textContent = client.customer_id;
+      
+      const isPWS = client.business_unit === 'pws';
+      const unitBadge = document.getElementById('cdmUnitBadge');
+      if (unitBadge) {
+        unitBadge.className = isPWS ? 'badge-pws' : 'badge-janitorial';
+        unitBadge.innerHTML = isPWS ? '<i class="fa-solid fa-truck"></i> Power Wash' : '<i class="fa-solid fa-building"></i> Commercial Janitorial';
+      }
+
+      document.getElementById('cdmSubtitleCompany').textContent = client.company_name ? `${client.company_name} · ${client.city || 'CA'}` : (client.city || 'Individual Account');
+
+      // Initials
+      const initials = (client.name || 'CL').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+      const avatarEl = document.getElementById('cdmAvatar');
+      if (avatarEl) {
+        avatarEl.textContent = initials;
+        avatarEl.style.background = isPWS ? '#0090FF' : '#059669';
+      }
+
+      document.getElementById('cdmName').value = client.name || '';
+      document.getElementById('cdmCompany').value = client.company_name || '';
+      document.getElementById('cdmEmail').value = client.email || '';
+      document.getElementById('cdmPhone').value = client.phone || '';
+      document.getElementById('cdmAddress').value = client.facility_address || '';
+      document.getElementById('cdmCity').value = client.city || '';
+      document.getElementById('cdmBusinessUnit').value = client.business_unit || 'janitorial';
+      document.getElementById('cdmRate').value = client.monthly_rate || 0;
+      document.getElementById('cdmStatus').value = client.status || 'active';
+      document.getElementById('cdmPlan').value = client.active_plan || '';
+      document.getElementById('cdmNextDate').value = client.next_service_date || '';
+      document.getElementById('cdmPassword').value = '';
+
+      // Populate client's work orders
+      const ordersCountEl = document.getElementById('cdmOrdersCount');
+      if (ordersCountEl) ordersCountEl.textContent = `${orders.length} Orders Submitted`;
+
+      const ordersBody = document.getElementById('cdmOrdersTableBody');
+      if (ordersBody) {
+        if (orders.length === 0) {
+          ordersBody.innerHTML = `<tr><td colspan="6" style="padding:14px;text-align:center;color:#64748B;">No service work orders submitted by this client yet.</td></tr>`;
+        } else {
+          ordersBody.innerHTML = orders.map(wo => `
+            <tr style="border-bottom:1px solid #F1F5F9;">
+              <td style="padding:8px 10px;font-family:'JetBrains Mono',monospace;font-weight:700;">#WO-${wo.id}</td>
+              <td style="padding:8px 10px;font-weight:600;color:#0A2533;">${escapeHtml(wo.service_name)}</td>
+              <td style="padding:8px 10px;color:#475569;">${escapeHtml(wo.requested_date || '-')}</td>
+              <td style="padding:8px 10px;font-weight:700;">${wo.price > 0 ? `$${parseFloat(wo.price).toFixed(2)}` : '$0.00'}</td>
+              <td style="padding:8px 10px;">
+                <span class="wo-status-dropdown wo-status-${wo.status}" style="display:inline-block;padding:2px 6px;font-size:11px;">
+                  ${wo.status.toUpperCase()}
+                </span>
+              </td>
+              <td style="padding:8px 10px;text-align:right;">
+                <button type="button" class="btn-table-action" style="padding:3px 7px;font-size:11px;" onclick="closeModal('clientDetailModal'); openWorkOrderDetailModal(${wo.id});">
+                  Manage →
+                </button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      modal.classList.add('open');
+    } catch (err) {
+      showToast('Error loading client profile: ' + err.message, true);
+    }
+  };
+
+  window.handleClientUpdateSubmit = async function(e) {
+    e.preventDefault();
+    if (!activeModalClientId) return;
+
+    const btn = document.getElementById('btnSaveClientChanges');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving Profile...';
+
+    const payload = {
+      name: document.getElementById('cdmName').value.trim(),
+      company_name: document.getElementById('cdmCompany').value.trim(),
+      email: document.getElementById('cdmEmail').value.trim(),
+      phone: document.getElementById('cdmPhone').value.trim(),
+      facility_address: document.getElementById('cdmAddress').value.trim(),
+      city: document.getElementById('cdmCity').value.trim(),
+      business_unit: document.getElementById('cdmBusinessUnit').value,
+      monthly_rate: parseFloat(document.getElementById('cdmRate').value) || 0,
+      status: document.getElementById('cdmStatus').value,
+      active_plan: document.getElementById('cdmPlan').value.trim(),
+      next_service_date: document.getElementById('cdmNextDate').value.trim()
+    };
+
+    const newPass = document.getElementById('cdmPassword').value.trim();
+    if (newPass) payload.password = newPass;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/clients/${activeModalClientId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to update client account.');
+
+      showToast(`✅ Client profile for ${payload.name} updated successfully!`);
+      closeModal('clientDetailModal');
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error updating client: ' + err.message, true);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  };
+
+  window.handleDeleteCurrentClient = async function() {
+    if (!activeModalClientId) return;
+    const name = document.getElementById('cdmName').value;
+    if (!confirm(`Are you sure you want to permanently delete the client account for "${name}"? This will remove all their portal access.`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/clients/${activeModalClientId}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Delete client request failed.');
+      showToast(`Client account deleted from database.`);
+      closeModal('clientDetailModal');
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Failed to delete client: ' + err.message, true);
+    }
+  };
+
+  window.handleDeleteClientDirect = async function(clientId) {
+    const client = clientsData.find(c => c.id === clientId);
+    const label = client ? `${client.name} (${client.company_name || 'Account'})` : `#${clientId}`;
+    if (!confirm(`Are you sure you want to delete client account ${label}?`)) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/clients/${clientId}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete client account.');
+      showToast(`Client ${label} deleted from database.`);
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error deleting client: ' + err.message, true);
+    }
+  };
+
+  // =========================================================================
+  // WORK ORDER DETAIL MODAL & CRUD HANDLERS
+  // =========================================================================
+
+  window.openWorkOrderDetailModal = async function(orderId) {
+    activeModalWorkOrderId = orderId;
+    const modal = document.getElementById('workOrderDetailModal');
+    if (!modal) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/work-orders/${orderId}`);
+      if (!res.ok) throw new Error('Failed to load work order.');
+      const data = await res.json();
+      const order = data.workOrder;
+
+      document.getElementById('wodmOrderId').value = order.id;
+      document.getElementById('wodmOrderBadge').textContent = `#WO-${order.id}`;
+      document.getElementById('wodmTitleScope').textContent = order.service_name;
+
+      const isPWS = order.business_unit === 'pws';
+      const companyOrClient = order.client_company_name || order.client_name || 'Client';
+      document.getElementById('wodmSubtitleClient').innerHTML = `
+        <strong>${escapeHtml(companyOrClient)}</strong> · 
+        <span class="${isPWS ? 'badge-pws' : 'badge-janitorial'}" style="font-size:11px;">
+          ${isPWS ? 'Power Wash' : 'Commercial Janitorial'}
+        </span>
+      `;
+
+      const urgencyPill = document.getElementById('wodmUrgencyPill');
+      if (urgencyPill) {
+        urgencyPill.className = `urgency-badge-${order.urgency || 'standard'}`;
+        urgencyPill.textContent = (order.urgency || 'standard').toUpperCase();
+      }
+
+      document.getElementById('wodmClientDescription').textContent = order.scope_description || 'No description provided by client.';
+      document.getElementById('wodmContactName').textContent = order.client_contact_name || order.client_name || '-';
+      document.getElementById('wodmContactPhone').textContent = order.client_phone || '-';
+      document.getElementById('wodmAddress').textContent = order.facility_address || order.client_city || 'Silicon Valley';
+
+      document.getElementById('wodmStatus').value = order.status || 'pending_approval';
+      document.getElementById('wodmPrice').value = order.price || 0;
+      document.getElementById('wodmCrew').value = order.crew_assigned || '';
+      document.getElementById('wodmDate').value = order.requested_date || '';
+      document.getElementById('wodmServiceName').value = order.service_name || '';
+      document.getElementById('wodmScopeDesc').value = order.scope_description || '';
+
+      modal.classList.add('open');
+    } catch (err) {
+      showToast('Error loading work order: ' + err.message, true);
+    }
+  };
+
+  window.handleWorkOrderUpdateSubmit = async function(e) {
+    e.preventDefault();
+    if (!activeModalWorkOrderId) return;
+
+    const btn = document.getElementById('btnSaveWorkOrder');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving Dispatch...';
+
+    const payload = {
+      status: document.getElementById('wodmStatus').value,
+      price: parseFloat(document.getElementById('wodmPrice').value) || 0,
+      crew_assigned: document.getElementById('wodmCrew').value.trim(),
+      requested_date: document.getElementById('wodmDate').value.trim(),
+      service_name: document.getElementById('wodmServiceName').value.trim(),
+      scope_description: document.getElementById('wodmScopeDesc').value.trim()
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/work-orders/${activeModalWorkOrderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to update work order.');
+
+      showToast(`✅ Work order #WO-${activeModalWorkOrderId} updated and dispatched successfully!`);
+      closeModal('workOrderDetailModal');
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error updating work order: ' + err.message, true);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  };
+
+  window.handleWorkOrderStatusChange = async function(orderId, newStatus, selectEl) {
+    try {
+      const res = await fetch(`${API_BASE}/admin/work-orders/${orderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (!res.ok) throw new Error('Status update failed.');
+
+      if (selectEl) {
+        selectEl.className = `wo-status-dropdown wo-status-${newStatus}`;
+      }
+      showToast(`Work Order #WO-${orderId} status set to: ${newStatus.toUpperCase()}`);
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Failed to update work order status: ' + err.message, true);
+    }
+  };
+
+  window.handleDeleteCurrentWorkOrder = async function() {
+    if (!activeModalWorkOrderId) return;
+    if (!confirm(`Are you sure you want to permanently delete work order #WO-${activeModalWorkOrderId}?`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/work-orders/${activeModalWorkOrderId}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete work order.');
+
+      showToast(`Work order #WO-${activeModalWorkOrderId} deleted from database.`);
+      closeModal('workOrderDetailModal');
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error deleting work order: ' + err.message, true);
+    }
+  };
+
+  window.handleDeleteWorkOrderDirect = async function(orderId) {
+    if (!confirm(`Are you sure you want to delete work order #WO-${orderId}?`)) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/work-orders/${orderId}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete work order.');
+
+      showToast(`Work order #WO-${orderId} deleted.`);
+      await fetchLiveMetrics();
+    } catch (err) {
+      showToast('Error deleting work order: ' + err.message, true);
+    }
   };
 
   // Export Master Leads CSV

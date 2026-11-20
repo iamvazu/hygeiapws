@@ -242,6 +242,48 @@
     .lead-status-dispatched { color: #7C3AED; background: #F5F3FF; border-color: #DDD6FE; }
     .lead-status-completed { color: #059669; background: #ECFDF5; border-color: #A7F3D0; }
 
+    /* Work Orders and Clients Tables & Badges */
+    .wo-status-dropdown {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid #CBD5E1;
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+    .wo-status-pending_approval { color: #D97706; background: #FFFBEB; border-color: #FDE68A; }
+    .wo-status-approved { color: #0284C7; background: #F0F9FF; border-color: #BAE6FD; }
+    .wo-status-dispatched { color: #7C3AED; background: #F5F3FF; border-color: #DDD6FE; }
+    .wo-status-completed { color: #059669; background: #ECFDF5; border-color: #A7F3D0; }
+    .wo-status-cancelled { color: #DC2626; background: #FEF2F2; border-color: #FECACA; }
+
+    .urgency-badge-rush { background: #FEF3C7; color: #D97706; font-weight: 800; font-size: 11px; padding: 2px 7px; border-radius: 6px; border: 1px solid #FDE68A; display: inline-flex; align-items: center; gap: 4px; }
+    .urgency-badge-emergency { background: #FEE2E2; color: #DC2626; font-weight: 800; font-size: 11px; padding: 2px 7px; border-radius: 6px; border: 1px solid #FECACA; display: inline-flex; align-items: center; gap: 4px; }
+    .urgency-badge-standard { background: #F1F5F9; color: #475569; font-weight: 700; font-size: 11px; padding: 2px 7px; border-radius: 6px; border: 1px solid #E2E8F0; display: inline-flex; align-items: center; gap: 4px; }
+
+    .client-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .client-status-active { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
+    .client-status-paused { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+    .client-status-delinquent { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+    
+    .clickable-row {
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .clickable-row:hover {
+      background: #F8FAFC !important;
+    }
+
     /* Action Buttons in Table */
     .btn-table-action {
       padding: 5px 10px;
@@ -599,6 +641,122 @@
           </div>
         </div>
       </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: CLIENT WORK ORDERS & SPECIAL SERVICE REQUESTS (UNIFIED)          -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="dash-section-eyebrow" style="color:#D97706;font-weight:800;font-size:11px;">PORTAL CLIENT WORK ORDERS</span>
+              <span id="badgePendingWorkOrdersCount" class="urgency-badge-rush" style="display:none;">0 Pending Review</span>
+            </div>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">Client Special Service Requests &amp; Extra Dispatches</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Special service requests submitted live by active clients via their client portals.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div style="position:relative;">
+              <input type="text" id="woSearchInput" placeholder="Search orders or client..." style="padding:6px 12px 6px 30px;border:1px solid #CBD5E1;border-radius:20px;font-size:12.5px;outline:none;" oninput="handleWorkOrdersSearch(this.value)">
+              <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#94A3B8;"></i>
+            </div>
+            <button class="btn btn-xs btn-outline" onclick="fetchLiveMetrics()"><i class="fa-solid fa-rotate"></i> Sync Orders</button>
+          </div>
+        </div>
+
+        <!-- Filter bar for work orders -->
+        <div class="stream-filter-bar">
+          <div class="filter-pills-group">
+            <span style="font-size:12px;font-weight:700;color:#64748B;margin-right:4px;">Division:</span>
+            <button class="filter-chip-btn active" data-wo-unit="all" onclick="setWorkOrderFilterUnit('all', this)">All Orders (<span id="countAllWorkOrders">0</span>)</button>
+            <button class="filter-chip-btn" data-wo-unit="janitorial" onclick="setWorkOrderFilterUnit('janitorial', this)">🏢 Janitorial (<span id="countJanWorkOrders">0</span>)</button>
+            <button class="filter-chip-btn" data-wo-unit="pws" onclick="setWorkOrderFilterUnit('pws', this)">🚛 Power Wash (<span id="countPwsWorkOrders">0</span>)</button>
+          </div>
+          <div class="filter-pills-group">
+            <span style="font-size:12px;font-weight:700;color:#64748B;margin-right:4px;">Status:</span>
+            <button class="filter-chip-btn active" data-wo-status="all" onclick="setWorkOrderFilterStatus('all', this)">All Statuses</button>
+            <button class="filter-chip-btn" data-wo-status="pending_approval" onclick="setWorkOrderFilterStatus('pending_approval', this)">⏳ Pending Review</button>
+            <button class="filter-chip-btn" data-wo-status="approved" onclick="setWorkOrderFilterStatus('approved', this)">✅ Approved</button>
+            <button class="filter-chip-btn" data-wo-status="dispatched" onclick="setWorkOrderFilterStatus('dispatched', this)">🚚 Dispatched</button>
+            <button class="filter-chip-btn" data-wo-status="completed" onclick="setWorkOrderFilterStatus('completed', this)">🏆 Completed</button>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:85px;">Order #</th>
+                <th style="width:105px;">Division</th>
+                <th>Client / Facility</th>
+                <th>Service Scope &amp; Client Description</th>
+                <th style="width:115px;">Requested</th>
+                <th style="width:90px;">Urgency</th>
+                <th style="width:110px;">Price ($)</th>
+                <th style="width:150px;">Assigned Crew</th>
+                <th style="width:165px;">Status</th>
+                <th style="width:120px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="unifiedWorkOrdersTableBody">
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: REGISTERED CLIENT ACCOUNTS DIRECTORY (UNIFIED)                   -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="dash-section-eyebrow" style="color:#0090FF;font-weight:800;font-size:11px;">ENTERPRISE CLIENT DIRECTORY</span>
+              <span id="badgeClientsCount" style="background:#EFF6FF;color:#1D4ED8;font-weight:800;font-size:11.5px;padding:2px 8px;border-radius:12px;border:1px solid #BFDBFE;">0 Active Accounts</span>
+            </div>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">Registered Client Accounts &amp; Service Contracts</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Active client portal accounts across commercial janitorial and power wash divisions. Click any client to view details and edit.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div style="position:relative;">
+              <input type="text" id="clientSearchInput" placeholder="Search client name, company, email..." style="padding:6px 12px 6px 30px;border:1px solid #CBD5E1;border-radius:20px;font-size:12.5px;outline:none;" oninput="handleClientSearch(this.value)">
+              <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#94A3B8;"></i>
+            </div>
+            <button class="btn btn-xs btn-primary" onclick="openNewClientModal()" style="background:#0090FF;color:#fff;border:none;font-weight:700;"><i class="fa-solid fa-user-plus"></i> + Provision Account</button>
+          </div>
+        </div>
+
+        <div class="stream-filter-bar">
+          <div class="filter-pills-group">
+            <span style="font-size:12px;font-weight:700;color:#64748B;margin-right:4px;">Division:</span>
+            <button class="filter-chip-btn active" data-client-unit="all" onclick="setClientFilterUnit('all', this)">All Accounts (<span id="countAllClients">0</span>)</button>
+            <button class="filter-chip-btn" data-client-unit="janitorial" onclick="setClientFilterUnit('janitorial', this)">🏢 Janitorial (<span id="countJanClients">0</span>)</button>
+            <button class="filter-chip-btn" data-client-unit="pws" onclick="setClientFilterUnit('pws', this)">🚛 Power Wash (<span id="countPwsClients">0</span>)</button>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:120px;">Account ID</th>
+                <th style="width:105px;">Division</th>
+                <th>Client / Company</th>
+                <th>Contact Details</th>
+                <th>Facility Address &amp; City</th>
+                <th>Active Plan &amp; Rate</th>
+                <th style="width:130px;">Next Service</th>
+                <th style="width:100px;">Status</th>
+                <th style="width:130px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="unifiedClientsTableBody">
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- ========================================================================= -->
@@ -812,6 +970,73 @@
           </div>
         </div>
       </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: PWS CLIENT WORK ORDERS & DISPATCHES                              -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-top:28px;margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span class="dash-section-eyebrow" style="color:#0090FF;font-weight:800;font-size:11px;">POWER WASH SERVICE DISPATCH</span>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">PWS Client Work Orders &amp; Extra Dispatches 🚛</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Client service requests for dumpster pads, emergency grease removal, extra bin washes, and surface cleaning.</p>
+          </div>
+          <button class="btn btn-xs btn-outline" onclick="fetchLiveMetrics()"><i class="fa-solid fa-rotate"></i> Refresh Orders</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:85px;">Order #</th>
+                <th>Client / Property</th>
+                <th>Service Scope &amp; Client Description</th>
+                <th style="width:115px;">Requested</th>
+                <th style="width:90px;">Urgency</th>
+                <th style="width:110px;">Price ($)</th>
+                <th style="width:150px;">Assigned Rig / Crew</th>
+                <th style="width:165px;">Status</th>
+                <th style="width:120px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pwsWorkOrdersTableBody">
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: PWS REGISTERED CLIENT ACCOUNTS DIRECTORY                         -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span class="dash-section-eyebrow" style="color:#0090FF;font-weight:800;font-size:11px;">PWS CLIENT ACCOUNTS</span>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">Power Wash &amp; Bin Cleaning Subscribers</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Registered portal accounts for residential bin subscribers and commercial exterior maintenance.</p>
+          </div>
+          <button class="btn btn-xs btn-primary" onclick="openNewClientModal('pws')" style="background:#0090FF;color:#fff;border:none;font-weight:700;"><i class="fa-solid fa-user-plus"></i> + Provision PWS Account</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:120px;">Account ID</th>
+                <th>Subscriber / Business</th>
+                <th>Contact Details</th>
+                <th>Service Address</th>
+                <th>Subscription Plan &amp; Rate</th>
+                <th style="width:130px;">Next Wash Route</th>
+                <th style="width:100px;">Status</th>
+                <th style="width:130px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pwsClientsTableBody">
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- ========================================================================= -->
@@ -951,6 +1176,76 @@
                 <td><span class="status-chip chip-pending"><span class="chip-dot"></span> Scheduled</span></td>
                 <td style="text-align:right;"><button class="btn btn-xs btn-outline" onclick="alert('Night inspection verified.')">Audit Checklist</button></td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: JANITORIAL CLIENT WORK ORDERS & SPECIAL DISPATCHES               -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-top:28px;margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="dash-section-eyebrow" style="color:#059669;font-weight:800;font-size:11px;">SPECIAL FACILITY DISPATCHES</span>
+              <span id="badgeJanPendingOrders" class="urgency-badge-rush" style="display:none;">0 Pending Review</span>
+            </div>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">Commercial Janitorial Facility Work Orders &amp; Dispatches 🏢</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Client requests for extra day porter staffing, emergency cleanroom disinfection, carpet extraction, and floor waxing.</p>
+          </div>
+          <button class="btn btn-xs btn-outline" onclick="fetchLiveMetrics()"><i class="fa-solid fa-rotate"></i> Refresh Orders</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:85px;">Order #</th>
+                <th>Client / Facility</th>
+                <th>Service Scope &amp; Client Description</th>
+                <th style="width:115px;">Requested</th>
+                <th style="width:90px;">Urgency</th>
+                <th style="width:110px;">Price ($)</th>
+                <th style="width:150px;">Assigned Crew</th>
+                <th style="width:165px;">Status</th>
+                <th style="width:120px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="janitorialWorkOrdersTableBody">
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION: JANITORIAL REGISTERED CLIENT DIRECTORY                           -->
+      <!-- ========================================================================= -->
+      <div class="dash-card mb-24" style="padding:0;overflow:hidden;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 4px 20px rgba(10,37,51,0.04);margin-bottom:28px;">
+        <div style="padding:18px 24px;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span class="dash-section-eyebrow" style="color:#059669;font-weight:800;font-size:11px;">FACILITY CONTRACTS</span>
+            <h3 style="margin:2px 0;font-size:19px;color:#0A2533;font-family:'Outfit',sans-serif;">Registered Facility Client Accounts</h3>
+            <p style="margin:2px 0 0;font-size:13px;color:#64748B;">Active commercial maintenance agreements, medical facility care contracts, and day porter clients.</p>
+          </div>
+          <button class="btn btn-xs btn-primary" onclick="openNewClientModal('janitorial')" style="background:#059669;color:#fff;border:none;font-weight:700;"><i class="fa-solid fa-user-plus"></i> + Provision Facility Client</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="lead-stream-table">
+            <thead>
+              <tr>
+                <th style="width:120px;">Account ID</th>
+                <th>Company / Facility</th>
+                <th>Contact Details</th>
+                <th>Facility Address &amp; City</th>
+                <th>Active Plan &amp; Rate</th>
+                <th style="width:130px;">Next Shift</th>
+                <th style="width:100px;">Status</th>
+                <th style="width:130px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="janitorialClientsTableBody">
+              <!-- Dynamically populated by admin.js -->
             </tbody>
           </table>
         </div>
@@ -1197,6 +1492,230 @@
   </div>
 
   <!-- ========================================================================= -->
+  <!-- MODAL: CLIENT DETAIL & FULL CRUD EDITOR                                   -->
+  <!-- ========================================================================= -->
+  <div id="clientDetailModal" class="admin-modal-overlay">
+    <div class="admin-modal-card" style="max-width: 780px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div id="cdmAvatar" style="width:48px;height:48px;border-radius:50%;background:#0A2533;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;font-family:'Outfit',sans-serif;">
+            CL
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <h2 id="cdmTitleName" style="margin:0;font-family:'Outfit',sans-serif;font-size:22px;color:#0A2533;">Client Account</h2>
+              <span id="cdmCustomerBadge" style="background:#EFF6FF;color:#1D4ED8;font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid #BFDBFE;">ID</span>
+              <span id="cdmUnitBadge" class="badge-blue">Janitorial</span>
+            </div>
+            <p id="cdmSubtitleCompany" style="margin:3px 0 0;font-size:13.5px;color:#64748B;">Facility &amp; Enterprise Service Profile</p>
+          </div>
+        </div>
+        <button onclick="closeModal('clientDetailModal')" style="background:none;border:none;font-size:24px;cursor:pointer;color:#64748B;">&times;</button>
+      </div>
+
+      <form id="formEditClient" onsubmit="handleClientUpdateSubmit(event)">
+        <input type="hidden" id="cdmClientId" value=""/>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Primary Contact / Client Name *</label>
+            <input type="text" id="cdmName" required style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Company / Facility Name</label>
+            <input type="text" id="cdmCompany" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Email Address *</label>
+            <input type="email" id="cdmEmail" required style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Phone Number</label>
+            <input type="tel" id="cdmPhone" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Facility / Service Address</label>
+            <input type="text" id="cdmAddress" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">City / Territory</label>
+            <input type="text" id="cdmCity" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Enterprise Division</label>
+            <select id="cdmBusinessUnit" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;background:#fff;">
+              <option value="janitorial">🏢 Commercial Janitorial</option>
+              <option value="pws">🚛 Power Wash Solutions</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Monthly Recurring Rate ($)</label>
+            <input type="number" id="cdmRate" step="0.01" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Account Status</label>
+            <select id="cdmStatus" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;background:#fff;">
+              <option value="active">Active &amp; Insured</option>
+              <option value="paused">Paused / Hold</option>
+              <option value="delinquent">Past Due / Delinquent</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Active Maintenance Plan Name</label>
+            <input type="text" id="cdmPlan" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Next Scheduled Service Date</label>
+            <input type="text" id="cdmNextDate" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="margin-bottom:18px;background:#F8FAFC;border:1px dashed #CBD5E1;border-radius:8px;padding:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Reset Portal Password (Leave empty to keep current password)</label>
+          <input type="text" id="cdmPassword" placeholder="Enter new password (e.g. Hygeia2026!)" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:13px;box-sizing:border-box;"/>
+        </div>
+
+        <!-- Client's Work Orders History -->
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:700;color:#0A2533;text-transform:uppercase;letter-spacing:0.5px;">Work Orders &amp; Dispatches for this Client</span>
+            <span id="cdmOrdersCount" style="font-size:12px;color:#64748B;">0 Orders Found</span>
+          </div>
+          <div style="max-height:160px;overflow-y:auto;border:1px solid #E2E8F0;border-radius:8px;background:#FFFFFF;">
+            <table style="width:100%;font-size:12.5px;border-collapse:collapse;" id="cdmOrdersTable">
+              <thead style="background:#F1F5F9;position:sticky;top:0;">
+                <tr>
+                  <th style="padding:6px 10px;text-align:left;">Order #</th>
+                  <th style="padding:6px 10px;text-align:left;">Scope</th>
+                  <th style="padding:6px 10px;text-align:left;">Date</th>
+                  <th style="padding:6px 10px;text-align:left;">Price</th>
+                  <th style="padding:6px 10px;text-align:left;">Status</th>
+                  <th style="padding:6px 10px;text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="cdmOrdersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E2E8F0;padding-top:16px;">
+          <button type="button" class="btn btn-outline btn-table-delete" onclick="handleDeleteCurrentClient()">
+            <i class="fa-solid fa-user-xmark"></i> Delete Client Account
+          </button>
+          <div style="display:flex;gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('clientDetailModal')">Cancel</button>
+            <button type="submit" id="btnSaveClientChanges" class="btn btn-gold" style="background:#0090FF;color:#fff;border:none;">
+              <i class="fa-solid fa-floppy-disk"></i> Save Client Profile Changes
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: WORK ORDER & DISPATCH DETAILS CRUD                                 -->
+  <!-- ========================================================================= -->
+  <div id="workOrderDetailModal" class="admin-modal-overlay">
+    <div class="admin-modal-card" style="max-width: 680px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span id="wodmOrderBadge" class="urgency-badge-rush">#WO-0</span>
+            <h2 id="wodmTitleScope" style="margin:0;font-family:'Outfit',sans-serif;font-size:22px;color:#0A2533;">Service Work Order</h2>
+          </div>
+          <p id="wodmSubtitleClient" style="margin:3px 0 0;font-size:13.5px;color:#64748B;">Client / Facility Details</p>
+        </div>
+        <button onclick="closeModal('workOrderDetailModal')" style="background:none;border:none;font-size:24px;cursor:pointer;color:#64748B;">&times;</button>
+      </div>
+
+      <form id="formEditWorkOrder" onsubmit="handleWorkOrderUpdateSubmit(event)">
+        <input type="hidden" id="wodmOrderId" value=""/>
+
+        <!-- Client Submitted Scope Box -->
+        <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:14px;margin-bottom:18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:11px;font-weight:800;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;">Client Submitted Scope &amp; Instructions</span>
+            <span id="wodmUrgencyPill" class="urgency-badge-standard">Standard</span>
+          </div>
+          <div id="wodmClientDescription" style="font-size:14px;color:#0A2533;font-weight:600;line-height:1.5;">
+            -
+          </div>
+          <div style="display:flex;gap:16px;margin-top:10px;font-size:12.5px;color:#475569;">
+            <div><strong>Client Contact:</strong> <span id="wodmContactName">-</span></div>
+            <div><strong>Phone:</strong> <span id="wodmContactPhone">-</span></div>
+            <div><strong>Address:</strong> <span id="wodmAddress">-</span></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Dispatch Status *</label>
+            <select id="wodmStatus" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;background:#fff;font-weight:700;">
+              <option value="pending_approval">⏳ Pending Review &amp; Approval</option>
+              <option value="approved">✅ Approved &amp; Scheduled</option>
+              <option value="dispatched">🚚 Dispatched / Crew En Route</option>
+              <option value="completed">🏆 Completed &amp; Verified</option>
+              <option value="cancelled">❌ Cancelled</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Contract / Billed Price ($)</label>
+            <input type="number" id="wodmPrice" step="0.01" placeholder="e.g. 280.00" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Assigned Crew / Fleet Rig</label>
+            <input type="text" id="wodmCrew" placeholder="e.g. Team Alpha (Hector S.) or Rig #1 (San Jose)" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Target / Scheduled Date</label>
+            <input type="text" id="wodmDate" placeholder="YYYY-MM-DD or Scheduled Shift" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+          </div>
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Service Name / Title</label>
+          <input type="text" id="wodmServiceName" required style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"/>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:4px;">Scope Notes &amp; Dispatch Instructions</label>
+          <textarea id="wodmScopeDesc" rows="3" placeholder="Special equipment, dock access, shift instructions..." style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:13.5px;box-sizing:border-box;"></textarea>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E2E8F0;padding-top:16px;">
+          <button type="button" class="btn btn-outline btn-table-delete" onclick="handleDeleteCurrentWorkOrder()">
+            <i class="fa-solid fa-trash"></i> Delete Work Order
+          </button>
+          <div style="display:flex;gap:10px;">
+            <button type="button" class="btn btn-outline" onclick="closeModal('workOrderDetailModal')">Cancel</button>
+            <button type="submit" id="btnSaveWorkOrder" class="btn btn-gold" style="background:#059669;color:#fff;border:none;">
+              <i class="fa-solid fa-paper-plane"></i> Save &amp; Dispatch Work Order
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- MODAL 3: ADMIN AUTHENTICATION GATE                                        -->
   <!-- ========================================================================= -->
   <div id="adminAuthModal" class="admin-modal-overlay">
@@ -1239,6 +1758,6 @@
     <span id="adminToastMsg">Notification</span>
   </div>
 
-  <script src="assets/js/admin.js?v=4.1.0"></script>
+  <script src="assets/js/admin.js?v=5.0.0"></script>
 </body>
 </html>
