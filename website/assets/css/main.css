@@ -4416,7 +4416,7 @@ html, body {
       max-width: 220px;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 12px 28px rgba(0, 180, 216, 0.35));
+      filter: drop-shadow(0 8px 24px rgba(0, 180, 216, 0.35)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9));
       transition: transform 0.3s ease;
     }
 
