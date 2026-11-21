@@ -1,29 +1,34 @@
 # Hygeia Commercial Cleaning & Janitorial Services
-> Silicon Valley's premier commercial cleaning, nightly janitorial, and day porter contractor. Over 35 years of continuous excellence. State of California DVBE & Small Business Certified (#2054658).
 
-## Core Identity & Heritage
-- Company: Montero Enterprises Inc. dba Hygeia Janitorial Services
-- Founder/CEO: Andy Montero (35+ years leadership in Silicon Valley commercial facility management)
-- Certification: State of California DVBE #2054658, DIR Registered #1000007842
-- Headquarters: 1105 Benton St, Suite A, Santa Clara, CA 95050
-- Phone: (650) 933-3823
+> Specialized commercial janitorial, on-site day porter staffing, hospital-grade terminal medical cleaning, and ISO cleanroom decontamination across Silicon Valley and the San Francisco Bay Area.
+
+## Organization
+- Legal Entity: Montero Enterprises Inc. dba Hygeia
+- Operating Experience: 35+ years serving Silicon Valley tech headquarters, biotech campuses, and medical surgical facilities
+- California DVBE Certification: #2054658
+- Green Seal GS-42 Certified (LEED v4.1 compliant)
+- HIPAA Compliant & CDC Cleanroom Certified
+- Operations Center: 1105 Benton St., Santa Clara, CA 95050
+- 24/7 Facility Dispatch: (650) 933-3823
 - Email: aloha@hygeiaservices.com
-- Web: https://hygeiaservices.com
+- Main Website: https://hygeiaservices.com/ (Staging: https://janitorial.2.25.90.226.sslip.io/)
 
-## Primary Commercial Services
-- Nightly Office & Campus Cleaning: Complete sanitization, trash/recycle removal, restroom hygiene protocols.
-- Dedicated Day Porter Services: Uniformed, vetted daytime staff for Class-A property maintenance.
-- Commercial Floor Stripping & Waxing: VCT, terrazzo, marble, polished concrete resurfacing.
-- Low-Moisture Commercial Carpet Cleaning: Hot water extraction and stain remediation.
-- Commercial Window Cleaning: Interior and exterior multi-story architectural glazing.
-- Post-Construction Cleanup: Rough, final, and touch-up phases for general contractors and TI projects.
-- Biotech Cleanrooms & Laboratory Janitorial: ISO-compliant sanitization protocols.
-- Medical Clinic & Healthcare Cleaning: Terminal cleaning and cross-contamination prevention.
+## Core Capabilities & Services
+- Commercial Janitorial (Night Operations): Comprehensive 8:00 PM to 6:00 AM full facility cleaning, trash collection, desk sanitization, and restroom deep-cleaning.
+- Day Porter Staffing: Uniformed, triple-vetted on-site day porters for continuous lobby management, spill cleanup, executive meeting room turnover, and restroom restocking.
+- Medical & Outpatient Surgical Cleaning: Terminal disinfection complying with CDC, OSHA, and HIPAA guidelines for surgery centers, dialysis clinics, and medical suites.
+- Biotech Cleanroom & Lab Maintenance: ISO Class 5-8 cleanroom sanitation, ESD floor maintenance, anti-static micro-fiber protocols, and HEPA air scrubbing.
+- Hard Floor Care & Terrazzo Restoration: 2,500 RPM diamond pad crystallization, VCT strip and wax, concrete polishing, and hot-water commercial carpet extraction.
 
-## Regional Service Coverage (18 Bay Area Municipalities)
-- Santa Clara, San Jose, Sunnyvale, Mountain View, Palo Alto, Menlo Park, Redwood City, San Carlos, San Mateo, San Bruno, Los Altos, Cupertino, Milpitas, Fremont, Newark, Hayward, Dublin, Morgan Hill.
+## Service Coverage (San Francisco Bay Area)
+- Silicon Valley: San Jose, Santa Clara, Sunnyvale, Cupertino, Mountain View, Palo Alto, Los Altos, Milpitas, Morgan Hill.
+- Peninsula: Redwood City, San Mateo, Menlo Park, Foster City, South San Francisco.
+- East Bay: Fremont, Newark, Hayward, Dublin, Pleasanton.
 
-## Compliance & Green Standards
-- 100% Green Seal Certified Non-Toxic Chemicals (GS-37/GS-40 standards).
-- HEPA Multi-Stage Micro-Filtration Vacuums (0.3 micron capture).
-- OSHA Safety Compliant & $2,000,000 Commercial General Liability Insured.
+## Key Links & Resources
+- Request Site Walk & RFP: https://hygeiaservices.com/contact.html
+- Medical Janitorial: https://hygeiaservices.com/medical-facility-cleaning.html
+- Day Porter Services: https://hygeiaservices.com/day-porter-services.html
+- Industries Served: https://hygeiaservices.com/industries.html
+- Client Operations Portal: https://hygeiaservices.com/portal.html
+- Knowledge Base: https://hygeiaservices.com/blog.html

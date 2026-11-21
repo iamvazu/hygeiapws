@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin/
+
+Sitemap: https://hygeiaservices.com/sitemap.xml
+# LLM & AI Answer Engine Context File
+# LLMs.txt: https://hygeiaservices.com/llms.txt
